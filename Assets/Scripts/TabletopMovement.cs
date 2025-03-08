@@ -21,6 +21,8 @@ public class TabletopMovement : MonoBehaviour
     {
         if ( _currentCell == null )
             _currentCell = FindFirstObjectByType<HexagonCell>();
+        _currentCell.WalkOn(this);
+
         transform.position = new Vector3(_currentCell.transform.position.x, transform.position.y, _currentCell.transform.position.z);
 
         _tabletop = FindFirstObjectByType<HexagonTabletop>();
@@ -71,30 +73,45 @@ public class TabletopMovement : MonoBehaviour
         }
     }
 
+    private Queue<IEnumerator> _queue = new();
     public void DemonstratePath(object sender, NotifyCollectionChangedEventArgs e)
     {
-        StartCoroutine(DemonstrateSlowPath(e));
+        IEnumerator cor = DemonstrateSlowPath(e, _pathfinder.Path.Count);
+        
+        _queue.Enqueue(cor);
+
+        if ( _queue.Count <= 1 )
+            StartCoroutine(cor);
     }
 
-    private IEnumerator DemonstrateSlowPath(NotifyCollectionChangedEventArgs e)
+    private IEnumerator DemonstrateSlowPath(NotifyCollectionChangedEventArgs e, int placement)
     {
-#pragma warning disable CS0252 // Possible unintended reference comparison; left hand side needs cast
-        if ( e.NewItems == _currentCell || e.OldItems == _currentCell) yield break;
-#pragma warning restore CS0252 // Possible unintended reference comparison; left hand side needs cast
+        // Debug.Log("queue count: " + _queue.Count);
 
-        if (e.NewItems != null && _pathfinder.Path.Count < Points)
-            foreach (HexagonCell newItem in e.NewItems)
-            {
-                yield return new WaitForSeconds(0.1f);
-               newItem.PathCell();
-            }
+        if ( e.NewItems != null && !e.NewItems.Contains(_currentCell)
+            || e.OldItems != null && !e.OldItems.Contains(_currentCell)) 
+       {
+            // temporary count viewing, ideally point accumulation would be handled by the pathfinder itself.
+            if (e.NewItems != null && placement < Points)
+                foreach (HexagonCell newItem in e.NewItems)
+                {
+                    yield return new WaitForSeconds(0.05f);
+                newItem.PathCell();
+                }
 
-        if (e.OldItems != null)
-            foreach (HexagonCell oldItem in e.OldItems)
-            {
-                yield return new WaitForSeconds(0.1f);
-               oldItem.StopPathCell(); 
-            }
+            if (e.OldItems != null)
+                foreach (HexagonCell oldItem in e.OldItems)
+                {
+                    yield return new WaitForSeconds(0.02f);
+                oldItem.StopPathCell(); 
+                }
+       }
+        
+        // Debug.Log("queue count 2: " + _queue.Count);
+        _queue.Dequeue();
+
+       if( _queue.Count > 0)
+            StartCoroutine(_queue.Peek());
     }
 
     /*private void ShowPath()
@@ -207,15 +224,15 @@ public class TabletopMovement : MonoBehaviour
 
             next = final.Pop();
 
-            if ( next == _selectedCell )
-                Debug.Log("at point");
-            else
-                Debug.Log("not at point");
-            Debug.Log("count: " + final.Count);
+            _currentCell.WalkOn();
+            next.WalkOn(this);
+
+            // Debug.Log("count: " + final.Count);
             
             _currentCell = next;
 
             transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
+
 
             if ( final.Count > 0 )
             {
@@ -234,8 +251,6 @@ public class TabletopMovement : MonoBehaviour
         _moving = false;
 
         _pathfinder.Stop();
-
-        _currentCell.WalkOn(this);
     }
 
     private void OnDisable()

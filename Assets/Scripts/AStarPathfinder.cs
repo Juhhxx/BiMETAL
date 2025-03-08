@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,17 +10,26 @@ public class AStarPathfinder : Pathfinder
 
     public override IEnumerator GetPath(HexagonCell objective, HexagonCell start)
     {
+        // objective and start are switched
+
         Done = false;
-        List<HexagonCell> openList = new() { start };
-        List<HexagonCell> closedList = new();
+
+        _data[start] = new CellData(start, 0, start.GetDistance(objective), null);
+
+        _openList.Add(_data[start]);
 
         Debug.Log("Starting pathfinding from " + start + " to " + objective);
-
-        while (openList.Any())
+        Debug.Log("Finding path. Stats:   open " + _openList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
+        /*foreach(HexagonCell cell in _data.Keys)
         {
-            HexagonCell current = openList.OrderBy(cell => cell.F).ThenBy(cell => cell.H).First();
-            openList.Remove(current);
-            closedList.Add(current);
+            Debug.Log("                 Data stats for " + cell + "  with " + _data[cell] + " and walkable: " + cell.Walkable);
+        }*/
+
+        while (_openList.Any())
+        {
+            HexagonCell current = _openList.Min.Cell;
+            _openList.Remove(_openList.Min);
+            _closedList.Add(current);
 
             if (current == objective)
             {
@@ -29,7 +37,7 @@ public class AStarPathfinder : Pathfinder
                 while (currentCell != start)
                 {
                     Path.Push(currentCell);
-                    currentCell = currentCell.Connection;
+                    currentCell = _data[currentCell].Connection;
                 }
 
                 Path.Push(start);
@@ -37,28 +45,34 @@ public class AStarPathfinder : Pathfinder
                 yield break;
             }
 
-            foreach (HexagonCell neighbor in current.Neighbors.Where(t => t.Walkable && !closedList.Contains(t)))
+            foreach (HexagonCell neighbor in current.Neighbors.Where(t => (t.Walkable || t == objective) && !_closedList.Contains(t)))
             {
-                float costToNeighbor = current.G + current.GetDistance(neighbor);
+                float costToNeighbor = _data[current].G + current.GetDistance(neighbor);
 
-                if (!openList.Contains(neighbor) || costToNeighbor < neighbor.G)
+                if (!_data.TryGetValue(neighbor, out CellData cellData))
                 {
-                    neighbor.SetG(costToNeighbor);
-                    neighbor.SetConnection(current);
-                    neighbor.SetH(neighbor.GetDistance(objective));
-                    neighbor.SetF(neighbor.G + neighbor.H);
+                    cellData = new CellData(neighbor, float.MaxValue, neighbor.GetDistance(objective), null);
+                    _data[neighbor] = cellData;
+                }
 
-                    if (!openList.Contains(neighbor))
-                    {
-                        openList.Add(neighbor);
-                    }
+                if (costToNeighbor < cellData.G)
+                {
+                    // Need to remove and readd the element from the sorted list so that it will reorder based on new F and H
+                    _openList.Remove(cellData); 
+
+                    cellData.G = costToNeighbor;
+                    cellData.H = neighbor.GetDistance(objective);
+                    cellData.Connection = current;
+
+                    // readd
+                    _openList.Add(cellData);
                 }
             }
 
             yield return null;
         }
 
-        Debug.Log("No path found.");
+        Debug.Log("No path found. Stats:   open " + _openList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         Done = true;
     }
 }

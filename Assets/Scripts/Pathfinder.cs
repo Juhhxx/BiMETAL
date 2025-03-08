@@ -12,12 +12,21 @@ public abstract class Pathfinder
     public ObservableStack<HexagonCell> Path { get; protected set; }
     protected MonoBehaviour _owner;
     protected Coroutine _getPath;
+
+    protected Dictionary<HexagonCell, CellData> _data;
+    protected SortedSet<CellData> _openList;
+    protected HashSet<HexagonCell> _closedList;
+
     public Pathfinder(HexagonTabletop tabletop, MonoBehaviour owner)
     {
         _owner = owner;
         _tabletop = tabletop;
         Path = new();
         Done = true;
+
+        _data = new Dictionary<HexagonCell, CellData>();
+        _openList = new SortedSet<CellData>();
+        _closedList = new HashSet<HexagonCell>();
     }
     public Stack<HexagonCell> FindPath(HexagonCell start, HexagonCell objective)
     {
@@ -36,6 +45,12 @@ public abstract class Pathfinder
             _owner.StopCoroutine(_getPath);
         }
 
+        _data.Clear();
+        _openList.Clear();
+        _closedList.Clear();
+
         Path.Clear();
+
+        Done = true;
     }
 }
