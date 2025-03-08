@@ -5,39 +5,24 @@ public class HexagonCell : MonoBehaviour
 {
     public Vector2 CellValue { get; private set; }
     private HexagonTabletop _tabletop;
-    public bool Walkable { get; private set; } = true;
+    public bool Walkable 
+    { 
+        get => Piece == null;
+    }
+    public TabletopMovement Piece { get; private set; }
     [SerializeField] private GameObject _Cosmetic;
     private bool _pathed = false;
     private bool _hovered = false;
 
-    public float G { get; private set; } = 0f; // Quantidade andada
-    public float H { get; private set; } = 0f;  // Distancia do objetivo
-    public float F { get; private set; } = 0f;  // Junção de G e H
-    public HexagonCell Connection { get; private set; }  // Conexão momentanea
-
     public List<HexagonCell> Neighbors;
 
-    public void WalkOn(TabletopMovement piece)
+    public bool WalkOn(TabletopMovement piece = null)
     {
-        Walkable = false;
-        // probably use the piece in teh future to communicate between them, create father class piece for tabletop movement and then branch into player and enemy movement
-    }
-
-    public void SetG(float g)
-    {
-        G = g;
-    }
-    public void SetH(float h)
-    {
-        H = h;
-    }
-    public void SetF(float f)
-    {
-        F = f;
-    }
-    public void SetConnection(HexagonCell connection)
-    {
-        Connection = connection;
+        if ( Piece != null && piece != null )
+            return false;
+        Piece = piece;
+        return true;
+        // probably use the piece in the future to communicate between each piece, create father class piece for tabletop movement and then branch into player and enemy movement
     }
     public Vector2 InitializeCell(HexagonTabletop tabletop)
     {
@@ -52,7 +37,7 @@ public class HexagonCell : MonoBehaviour
         );
         
         
-        Debug.Log("Initializing " + this );
+        // Debug.Log("Initializing " + this );
         
         SetNeighbors();
 
@@ -78,7 +63,7 @@ public class HexagonCell : MonoBehaviour
             if (col.transform.parent.TryGetComponent(out HexagonCell neighbor))
                 Neighbors.Add(neighbor);
         
-        Debug.Log($"Neighbors of {this}:             {string.Join(", ", Neighbors)}");
+        // Debug.Log($"Neighbors of {this}:             {string.Join(", ", Neighbors)}");
     }
 
     /*public float GetDistance(ICoords other) => (this - (HexCoords)other).AxialLength();
@@ -167,6 +152,6 @@ public class HexagonCell : MonoBehaviour
 
     public override string ToString()
     {
-        return $"Hex({CellValue.x}, {CellValue.y})G:{G} H:{H} F:{F}";
+        return $"Hex({CellValue.x}, {CellValue.y})";
     }
 }

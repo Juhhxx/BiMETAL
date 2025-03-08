@@ -17,7 +17,7 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
         T item = base.Pop();
         OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
         
-        Debug.Log("removing " + item);
+        // Debug.Log("removing " + item);
 
         return item;
     }
@@ -35,7 +35,7 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
 
         base.Clear();
 
-        Debug.Log("clearing");
+        // Debug.Log("clearing");
     }
 
     public virtual event NotifyCollectionChangedEventHandler CollectionChanged;
