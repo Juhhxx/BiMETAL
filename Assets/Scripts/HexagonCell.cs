@@ -9,10 +9,23 @@ public class HexagonCell : MonoBehaviour
     { 
         get => Piece == null;
     }
+private float _points;
+
+public float Points
+{
+    get => _points;
+    private set
+    {
+        // it wouldn't be reachable anyway if it didn't have neighbors,
+        // but we get their distance to recalculate points
+        if (Neighbors.Count > 1)
+            _points = value * this.GetDistance(Neighbors[0]);
+        else
+            _points = value;
+    }
+}
     public TabletopMovement Piece { get; private set; }
     [SerializeField] private GameObject _Cosmetic;
-    private bool _pathed = false;
-    private bool _hovered = false;
 
     public List<HexagonCell> Neighbors;
 
@@ -40,9 +53,10 @@ public class HexagonCell : MonoBehaviour
         // Debug.Log("Initializing " + this );
         
         SetNeighbors();
+        SetPoints();
 
         if ( _Cosmetic == null )
-            _Cosmetic = gameObject;
+            _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
 
         return CellValue;
     }
@@ -66,28 +80,15 @@ public class HexagonCell : MonoBehaviour
         // Debug.Log($"Neighbors of {this}:             {string.Join(", ", Neighbors)}");
     }
 
-    /*public float GetDistance(ICoords other) => (this - (HexCoords)other).AxialLength();
+    private void SetPoints()
+    {
+        // viewer that changes material color for testing
+        Points = Random.Range(1, 3);
+        Material mat = GetComponentInChildren<Renderer>().material;
 
-    private static readonly float Sqrt3 = Mathf.Sqrt(3);
-
-    public Vector2 Pos { get; set; }
-
-    private int AxialCoords() {
-        if (_q == 0 && _r == 0) return 0;
-        if (_q > 0 && _r >= 0) return _q + _r;
-        if (_q <= 0 && _r > 0) return -_q < _r ? _r : -_q;
-        if (_q < 0) return -_q - _r;
-        return -_r > _q ? -_r : _q;
+        float grayscaleValue = Mathf.Lerp(1f, 0f, (Points - 1) / 2f);
+        mat.color = new Color(grayscaleValue, grayscaleValue, grayscaleValue);
     }
-
-    public static HexCoords operator -(HexCoords a, HexCoords b) {
-        return new HexCoords(a._q - b._q, a._r - b._r);
-        
-         |
-         |
-        V
-        
-        */
 
 
     // Using Axial Distance we can determine the distance in the 3 hexagonal directions with only 2 of these directions.
@@ -105,40 +106,44 @@ public class HexagonCell : MonoBehaviour
         return -dis.y > dis.x ? -dis.y : dis.x;
     }
 
-    public void HoverCell()
+    private bool _hovered = false;
+    public void HoverCell(bool onOrOff = true)
     {
-        if ( _hovered ) return;
-
-        StopPathCell();
-
-        _Cosmetic.transform.Translate(Vector3.up * 0.2f);
-
-        _hovered = true;
-    }
-    public void StopHoverCell()
-    {
-        if ( !_hovered ) return;
-
-        _Cosmetic.transform.Translate(Vector3.down * 0.2f);
-
-        _hovered = false;
+        if ( _hovered == onOrOff ) return;
+        
+        if ( _hovered )
+            _Cosmetic.transform.Translate(Vector3.down * 0.2f);
+        else if ( !_hovered )
+            _Cosmetic.transform.Translate(Vector3.up * 0.2f);
+        
+        _hovered = onOrOff;
     }
 
+    private int _pathStack = 0;
     public void PathCell()
     {
-        if ( _pathed ) return;
+        _pathStack++;
+
+        if ( Piece != null )
+            Debug.Log("pathcell: " + _pathStack);
+
+        if ( _pathStack < 0 ) return;
 
         _Cosmetic.transform.Translate(Vector3.up * 0.1f);
-
-        _pathed = true;
     }
     public void StopPathCell()
     {
-        if ( !_pathed ) return;
+        _pathStack--;
+
+        if ( Piece != null )
+            Debug.Log("stopathcell: " + _pathStack);
+
+        if ( _pathStack > 0 ) return;
 
         _Cosmetic.transform.Translate(Vector3.down * 0.1f);
 
-        _pathed = false;
+        // _pathStack = _pathStack <= 0 ? 0 : _pathStack;
+        // Debug.Log("stopathcell2: " + _pathStack);
     }
 
     public void SelectCell()
