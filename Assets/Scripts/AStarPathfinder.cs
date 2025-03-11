@@ -16,19 +16,19 @@ public class AStarPathfinder : Pathfinder
 
         _data[start] = new CellData(start, 0, start.GetDistance(objective), null);
 
-        _openList.Add(_data[start]);
+        OpenList.Add(_data[start]);
 
         Debug.Log("Starting pathfinding from " + start + " to " + objective);
-        Debug.Log("Finding path. Stats:   open " + _openList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
+        Debug.Log("Finding path. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         /*foreach(HexagonCell cell in _data.Keys)
         {
             Debug.Log("                 Data stats for " + cell + "  with " + _data[cell] + " and walkable: " + cell.Walkable);
         }*/
 
-        while (_openList.Any())
+        while (OpenList.Any())
         {
-            HexagonCell current = _openList.Min.Cell;
-            _openList.Remove(_openList.Min);
+            HexagonCell current = OpenList.Min.Cell;
+            OpenList.Remove(OpenList.Min);
             _closedList.Add(current);
 
             if (current == objective)
@@ -47,7 +47,11 @@ public class AStarPathfinder : Pathfinder
 
             foreach (HexagonCell neighbor in current.Neighbors.Where(t => (t.Walkable || t == objective) && !_closedList.Contains(t)))
             {
-                float costToNeighbor = _data[current].G + current.GetDistance(neighbor);
+                // by switching the distance here by Points (which is how many points it takes to cross times the distance)
+                // we can reorganize pathfinding to account for how much it costs to move
+                // it calculates how much to walk to the next one from the current (not to neighbor)
+                float costToNeighbor = _data[current].G + current.Points;
+                // the tabletop movement is then responsible for curating how far they go (not the pathfinder)
 
                 if (!_data.TryGetValue(neighbor, out CellData cellData))
                 {
@@ -58,21 +62,21 @@ public class AStarPathfinder : Pathfinder
                 if (costToNeighbor < cellData.G)
                 {
                     // Need to remove and readd the element from the sorted list so that it will reorder based on new F and H
-                    _openList.Remove(cellData); 
+                    OpenList.Remove(cellData); 
 
                     cellData.G = costToNeighbor;
                     cellData.H = neighbor.GetDistance(objective);
                     cellData.Connection = current;
 
                     // readd
-                    _openList.Add(cellData);
+                    OpenList.Add(cellData);
                 }
             }
 
             yield return null;
         }
 
-        Debug.Log("No path found. Stats:   open " + _openList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
+        Debug.Log("No path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         Done = true;
     }
 }

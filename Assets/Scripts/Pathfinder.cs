@@ -14,7 +14,8 @@ public abstract class Pathfinder
     protected Coroutine _getPath;
 
     protected Dictionary<HexagonCell, CellData> _data;
-    protected SortedSet<CellData> _openList;
+    // becomes open for environment variables to see
+    public SortedSet<CellData> OpenList  { get; protected set; }
     protected HashSet<HexagonCell> _closedList;
 
     public Pathfinder(HexagonTabletop tabletop, MonoBehaviour owner)
@@ -25,7 +26,7 @@ public abstract class Pathfinder
         Done = true;
 
         _data = new Dictionary<HexagonCell, CellData>();
-        _openList = new SortedSet<CellData>();
+        OpenList = new SortedSet<CellData>();
         _closedList = new HashSet<HexagonCell>();
     }
     public Stack<HexagonCell> FindPath(HexagonCell start, HexagonCell objective)
@@ -46,7 +47,7 @@ public abstract class Pathfinder
         }
 
         _data.Clear();
-        _openList.Clear();
+        OpenList.Clear();
         _closedList.Clear();
 
         Path.Clear();

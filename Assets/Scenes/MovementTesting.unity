@@ -18808,13 +18808,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cam: {fileID: 1068706358}
   _focus: {fileID: 1092586823}
-  _rotSpeed: 100
-  _zoomSpeed: 2
-  _movSpeed: 10
-  _minZoom: 5
-  _maxZoom: 15
+  _rotSpeed: 20
+  _zoomSpeed: 1
+  _movSpeed: 5
+  _minZoom: 2
+  _maxZoom: 40
   _rotate: 1
-  _easeTime: 0.05
+  _easeTime: 0.02
 --- !u!1001 &1069342045
 PrefabInstance:
   m_ObjectHideFlags: 0
