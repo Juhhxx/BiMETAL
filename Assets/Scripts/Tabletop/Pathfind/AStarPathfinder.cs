@@ -8,14 +8,13 @@ public class AStarPathfinder : Pathfinder
     public AStarPathfinder(HexagonTabletop tabletop, MonoBehaviour owner) : base(tabletop, owner)
     {}
 
-    public override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int points)
+    public override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         // objective and start are switched
 
         Done = false;
 
         _data[start] = new CellData(start, start.Weight, start.GetDistance(objective), null);
-        float totalWeight = points; // * start.GetDistance(start.Neighbors[0]);
 
         OpenList.Add(_data[start]);
 
@@ -68,7 +67,7 @@ public class AStarPathfinder : Pathfinder
 
                 // Debug.Log("cost: " + costToNeighbor + "     neighbor points: " + neighbor.Weight + "    total cost: " + totalWeight);
 
-                if ( costToNeighbor > totalWeight ) continue;
+                if ( totalWeight != -1 && costToNeighbor > totalWeight ) continue;
 
                 if (!_data.TryGetValue(neighbor, out CellData cellData))
                 {
