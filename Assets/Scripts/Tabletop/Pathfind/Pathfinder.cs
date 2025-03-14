@@ -29,15 +29,15 @@ public abstract class Pathfinder
         OpenList = new SortedSet<CellData>();
         _closedList = new HashSet<HexagonCell>();
     }
-    public Stack<HexagonCell> FindPath(HexagonCell start, HexagonCell objective)
+    public Stack<HexagonCell> FindPath(HexagonCell start, HexagonCell objective, int points)
     {
         Stop();
 
-        _getPath = _owner.StartCoroutine(GetPath(start, objective));
+        _getPath = _owner.StartCoroutine(GetPath(start, objective, points));
         return Path;
     }
 
-    public abstract IEnumerator GetPath(HexagonCell objective, HexagonCell start);
+    public abstract IEnumerator GetPath(HexagonCell objective, HexagonCell start, int points);
 
     public void Stop()
     {
@@ -50,7 +50,7 @@ public abstract class Pathfinder
         OpenList.Clear();
         _closedList.Clear();
 
-        Path.Clear();
+        Path.ObserveClear();
 
         Done = true;
     }

@@ -8,13 +8,14 @@ public class AStarPathfinder : Pathfinder
     public AStarPathfinder(HexagonTabletop tabletop, MonoBehaviour owner) : base(tabletop, owner)
     {}
 
-    public override IEnumerator GetPath(HexagonCell objective, HexagonCell start)
+    public override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int points)
     {
         // objective and start are switched
 
         Done = false;
 
-        _data[start] = new CellData(start, 0, start.GetDistance(objective), null);
+        _data[start] = new CellData(start, start.Weight, start.GetDistance(objective), null);
+        float totalWeight = points; // * start.GetDistance(start.Neighbors[0]);
 
         OpenList.Add(_data[start]);
 
@@ -36,11 +37,17 @@ public class AStarPathfinder : Pathfinder
                 HexagonCell currentCell = objective;
                 while (currentCell != start)
                 {
-                    Path.Push(currentCell);
-                    currentCell = _data[currentCell].Connection;
+                    Path.ObservePush(currentCell);
+                    currentCell = _data[currentCell].Connection.Cell;
+                    // Debug.Log("this cell G: " + currentCell + " " + _data[currentCell].G);
                 }
 
-                Path.Push(start);
+                Path.ObservePush(start);
+                // Debug.Log("this start cell G: " + start + " " + _data[start].G);
+
+                // while ( Path.Count > 0 )
+                //     Debug.Log("this cell: " + Path.Peek() + "    is start? " + (Path.Peek() == start) + "    is objective? " + (Path.Pop() == objective));
+                
                 Done = true;
                 yield break;
             }
@@ -50,8 +57,18 @@ public class AStarPathfinder : Pathfinder
                 // by switching the distance here by Points (which is how many points it takes to cross times the distance)
                 // we can reorganize pathfinding to account for how much it costs to move
                 // it calculates how much to walk to the next one from the current (not to neighbor)
-                float costToNeighbor = _data[current].G + current.Points;
+                
+                // neighbor points or current points?
+                // float costToNeighbor = _data[current].G + neighbor.Weight;
+                float costToNeighbor = 0;
+
+                if ( neighbor != objective ) 
+                    costToNeighbor = _data[current].G + neighbor.Weight;
                 // the tabletop movement is then responsible for curating how far they go (not the pathfinder)
+
+                // Debug.Log("cost: " + costToNeighbor + "     neighbor points: " + neighbor.Weight + "    total cost: " + totalWeight);
+
+                if ( costToNeighbor > totalWeight ) continue;
 
                 if (!_data.TryGetValue(neighbor, out CellData cellData))
                 {
@@ -65,8 +82,10 @@ public class AStarPathfinder : Pathfinder
                     OpenList.Remove(cellData); 
 
                     cellData.G = costToNeighbor;
-                    cellData.H = neighbor.GetDistance(objective);
-                    cellData.Connection = current;
+                    // Do we need this line?
+                    // cellData.H = neighbor.GetDistance(objective);
+                    cellData.H = Vector2.Distance(neighbor.CellValue, objective.CellValue);
+                    cellData.Connection = _data[current];
 
                     // readd
                     OpenList.Add(cellData);
@@ -78,5 +97,8 @@ public class AStarPathfinder : Pathfinder
 
         Debug.Log("No path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         Done = true;
+
+        while ( Path.Count > 0 )
+            Debug.Log("this cell: " + Path.Peek() + "    is start? " + (Path.Peek() == start) + "    is objective? " + (Path.Pop() == objective));
     }
 }

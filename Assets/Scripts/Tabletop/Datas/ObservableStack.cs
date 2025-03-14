@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using UnityEngine;
 
 public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
 {
@@ -12,30 +12,40 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
     public ObservableStack(int capacity) : base(capacity) { }
 
 
-    public virtual new T Pop()
+    public T ObservePop()
     {
-        T item = base.Pop();
+        if ( Count == 0) throw new InvalidOperationException("Stack is empty.");
+
+        // Debug.Log("count1 " + Count);
+        T item = Peek();
+        // Debug.Log("count2 " + Count);
         OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
+        // Debug.Log("count3 " + Count);
+        Pop();
         
         // Debug.Log("removing " + item);
 
         return item;
     }
 
-    public virtual new void Push(T item)
+    public void ObservePush(T item)
     {
-        base.Push(item);
+        Push(item);
         OnCollectionChanged(NotifyCollectionChangedAction.Add, item);
     }
 
-    public virtual new void Clear()
+    public void ObserveClear()
     {
-        foreach(T item in this)
-            OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
+        // We need to use actual new methods like this because we cant make sure the overrides will go before or after base.
+        
+        // Debug.Log("hi bgolus count: " + Count);
+        while ( Count > 0 )
+        {
+            // OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
+            ObservePop();
+        }
 
-        base.Clear();
-
-        // Debug.Log("clearing");
+        Clear();
     }
 
     public virtual event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -47,5 +57,16 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
             , item
             , item == null ? -1 : 0)
         );
+    }
+
+    public void Reverse()
+    {
+        if (Count <= 1) return;
+
+        T[] items = this.ToArray();
+        Clear();
+
+        for (int i = 0; i < items.Length; i++)
+            Push(items[i]);
     }
 }

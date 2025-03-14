@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Drawing;
 using UnityEngine;
 
 public class TabletopMovement : MonoBehaviour
@@ -11,6 +12,7 @@ public class TabletopMovement : MonoBehaviour
     private HexagonCell _selectedCell;
     private Pathfinder _pathfinder;
     private HexagonTabletop _tabletop;
+
     public int Points { get; private set; } = 7;
 
 
@@ -62,7 +64,7 @@ public class TabletopMovement : MonoBehaviour
             if ( newCell != _currentCell )
             {
                 _hoveredCell.HoverCell();
-                _pathfinder.FindPath(_currentCell, _hoveredCell);
+                _pathfinder.FindPath(_currentCell, _hoveredCell, Points);
             }
         }
         else if ( _hoveredCell != null )
@@ -77,6 +79,10 @@ public class TabletopMovement : MonoBehaviour
     private Queue<IEnumerator> _queue = new();
     public void DemonstratePath(object sender, NotifyCollectionChangedEventArgs e)
     {
+        // Debug.Log("count: " + _pathfinder.Path.Count + "      points: " + Points);
+        // count viewing, ideally point accumulation would be handled by the pathfinder itself, but it is shown here
+        if ( _pathfinder.Path.Count > Points ) return;
+
         IEnumerator cor = DemonstrateSlowPath(e);
         
         _queue.Enqueue(cor);
@@ -92,10 +98,11 @@ public class TabletopMovement : MonoBehaviour
         if ( ( e.NewItems != null && !e.NewItems.Contains(_currentCell) )
             || ( e.OldItems != null && !e.OldItems.Contains(_currentCell) ) )
        {
-            // temporary count viewing, ideally point accumulation would be handled by the pathfinder itself.
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
+                    if ( newItem == _startCell )
+                        Debug.Log("Add start?: " + _startCell);
                     yield return new WaitForSeconds(0.05f);
                     newItem.PathCell();
                 }
@@ -103,15 +110,14 @@ public class TabletopMovement : MonoBehaviour
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
-                    yield return new WaitForSeconds(0.02f);
                     if ( oldItem == _startCell )
                     {
+                        Debug.Log("Reset start?: " + _startCell);
                         _startCell = null;
-                        break;
+                        // continue;
                     }
+                    yield return new WaitForSeconds(0.02f);
                     oldItem.StopPathCell();
-                    if ( oldItem == _selectedCell )
-                        _selectedCell = null;
                 }
        }
         
@@ -130,7 +136,8 @@ public class TabletopMovement : MonoBehaviour
 
         if (_hoveredCell != null && InputManager.Select())
         {
-            if ( _pathfinder.Path.Count <= Points )
+            // Previously the points were counting with the first and last cell we find in the pathfinded stack, we should change it to not count the first cell, so we add one
+            if ( _pathfinder.Path.Count <= Points +1 )
             {
                 _selectedCell = _hoveredCell;
                 StartCoroutine(Move());
@@ -162,30 +169,34 @@ public class TabletopMovement : MonoBehaviour
 
         Stack<HexagonCell> final =  new(_pathfinder.Path);
 
+        _pathfinder.Path.Reverse();
+
         _startCell = _currentCell;
         Debug.Log("Stop moving current? " + _currentCell + "    path count: " + _pathfinder.Path.Count);
 
         // HidePath();
 
         HexagonCell next;
-        do
+
+        while ( _currentCell != _selectedCell &&  _pathfinder.Path != null )
         {
+            next = _pathfinder.Path.ObservePop(); // previously giving an error here because pops where happening more than pushes
+            // Debug.Log("next: " + next + "      current: " + _currentCell + "      selected: " + _selectedCell + "      are they the same? " + (next == _selectedCell));
+            // Debug.Log("current is selected? " + (_currentCell == _selectedCell) + "  _current? " + _currentCell );
+
             yield return new WaitForSeconds(0.2f);
-
-            next = _pathfinder.Path.Pop(); // giving an error here, find out why
-            Debug.Log("next: " + next + "      current" + _currentCell + "   are they the same? " + (next == _currentCell));
-
-            _currentCell.WalkOn();
-            _currentCell = next;
-            next.WalkOn(this);
-
-            // Debug.Log("count: " + final.Count);
 
             if ( _currentCell.Piece != null )
                 StartBattle(_currentCell.Piece);
 
-            transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
+            _currentCell.WalkOn();
+            _currentCell = next;
+            // Debug.Log("current is selected?2 " + (_currentCell == _selectedCell) + "      current: " + _currentCell + "      selected: " + _selectedCell );
+            next.WalkOn(this);
 
+            // Debug.Log("count: " + final.Count);
+
+            transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
 
             if ( _pathfinder.Path.Count > 0 )
             {
@@ -196,18 +207,20 @@ public class TabletopMovement : MonoBehaviour
 
                 transform.LookAt(target);
             }
+
+            // Debug.Log("current is selected?3 " + (_currentCell == _selectedCell) + "      current: " + _currentCell + "      selected: " + _selectedCell );
         }
-        while ( _currentCell != _selectedCell );
 
         _pathfinder.Stop();
         _moving = false;
 
-        Debug.Log("stopped moving start?" + _startCell);
+        // Debug.Log("stopped moving start?" + _startCell);
     }
 
     private void OnDisable()
     {
         _moving = false;
+        _pathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 
     private void StartBattle(TabletopMovement enemy)

@@ -5,19 +5,26 @@ public class CellData : IComparable<CellData>
     public float G { get; set; }
     public float H { get; set; }
     public float F => G + H;
-    public HexagonCell Connection { get; set; }
+    public CellData Connection { get; set; }
     public HexagonCell Cell  { get; private set; }
 
-    public CellData(HexagonCell cell, float g, float h, HexagonCell connection)
+    public CellData(HexagonCell cell, float g, float h, CellData connection)
     {
         G = g;
         H = h;
         Cell = cell;
         Connection = connection;
     }
+
+/*                  cellData.G = costToNeighbor;
+                    // Do we need this line?
+                    cellData.H = neighbor.GetDistance(objective);
+                    cellData.Connection = _data[current];
+                    */
+
     public override string ToString()
     {
-        return $"GHF: ({G}, {H}, {F}) connected to :{(Connection? Connection : "null")}";
+        return $"GHF: ({G}, {H}, {F}) connected to :{Connection}";
     }
 
     public int CompareTo(CellData other)
@@ -31,6 +38,13 @@ public class CellData : IComparable<CellData>
         if (H < other.H) return -1;
         if (H > other.H) return 1;
 
+        // Use randoms to decide if they are both the same
+
         return GetHashCode().CompareTo(other.GetHashCode());
+    }
+
+    public int GetPathPoints()
+    {
+        return Cell.Weight + (Connection != null ? Connection.GetPathPoints() : 0);
     }
 }

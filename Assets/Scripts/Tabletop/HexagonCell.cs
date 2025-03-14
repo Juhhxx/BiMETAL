@@ -9,21 +9,9 @@ public class HexagonCell : MonoBehaviour
     { 
         get => Piece == null;
     }
-private float _points;
 
-public float Points
-{
-    get => _points;
-    private set
-    {
-        // it wouldn't be reachable anyway if it didn't have neighbors,
-        // but we get their distance to recalculate points
-        if (Neighbors.Count > 1)
-            _points = value * this.GetDistance(Neighbors[0]);
-        else
-            _points = value;
-    }
-}
+    public int Weight { get; private set; }
+
     public TabletopMovement Piece { get; private set; }
     [SerializeField] private GameObject _Cosmetic;
 
@@ -83,10 +71,10 @@ public float Points
     private void SetPoints()
     {
         // viewer that changes material color for testing
-        Points = Random.Range(1, 3);
+        Weight = Random.Range(1, 4);
         Material mat = GetComponentInChildren<Renderer>().material;
 
-        float grayscaleValue = Mathf.Lerp(1f, 0f, (Points - 1) / 2f);
+        float grayscaleValue = Mathf.Lerp(1f, 0f, (Weight - 1) / 2f);
         mat.color = new Color(grayscaleValue, grayscaleValue, grayscaleValue);
     }
 
@@ -98,12 +86,10 @@ public float Points
         // Getting vector to other from the current cell
         Vector2 dis = new(other.CellValue[0] - CellValue[0], other.CellValue[1] - CellValue[1]);
 
+        // Are these heuristics correct? lol
+
         // Calculating the axial distance
-        if (dis.x == 0 && dis.y == 0) return 0;
-        if (dis.x > 0 && dis.y >= 0) return dis.x + dis.y;
-        if (dis.x <= 0 && dis.y > 0) return -dis.x < dis.y ? dis.y : -dis.x;
-        if (dis.x < 0) return -dis.x - dis.y;
-        return -dis.y > dis.x ? -dis.y : dis.x;
+        return Mathf.Max(Mathf.Abs(dis.x), Mathf.Abs(dis.y), Mathf.Abs(dis.x + dis.y));
     }
 
     private bool _hovered = false;
@@ -129,6 +115,8 @@ public float Points
 
         if ( _pathStack < 0 ) return;
 
+        // Debug.Log("added to path: " + this);
+
         _Cosmetic.transform.Translate(Vector3.up * 0.1f);
     }
     public void StopPathCell()
@@ -139,6 +127,8 @@ public float Points
             Debug.Log("stopathcell: " + _pathStack);
 
         if ( _pathStack > 0 ) return;
+
+        // Debug.Log("removed from path: " + this);
 
         _Cosmetic.transform.Translate(Vector3.down * 0.1f);
 
@@ -157,6 +147,6 @@ public float Points
 
     public override string ToString()
     {
-        return $"Hex({CellValue.x}, {CellValue.y})";
+        return $"Hex({CellValue.x}, {CellValue.y})     .     weight({Weight})";
     }
 }
