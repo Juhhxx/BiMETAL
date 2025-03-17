@@ -1,38 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using UnityEngine;
 
 public class PlayerTabletopMovement : TabletopMovement
 {
     [SerializeField] private LayerMask _cellLayer;
     private HexagonCell _hoveredCell;
-    [SerializeField] private HexagonCell _currentCell;
     private HexagonCell _selectedCell;
-    private Pathfinder _pathfinder;
-    private HexagonTabletop _tabletop;
 
-    public int Points { get; private set; } = 7;
-
-
-    private bool _moving;
-    // private HashSet<HexagonCell> _shownPath;
-
-    private void Start()
-    {
-        if ( _currentCell == null )
-            _currentCell = FindFirstObjectByType<HexagonCell>();
-        
-        _currentCell.WalkOn(this);
-
-        transform.position = new Vector3(_currentCell.transform.position.x, transform.position.y, _currentCell.transform.position.z);
-
-        _tabletop = FindFirstObjectByType<HexagonTabletop>();
-        _pathfinder = new AStarPathfinder(_tabletop, this);
-        _pathfinder.Path.CollectionChanged += DemonstratePath;
-
-        // _shownPath = new HashSet<HexagonCell>();
-    }
     private void Update()
     {
         CheckForHover();
@@ -75,58 +50,6 @@ public class PlayerTabletopMovement : TabletopMovement
         }
     }
 
-    private Queue<IEnumerator> _queue = new();
-    public void DemonstratePath(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        // Debug.Log("count: " + _pathfinder.Path.Count + "      points: " + Points);
-        // count viewing, ideally point accumulation would be handled by the pathfinder itself, but it is shown here
-        if ( _pathfinder.Path.Count > Points ) return;
-
-        IEnumerator cor = DemonstrateSlowPath(e);
-        
-        _queue.Enqueue(cor);
-
-        if ( _queue.Count <= 1 )
-            StartCoroutine(cor);
-    }
-
-    private IEnumerator DemonstrateSlowPath(NotifyCollectionChangedEventArgs e)
-    {
-        // Debug.Log("queue count: " + _queue.Count);
-
-        if ( ( e.NewItems != null && !e.NewItems.Contains(_currentCell) )
-            || ( e.OldItems != null && !e.OldItems.Contains(_currentCell) ) )
-       {
-            if (e.NewItems != null)
-                foreach (HexagonCell newItem in e.NewItems)
-                {
-                    if ( newItem == _startCell )
-                        Debug.Log("Add start?: " + _startCell);
-                    yield return new WaitForSeconds(0.05f);
-                    newItem.PathCell();
-                }
-
-            if (e.OldItems != null)
-                foreach (HexagonCell oldItem in e.OldItems)
-                {
-                    if ( oldItem == _startCell )
-                    {
-                        Debug.Log("Reset start?: " + _startCell);
-                        _startCell = null;
-                        // continue;
-                    }
-                    yield return new WaitForSeconds(0.02f);
-                    oldItem.StopPathCell();
-                }
-       }
-        
-        // Debug.Log("queue count 2: " + _queue.Count);
-        _queue.Dequeue();
-
-       if( _queue.Count > 0)
-            StartCoroutine(_queue.Peek());
-    }
-
     private void CheckForSelection()
     {
         if (_moving || _pathfinder.Path == null ) return;
@@ -148,8 +71,6 @@ public class PlayerTabletopMovement : TabletopMovement
         }
 
     }
-
-    private HexagonCell _startCell;
     protected override IEnumerator Move()
     {
         Debug.Log("Starting movement from " + _currentCell + " to " + _selectedCell );
@@ -214,16 +135,5 @@ public class PlayerTabletopMovement : TabletopMovement
         _moving = false;
 
         // Debug.Log("stopped moving start?" + _startCell);
-    }
-
-    private void OnDisable()
-    {
-        _moving = false;
-        _pathfinder.Path.CollectionChanged -= DemonstratePath;
-    }
-
-    protected override void StartBattle(TabletopMovement enemy)
-    {
-
     }
 }

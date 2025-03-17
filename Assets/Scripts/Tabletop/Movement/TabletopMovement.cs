@@ -5,20 +5,18 @@ using UnityEngine;
 
 public abstract class TabletopMovement : MonoBehaviour
 {
-    [SerializeField] protected LayerMask _cellLayer;
-    protected HexagonCell _hoveredCell;
     [SerializeField] protected HexagonCell _currentCell;
-    protected HexagonCell _selectedCell;
     protected Pathfinder _pathfinder;
     protected HexagonTabletop _tabletop;
+    protected Queue<IEnumerator> _queue = new();
+    protected HexagonCell _startCell;
 
-    public int Points { get; protected set; } = 7;
+    [field:SerializeField] public int Points { get; protected set; } = 7;
 
 
     protected bool _moving;
-    // private HashSet<HexagonCell> _shownPath;
 
-    protected void Start()
+    protected virtual void Start()
     {
         if ( _currentCell == null )
             _currentCell = FindFirstObjectByType<HexagonCell>();
@@ -30,11 +28,8 @@ public abstract class TabletopMovement : MonoBehaviour
         _tabletop = FindFirstObjectByType<HexagonTabletop>();
         _pathfinder = new AStarPathfinder(_tabletop, this);
         _pathfinder.Path.CollectionChanged += DemonstratePath;
-
-        // _shownPath = new HashSet<HexagonCell>();
     }
 
-    protected Queue<IEnumerator> _queue = new();
     protected virtual void DemonstratePath(object sender, NotifyCollectionChangedEventArgs e)
     {
         // Debug.Log("count: " + _pathfinder.Path.Count + "      points: " + Points);
@@ -85,8 +80,6 @@ public abstract class TabletopMovement : MonoBehaviour
        if( _queue.Count > 0)
             StartCoroutine(_queue.Peek());
     }
-
-    protected HexagonCell _startCell;
     protected abstract IEnumerator Move();
 
     protected virtual void OnDisable()
@@ -95,5 +88,12 @@ public abstract class TabletopMovement : MonoBehaviour
         _pathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 
-    protected abstract void StartBattle(TabletopMovement enemy);
+    protected void StartBattle(TabletopMovement enemy)
+    {
+
+    }
+    protected void PushModifier(TabletopModifier modifier)
+    {
+
+    }
 }

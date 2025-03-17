@@ -62,7 +62,7 @@ public class HexagonCell : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, _tabletop.Grid.cellSize.y*0.75f);
 
         foreach ( Collider col in colliders )
-            if (col.transform.parent.TryGetComponent(out HexagonCell neighbor))
+            if (col.transform.parent.TryGetComponent(out HexagonCell neighbor) &&  neighbor != this)
                 Neighbors.Add(neighbor);
         
         // Debug.Log($"Neighbors of {this}:             {string.Join(", ", Neighbors)}");
