@@ -98,7 +98,7 @@ public class PlayerTabletopMovement : TabletopMovement
 
         HexagonCell next;
 
-        while ( _currentCell != _selectedCell &&  _pathfinder.Path != null )
+        while ( _currentCell != _selectedCell &&  _pathfinder.Path.Count > 0 )
         {
             next = _pathfinder.Path.ObservePop(); // previously giving an error here because pops where happening more than pushes
             // Debug.Log("next: " + next + "      current: " + _currentCell + "      selected: " + _selectedCell + "      are they the same? " + (next == _selectedCell));

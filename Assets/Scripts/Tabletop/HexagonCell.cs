@@ -74,7 +74,7 @@ public class HexagonCell : MonoBehaviour
         Weight = Random.Range(1, 4);
         Material mat = GetComponentInChildren<Renderer>().material;
 
-        float grayscaleValue = Mathf.Lerp(1f, 0f, (Weight - 1) / 2f);
+        float grayscaleValue = Mathf.Lerp(1f, 0f, (Weight - 1) / 2f)/2f;
         mat.color = new Color(grayscaleValue, grayscaleValue, grayscaleValue);
     }
 
