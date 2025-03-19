@@ -110,12 +110,12 @@ public class PlayerTabletopMovement : TabletopMovement
             yield return new WaitForSeconds(0.2f);
 
             if ( _currentCell.Piece != null )
-                StartBattle(_currentCell.Piece);
+                Interact(_currentCell.Piece);
 
             _currentCell.WalkOn();
             _currentCell = next;
             // Debug.Log("current is selected?2 " + (_currentCell == _selectedCell) + "      current: " + _currentCell + "      selected: " + _selectedCell );
-            next.WalkOn(this);
+            next.WalkOn(Interactive);
 
             // Debug.Log("count: " + final.Count);
 

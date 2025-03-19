@@ -11,6 +11,8 @@ public abstract class TabletopMovement : MonoBehaviour
     protected Queue<IEnumerator> _queue = new();
     protected HexagonCell _startCell;
 
+    public Interactive Interactive { get; protected set; }
+
     [field:SerializeField] public int Points { get; protected set; } = 7;
 
 
@@ -21,7 +23,7 @@ public abstract class TabletopMovement : MonoBehaviour
         if ( _currentCell == null )
             _currentCell = FindFirstObjectByType<HexagonCell>();
         
-        _currentCell.WalkOn(this);
+        _currentCell.WalkOn(Interactive);
 
         transform.position = new Vector3(_currentCell.transform.position.x, transform.position.y, _currentCell.transform.position.z);
 
@@ -88,11 +90,7 @@ public abstract class TabletopMovement : MonoBehaviour
         _pathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 
-    protected void StartBattle(TabletopMovement enemy)
-    {
-
-    }
-    protected void PushModifier(TabletopModifier modifier)
+    protected void Interact(Interactive other)
     {
 
     }

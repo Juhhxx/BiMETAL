@@ -12,12 +12,12 @@ public class HexagonCell : MonoBehaviour
 
     public int Weight { get; private set; }
 
-    public TabletopMovement Piece { get; private set; }
+    public Interactive Piece { get; private set; }
     [SerializeField] private GameObject _Cosmetic;
 
     public List<HexagonCell> Neighbors;
 
-    public bool WalkOn(TabletopMovement piece = null)
+    public bool WalkOn(Interactive piece = null)
     {
         if ( Piece != null && piece != null )
             return false;
@@ -103,6 +103,8 @@ public class HexagonCell : MonoBehaviour
             _Cosmetic.transform.Translate(Vector3.up * 0.2f);
         
         _hovered = onOrOff;
+
+        Piece?.Hover(_hovered);
     }
 
     private int _pathStack = 0;
@@ -138,11 +140,11 @@ public class HexagonCell : MonoBehaviour
 
     public void SelectCell()
     {
-        
+        Piece?.Select();
     }
     public void SelectionError()
     {
-        
+        Piece?.SelectionError();
     }
 
     public override string ToString()
