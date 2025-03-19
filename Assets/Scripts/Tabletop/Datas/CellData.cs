@@ -24,7 +24,7 @@ public class CellData : IComparable<CellData>
 
     public override string ToString()
     {
-        return $"GHF: ({G}, {H}, {F}) connected to :{Connection}";
+        return $"GHF: ({G}, {H}, {F}), Cell:{Cell}";
     }
 
     public int CompareTo(CellData other)

@@ -25,27 +25,31 @@ public class AStarPathfinder : Pathfinder
             Debug.Log("                 Data stats for " + cell + "  with " + _data[cell] + " and walkable: " + cell.Walkable);
         }*/
 
-        while (OpenList.Any())
+        HexagonCell current = OpenList.Min.Cell;
+
+        while ( OpenList.Any() )
         {
-            HexagonCell current = OpenList.Min.Cell;
+            current = OpenList.Min.Cell;
             OpenList.Remove(OpenList.Min);
             _closedList.Add(current);
 
             if (current == objective)
             {
                 HexagonCell currentCell = objective;
+                int weight = 0;
                 while (currentCell != start)
                 {
-                    Path.ObservePush(currentCell);
+                    weight += currentCell.Weight;
+                    if (totalWeight == -1 || weight <= totalWeight)
+                        Path.ObservePush(currentCell);
+                    
                     currentCell = _data[currentCell].Connection.Cell;
-                    // Debug.Log("this cell G: " + currentCell + " " + _data[currentCell].G);
+                    Debug.Log("this cell G: " + currentCell + "   cell: " + _data[currentCell].Cell + "  connection: " + _data[currentCell].Connection);
                 }
-
-                Path.ObservePush(start);
-                // Debug.Log("this start cell G: " + start + " " + _data[start].G);
-
-                // while ( Path.Count > 0 )
-                //     Debug.Log("this cell: " + Path.Peek() + "    is start? " + (Path.Peek() == start) + "    is objective? " + (Path.Pop() == objective));
+                weight += start.Weight;
+                if (totalWeight == -1 || weight <= totalWeight)
+                    Path.ObservePush(start);
+                Debug.Log("this start cell G: " + start + "   cell: " + _data[start].Cell + "  connection: " + _data[start].Connection);
                 
                 Done = true;
                 yield break;
@@ -58,16 +62,16 @@ public class AStarPathfinder : Pathfinder
                 // it calculates how much to walk to the next one from the current (not to neighbor)
                 
                 // neighbor points or current points?
-                // float costToNeighbor = _data[current].G + neighbor.Weight;
                 float costToNeighbor = 0;
+
 
                 if ( neighbor != objective ) 
                     costToNeighbor = _data[current].G + neighbor.Weight;
+                
                 // the tabletop movement is then responsible for curating how far they go (not the pathfinder)
+                
+                // if ( totalWeight != -1 && costToNeighbor > totalWeight ) continue;
 
-                // Debug.Log("cost: " + costToNeighbor + "     neighbor points: " + neighbor.Weight + "    total cost: " + totalWeight);
-
-                if ( totalWeight != -1 && costToNeighbor > totalWeight ) continue;
 
                 if (!_data.TryGetValue(neighbor, out CellData cellData))
                 {
@@ -81,9 +85,10 @@ public class AStarPathfinder : Pathfinder
                     OpenList.Remove(cellData); 
 
                     cellData.G = costToNeighbor;
-                    // Do we need this line?
-                    // cellData.H = neighbor.GetDistance(objective);
-                    cellData.H = Vector2.Distance(neighbor.CellValue, objective.CellValue);
+
+                    cellData.H = neighbor.GetDistance(objective);
+                    // cellData.H = Vector2.Distance(neighbor.CellValue, objective.CellValue);
+
                     cellData.Connection = _data[current];
 
                     // readd
@@ -96,8 +101,5 @@ public class AStarPathfinder : Pathfinder
 
         Debug.Log("No path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         Done = true;
-
-        while ( Path.Count > 0 )
-            Debug.Log("this cell: " + Path.Peek() + "    is start? " + (Path.Peek() == start) + "    is objective? " + (Path.Pop() == objective));
     }
 }

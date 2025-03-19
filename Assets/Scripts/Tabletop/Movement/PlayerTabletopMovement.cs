@@ -24,12 +24,15 @@ public class PlayerTabletopMovement : TabletopMovement
 
             if ( _hoveredCell == newCell ) return;
 
-            if ( _hoveredCell != null &&  newCell != _currentCell )
+            if ( _hoveredCell != null )
             {
                 // // HidePath();
                 _pathfinder.Stop();
-                _hoveredCell?.HoverCell(false);
+                _hoveredCell.HoverCell(false);
+                _hoveredCell = null;
             }
+            
+            if ( newCell == _currentCell ) return;
 
             _hoveredCell = newCell;
     

@@ -147,6 +147,6 @@ public class HexagonCell : MonoBehaviour
 
     public override string ToString()
     {
-        return $"Hex({CellValue.x}, {CellValue.y})     .     weight({Weight})";
+        return $"Hex({CellValue.x}, {CellValue.y}), W({Weight})";
     }
 }
