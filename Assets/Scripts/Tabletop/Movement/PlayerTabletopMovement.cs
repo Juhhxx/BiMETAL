@@ -32,16 +32,16 @@ public class PlayerTabletopMovement : TabletopMovement
                 _hoveredCell = null;
             }
             
-            if ( newCell == _currentCell ) return;
+            if ( newCell == CurrentCell ) return;
 
             _hoveredCell = newCell;
     
             // Only show cell has selectable if it's in range and is not already hovered ( it twitches otherwise )
             // Doesnt apply for the players current cell because it think its self explanatory for them
-            if ( newCell != _currentCell )
+            if ( newCell != CurrentCell )
             {
                 _hoveredCell.HoverCell();
-                _pathfinder.FindPath(_currentCell, _hoveredCell, Points);
+                _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
             }
         }
         else if ( _hoveredCell != null )
@@ -55,14 +55,14 @@ public class PlayerTabletopMovement : TabletopMovement
 
     private void CheckForSelection()
     {
-        if (_moving || _pathfinder.Path == null ) return;
+        if (_moving || Path == null ) return;
         // Chose up, so if the player hovers and buttons down the wrong button,
         // they can still navigate to another button so select it
 
         if (_hoveredCell != null && InputManager.Select())
         {
             // Previously the points were counting with the first and last cell we find in the pathfinded stack, we should change it to not count the first cell, so we add one
-            if ( _pathfinder.Path.Count <= Points +1 )
+            if ( Path.Count <= Points +1 )
             {
                 _selectedCell = _hoveredCell;
                 StartCoroutine(Move());
@@ -76,14 +76,14 @@ public class PlayerTabletopMovement : TabletopMovement
     }
     protected override IEnumerator Move()
     {
-        Debug.Log("Starting movement from " + _currentCell + " to " + _selectedCell );
+        Debug.Log("Starting movement from " + CurrentCell + " to " + _selectedCell );
         _moving = true;
 
-        // Stack<HexagonCell> path = _pathfinder.FindPath(_currentCell, _selectedCell);
+        // Stack<HexagonCell> path = _pathfinder.FindPath(CurrentCell, _selectedCell);
 
         yield return new WaitUntil(() => _pathfinder.Done);
 
-        if ( _pathfinder.Path == null )
+        if ( Path == null )
         {
             _moving = false;
             Debug.Log("Can't move there. ");
@@ -92,38 +92,38 @@ public class PlayerTabletopMovement : TabletopMovement
 
         // Stack<HexagonCell> final =  new(_pathfinder.Path);
 
-        _pathfinder.Path.Reverse();
+        _pathfinder.Reverse();
 
-        _startCell = _currentCell;
-        Debug.Log("Stop moving current? " + _currentCell + "    path count: " + _pathfinder.Path.Count);
+        _startCell = CurrentCell;
+        Debug.Log("Stop moving current? " + CurrentCell + "    path count: " + Path.Count);
 
         // HidePath();
 
         HexagonCell next;
 
-        while ( _currentCell != _selectedCell &&  _pathfinder.Path.Count > 0 )
+        while ( CurrentCell != _selectedCell &&  Path.Count > 0 )
         {
-            next = _pathfinder.Path.ObservePop(); // previously giving an error here because pops where happening more than pushes
-            Debug.Log("next: " + next + "      current: " + _currentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
-            // Debug.Log("current is selected? " + (_currentCell == _selectedCell) + "  _current? " + _currentCell );
+            next = Path.ObservePop(); // previously giving an error here because pops where happening more than pushes
+            Debug.Log("next: " + next + "      current: " + CurrentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
+            // Debug.Log("current is selected? " + (CurrentCell == _selectedCell) + "  _current? " + CurrentCell );
 
             yield return new WaitForSeconds(0.2f);
 
-            if ( _currentCell.Piece != null )
-                Interact(_currentCell.Piece);
+            if ( CurrentCell.Piece != null )
+                Interact(CurrentCell.Piece);
 
-            _currentCell.WalkOn();
-            _currentCell = next;
-            // Debug.Log("current is selected?2 " + (_currentCell == _selectedCell) + "      current: " + _currentCell + "      selected: " + _selectedCell );
+            CurrentCell.WalkOn();
+            CurrentCell = next;
+            // Debug.Log("current is selected?2 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
             next.WalkOn(Interactive);
 
             // Debug.Log("count: " + final.Count);
 
             transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
 
-            if ( _pathfinder.Path.Count > 0 )
+            if ( Path.Count > 0 )
             {
-                next = _pathfinder.Path.Peek();
+                next = Path.Peek();
 
                 Vector3 target = next.transform.position;
                 target.y = transform.position.y;
@@ -131,7 +131,7 @@ public class PlayerTabletopMovement : TabletopMovement
                 transform.LookAt(target);
             }
 
-            // Debug.Log("current is selected?3 " + (_currentCell == _selectedCell) + "      current: " + _currentCell + "      selected: " + _selectedCell );
+            // Debug.Log("current is selected?3 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
         }
 
         _pathfinder.Stop();

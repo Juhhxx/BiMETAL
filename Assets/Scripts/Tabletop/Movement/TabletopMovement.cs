@@ -5,8 +5,10 @@ using UnityEngine;
 
 public abstract class TabletopMovement : MonoBehaviour
 {
-    [SerializeField] protected HexagonCell _currentCell;
+    [field:SerializeField] public HexagonCell CurrentCell { get; protected set; }
     protected Pathfinder _pathfinder;
+    public Pathfinder Pathfinder => _pathfinder;
+    public ObservableStack<HexagonCell> Path => _pathfinder.Path;
     protected HexagonTabletop _tabletop;
     protected Queue<IEnumerator> _queue = new();
     protected HexagonCell _startCell;
@@ -20,12 +22,12 @@ public abstract class TabletopMovement : MonoBehaviour
 
     protected virtual void Start()
     {
-        if ( _currentCell == null )
-            _currentCell = FindFirstObjectByType<HexagonCell>();
+        if ( CurrentCell == null )
+            CurrentCell = FindFirstObjectByType<HexagonCell>();
         
-        _currentCell.WalkOn(Interactive);
+        CurrentCell.WalkOn(Interactive);
 
-        transform.position = new Vector3(_currentCell.transform.position.x, transform.position.y, _currentCell.transform.position.z);
+        transform.position = new Vector3(CurrentCell.transform.position.x, transform.position.y, CurrentCell.transform.position.z);
 
         _tabletop = FindFirstObjectByType<HexagonTabletop>();
         _pathfinder = new AStarPathfinder(_tabletop, this);
@@ -50,8 +52,8 @@ public abstract class TabletopMovement : MonoBehaviour
     {
         // Debug.Log("queue count: " + _queue.Count);
 
-        if ( ( e.NewItems != null && !e.NewItems.Contains(_currentCell) )
-            || ( e.OldItems != null && !e.OldItems.Contains(_currentCell) ) )
+        if ( ( e.NewItems != null && !e.NewItems.Contains(CurrentCell) )
+            || ( e.OldItems != null && !e.OldItems.Contains(CurrentCell) ) )
        {
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
