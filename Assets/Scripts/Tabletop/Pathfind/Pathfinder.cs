@@ -54,4 +54,9 @@ public abstract class Pathfinder
 
         Done = true;
     }
+
+    public void Reverse()
+    {
+        Path.Reverse();
+    }
 }
