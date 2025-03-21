@@ -13,6 +13,7 @@ public class HexagonCell : MonoBehaviour
     public int Weight { get; private set; }
 
     public Interactive Piece { get; private set; }
+    public Modifier Modifier { get; private set; }
     [SerializeField] private GameObject _Cosmetic;
 
     public List<HexagonCell> Neighbors;
@@ -25,6 +26,22 @@ public class HexagonCell : MonoBehaviour
         return true;
         // probably use the piece in the future to communicate between each piece, create father class piece for tabletop movement and then branch into player and enemy movement
     }
+
+
+    // It needs to modify if its a modifier changing it but only modify if its null and its a piece changing it
+    public bool Modify(Modifier mod, bool dynamic = false)
+    {
+        if ( dynamic && Modifier != null )
+            return false;
+
+        Modifier = mod;
+
+         _Cosmetic.GetComponent<Renderer>().material.color = Modifier.Color;
+        
+        return true;
+    }
+
+
     public Vector2 InitializeCell(HexagonTabletop tabletop)
     {
         _tabletop = tabletop;
@@ -112,9 +129,6 @@ public class HexagonCell : MonoBehaviour
     {
         _pathStack++;
 
-        if ( Piece != null )
-            Debug.Log("pathcell: " + _pathStack);
-
         if ( _pathStack < 0 ) return;
 
         // Debug.Log("added to path: " + this);
@@ -124,9 +138,6 @@ public class HexagonCell : MonoBehaviour
     public void StopPathCell()
     {
         _pathStack--;
-
-        if ( Piece != null )
-            Debug.Log("stopathcell: " + _pathStack);
 
         if ( _pathStack > 0 ) return;
 
@@ -150,5 +161,32 @@ public class HexagonCell : MonoBehaviour
     public override string ToString()
     {
         return $"Hex({CellValue.x}, {CellValue.y}), W({Weight})";
+    }
+
+    public List<PieceInteractive> GetPieces(HashSet<HexagonCell> visited = null)
+    {
+        visited ??= new HashSet<HexagonCell>();
+
+        List<PieceInteractive> result = new();
+
+        if (visited.Contains(this))
+            return result;
+
+        visited.Add(this);
+
+        if (Piece is PieceInteractive interactive)
+            result.Add(interactive);
+
+
+        foreach (var neighbor in Neighbors)
+        {
+            if (neighbor == null || visited.Contains(neighbor))
+                continue;
+
+            if (neighbor.Piece is PieceInteractive)
+                result.AddRange(neighbor.GetPieces(visited));
+        }
+
+        return result;
     }
 }

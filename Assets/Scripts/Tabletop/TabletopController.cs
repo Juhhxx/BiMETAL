@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TabletopController : MonoBehaviour
@@ -12,5 +13,10 @@ public class TabletopController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void StartBattle(Modifier mod, List<PieceInteractive> pieces)
+    {
+
     }
 }

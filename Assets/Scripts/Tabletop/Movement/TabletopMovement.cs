@@ -36,7 +36,7 @@ public abstract class TabletopMovement : MonoBehaviour
     {
         // Debug.Log("count: " + _pathfinder.Path.Count + "      points: " + Points);
         // count viewing, ideally point accumulation would be handled by the pathfinder itself, but it is shown here
-        if ( _pathfinder.Path.Count > Points ) return;
+        // if ( _pathfinder.Path.Count > Points ) return;
 
         IEnumerator cor = DemonstrateSlowPath(e);
         
@@ -92,6 +92,6 @@ public abstract class TabletopMovement : MonoBehaviour
 
     protected void Interact(Interactive other)
     {
-
+        other.Interact(Interactive);
     }
 }

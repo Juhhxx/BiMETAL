@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ShopInteractive : Interactive
 {
-    public override void Interact()
+    public override void Interact(Interactive other)
     {
         throw new System.NotImplementedException();
     }

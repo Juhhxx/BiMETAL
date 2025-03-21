@@ -8,7 +8,7 @@ public class AStarPathfinder : Pathfinder
     public AStarPathfinder(HexagonTabletop tabletop, MonoBehaviour owner) : base(tabletop, owner)
     {}
 
-    public override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
+    protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         // objective and start are switched
 

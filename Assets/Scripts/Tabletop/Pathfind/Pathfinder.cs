@@ -37,7 +37,7 @@ public abstract class Pathfinder
         return Path;
     }
 
-    public abstract IEnumerator GetPath(HexagonCell objective, HexagonCell start, int points);
+    protected abstract IEnumerator GetPath(HexagonCell objective, HexagonCell start, int points);
 
     public void Stop()
     {

@@ -90,7 +90,7 @@ public class PlayerTabletopMovement : TabletopMovement
             yield break;
         }
 
-        Stack<HexagonCell> final =  new(_pathfinder.Path);
+        // Stack<HexagonCell> final =  new(_pathfinder.Path);
 
         _pathfinder.Path.Reverse();
 
@@ -104,7 +104,7 @@ public class PlayerTabletopMovement : TabletopMovement
         while ( _currentCell != _selectedCell &&  _pathfinder.Path.Count > 0 )
         {
             next = _pathfinder.Path.ObservePop(); // previously giving an error here because pops where happening more than pushes
-            // Debug.Log("next: " + next + "      current: " + _currentCell + "      selected: " + _selectedCell + "      are they the same? " + (next == _selectedCell));
+            Debug.Log("next: " + next + "      current: " + _currentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
             // Debug.Log("current is selected? " + (_currentCell == _selectedCell) + "  _current? " + _currentCell );
 
             yield return new WaitForSeconds(0.2f);

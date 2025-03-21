@@ -38,7 +38,6 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
     {
         // We need to use actual new methods like this because we cant make sure the overrides will go before or after base.
         
-        // Debug.Log("hi bgolus count: " + Count);
         while ( Count > 0 )
         {
             // OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);

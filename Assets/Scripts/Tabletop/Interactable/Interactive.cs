@@ -1,8 +1,19 @@
 using UnityEngine;
 
+/// <summary>
+// Interactives shouldnt be raycasted, the cells under them are raycast targets
+// and then they send the signals to their Interactive if it exits.
+/// </summary>
 public abstract class Interactive : MonoBehaviour
 {
-    public bool Ignore { get; protected set; } = false;
+    private HexagonCell _cell;
+    public HexagonCell Cell {
+        get {
+            UpdateCurrentCell();
+            return _cell;
+        }
+    }
+    [SerializeField] private LayerMask _cells;
     
     protected virtual void Start()
     {
@@ -28,5 +39,11 @@ public abstract class Interactive : MonoBehaviour
 
     }
 
-    public abstract void Interact();
+    public abstract void Interact(Interactive other);
+
+    protected void UpdateCurrentCell()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 10f, _cells))
+            _cell = hit.transform.GetComponentInChildren<HexagonCell>();
+    }
 }
