@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyTabletopMovement : TabletopMovement,  IComparable<EnemyTabletopMovement>
+public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletopMovement>
 {
     protected PlayerTabletopMovement _player;
     public int Priority { get; set; }
@@ -10,13 +10,16 @@ public class EnemyTabletopMovement : TabletopMovement,  IComparable<EnemyTableto
     protected override void Start()
     {
         base.Start();
+        _pathfinder = new AStarPathfinder(this, true);
+        _pathfinder.Path.CollectionChanged += DemonstratePath;
         _player = FindFirstObjectByType<PlayerTabletopMovement>();
     }
+
     public int CompareTo(EnemyTabletopMovement other)
     {
         if (other == null) return -1;
 
-        if ( Path.Count == 0 || other.Path.Count == 0)
+        if (Path.Count == 0 || other.Path.Count == 0)
             return Path.Count.CompareTo(other.Path.Count);
 
         HexagonCell thisTop = Path.Peek();
@@ -31,7 +34,7 @@ public class EnemyTabletopMovement : TabletopMovement,  IComparable<EnemyTableto
             return 1;
 
         // this goes first
-        if ( Path.Contains(otherTop))
+        if (Path.Contains(otherTop))
             return -1;
 
         return Path.Count.CompareTo(other.Path.Count);
@@ -46,14 +49,14 @@ public class EnemyTabletopMovement : TabletopMovement,  IComparable<EnemyTableto
         _pathfinder.Stop();
     }
 
-    
+
     public void MoveEnemy()
     {
         IEnumerator cor = Move();
-        
+
         _queue.Enqueue(cor);
 
-        if ( _queue.Count <= 1 )
+        if (_queue.Count <= 1)
         {
             _startCell = CurrentCell;
             StartCoroutine(cor);
@@ -65,47 +68,50 @@ public class EnemyTabletopMovement : TabletopMovement,  IComparable<EnemyTableto
 
         yield return new WaitUntil(() => _pathfinder.Done);
 
-        if ( Path == null || Path.Count < 0 )
+        if (Path == null || Path.Count < 0)
         {
             Debug.Log("Can't move more. ");
         }
         else
         {
 
-        HexagonCell next = Path.ObservePop();
+            HexagonCell next = Path.ObservePop();
 
-        yield return new WaitForSeconds(0.2f);
-        
-        if ( Path.Count > 0 )
-        {
-            next = Path.Peek();
+            yield return new WaitForSeconds(0.2f);
 
-            Vector3 target = next.transform.position;
-            target.y = transform.position.y;
+            if (Path.Count > 0)
+            {
+                next = Path.Peek();
 
-            transform.LookAt(target);
-        }
+                Vector3 target = next.transform.position;
+                target.y = transform.position.y;
 
-        if ( next.Piece is not PieceInteractive )
-        {
-            Interact(next.Piece);
-            Pathfinder.Stop();
-        }
-        else
-        {
-            CurrentCell.WalkOn();
-            CurrentCell = next;
+                transform.LookAt(target);
+            }
 
-            next.WalkOn(Interactive);
+            if (next.Piece is not PieceInteractive)
+            {
+                Interact(next.Piece);
+                Pathfinder.Stop();
+            }
+            else
+            {
+                CurrentCell.WalkOn();
+                CurrentCell = next;
 
-            transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
-        }
+                next.WalkOn(Interactive);
+
+                transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
+
+                if (Interactive is PieceInteractive piece)
+                    piece.Modify();
+            }
 
         }
 
         _queue.Dequeue();
 
-       if( _queue.Count > 0)
+        if (_queue.Count > 0)
             StartCoroutine(_queue.Peek());
         else
             _moving = false;

@@ -8,6 +8,13 @@ public class PlayerTabletopMovement : TabletopMovement
     private HexagonCell _hoveredCell;
     private HexagonCell _selectedCell;
 
+    protected override void Start()
+    {
+        base.Start();
+        _pathfinder = new AStarPathfinder(this, false);
+        _pathfinder.Path.CollectionChanged += DemonstratePath;
+    }
+
     private void Update()
     {
         CheckForHover();
@@ -16,35 +23,35 @@ public class PlayerTabletopMovement : TabletopMovement
 
     private void CheckForHover()
     {
-        if ( _moving ) return;
+        if (_moving) return;
 
-        if ( InputManager.HoverCell( _cellLayer, out var newCell) )
+        if (InputManager.HoverCell(_cellLayer, out var newCell))
         {
             // ShowPath();
 
-            if ( _hoveredCell == newCell ) return;
+            if (_hoveredCell == newCell) return;
 
-            if ( _hoveredCell != null )
+            if (_hoveredCell != null)
             {
                 // // HidePath();
                 _pathfinder.Stop();
                 _hoveredCell.HoverCell(false);
                 _hoveredCell = null;
             }
-            
-            if ( newCell == CurrentCell ) return;
+
+            if (newCell == CurrentCell) return;
 
             _hoveredCell = newCell;
-    
+
             // Only show cell has selectable if it's in range and is not already hovered ( it twitches otherwise )
             // Doesnt apply for the players current cell because it think its self explanatory for them
-            if ( newCell != CurrentCell )
+            if (newCell != CurrentCell)
             {
                 _hoveredCell.HoverCell();
                 _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
             }
         }
-        else if ( _hoveredCell != null )
+        else if (_hoveredCell != null)
         {
             // HidePath();
             _pathfinder.Stop();
@@ -55,14 +62,14 @@ public class PlayerTabletopMovement : TabletopMovement
 
     private void CheckForSelection()
     {
-        if (_moving || Path == null ) return;
+        if (_moving || Path == null) return;
         // Chose up, so if the player hovers and buttons down the wrong button,
         // they can still navigate to another button so select it
 
         if (_hoveredCell != null && InputManager.Select())
         {
             // Previously the points were counting with the first and last cell we find in the pathfinded stack, we should change it to not count the first cell, so we add one
-            if ( Path.Count <= Points +1 )
+            if (Path.Count <= Points + 1)
             {
                 _selectedCell = _hoveredCell;
                 StartCoroutine(Move());
@@ -76,14 +83,14 @@ public class PlayerTabletopMovement : TabletopMovement
     }
     protected override IEnumerator Move()
     {
-        Debug.Log("Starting movement from " + CurrentCell + " to " + _selectedCell );
+        Debug.Log("Starting movement from " + CurrentCell + " to " + _selectedCell);
         _moving = true;
 
         // Stack<HexagonCell> path = _pathfinder.FindPath(CurrentCell, _selectedCell);
 
         yield return new WaitUntil(() => _pathfinder.Done);
 
-        if ( Path == null )
+        if (Path == null)
         {
             _moving = false;
             Debug.Log("Can't move there. ");
@@ -101,7 +108,7 @@ public class PlayerTabletopMovement : TabletopMovement
 
         HexagonCell next;
 
-        while ( CurrentCell != _selectedCell &&  Path.Count > 0 )
+        while (CurrentCell != _selectedCell && Path.Count > 0)
         {
             next = Path.ObservePop(); // previously giving an error here because pops where happening more than pushes
             Debug.Log("next: " + next + "      current: " + CurrentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
@@ -109,7 +116,7 @@ public class PlayerTabletopMovement : TabletopMovement
 
             yield return new WaitForSeconds(0.2f);
 
-            if ( CurrentCell.Piece != null )
+            if (CurrentCell.Piece != null)
                 Interact(CurrentCell.Piece);
 
             CurrentCell.WalkOn();
@@ -121,7 +128,7 @@ public class PlayerTabletopMovement : TabletopMovement
 
             transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
 
-            if ( Path.Count > 0 )
+            if (Path.Count > 0)
             {
                 next = Path.Peek();
 

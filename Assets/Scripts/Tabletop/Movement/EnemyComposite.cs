@@ -17,10 +17,10 @@ public class EnemyComposite : TabletopMovement
 
     protected override IEnumerator Move()
     {
-        if ( _player == null || _enemies == null || _enemies.Count == 0 )
+        if (_player == null || _enemies == null || _enemies.Count == 0)
             yield break;
-        
-        
+
+
         List<EnemyTabletopMovement> leftEnemies = new(_enemies);
         List<EnemyTabletopMovement> currentEnemies = new(_enemies);
         PieceInteractive playerPiece = null;
@@ -37,7 +37,7 @@ public class EnemyComposite : TabletopMovement
             enemy.Pathfinder.Reverse();
 
 
-        while ( leftEnemies.Count > 0 )
+        while (leftEnemies.Count > 0)
         {
             currentEnemies = new List<EnemyTabletopMovement>(leftEnemies);
 
@@ -57,15 +57,15 @@ public class EnemyComposite : TabletopMovement
                     .Where(other => other.Priority < enemy.Priority)
                     .Any(other => other.Path.Contains(nextCell));
 
-                if ( !wait && nextCell.Piece == null )
+                if (!wait && nextCell.Piece == null)
                     enemy.MoveEnemy();
 
-                if ( nextCell.Piece is PieceInteractive pieceInteractive )
+                if (nextCell.Piece is PieceInteractive pieceInteractive)
                 {
-                    if ( pieceInteractive.EnemyMovement == null )
+                    if (pieceInteractive.EnemyMovement == null)
                         playerPiece = pieceInteractive;
 
-                    else if ( pieceInteractive.EnemyMovement.Path.Count <= 0 )
+                    else if (pieceInteractive.EnemyMovement.Path.Count <= 0)
                         enemy.Pathfinder.Stop();
                 }
 

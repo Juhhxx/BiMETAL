@@ -12,18 +12,19 @@ public abstract class Pathfinder
     public ObservableStack<HexagonCell> Path { get; protected set; }
     protected MonoBehaviour _owner;
     protected Coroutine _getPath;
+    protected bool _includeNonAvoidance;
 
     protected Dictionary<HexagonCell, CellData> _data;
     // becomes open for environment variables to see
-    public SortedSet<CellData> OpenList  { get; protected set; }
+    public SortedSet<CellData> OpenList { get; protected set; }
     protected HashSet<HexagonCell> _closedList;
 
-    public Pathfinder(HexagonTabletop tabletop, MonoBehaviour owner)
+    public Pathfinder(MonoBehaviour owner, bool nonAvoid)
     {
         _owner = owner;
-        _tabletop = tabletop;
         Path = new();
         Done = true;
+        _includeNonAvoidance = nonAvoid;
 
         _data = new Dictionary<HexagonCell, CellData>();
         OpenList = new SortedSet<CellData>();

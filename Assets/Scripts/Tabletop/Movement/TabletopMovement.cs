@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class TabletopMovement : MonoBehaviour
 {
-    [field:SerializeField] public HexagonCell CurrentCell { get; protected set; }
+    [field: SerializeField] public HexagonCell CurrentCell { get; protected set; }
     protected Pathfinder _pathfinder;
     public Pathfinder Pathfinder => _pathfinder;
     public ObservableStack<HexagonCell> Path => _pathfinder.Path;
@@ -15,23 +15,21 @@ public abstract class TabletopMovement : MonoBehaviour
 
     public Interactive Interactive { get; protected set; }
 
-    [field:SerializeField] public int Points { get; protected set; } = 7;
+    [field: SerializeField] public int Points { get; protected set; } = 7;
 
 
     protected bool _moving;
 
     protected virtual void Start()
     {
-        if ( CurrentCell == null )
+        if (CurrentCell == null)
             CurrentCell = FindFirstObjectByType<HexagonCell>();
-        
+
         CurrentCell.WalkOn(Interactive);
 
         transform.position = new Vector3(CurrentCell.transform.position.x, transform.position.y, CurrentCell.transform.position.z);
 
         _tabletop = FindFirstObjectByType<HexagonTabletop>();
-        _pathfinder = new AStarPathfinder(_tabletop, this);
-        _pathfinder.Path.CollectionChanged += DemonstratePath;
     }
 
     protected virtual void DemonstratePath(object sender, NotifyCollectionChangedEventArgs e)
@@ -41,10 +39,10 @@ public abstract class TabletopMovement : MonoBehaviour
         // if ( _pathfinder.Path.Count > Points ) return;
 
         IEnumerator cor = DemonstrateSlowPath(e);
-        
+
         _queue.Enqueue(cor);
 
-        if ( _queue.Count <= 1 )
+        if (_queue.Count <= 1)
             StartCoroutine(cor);
     }
 
@@ -52,13 +50,13 @@ public abstract class TabletopMovement : MonoBehaviour
     {
         // Debug.Log("queue count: " + _queue.Count);
 
-        if ( ( e.NewItems != null && !e.NewItems.Contains(CurrentCell) )
-            || ( e.OldItems != null && !e.OldItems.Contains(CurrentCell) ) )
-       {
+        if ((e.NewItems != null && !e.NewItems.Contains(CurrentCell))
+            || (e.OldItems != null && !e.OldItems.Contains(CurrentCell)))
+        {
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
-                    if ( newItem == _startCell )
+                    if (newItem == _startCell)
                         Debug.Log("Add start?: " + _startCell);
                     yield return new WaitForSeconds(0.05f);
                     newItem.PathCell();
@@ -67,7 +65,7 @@ public abstract class TabletopMovement : MonoBehaviour
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
-                    if ( oldItem == _startCell )
+                    if (oldItem == _startCell)
                     {
                         Debug.Log("Reset start?: " + _startCell);
                         _startCell = null;
@@ -76,12 +74,12 @@ public abstract class TabletopMovement : MonoBehaviour
                     yield return new WaitForSeconds(0.02f);
                     oldItem.StopPathCell();
                 }
-       }
-        
+        }
+
         // Debug.Log("queue count 2: " + _queue.Count);
         _queue.Dequeue();
 
-       if( _queue.Count > 0)
+        if (_queue.Count > 0)
             StartCoroutine(_queue.Peek());
     }
     protected abstract IEnumerator Move();
