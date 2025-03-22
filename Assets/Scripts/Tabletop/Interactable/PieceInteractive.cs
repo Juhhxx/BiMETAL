@@ -19,7 +19,7 @@ public class PieceInteractive : ModifierInteractive
 
     public override void Hover(bool onOrOff = true)
     {
-        base.Hover();
+        base.Hover(onOrOff);
 
         if (EnemyMovement != null)
         {
@@ -61,8 +61,11 @@ public class PieceInteractive : ModifierInteractive
     {
         if (_modifier == null) return;
 
-        if (other == null)
+        if ( other == null || other.Count <= 0 )
+        {
             Modify();
+            return;
+        }
         
         StartCoroutine(ModifyAtCell(other.Pop()));
     }
@@ -71,6 +74,7 @@ public class PieceInteractive : ModifierInteractive
     {
         yield return new WaitUntil(() => EnemyMovement.Pathfinder.Done);
 
-        _pathfinder.FindPath(cell, null, _reach);
+        // here the pathfinder should get the ranged enemies range
+        // _pathfinder.FindPath(cell, null, _reach);
     }
 }

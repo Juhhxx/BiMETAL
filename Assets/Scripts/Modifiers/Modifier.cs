@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Modifier : MonoBehaviour
+[CreateAssetMenu(fileName = "Modifier", menuName = "Modifier")]
+public class Modifier : ScriptableObject
 {
-    public Color Color { get; private set; }
-    public int Weight { get; private set; }
+    [field: SerializeField] public Color Color { get; private set; }
+    [field: SerializeField] public int Weight { get; private set; }
 
-
-    private void Start()
+    public void GenerateRandomValues()
     {
         Color = new Color(Random.value, Random.value, Random.value);
         Weight = Random.Range(1, 3);

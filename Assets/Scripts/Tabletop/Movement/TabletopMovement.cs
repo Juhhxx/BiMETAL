@@ -6,16 +6,15 @@ using UnityEngine;
 public abstract class TabletopMovement : MonoBehaviour
 {
     [field: SerializeField] public HexagonCell CurrentCell { get; protected set; }
+    [field: SerializeField] public Interactive Interactive { get; protected set; }
+    [field: SerializeField] public int Points { get; protected set; } = 7;
+
     protected Pathfinder _pathfinder;
     public Pathfinder Pathfinder => _pathfinder;
     public ObservableStack<HexagonCell> Path => _pathfinder.Path;
     protected HexagonTabletop _tabletop;
     protected Queue<IEnumerator> _queue = new();
     protected HexagonCell _startCell;
-
-    public Interactive Interactive { get; protected set; }
-
-    [field: SerializeField] public int Points { get; protected set; } = 7;
 
 
     protected bool _moving;
@@ -95,11 +94,14 @@ public abstract class TabletopMovement : MonoBehaviour
     protected virtual void OnDisable()
     {
         _moving = false;
-        _pathfinder.Path.CollectionChanged -= DemonstratePath;
+        if ( _pathfinder != null )
+            _pathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 
     protected void Interact(Interactive other)
     {
+        if ( other == Interactive ) return;
+        
         other.Interact(Interactive);
     }
 }

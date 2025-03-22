@@ -16,7 +16,8 @@ public class ModifierInteractive : Interactive
         base.Start();
         Modified = false;
         ChooseRange();
-        _pathfinder.Path.CollectionChanged += DemonstratePath;
+        if ( _pathfinder != null )
+            _pathfinder.Path.CollectionChanged += DemonstratePath;
     }
 
     private void ChooseRange()
@@ -49,11 +50,6 @@ public class ModifierInteractive : Interactive
         Modified = true;
     }
 
-    public override void Hover(bool onOrOff = true)
-    {
-        base.Hover();
-    }
-
     public override void Select()
     {
         throw new System.NotImplementedException();
@@ -71,7 +67,7 @@ public class ModifierInteractive : Interactive
 
     public virtual void Path(ObservableStack<HexagonCell> other = null)
     {
-        if (other == null)
+        if ( other == null || other.Count <= 0 )
         {
             _pathfinder.Stop();
             return;
@@ -131,6 +127,7 @@ public class ModifierInteractive : Interactive
 
     protected virtual void OnDisable()
     {
-        _pathfinder.Path.CollectionChanged -= DemonstratePath;
+        if ( _pathfinder != null )
+            _pathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 }

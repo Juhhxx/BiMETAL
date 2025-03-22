@@ -92,7 +92,8 @@ public class PlayerTabletopMovement : TabletopMovement
 
         if (Path == null)
         {
-            _moving = false;
+            DoneMoving();
+
             Debug.Log("Can't move there. ");
             yield break;
         }
@@ -141,9 +142,16 @@ public class PlayerTabletopMovement : TabletopMovement
             // Debug.Log("current is selected?3 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
         }
 
-        _pathfinder.Stop();
-        _moving = false;
+        DoneMoving();
 
         // Debug.Log("stopped moving start?" + _startCell);
+    }
+
+    private void DoneMoving()
+    {
+        _pathfinder.Stop();
+        _moving = false;
+        _hoveredCell?.HoverCell(false);
+        _hoveredCell = null;
     }
 }
