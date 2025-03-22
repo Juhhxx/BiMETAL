@@ -5,8 +5,8 @@ using UnityEngine;
 public class AStarPathfinder : Pathfinder
 {
 
-    public AStarPathfinder(HexagonTabletop tabletop, MonoBehaviour owner) : base(tabletop, owner)
-    {}
+    public AStarPathfinder(MonoBehaviour owner, bool nonAvoid) : base(owner, nonAvoid)
+    { }
 
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
@@ -27,7 +27,7 @@ public class AStarPathfinder : Pathfinder
 
         HexagonCell current = OpenList.Min.Cell;
 
-        while ( OpenList.Any() )
+        while (OpenList.Any())
         {
             current = OpenList.Min.Cell;
             OpenList.Remove(OpenList.Min);
@@ -42,34 +42,42 @@ public class AStarPathfinder : Pathfinder
                     weight += currentCell.Weight;
                     if (totalWeight == -1 || weight <= totalWeight)
                         Path.ObservePush(currentCell);
-                    
+
+                    if (_includeNonAvoidance && currentCell.IsNonAvoidable())
+                    {
+                        Done = true;
+                        yield break;
+                    }
+
                     currentCell = _data[currentCell].Connection.Cell;
-                    Debug.Log("this cell G: " + currentCell + "   cell: " + _data[currentCell].Cell + "  connection: " + _data[currentCell].Connection);
+                    // Debug.Log("this cell G: " + currentCell + "   cell: " + _data[currentCell].Cell + "  connection: " + _data[currentCell].Connection);
                 }
                 weight += start.Weight;
                 if (totalWeight == -1 || weight <= totalWeight)
                     Path.ObservePush(start);
-                Debug.Log("this start cell G: " + start + "   cell: " + _data[start].Cell + "  connection: " + _data[start].Connection);
-                
+                // Debug.Log("this start cell G: " + start + "   cell: " + _data[start].Cell + "  connection: " + _data[start].Connection);
+
                 Done = true;
                 yield break;
             }
 
-            foreach (HexagonCell neighbor in current.Neighbors.Where(t => (t.Walkable || t == objective) && !_closedList.Contains(t)))
+            foreach (HexagonCell neighbor in current.Neighbors.Where(t => (t.Walkable() ||
+                (_includeNonAvoidance && t.IsNonAvoidable()) ||
+                t == objective) && !_closedList.Contains(t)))
             {
                 // by switching the distance here by Points (which is how many points it takes to cross times the distance)
                 // we can reorganize pathfinding to account for how much it costs to move
                 // it calculates how much to walk to the next one from the current (not to neighbor)
-                
+
                 // neighbor points or current points?
                 float costToNeighbor = 0;
 
 
-                if ( neighbor != objective ) 
+                if (neighbor != objective)
                     costToNeighbor = _data[current].G + neighbor.Weight;
-                
+
                 // the tabletop movement is then responsible for curating how far they go (not the pathfinder)
-                
+
                 // if ( totalWeight != -1 && costToNeighbor > totalWeight ) continue;
 
 
@@ -82,7 +90,7 @@ public class AStarPathfinder : Pathfinder
                 if (costToNeighbor < cellData.G)
                 {
                     // Need to remove and readd the element from the sorted list so that it will reorder based on new F and H
-                    OpenList.Remove(cellData); 
+                    OpenList.Remove(cellData);
 
                     cellData.G = costToNeighbor;
 
