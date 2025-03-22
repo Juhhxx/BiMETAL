@@ -15,7 +15,10 @@ public class HexagonCell : MonoBehaviour
     {
         return Piece is ModifierInteractive && !Piece.Modified;
     }
-    public int Weight { get; private set; }
+    public int Weight
+    {
+        get { return 1 + (Modifier?.Weight ?? 0); }
+    }
 
     public Interactive Piece { get; private set; }
     public Modifier Modifier { get; private set; }
@@ -42,6 +45,8 @@ public class HexagonCell : MonoBehaviour
         Modifier = mod;
 
         _Cosmetic.GetComponent<Renderer>().material.color = Modifier.Color;
+
+        SetPoints();
 
         return true;
     }
@@ -93,7 +98,7 @@ public class HexagonCell : MonoBehaviour
     private void SetPoints()
     {
         // viewer that changes material color for testing
-        Weight = Random.Range(1, 4);
+        // Weight = Random.Range(1, 4);
         Material mat = GetComponentInChildren<Renderer>().material;
 
         float grayscaleValue = Mathf.Lerp(1f, 0f, (Weight - 1) / 2f) / 2f;
