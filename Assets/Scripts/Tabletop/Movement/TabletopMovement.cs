@@ -60,6 +60,9 @@ public abstract class TabletopMovement : MonoBehaviour
                     yield return new WaitForSeconds(0.05f);
                     newItem.PathCell();
 
+                    if ( this is EnemyTabletopMovement )
+                        Debug.Log("added path cell");
+
                 // if (newItem.IsNonAvoidable())
                     if (newItem.Piece is ModifierInteractive piece)
                         piece.Path(_pathfinder.Path);
@@ -77,9 +80,12 @@ public abstract class TabletopMovement : MonoBehaviour
                     yield return new WaitForSeconds(0.02f);
                     oldItem.StopPathCell();
 
-                    // if (oldItem.IsNonAvoidable())
-                        if (oldItem.Piece is ModifierInteractive piece)
-                            piece.Path();
+                    if ( this is EnemyTabletopMovement )
+                        Debug.Log("stopped path cell");
+
+                // if (oldItem.IsNonAvoidable())
+                    if (oldItem.Piece is ModifierInteractive piece)
+                        piece.Path();
                 }
         }
 
@@ -101,7 +107,7 @@ public abstract class TabletopMovement : MonoBehaviour
     protected void Interact(Interactive other)
     {
         if ( other == Interactive ) return;
-        
+
         other.Interact(Interactive);
     }
 }

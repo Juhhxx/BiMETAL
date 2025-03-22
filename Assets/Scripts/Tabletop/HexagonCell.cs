@@ -135,31 +135,36 @@ public class HexagonCell : MonoBehaviour
     }
 
     private int _pathStack = 0;
+
+    /// <summary>
+    /// Increases the path highlight stack count, but only visually changes when transitioning from 0 to 1.
+    /// </summary>
     public void PathCell()
     {
+        if (_pathStack == 0)
+        {
+            _Cosmetic.transform.Translate(Vector3.up * 0.1f);
+
+            /*if (Piece is ModifierInteractive piece)
+                piece.Path();*/
+        }
+
         _pathStack++;
-
-        if (_pathStack < 0) return;
-
-        // Debug.Log("added to path: " + this);
-
-        _Cosmetic.transform.Translate(Vector3.up * 0.1f);
-
-        if ( Piece is ModifierInteractive piece )
-            piece.Path();
     }
+
+    /// <summary>
+    /// Decreases the path highlight stack count, but only visually changes when transitioning from 0 to 1.
+    /// </summary>
     public void StopPathCell()
     {
         _pathStack--;
 
-        if (_pathStack > 0) return;
+        if (_pathStack <= 0)
+        {
+            _pathStack = 0;
 
-        // Debug.Log("removed from path: " + this);
-
-        _Cosmetic.transform.Translate(Vector3.down * 0.1f);
-
-        // _pathStack = _pathStack <= 0 ? 0 : _pathStack;
-        // Debug.Log("stopathcell2: " + _pathStack);
+            _Cosmetic.transform.Translate(Vector3.down * 0.1f);
+        }
     }
 
     public void SelectCell()
