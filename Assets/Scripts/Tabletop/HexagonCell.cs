@@ -7,7 +7,11 @@ public class HexagonCell : MonoBehaviour
     private HexagonTabletop _tabletop;
     public bool Walkable 
     { 
-        get => Piece == null;
+        get => Piece == null ;
+    }
+    public bool Modifiable
+    {
+        get => Piece == null || ( Piece is ModifierInteractive && ! Piece.Modified );
     }
 
     public int Weight { get; private set; }
