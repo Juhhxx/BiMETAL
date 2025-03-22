@@ -4100,7 +4100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 1671480133}
   <Interactive>k__BackingField: {fileID: 262858354}
-  <Points>k__BackingField: 5
+  <Points>k__BackingField: 3
   _cellLayer:
     serializedVersion: 2
     m_Bits: 131072
@@ -22451,7 +22451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 1021348675}
   <Interactive>k__BackingField: {fileID: 1249616644}
-  <Points>k__BackingField: 7
+  <Points>k__BackingField: 4
 --- !u!4 &1256610601 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2727851463618834284, guid: 70161868165544642b7370e092a8e6c3, type: 3}
@@ -23811,7 +23811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 1904283474}
   <Interactive>k__BackingField: {fileID: 1344085353}
-  <Points>k__BackingField: 7
+  <Points>k__BackingField: 4
 --- !u!23 &1344085355
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -47,6 +47,22 @@ public abstract class TabletopMovement : MonoBehaviour
 
     protected virtual IEnumerator DemonstrateSlowPath(NotifyCollectionChangedEventArgs e)
     {
+
+        if (e.NewItems != null)
+            foreach (HexagonCell newItem in e.NewItems)
+            {
+                if (newItem.Piece is PieceInteractive test && test.EnemyMovement != null)
+                    Debug.Log("detected added path cell by " + gameObject.name  + " NEW: " + (e.NewItems != null) + " Contains current:" + (!e.NewItems.Contains(CurrentCell)));
+            }
+
+        if (e.OldItems != null)
+            foreach (HexagonCell oldItem in e.OldItems)
+            {
+                if (oldItem.Piece is PieceInteractive test && test.EnemyMovement != null)
+                    Debug.Log("detected stopped path cell by " + gameObject.name + " OLD: " + (e.OldItems != null) + " Contains current:" + (!e.OldItems.Contains(CurrentCell)));
+            }
+
+
         // Debug.Log("queue count: " + _queue.Count);
 
         if ((e.NewItems != null && !e.NewItems.Contains(CurrentCell))
@@ -60,10 +76,10 @@ public abstract class TabletopMovement : MonoBehaviour
                     yield return new WaitForSeconds(0.05f);
                     newItem.PathCell();
 
-                    if ( this is EnemyTabletopMovement )
-                        Debug.Log("added path cell");
+                    if (newItem.Piece is PieceInteractive test && test.EnemyMovement != null)
+                        Debug.Log("added path cell by " + gameObject.name);
 
-                // if (newItem.IsNonAvoidable())
+                    // if (newItem.IsNonAvoidable())
                     if (newItem.Piece is ModifierInteractive piece)
                         piece.Path(_pathfinder.Path);
                 }
@@ -77,13 +93,14 @@ public abstract class TabletopMovement : MonoBehaviour
                         _startCell = null;
                         // continue;
                     }
+
                     yield return new WaitForSeconds(0.02f);
                     oldItem.StopPathCell();
 
-                    if ( this is EnemyTabletopMovement )
-                        Debug.Log("stopped path cell");
+                    if (oldItem.Piece is PieceInteractive test && test.EnemyMovement != null)
+                        Debug.Log("stopped path cell by " + gameObject.name);
 
-                // if (oldItem.IsNonAvoidable())
+                    // if (oldItem.IsNonAvoidable())
                     if (oldItem.Piece is ModifierInteractive piece)
                         piece.Path();
                 }
@@ -100,13 +117,13 @@ public abstract class TabletopMovement : MonoBehaviour
     protected virtual void OnDisable()
     {
         _moving = false;
-        if ( _pathfinder != null )
+        if (_pathfinder != null)
             _pathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 
     protected void Interact(Interactive other)
     {
-        if ( other == Interactive ) return;
+        if (other == Interactive) return;
 
         other.Interact(Interactive);
     }

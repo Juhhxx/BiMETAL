@@ -18,8 +18,8 @@ public class AStarPathfinder : Pathfinder
 
         OpenList.Add(_data[start]);
 
-        Debug.Log("Starting pathfinding from " + start + " to " + objective);
-        Debug.Log("Finding path. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
+        // Debug.Log("Starting pathfinding from " + start + " to " + objective);
+        // Debug.Log("Finding path. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         /*foreach(HexagonCell cell in _data.Keys)
         {
             Debug.Log("                 Data stats for " + cell + "  with " + _data[cell] + " and walkable: " + cell.Walkable);
@@ -107,7 +107,7 @@ public class AStarPathfinder : Pathfinder
             yield return null;
         }
 
-        Debug.Log("No path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
+        // Debug.Log("No path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         Done = true;
     }
 }

@@ -57,6 +57,10 @@ public class PieceInteractive : ModifierInteractive
     }
 
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="other"> other here seems to be getting passed as a reference? </param>
     public override void Path(ObservableStack<HexagonCell> other = null)
     {
         if (_modifier == null) return;
@@ -67,7 +71,7 @@ public class PieceInteractive : ModifierInteractive
             return;
         }
         
-        StartCoroutine(ModifyAtCell(other.Pop()));
+        StartCoroutine(ModifyAtCell(other.Peek()));
     }
 
     private IEnumerator ModifyAtCell(HexagonCell cell)

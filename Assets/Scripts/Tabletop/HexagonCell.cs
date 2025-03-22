@@ -44,7 +44,7 @@ public class HexagonCell : MonoBehaviour
 
         Modifier = mod;
 
-        _Cosmetic.GetComponent<Renderer>().material.color = Modifier.Color;
+        _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier.Color;
 
         SetPoints();
 
@@ -150,6 +150,9 @@ public class HexagonCell : MonoBehaviour
         }
 
         _pathStack++;
+
+        if ( Piece is PieceInteractive piece && piece.EnemyMovement != null )
+            Debug.Log("path stack for " + piece.gameObject.name + " cell: " + _pathStack);
     }
 
     /// <summary>
@@ -158,6 +161,9 @@ public class HexagonCell : MonoBehaviour
     public void StopPathCell()
     {
         _pathStack--;
+
+        if ( Piece is PieceInteractive piece && piece.EnemyMovement != null )
+            Debug.Log("path stack for " + piece.gameObject.name + " cell: " + _pathStack);
 
         if (_pathStack <= 0)
         {

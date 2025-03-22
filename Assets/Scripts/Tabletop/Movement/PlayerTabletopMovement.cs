@@ -34,9 +34,10 @@ public class PlayerTabletopMovement : TabletopMovement
             if (_hoveredCell != null)
             {
                 // // HidePath();
-                _pathfinder.Stop();
+                /*_pathfinder.Stop();
                 _hoveredCell.HoverCell(false);
-                _hoveredCell = null;
+                _hoveredCell = null;*/
+                DoneMoving();
             }
 
             if (newCell == CurrentCell) return;
@@ -54,9 +55,10 @@ public class PlayerTabletopMovement : TabletopMovement
         else if (_hoveredCell != null)
         {
             // HidePath();
-            _pathfinder.Stop();
+            /*_pathfinder.Stop();
             _hoveredCell.HoverCell(false);
-            _hoveredCell = null;
+            _hoveredCell = null;*/
+            DoneMoving();
         }
     }
 
@@ -149,9 +151,9 @@ public class PlayerTabletopMovement : TabletopMovement
 
     private void DoneMoving()
     {
-        _pathfinder.Stop();
         _moving = false;
-        _hoveredCell?.HoverCell(false);
+        _pathfinder.Stop();
+        _hoveredCell.HoverCell(false);
         _hoveredCell = null;
     }
 }

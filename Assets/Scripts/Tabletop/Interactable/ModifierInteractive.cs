@@ -57,16 +57,19 @@ public class ModifierInteractive : Interactive
 
     public virtual void Modify()
     {
-        // some cosmetic way of saying the _modifier now already modifed and wont be modified again
-
+        // some cosmetic way of saying the _modifier now already modifed and wont be modified again?
         // foreach ( HexagonCell cell in _pathfinder.Path)
             //cell.Modify
 
-        _pathfinder.Path.Clear();
+        // we just clear the current path to save the current cells settings and move on
+       _pathfinder.Path.Clear();
+
     }
 
     public virtual void Path(ObservableStack<HexagonCell> other = null)
     {
+        other = new(other);
+        
         if ( other == null || other.Count <= 0 )
         {
             _pathfinder.Stop();
@@ -80,6 +83,7 @@ public class ModifierInteractive : Interactive
 
         last = other.Pop();
 
+        // only supposed to do this once
         _pathfinder.FindPath(Cell, last, _reach);
     }
 
