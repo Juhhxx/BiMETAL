@@ -5,15 +5,16 @@ public class HexagonCell : MonoBehaviour
 {
     public Vector2 CellValue { get; private set; }
     private HexagonTabletop _tabletop;
-    public bool Walkable 
-    { 
-        get => Piece == null ;
-    }
-    public bool Modifiable
-    {
-        get => Piece == null || ( Piece is ModifierInteractive && ! Piece.Modified );
-    }
 
+    // Any enemy can pass through here, but will take down the piece
+    public bool Walkable()
+    {
+        return Piece == null;
+    }
+    public bool IsNonAvoidable()
+    {
+        return Piece is ModifierInteractive && !Piece.Modified;
+    }
     public int Weight { get; private set; }
 
     public Interactive Piece { get; private set; }
@@ -24,7 +25,7 @@ public class HexagonCell : MonoBehaviour
 
     public bool WalkOn(Interactive piece = null)
     {
-        if ( Piece != null && piece != null )
+        if (Piece != null && piece != null)
             return false;
         Piece = piece;
         return true;
@@ -35,13 +36,13 @@ public class HexagonCell : MonoBehaviour
     // It needs to modify if its a modifier changing it but only modify if its null and its a piece changing it
     public bool Modify(Modifier mod, bool dynamic = false)
     {
-        if ( dynamic && Modifier != null )
+        if (dynamic && Modifier != null)
             return false;
 
         Modifier = mod;
 
-         _Cosmetic.GetComponent<Renderer>().material.color = Modifier.Color;
-        
+        _Cosmetic.GetComponent<Renderer>().material.color = Modifier.Color;
+
         return true;
     }
 
@@ -57,14 +58,14 @@ public class HexagonCell : MonoBehaviour
             Round(transform.localPosition.x, 2),
             Round(transform.localPosition.y, 2)
         );
-        
-        
+
+
         // Debug.Log("Initializing " + this );
-        
+
         SetNeighbors();
         SetPoints();
 
-        if ( _Cosmetic == null )
+        if (_Cosmetic == null)
             _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
 
         return CellValue;
@@ -80,12 +81,12 @@ public class HexagonCell : MonoBehaviour
     {
         Neighbors = new List<HexagonCell>();
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _tabletop.Grid.cellSize.y*0.75f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _tabletop.Grid.cellSize.y * 0.75f);
 
-        foreach ( Collider col in colliders )
-            if (col.transform.parent.TryGetComponent(out HexagonCell neighbor) &&  neighbor != this)
+        foreach (Collider col in colliders)
+            if (col.transform.parent.TryGetComponent(out HexagonCell neighbor) && neighbor != this)
                 Neighbors.Add(neighbor);
-        
+
         // Debug.Log($"Neighbors of {this}:             {string.Join(", ", Neighbors)}");
     }
 
@@ -95,7 +96,7 @@ public class HexagonCell : MonoBehaviour
         Weight = Random.Range(1, 4);
         Material mat = GetComponentInChildren<Renderer>().material;
 
-        float grayscaleValue = Mathf.Lerp(1f, 0f, (Weight - 1) / 2f)/2f;
+        float grayscaleValue = Mathf.Lerp(1f, 0f, (Weight - 1) / 2f) / 2f;
         mat.color = new Color(grayscaleValue, grayscaleValue, grayscaleValue);
     }
 
@@ -116,13 +117,13 @@ public class HexagonCell : MonoBehaviour
     private bool _hovered = false;
     public void HoverCell(bool onOrOff = true)
     {
-        if ( _hovered == onOrOff ) return;
-        
-        if ( _hovered )
+        if (_hovered == onOrOff) return;
+
+        if (_hovered)
             _Cosmetic.transform.Translate(Vector3.down * 0.2f);
-        else if ( !_hovered )
+        else if (!_hovered)
             _Cosmetic.transform.Translate(Vector3.up * 0.2f);
-        
+
         _hovered = onOrOff;
 
         Piece?.Hover(_hovered);
@@ -133,17 +134,20 @@ public class HexagonCell : MonoBehaviour
     {
         _pathStack++;
 
-        if ( _pathStack < 0 ) return;
+        if (_pathStack < 0) return;
 
         // Debug.Log("added to path: " + this);
 
         _Cosmetic.transform.Translate(Vector3.up * 0.1f);
+
+        if ( Piece is ModifierInteractive piece )
+            piece.Path();
     }
     public void StopPathCell()
     {
         _pathStack--;
 
-        if ( _pathStack > 0 ) return;
+        if (_pathStack > 0) return;
 
         // Debug.Log("removed from path: " + this);
 

@@ -7,26 +7,28 @@ using UnityEngine;
 public abstract class Interactive : MonoBehaviour
 {
     private HexagonCell _cell;
-    public bool Modified { get; protected set; }
-    public HexagonCell Cell {
-        get {
+    public bool Modified { get; protected set; } = true;
+    public HexagonCell Cell
+    {
+        get
+        {
             UpdateCurrentCell();
             return _cell;
         }
     }
     [SerializeField] private LayerMask _cells;
-    
+
     protected virtual void Start()
     {
 
     }
 
-    
+
     public virtual void Hover(bool onOrOff = true)
     {
-        if ( onOrOff )
+        if (onOrOff)
             transform.Translate(Vector3.down * 0.2f);
-        else if ( !onOrOff )
+        else if (!onOrOff)
             transform.Translate(Vector3.up * 0.2f);
     }
 

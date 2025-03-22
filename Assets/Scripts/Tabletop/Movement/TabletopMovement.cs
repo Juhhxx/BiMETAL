@@ -60,6 +60,10 @@ public abstract class TabletopMovement : MonoBehaviour
                         Debug.Log("Add start?: " + _startCell);
                     yield return new WaitForSeconds(0.05f);
                     newItem.PathCell();
+
+                // if (newItem.IsNonAvoidable())
+                    if (newItem.Piece is ModifierInteractive piece)
+                        piece.Path(_pathfinder.Path);
                 }
 
             if (e.OldItems != null)
@@ -73,6 +77,10 @@ public abstract class TabletopMovement : MonoBehaviour
                     }
                     yield return new WaitForSeconds(0.02f);
                     oldItem.StopPathCell();
+
+                    // if (oldItem.IsNonAvoidable())
+                        if (oldItem.Piece is ModifierInteractive piece)
+                            piece.Path();
                 }
         }
 
