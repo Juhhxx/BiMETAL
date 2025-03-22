@@ -21,9 +21,9 @@ public class HexagonTabletop : MonoBehaviour
 
         // Debug.Log("Found " + cells.Length + " cells.");
 
-        foreach ( HexagonCell cell in cells)
+        foreach (HexagonCell cell in cells)
             Cells[cell.InitializeCell(this)] = cell;
-        
+
         // Debug.Log("Initialized " + Cells.Count + " cells.");
     }
 

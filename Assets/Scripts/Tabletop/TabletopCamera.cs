@@ -17,7 +17,7 @@ public class Tabletop_camera : MonoBehaviour
         if (_cam == null)
             _cam = Camera.main;
 
-        if ( _focus == null )
+        if (_focus == null)
             _focus = FindFirstObjectByType<HexagonTabletop>().transform;
 
         _currentZoom = _cam.orthographicSize;
@@ -30,7 +30,7 @@ public class Tabletop_camera : MonoBehaviour
     void Update()
     {
         HandleZoom();
-        if ( _rotate )
+        if (_rotate)
             HandleRotation();
         // To restrict this movement create a collider that is always the same size a the tabletop
         // but sits somewhat above it, and then make sure the came stays within it, and change

@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 
 public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
 {
-    
+
     public ObservableStack() : base() { }
 
     public ObservableStack(IEnumerable<T> collection) : base(collection) { }
@@ -14,7 +14,7 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
 
     public T ObservePop()
     {
-        if ( Count == 0) throw new InvalidOperationException("Stack is empty.");
+        if (Count == 0) throw new InvalidOperationException("Stack is empty.");
 
         // Debug.Log("count1 " + Count);
         T item = Peek();
@@ -22,7 +22,7 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
         OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
         // Debug.Log("count3 " + Count);
         Pop();
-        
+
         // Debug.Log("removing " + item);
 
         return item;
@@ -37,8 +37,8 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
     public void ObserveClear()
     {
         // We need to use actual new methods like this because we cant make sure the overrides will go before or after base.
-        
-        while ( Count > 0 )
+
+        while (Count > 0)
         {
             // OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
             ObservePop();
