@@ -7,6 +7,7 @@ using UnityEngine;
 public abstract class Interactive : MonoBehaviour
 {
     private HexagonCell _cell;
+    public bool Modified { get; protected set; }
     public HexagonCell Cell {
         get {
             UpdateCurrentCell();
@@ -39,7 +40,7 @@ public abstract class Interactive : MonoBehaviour
 
     }
 
-    public abstract void Interact(Interactive other);
+    public abstract void Interact(Interactive other = null);
 
     protected void UpdateCurrentCell()
     {

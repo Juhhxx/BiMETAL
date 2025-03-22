@@ -8,7 +8,6 @@ public class ModifierInteractive : Interactive
     [SerializeField] protected Modifier _modifier;
     [SerializeField] protected Pathfinder _pathfinder;
     [SerializeField] protected int _reach;
-    protected bool _modified = false;
     protected bool _dynamic = false;
 
     protected override void Start()
@@ -17,19 +16,15 @@ public class ModifierInteractive : Interactive
         _pathfinder.Path.CollectionChanged += DemonstratePath;
     }
 
-    public override void Interact(Interactive other)
+    public override void Interact(Interactive other = null)
     {
-        if ( _modified ) return;
-
         Modify();
 
-        _modified = true;
+        Modified = true;
     }
 
     public override void Hover(bool onOrOff = true)
     {
-        if ( _modified ) return;
-
         base.Hover();
     }
 
@@ -40,7 +35,7 @@ public class ModifierInteractive : Interactive
 
     public virtual void Modify()
     {
-        // some cosmetic way of saying the modifier now already modifed and wont be modified again
+        // some cosmetic way of saying the _modifier now already modifed and wont be modified again
 
         _pathfinder.Path.Clear();
     }
@@ -50,6 +45,7 @@ public class ModifierInteractive : Interactive
         if ( other == null )
         {
             _pathfinder.Stop();
+            return;
         }
         
         HexagonCell last = other.Pop();

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterInteractive : Interactive
 {
-    public override void Interact(Interactive other)
+    public override void Interact(Interactive other = null)
     {
         throw new System.NotImplementedException();
     }
