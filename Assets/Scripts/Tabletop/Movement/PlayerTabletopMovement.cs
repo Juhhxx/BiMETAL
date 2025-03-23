@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTabletopMovement : TabletopMovement
@@ -111,21 +110,27 @@ public class PlayerTabletopMovement : TabletopMovement
 
         HexagonCell next;
 
+        _hoveredCell?.HoverCell(false);
+        _hoveredCell = null;
+
         while (CurrentCell != _selectedCell && Path.Count > 0)
         {
             next = Path.ObservePop(); // previously giving an error here because pops where happening more than pushes, must also remove as hovered here
-            if ( next == _hoveredCell )
-            {
-                _hoveredCell.HoverCell(false);
-                _hoveredCell = null;
-            }
+
             Debug.Log("next: " + next + "      current: " + CurrentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
             // Debug.Log("current is selected? " + (CurrentCell == _selectedCell) + "  _current? " + CurrentCell );
 
             yield return new WaitForSeconds(0.2f);
 
-            if (CurrentCell.Piece != null)
-                Interact(CurrentCell.Piece);
+            if (next.Piece != null && next != CurrentCell)
+            {
+                Interact(next.Piece);
+                // here we have to wait until the interaction is done...
+                // yield return WaitUntil(() )
+                // break for now
+                DoneMoving();
+                yield break;
+            }
 
             CurrentCell.WalkOn();
             CurrentCell = next;
@@ -134,8 +139,10 @@ public class PlayerTabletopMovement : TabletopMovement
 
             // Debug.Log("count: " + final.Count);
 
+            // move
             transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
 
+            // rotate
             if (Path.Count > 0)
             {
                 next = Path.Peek();

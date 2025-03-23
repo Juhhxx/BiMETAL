@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// Gets an AStars' open list as the path
+/// Gets an AStars' open list as the path, non avoidance bool here counts for walkable objects as well
 /// </summary>
 public class OpenStarPathfinder : Pathfinder
 {
@@ -31,10 +31,11 @@ public class OpenStarPathfinder : Pathfinder
 
             Path.ObservePush(current);
 
-            foreach (HexagonCell neighbor in current.Neighbors.Where(t => t == objective && !_closedList.Contains(t)))
+            foreach (HexagonCell neighbor in current.Neighbors.Where(t => ( t != null && 
+                t.Walkable() || (_includeNonAvoidance && t.IsNonAvoidable()) ||
+                t == objective) && !_closedList.Contains(t)))
             {
                 float costToNeighbor = 0;
-
 
                 if (neighbor != objective)
                     costToNeighbor = _data[current].G + neighbor.Weight;

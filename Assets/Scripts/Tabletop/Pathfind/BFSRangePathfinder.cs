@@ -41,13 +41,9 @@ public class BFSRangePathfinder : Pathfinder
             OpenList.Remove(OpenList.Min);
             _closedList.Add(current);
 
-            foreach (HexagonCell neighbor in current.Neighbors)
+            foreach (HexagonCell neighbor in current.Neighbors.Where(t => t != null && !_closedList.Contains(t) &&
+                ( t.Walkable() || (_includeNonAvoidance && t.IsNonAvoidable())) ))
             {
-                if (!(neighbor.Walkable() || (_includeNonAvoidance && neighbor.IsNonAvoidable())))
-                    continue;
-
-                if (_closedList.Contains(neighbor))
-                    continue;
 
                 float costToNeighbor = _data[current].G + neighbor.Weight;
 

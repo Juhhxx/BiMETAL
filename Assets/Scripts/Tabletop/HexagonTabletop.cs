@@ -23,6 +23,8 @@ public class HexagonTabletop : MonoBehaviour
 
         foreach (HexagonCell cell in cells)
             Cells[cell.InitializeCell(this)] = cell;
+        foreach (HexagonCell cell in cells)
+            cell.SetNeighbors();
 
         // Debug.Log("Initialized " + Cells.Count + " cells.");
     }

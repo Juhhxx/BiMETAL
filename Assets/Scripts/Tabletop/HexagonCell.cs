@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HexagonCell : MonoBehaviour
@@ -7,24 +8,17 @@ public class HexagonCell : MonoBehaviour
     private HexagonTabletop _tabletop;
 
     // Any enemy can pass through here, but will take down the piece
-    public bool Walkable()
-    {
-        return Piece == null;
-    }
-    public bool IsNonAvoidable()
-    {
-        return Piece is ModifierInteractive && !Piece.Modified;
-    }
-    public int Weight
-    {
-        get { return 1 + (Modifier?.Weight ?? 0); }
-    }
-
     public Interactive Piece { get; private set; }
     public Modifier Modifier { get; private set; }
     [SerializeField] private GameObject _Cosmetic;
 
-    public List<HexagonCell> Neighbors;
+    public HexagonCell[] Neighbors;
+
+    public bool Walkable() => Piece == null;
+
+    public bool IsNonAvoidable() => Piece is ModifierInteractive && !Piece.Modified;
+
+    public int Weight => 1 + (Modifier?.Weight ?? 0);
 
     public bool WalkOn(Interactive piece = null)
     {
@@ -64,14 +58,10 @@ public class HexagonCell : MonoBehaviour
             Round(transform.localPosition.y, 2)
         );
 
-
-        // Debug.Log("Initializing " + this );
-
-        SetNeighbors();
-        SetPoints();
-
         if (_Cosmetic == null)
             _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
+
+        SetPoints();
 
         return CellValue;
     }
@@ -82,17 +72,72 @@ public class HexagonCell : MonoBehaviour
         return Mathf.Round(value * scale) / scale;
     }
 
-    private void SetNeighbors()
+    /* pointy example:
+    0 East (+q, 0)
+    1 Northeast (+q, -r)
+    2 Northwest (0, -r)
+    3 West (−q, 0)
+    4 Southwest (−q, +r)
+    5 Southeast (0, +r)
+    traditional flat:
+        new(+1, 0),
+        new(+1, -1),
+        new(0, -1),
+        new(-1, 0),
+        new(-1, +1),
+        new(0, +1)
+    traditional pointy:
+        new(0, +1),
+        new(+1, 0),
+        new(+1, -1),
+        new(0, -1),
+        new(-1, 0),
+        new(-1, +1)
+    */
+    private static readonly Vector2Int[] Directions = new Vector2Int[]
     {
-        Neighbors = new List<HexagonCell>();
+        new(+1, +1),
+        new(+1, 0),
+        new(+1, -1),
+        new(-1, -1),
+        new(-1, 0),
+        new(-1, +1)
+    };
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _tabletop.Grid.cellSize.y * 0.75f);
+    public void SetNeighbors()
+    {
+        Neighbors = new HexagonCell[6];
+
+        Vector2Int[] directions = Directions;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _tabletop.Grid.cellSize.x * 0.75f);
 
         foreach (Collider col in colliders)
-            if (col.transform.parent.TryGetComponent(out HexagonCell neighbor) && neighbor != this)
-                Neighbors.Add(neighbor);
+        {
+            if (!col.transform.parent.TryGetComponent(out HexagonCell neighbor) || neighbor == this)
+                continue;
 
-        // Debug.Log($"Neighbors of {this}:             {string.Join(", ", Neighbors)}");
+            Vector2 delta = neighbor.CellValue - CellValue;
+            delta = delta.normalized;
+
+           Vector2Int dir = new(
+                Mathf.RoundToInt(delta.x),
+                Mathf.RoundToInt(delta.y)
+            );
+
+            Debug.Log("neighbor cel: " + neighbor + "    dir: " + (neighbor.CellValue - CellValue) + "    normal: " + delta + "    int dir: " + dir);
+
+            for (int i = 0; i < 6; i++)
+                if (dir == directions[i])
+                {
+                    // Debug.Log("new neighbor " + i + "  cel: " + neighbor);
+                    Neighbors[i] = neighbor;
+                    break;
+                }
+        }
+
+        for ( int i = 0 ; i < 6 ; i++ )
+            Debug.Log("neighbor " + i + "  for dir: " + directions[i] + "  cel: " + Neighbors[i]);
     }
 
     private void SetPoints()
@@ -111,7 +156,8 @@ public class HexagonCell : MonoBehaviour
     public float GetDistance(HexagonCell other)
     {
         // Getting vector to other from the current cell
-        Vector2 dis = new(other.CellValue[0] - CellValue[0], other.CellValue[1] - CellValue[1]);
+        // Vector2 dis = new(other.CellValue[0] - CellValue[0], other.CellValue[1] - CellValue[1]);
+        Vector2 dis = other.CellValue - CellValue;
 
         // Are these heuristics correct? lol
 
@@ -150,9 +196,6 @@ public class HexagonCell : MonoBehaviour
         }
 
         _pathStack++;
-
-        if ( Piece is PieceInteractive piece && piece.EnemyMovement != null )
-            Debug.Log("path stack for " + piece.gameObject.name + " cell: " + _pathStack);
     }
 
     /// <summary>
@@ -161,9 +204,6 @@ public class HexagonCell : MonoBehaviour
     public void StopPathCell()
     {
         _pathStack--;
-
-        if ( Piece is PieceInteractive piece && piece.EnemyMovement != null )
-            Debug.Log("path stack for " + piece.gameObject.name + " cell: " + _pathStack);
 
         if (_pathStack <= 0)
         {
@@ -182,10 +222,7 @@ public class HexagonCell : MonoBehaviour
         Piece?.SelectionError();
     }
 
-    public override string ToString()
-    {
-        return $"Hex({CellValue.x}, {CellValue.y}), W({Weight})";
-    }
+    public override string ToString() => $"Hex({CellValue.x}, {CellValue.y}), W({Weight})";
 
     public List<PieceInteractive> GetPieces(HashSet<HexagonCell> visited = null)
     {
@@ -203,14 +240,32 @@ public class HexagonCell : MonoBehaviour
 
 
         foreach (HexagonCell neighbor in Neighbors)
-        {
-            if (neighbor == null || visited.Contains(neighbor))
-                continue;
-
-            if (neighbor.Piece is PieceInteractive)
+            if (neighbor != null && !visited.Contains(neighbor) && neighbor.Piece is PieceInteractive)
                 result.AddRange(neighbor.GetPieces(visited));
-        }
 
         return result;
+    }
+
+    public int GetDirectionToNeighbor(HexagonCell other)
+    {
+        for (int dir = 0; dir < 6; dir++)
+            if (GetNeighborInDirection(dir) == other)
+                return dir;
+        // it's not a neighbor
+        return -1;
+    }
+    // if we can only do get neighbor in direction, we can still use reverse to get the next direction
+    public static int ReverseDirection(int direction) => (direction + 3) % 6;
+
+    public HexagonCell GetNeighborInDirection(int direction)
+    {
+        if (direction < 0 || direction > 5) return null;
+
+        return Neighbors[direction];
+    }
+    public bool TryGetNeighborInDirection(int direction, out HexagonCell neighbor)
+    {
+        neighbor = GetNeighborInDirection(direction);
+        return neighbor != null;
     }
 }

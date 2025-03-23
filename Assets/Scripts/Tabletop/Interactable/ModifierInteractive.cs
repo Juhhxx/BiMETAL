@@ -67,6 +67,8 @@ public class ModifierInteractive : Interactive
     public virtual void Path(ObservableStack<HexagonCell> other = null)
     {
         if (_modifier == null) return;
+
+        Debug.Log("modifier " + gameObject.name + " trying to path cell: " + Cell + " and other " + other?.Contains(Cell) + " contains it");
         
         if ( other == null || other.Count <= 0 )
         {
@@ -74,19 +76,32 @@ public class ModifierInteractive : Interactive
             return;
         }
 
-        other = new(other);
+        ObservableStack<HexagonCell> clone = new(other);
 
-        HexagonCell last = other.Pop();
+        HexagonCell last = clone.Pop();
 
-        while ( other.Count > 0 && last != Cell)
+        while ( clone.Count > 0 && last != Cell)
         {
-            last = other.Pop();
+            last = clone.Pop();
         }
 
-        if ( other.Count <= 1 )
+        if ( clone.Count < 1 )
             return;
 
-        last = other.Pop();
+        last = clone.Pop();
+
+        int dir = last.GetDirectionToNeighbor(Cell);
+        last = Cell;
+
+        // gets the last cell in the new direction, within reach.
+
+        for ( int i = 0 ; i <= _reach; i++)
+        {
+            if ( last.TryGetNeighborInDirection(dir, out HexagonCell next) )
+                break;
+        
+            last = next;
+        }
 
         // only supposed to do this once
         _modPathfinder.FindPath(Cell, last, _reach);
