@@ -6,39 +6,21 @@ using UnityEngine;
 public class ModifierInteractive : Interactive
 {
     [SerializeField] protected Modifier _modifier;
-    [SerializeField] protected ModifierRangeType _rangeType;
-    protected Pathfinder _pathfinder;
+    [SerializeField] protected PathfinderType _rangeType;
     [SerializeField] protected int _reach;
+
+    protected Pathfinder _pathfinder;
     protected bool _dynamic = false;
 
     protected override void Start()
     {
         base.Start();
         Modified = false;
-        ChooseRange();
+
+        _pathfinder = PathfinderChooser.ChooseRange(this, _rangeType);
+
         if ( _pathfinder != null )
             _pathfinder.Path.CollectionChanged += DemonstratePath;
-    }
-
-    private void ChooseRange()
-    {
-        switch ( _rangeType )
-        {
-            case ModifierRangeType.Star:
-                _pathfinder = new AStarPathfinder(this, false);
-                break;
-
-            case ModifierRangeType.Hexagon:
-                _pathfinder = new AStarPathfinder(this, false);
-                break;
-
-            case ModifierRangeType.AStar:
-                _pathfinder = new AStarPathfinder(this, false);
-                break;
-
-            default:
-                break;
-        }
     }
 
     public override void Interact(Interactive other = null)

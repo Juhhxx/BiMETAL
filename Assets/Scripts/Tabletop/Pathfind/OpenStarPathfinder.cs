@@ -2,6 +2,9 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Gets an AStars' open list as the path
+/// </summary>
 public class OpenStarPathfinder : Pathfinder
 {
 

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// gets any cell you can walk to with total weight, accounting for avoidables and walkables
+/// </summary>
 public class BFSRangePathfinder : Pathfinder
 {
-
     public BFSRangePathfinder(MonoBehaviour owner, bool nonAvoid) : base(owner, nonAvoid)
     { }
 
