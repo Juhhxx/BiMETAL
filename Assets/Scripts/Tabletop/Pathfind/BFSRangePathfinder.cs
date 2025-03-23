@@ -12,71 +12,72 @@ public class BFSRangePathfinder : Pathfinder
     { }
 
     private HashSet<HexagonCell> _set;
+
+    /// <summary>
+    /// objective is the current cell and start is the objective
+    /// </summary>
+    /// <param name="objective"></param>
+    /// <param name="start"></param>
+    /// <param name="totalWeight"></param>
+    /// <returns></returns>
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         Done = false;
 
-        _data[start] = new CellData(start, start.Weight, start.GetDistance(objective), null);
-        OpenList.Add(_data[start]);
+        _data.Clear();
+        _closedList.Clear();
+        OpenList.Clear();
+        Path.Clear();
 
-        _set = new();
+        _set = new HashSet<HexagonCell>();
 
-
-        HexagonCell current = OpenList.Min.Cell;
+        // objective is start as stated before
+        _data[objective] = new CellData(objective, 0f, 0f, null);
+        OpenList.Add(_data[objective]);
 
         while (OpenList.Any())
         {
-            current = OpenList.Min.Cell;
+            HexagonCell current = OpenList.Min.Cell;
             OpenList.Remove(OpenList.Min);
             _closedList.Add(current);
 
-            // when open list is done, add hash set bfs to path
-            if ( OpenList.Count <= 0 )
+            foreach (HexagonCell neighbor in current.Neighbors)
             {
-                HexagonCell currentCell;
+                if (!(neighbor.Walkable() || (_includeNonAvoidance && neighbor.IsNonAvoidable())))
+                    continue;
 
-                while ( _set.Any() )
-                {
-                    currentCell = _set.Last();
-                    Path.ObservePush(currentCell);
-                }
-                // Path.ObservePush(start);
+                if (_closedList.Contains(neighbor))
+                    continue;
 
-                Done = true;
-                yield break;
-            }
+                float costToNeighbor = _data[current].G + neighbor.Weight;
 
-            foreach (HexagonCell neighbor in current.Neighbors.Where(t => (t.Walkable() ||
-                (_includeNonAvoidance && t.IsNonAvoidable()) ||
-                t == objective) && !_closedList.Contains(t)))
-            {
-                float costToNeighbor = 0;
-
-                if (neighbor != objective)
-                    costToNeighbor = _data[current].G + neighbor.Weight;
+                // if the cost is too great we don't want this neighbor
+                if (costToNeighbor > totalWeight)
+                    continue;
 
                 if (!_data.TryGetValue(neighbor, out CellData cellData))
                 {
-                    cellData = new CellData(neighbor, float.MaxValue, neighbor.GetDistance(objective), null);
+                    cellData = new CellData(neighbor, float.MaxValue, 0f, null);
                     _data[neighbor] = cellData;
                 }
 
-                if ( costToNeighbor < cellData.G && costToNeighbor <= totalWeight)
+                // if its better than the last cost, we update it
+                if (costToNeighbor < cellData.G)
                 {
-                    // Need to remove and readd the element from the sorted list so that it will reorder based on new F and H
                     OpenList.Remove(cellData);
 
                     cellData.G = costToNeighbor;
-                    // readd
                     OpenList.Add(cellData);
 
-                    // had bfs correct path to here
                     _set.Add(neighbor);
                 }
             }
 
             yield return null;
         }
+
+        foreach (HexagonCell cell in _set)
+            Path.ObservePush(cell);
 
         Done = true;
     }
