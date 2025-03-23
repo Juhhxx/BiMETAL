@@ -7,12 +7,30 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
     protected PlayerTabletopMovement _player;
     public int Priority { get; set; }
 
+    protected Pathfinder _rangePathfinder;
+    protected Pathfinder _movementPathfinder;
+
     protected override void Start()
     {
         base.Start();
-        _pathfinder = new AStarPathfinder(this, true);
-        _pathfinder.Path.CollectionChanged += DemonstratePath;
+
+        _movementPathfinder = new AStarPathfinder(this, true);
+        _rangePathfinder = new BFSRangePathfinder(this, true);
+
+        _movementPathfinder.Path.CollectionChanged += DemonstratePath;
+        _rangePathfinder.Path.CollectionChanged += DemonstratePath;
+
         _player = FindFirstObjectByType<PlayerTabletopMovement>();
+
+        TogglePath();
+    }
+
+    public void TogglePath()
+    {
+        _pathfinder?.Stop();
+        
+        if ( _pathfinder == _rangePathfinder ) _pathfinder = _movementPathfinder;
+        else _pathfinder = _rangePathfinder;
     }
 
     public int CompareTo(EnemyTabletopMovement other)

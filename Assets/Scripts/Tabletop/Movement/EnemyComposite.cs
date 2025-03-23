@@ -27,7 +27,10 @@ public class EnemyComposite : TabletopMovement
 
 
         foreach (EnemyTabletopMovement enemy in _enemies)
+        {
+            enemy.TogglePath();
             enemy.FindPath();
+        }
 
         leftEnemies.Sort();
         for (int i = 0; i < leftEnemies.Count; i++)
@@ -62,7 +65,7 @@ public class EnemyComposite : TabletopMovement
 
                 if (nextCell.Piece is PieceInteractive pieceInteractive)
                 {
-                    if (pieceInteractive.EnemyMovement == null)
+                    if ( ! pieceInteractive.IsEnemy )
                         playerPiece = pieceInteractive;
 
                     else if (pieceInteractive.EnemyMovement.Path.Count <= 0)
@@ -70,7 +73,10 @@ public class EnemyComposite : TabletopMovement
                 }
 
                 if (enemy.Path.Count == 0)
+                {
+                    enemy.TogglePath();
                     leftEnemies.Remove(enemy);
+                }
             }
 
             yield return new WaitForSeconds(0.1f);

@@ -25,7 +25,7 @@ public class PlayerTabletopMovement : TabletopMovement
     {
         if (_moving) return;
 
-        if (InputManager.HoverCell(_cellLayer, out var newCell))
+        if (InputManager.HoverCell(_cellLayer, out HexagonCell newCell))
         {
             // ShowPath();
 

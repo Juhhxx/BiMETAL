@@ -3,32 +3,22 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
 
-public abstract class TabletopMovement : MonoBehaviour
+public abstract class TabletopMovement : TabletopBase
 {
-    [field: SerializeField] public HexagonCell CurrentCell { get; protected set; }
-    [field: SerializeField] public Interactive Interactive { get; protected set; }
     [field: SerializeField] public int Points { get; protected set; } = 7;
 
     protected Pathfinder _pathfinder;
     public Pathfinder Pathfinder => _pathfinder;
     public ObservableStack<HexagonCell> Path => _pathfinder.Path;
-    protected HexagonTabletop _tabletop;
     protected Queue<IEnumerator> _queue = new();
     protected HexagonCell _startCell;
 
 
     protected bool _moving;
 
-    protected virtual void Start()
+    protected override void Start()
     {
-        if (CurrentCell == null)
-            CurrentCell = FindFirstObjectByType<HexagonCell>();
-
-        CurrentCell.WalkOn(Interactive);
-
-        transform.position = new Vector3(CurrentCell.transform.position.x, transform.position.y, CurrentCell.transform.position.z);
-
-        _tabletop = FindFirstObjectByType<HexagonTabletop>();
+        base.Start();
     }
 
     protected virtual void DemonstratePath(object sender, NotifyCollectionChangedEventArgs e)
@@ -47,22 +37,6 @@ public abstract class TabletopMovement : MonoBehaviour
 
     protected virtual IEnumerator DemonstrateSlowPath(NotifyCollectionChangedEventArgs e)
     {
-
-        if (e.NewItems != null)
-            foreach (HexagonCell newItem in e.NewItems)
-            {
-                if (newItem.Piece is PieceInteractive test && test.EnemyMovement != null)
-                    Debug.Log("detected added path cell by " + gameObject.name  + " NEW: " + (e.NewItems != null) + " Contains current:" + (!e.NewItems.Contains(CurrentCell)));
-            }
-
-        if (e.OldItems != null)
-            foreach (HexagonCell oldItem in e.OldItems)
-            {
-                if (oldItem.Piece is PieceInteractive test && test.EnemyMovement != null)
-                    Debug.Log("detected stopped path cell by " + gameObject.name + " OLD: " + (e.OldItems != null) + " Contains current:" + (!e.OldItems.Contains(CurrentCell)));
-            }
-
-
         // Debug.Log("queue count: " + _queue.Count);
 
         if ((e.NewItems != null && !e.NewItems.Contains(CurrentCell))
@@ -71,13 +45,8 @@ public abstract class TabletopMovement : MonoBehaviour
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
-                    if (newItem == _startCell)
-                        Debug.Log("Add start?: " + _startCell);
                     yield return new WaitForSeconds(0.05f);
                     newItem.PathCell();
-
-                    if (newItem.Piece is PieceInteractive test && test.EnemyMovement != null)
-                        Debug.Log("added path cell by " + gameObject.name);
 
                     // if (newItem.IsNonAvoidable())
                     if (newItem.Piece is ModifierInteractive piece)
@@ -96,9 +65,6 @@ public abstract class TabletopMovement : MonoBehaviour
 
                     yield return new WaitForSeconds(0.02f);
                     oldItem.StopPathCell();
-
-                    if (oldItem.Piece is PieceInteractive test && test.EnemyMovement != null)
-                        Debug.Log("stopped path cell by " + gameObject.name);
 
                     // if (oldItem.IsNonAvoidable())
                     if (oldItem.Piece is ModifierInteractive piece)
