@@ -44,7 +44,9 @@ public class BFSRangePathfinder : Pathfinder
                 yield break;
             }
 
-            foreach (HexagonCell neighbor in current.Neighbors.Where(t => t == objective && !_closedList.Contains(t) ))
+            foreach (HexagonCell neighbor in current.Neighbors.Where(t => (t.Walkable() ||
+                (_includeNonAvoidance && t.IsNonAvoidable()) ||
+                t == objective) && !_closedList.Contains(t)))
             {
                 float costToNeighbor = 0;
 
@@ -63,9 +65,6 @@ public class BFSRangePathfinder : Pathfinder
                     OpenList.Remove(cellData);
 
                     cellData.G = costToNeighbor;
-
-                    cellData.Connection = _data[current];
-
                     // readd
                     OpenList.Add(cellData);
 
@@ -73,7 +72,7 @@ public class BFSRangePathfinder : Pathfinder
                     _set.Add(neighbor);
                 }
             }
-            
+
             yield return null;
         }
 
