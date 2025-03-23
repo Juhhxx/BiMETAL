@@ -202,7 +202,7 @@ public class HexagonCell : MonoBehaviour
             result.Add(interactive);
 
 
-        foreach (var neighbor in Neighbors)
+        foreach (HexagonCell neighbor in Neighbors)
         {
             if (neighbor == null || visited.Contains(neighbor))
                 continue;

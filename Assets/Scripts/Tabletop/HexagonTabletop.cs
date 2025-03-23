@@ -27,7 +27,7 @@ public class HexagonTabletop : MonoBehaviour
         // Debug.Log("Initialized " + Cells.Count + " cells.");
     }
 
-    public HexagonCell GetCell(Vector2 pos) => Cells.TryGetValue(pos, out var tile) ? tile : null;
+    public HexagonCell GetCell(Vector2 pos) => Cells.TryGetValue(pos, out HexagonCell tile) ? tile : null;
 
     // pass cell visualization handleing to here
 }

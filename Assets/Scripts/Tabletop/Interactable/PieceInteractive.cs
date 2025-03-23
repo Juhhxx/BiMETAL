@@ -5,13 +5,21 @@ using UnityEngine;
 public class PieceInteractive : ModifierInteractive
 {
     private TabletopController _controller;
+    public bool IsEnemy { get; protected set; }
+    // [SerializeField] protected PathfinderType _rangeType;
     public EnemyTabletopMovement EnemyMovement { get; protected set; }
 
     // Add here other piece stats like if its player or the prefab it needs to load in battle or something
 
     protected override void Start()
     {
-        EnemyMovement = GetComponentInChildren<EnemyTabletopMovement>();
+        base.Start();
+
+        IsEnemy = _base is EnemyTabletopMovement;
+
+        if ( IsEnemy )
+            EnemyMovement = _base as EnemyTabletopMovement;
+
         _controller = FindFirstObjectByType<TabletopController>();
         Modified = true;
         _dynamic = true;
@@ -21,7 +29,7 @@ public class PieceInteractive : ModifierInteractive
     {
         base.Hover(onOrOff);
 
-        if (EnemyMovement != null)
+        if ( IsEnemy )
         {
             if (onOrOff)
             {
@@ -38,8 +46,6 @@ public class PieceInteractive : ModifierInteractive
 
     public override void Interact(Interactive other = null)
     {
-        UpdateCurrentCell();
-
         List<PieceInteractive> pieces = Cell.GetPieces();
         _controller.StartBattle(_modifier, pieces);
     }
@@ -71,7 +77,8 @@ public class PieceInteractive : ModifierInteractive
             return;
         }
         
-        StartCoroutine(ModifyAtCell(other.Peek()));
+        // remove for now because he are using a bfs so there is no definite objective
+        // StartCoroutine(ModifyAtCell(other.Peek()));
     }
 
     private IEnumerator ModifyAtCell(HexagonCell cell)

@@ -6,21 +6,14 @@ using UnityEngine;
 /// </summary>
 public abstract class Interactive : MonoBehaviour
 {
-    private HexagonCell _cell;
     public bool Modified { get; protected set; } = true;
-    public HexagonCell Cell
-    {
-        get
-        {
-            UpdateCurrentCell();
-            return _cell;
-        }
-    }
+    protected TabletopBase _base;
+    public HexagonCell Cell => _base?.CurrentCell;
     [SerializeField] private LayerMask _cells;
 
     protected virtual void Start()
     {
-
+        _base = GetComponentInChildren<TabletopBase>();
     }
 
 
@@ -43,10 +36,4 @@ public abstract class Interactive : MonoBehaviour
     }
 
     public abstract void Interact(Interactive other = null);
-
-    protected void UpdateCurrentCell()
-    {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 10f, _cells))
-            _cell = hit.transform.GetComponentInChildren<HexagonCell>();
-    }
 }

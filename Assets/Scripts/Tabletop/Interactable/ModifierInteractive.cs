@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class ModifierInteractive : Interactive
 {
     [SerializeField] protected Modifier _modifier;
-    [SerializeField] protected PathfinderType _rangeType;
+    private bool HasModifier => _modifier != null;
+
+    [ShowIf(nameof(HasModifier))]
+    [SerializeField] protected PathfinderType _modRangeType;
+
+    [ShowIf(nameof(HasModifier))]
     [SerializeField] protected int _reach;
 
-    protected Pathfinder _pathfinder;
+
+    protected Pathfinder _modPathfinder;
     protected bool _dynamic = false;
 
     protected override void Start()
@@ -17,10 +24,17 @@ public class ModifierInteractive : Interactive
         base.Start();
         Modified = false;
 
-        _pathfinder = PathfinderChooser.ChooseRange(this, _rangeType);
+        _modPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
 
-        if ( _pathfinder != null )
-            _pathfinder.Path.CollectionChanged += DemonstratePath;
+        if ( _modPathfinder != null )
+            _modPathfinder.Path.CollectionChanged += DemonstratePath;
+    }
+
+    public override void Hover(bool onOrOff = true)
+    {
+        base.Hover(onOrOff);
+
+        Debug.Log("modifier name: " + gameObject.name + "  cell: " + Cell);
     }
 
     public override void Interact(Interactive other = null)
@@ -39,34 +53,43 @@ public class ModifierInteractive : Interactive
 
     public virtual void Modify()
     {
+        if (_modifier == null) return;
+
         // some cosmetic way of saying the _modifier now already modifed and wont be modified again?
-        // foreach ( HexagonCell cell in _pathfinder.Path)
+        // foreach ( HexagonCell cell in _modPathfinder.Path)
             //cell.Modify
 
         // we just clear the current path to save the current cells settings and move on
-       _pathfinder.Path.Clear();
+       _modPathfinder.Path.Clear();
 
     }
 
     public virtual void Path(ObservableStack<HexagonCell> other = null)
     {
-        other = new(other);
+        if (_modifier == null) return;
         
         if ( other == null || other.Count <= 0 )
         {
-            _pathfinder.Stop();
+            _modPathfinder.Stop();
             return;
         }
 
+        other = new(other);
+
         HexagonCell last = other.Pop();
 
-        while (last != Cell)
+        while ( other.Count > 0 && last != Cell)
+        {
             last = other.Pop();
+        }
+
+        if ( other.Count <= 1 )
+            return;
 
         last = other.Pop();
 
         // only supposed to do this once
-        _pathfinder.FindPath(Cell, last, _reach);
+        _modPathfinder.FindPath(Cell, last, _reach);
     }
 
 
@@ -113,7 +136,7 @@ public class ModifierInteractive : Interactive
 
     protected virtual void OnDisable()
     {
-        if ( _pathfinder != null )
-            _pathfinder.Path.CollectionChanged -= DemonstratePath;
+        if ( _modPathfinder != null )
+            _modPathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 }
