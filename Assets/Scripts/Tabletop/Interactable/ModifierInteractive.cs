@@ -69,10 +69,13 @@ public class ModifierInteractive : Interactive
     {
         if (_modifier == null) return;
 
+        
+        Debug.Log("modifier? modifying? " + (other == null));
         // Debug.Log("modifier " + gameObject.name + " trying to path cell: " + Cell + " and other " + other?.Contains(Cell) + " contains it");
         
         if ( other == null || other.Count <= 0 )
         {
+            Debug.Log("modifier? stopping");
             _modPathfinder.Stop();
             return;
         }
@@ -93,6 +96,7 @@ public class ModifierInteractive : Interactive
         if ( clone.Count < 1 )
             return;
 
+        Debug.Log("modifier? starting");
         // only supposed to do this once
         _modPathfinder.FindPath(Cell, last, _reach);
     }

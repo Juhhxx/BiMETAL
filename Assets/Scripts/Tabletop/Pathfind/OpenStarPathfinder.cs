@@ -51,7 +51,7 @@ public class OpenStarPathfinder : Pathfinder
 
             if ( current == objective )
             {
-                Debug.Log("modifier? Found start");
+                // Debug.Log("modifier? Found start");
                 yield break;
             }
 
