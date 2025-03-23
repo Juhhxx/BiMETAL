@@ -113,7 +113,12 @@ public class PlayerTabletopMovement : TabletopMovement
 
         while (CurrentCell != _selectedCell && Path.Count > 0)
         {
-            next = Path.ObservePop(); // previously giving an error here because pops where happening more than pushes
+            next = Path.ObservePop(); // previously giving an error here because pops where happening more than pushes, must also remove as hovered here
+            if ( next == _hoveredCell )
+            {
+                _hoveredCell.HoverCell(false);
+                _hoveredCell = null;
+            }
             Debug.Log("next: " + next + "      current: " + CurrentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
             // Debug.Log("current is selected? " + (CurrentCell == _selectedCell) + "  _current? " + CurrentCell );
 
@@ -153,7 +158,10 @@ public class PlayerTabletopMovement : TabletopMovement
     {
         _moving = false;
         _pathfinder.Stop();
-        _hoveredCell.HoverCell(false);
+
+        if ( _hoveredCell != null )
+            _hoveredCell.HoverCell(false);
+        
         _hoveredCell = null;
     }
 }
