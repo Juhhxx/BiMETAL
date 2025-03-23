@@ -36,9 +36,13 @@ public class HexagonCell : MonoBehaviour
         if (dynamic && Modifier != null)
             return false;
 
-        Modifier = mod;
+        // probably gonna have to implement a smarter way of knowing if someone else's modifier tat is the same scriptable object is already here
+        if ( Modifier = mod )
+            Modifier = null;
+        else
+            Modifier = mod;
 
-        _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier.Color;
+        // _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.gray;
 
         SetPoints();
 

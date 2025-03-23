@@ -4,6 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Gets an AStars' open list as the path, non avoidance bool here counts for walkable objects as well
+/// A water like moment 
 /// </summary>
 public class OpenStarPathfinder : Pathfinder
 {
@@ -15,13 +16,30 @@ public class OpenStarPathfinder : Pathfinder
     {
         // objective and start are switched
 
+        Debug.Log("modifier? starting pathfinder at " + _owner.gameObject.name);
         Done = false;
 
-        _data[start] = new CellData(start, start.Weight, start.GetDistance(objective), null);
 
-        OpenList.Add(_data[start]);
+        int dir = start.GetDirectionToNeighbor(objective);
+        HexagonCell current = objective;
 
-        HexagonCell current = OpenList.Min.Cell;
+        // Above, current is now "objective" (starting cell), bellow, objective becomes the most ahead cell
+        // gets the last cell in the new direction, within reach.
+
+        for ( int i = 0 ; i <= totalWeight; i++)
+        {
+            if ( !objective.TryGetNeighborInDirection(dir, out HexagonCell next) )
+                break;
+        
+            objective = next;
+            // Debug -> last.Modify(_modifier, _dynamic);
+        }
+
+        // DEBUG objective.PathCell();
+
+
+        _data[current] = new CellData(current, current.Weight, current.GetDistance(objective), null);
+        OpenList.Add(_data[current]);
 
         while (OpenList.Any())
         {
@@ -31,14 +49,21 @@ public class OpenStarPathfinder : Pathfinder
 
             Path.ObservePush(current);
 
-            foreach (HexagonCell neighbor in current.Neighbors.Where(t => ( t != null && 
-                t.Walkable() || (_includeNonAvoidance && t.IsNonAvoidable()) ||
-                t == objective) && !_closedList.Contains(t)))
+            if ( current == objective )
+            {
+                Debug.Log("modifier? Found start");
+                yield break;
+            }
+
+            // avoid going in the direct direction of the objective (dir)
+            foreach (HexagonCell neighbor in current.Neighbors.Where(t => t != null && 
+                !_closedList.Contains(t) && dir != current.GetDirectionToNeighbor(t)))
             {
                 float costToNeighbor = 0;
 
+                // previously weighted here, no more
                 if (neighbor != objective)
-                    costToNeighbor = _data[current].G + neighbor.Weight;
+                    costToNeighbor = _data[current].G + current.Weight;
 
                 // needs to use bfs to find a shot based path to a cell near it
 
@@ -55,11 +80,8 @@ public class OpenStarPathfinder : Pathfinder
                     OpenList.Remove(cellData);
 
                     cellData.G = costToNeighbor;
-
                     cellData.H = neighbor.GetDistance(objective);
-                    // cellData.H = Vector2.Distance(neighbor.CellValue, objective.CellValue);
-
-                    cellData.Connection = _data[current];
+                    // cellData.H = HeuristicWeightDistance(neighbor, objective);
 
                     // readd
                     OpenList.Add(cellData);
@@ -69,7 +91,19 @@ public class OpenStarPathfinder : Pathfinder
             yield return null;
         }
 
-        // Debug.Log("No path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
+        // DEBUG objective.StopPathCell();
+
+        Debug.Log("modifier? Path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         Done = true;
     }
+
+    /* Nevermind
+
+    private float HeuristicWeightDistance(HexagonCell one, HexagonCell two)
+    {
+        // the seed needs to be the same for each cell
+        System.Random rng = new(two.CellValue.GetHashCode());
+        // the float determines the random force
+        return one.GetDistance(two)/ (float) rng.NextDouble() * 0.5f;
+    }*/
 }

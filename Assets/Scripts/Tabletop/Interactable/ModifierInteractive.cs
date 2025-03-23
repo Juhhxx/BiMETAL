@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -68,7 +69,7 @@ public class ModifierInteractive : Interactive
     {
         if (_modifier == null) return;
 
-        Debug.Log("modifier " + gameObject.name + " trying to path cell: " + Cell + " and other " + other?.Contains(Cell) + " contains it");
+        // Debug.Log("modifier " + gameObject.name + " trying to path cell: " + Cell + " and other " + other?.Contains(Cell) + " contains it");
         
         if ( other == null || other.Count <= 0 )
         {
@@ -78,30 +79,19 @@ public class ModifierInteractive : Interactive
 
         ObservableStack<HexagonCell> clone = new(other);
 
-        HexagonCell last = clone.Pop();
+        HexagonCell last = clone.Peek();
 
         while ( clone.Count > 0 && last != Cell)
         {
             last = clone.Pop();
+            // Debug.Log("modifier clone at: " + clone.Count);
+
+            if ( !clone.Any() || clone.Peek() == Cell)
+                break;
         }
 
         if ( clone.Count < 1 )
             return;
-
-        last = clone.Pop();
-
-        int dir = last.GetDirectionToNeighbor(Cell);
-        last = Cell;
-
-        // gets the last cell in the new direction, within reach.
-
-        for ( int i = 0 ; i <= _reach; i++)
-        {
-            if ( last.TryGetNeighborInDirection(dir, out HexagonCell next) )
-                break;
-        
-            last = next;
-        }
 
         // only supposed to do this once
         _modPathfinder.FindPath(Cell, last, _reach);

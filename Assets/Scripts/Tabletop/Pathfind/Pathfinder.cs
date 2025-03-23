@@ -42,6 +42,9 @@ public abstract class Pathfinder
 
     public void Stop()
     {
+        if ( this is OpenStarPathfinder)
+            Debug.Log("modifier? stopping " + _owner + " path.");
+        
         if (_getPath != null)
         {
             _owner.StopCoroutine(_getPath);
