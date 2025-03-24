@@ -36,8 +36,10 @@ public class HexagonCell : MonoBehaviour
         if (dynamic && Modifier != null)
             return false;
 
+        Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
+
         // probably gonna have to implement a smarter way of knowing if someone else's modifier tat is the same scriptable object is already here
-        if ( Modifier = mod )
+        if ( Modifier == mod )
             Modifier = null;
         else
             Modifier = mod;

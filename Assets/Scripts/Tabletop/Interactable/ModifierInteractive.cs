@@ -60,6 +60,8 @@ public class ModifierInteractive : Interactive
         // foreach ( HexagonCell cell in _modPathfinder.Path)
             //cell.Modify
 
+        Debug.Log("modifier? setting path as fr fr hopefully, is path null or count 0?  " + (_modPathfinder.Path.Count == 0 || _modPathfinder.Path == null));
+
         // we just clear the current path to save the current cells settings and move on
        _modPathfinder.Path.Clear();
 

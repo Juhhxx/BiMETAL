@@ -11,4 +11,5 @@ public class Modifier : ScriptableObject
         Color = new Color(Random.value, Random.value, Random.value);
         Weight = Random.Range(1, 3);
     }
+    public override string ToString() => $"C({Color}),, W({Weight})";
 }

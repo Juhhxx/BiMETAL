@@ -115,7 +115,8 @@ public class PlayerTabletopMovement : TabletopMovement
 
         while (CurrentCell != _selectedCell && Path.Count > 0)
         {
-            next = Path.ObservePop(); // previously giving an error here because pops where happening more than pushes, must also remove as hovered here
+            next = Path.Peek(); // previously giving an error here because pops where happening more than pushes, must also remove as hovered here
+            // need to peek first so we dont spook the next pieces modifier interactive
 
             Debug.Log("next: " + next + "      current: " + CurrentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
             // Debug.Log("current is selected? " + (CurrentCell == _selectedCell) + "  _current? " + CurrentCell );
@@ -131,6 +132,8 @@ public class PlayerTabletopMovement : TabletopMovement
                 DoneMoving();
                 yield break;
             }
+
+            Path.ObservePop();
 
             CurrentCell.WalkOn();
             CurrentCell = next;
