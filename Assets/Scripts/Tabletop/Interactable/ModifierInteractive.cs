@@ -69,7 +69,7 @@ public class ModifierInteractive : Interactive
 
     public virtual void Path(ObservableStack<HexagonCell> other = null)
     {
-        if (_modifier == null) return;
+        if (_modifier == null || Modified ) return;
 
         
         Debug.Log("modifier? modifying? " + (other == null));
