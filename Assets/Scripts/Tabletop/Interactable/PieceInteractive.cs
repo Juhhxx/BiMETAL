@@ -23,6 +23,10 @@ public class PieceInteractive : ModifierInteractive
         _controller = FindFirstObjectByType<TabletopController>();
         Modified = true;
         _dynamic = true;
+
+
+        if (_modifier != null)
+            _modPathfinder.FindPath(Cell, null, _reach);
     }
 
     public override void Hover(bool onOrOff = true)
@@ -35,11 +39,19 @@ public class PieceInteractive : ModifierInteractive
             {
                 EnemyMovement.FindPath();
                 // Path(EnemyMovement.Path);
+                if ( HasModifier )
+                {
+                    Debug.Log("De-modifying. ");
+                    _modPathfinder.Stop();
+                }
+
             }
             else
             {
                 EnemyMovement.Stop();
                 // Path();
+                if ( HasModifier )
+                    _modPathfinder.FindPath(Cell, null, _reach);
             }
         }
     }
@@ -47,7 +59,7 @@ public class PieceInteractive : ModifierInteractive
     public override void Interact(Interactive other = null)
     {
         List<PieceInteractive> pieces = Cell.GetPieces();
-        _controller.StartBattle(_modifier, pieces);
+        _controller.StartBattle(Cell.Modifier, pieces);
     }
 
     public override void Select()
@@ -59,7 +71,7 @@ public class PieceInteractive : ModifierInteractive
     {
         if (_modifier == null) return;
 
-        StartCoroutine(ModifyAtCell(Cell));
+        // StartCoroutine(ModifyAtCell());
     }
 
 
@@ -69,7 +81,7 @@ public class PieceInteractive : ModifierInteractive
     /// <param name="other"> other here seems to be getting passed as a reference? </param>
     public override void Path(ObservableStack<HexagonCell> other = null)
     {
-        if (_modifier == null) return;
+        if ( ! HasModifier ) return;
 
         if ( other == null || other.Count <= 0 )
         {
@@ -81,11 +93,11 @@ public class PieceInteractive : ModifierInteractive
         // StartCoroutine(ModifyAtCell(other.Peek()));
     }
 
-    private IEnumerator ModifyAtCell(HexagonCell cell)
+    private IEnumerator ModifyAtCell()
     {
         yield return new WaitUntil(() => EnemyMovement.Pathfinder.Done);
 
         // here the pathfinder should get the ranged enemies range
-        // _pathfinder.FindPath(cell, null, _reach);
+        _modPathfinder.FindPath(Cell, null, _reach);
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine;
 public class ModifierInteractive : Interactive
 {
     [SerializeField] protected Modifier _modifier;
-    private bool HasModifier => _modifier != null;
+    public bool HasModifier => _modifier != null;
 
     [ShowIf(nameof(HasModifier))]
     [SerializeField] protected PathfinderType _modRangeType;
@@ -25,10 +25,13 @@ public class ModifierInteractive : Interactive
         base.Start();
         Modified = false;
 
-        _modPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
+        if ( HasModifier )
+        {
+            _modPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
 
-        if ( _modPathfinder != null )
-            _modPathfinder.Path.CollectionChanged += DemonstratePath;
+            if ( _modPathfinder != null )
+                _modPathfinder.Path.CollectionChanged += DemonstratePath;
+        }
     }
 
     public override void Hover(bool onOrOff = true)
@@ -54,7 +57,7 @@ public class ModifierInteractive : Interactive
 
     public virtual void Modify()
     {
-        if (_modifier == null) return;
+        if ( ! HasModifier ) return;
 
         // some cosmetic way of saying the _modifier now already modifed and wont be modified again?
         // foreach ( HexagonCell cell in _modPathfinder.Path)
@@ -69,7 +72,7 @@ public class ModifierInteractive : Interactive
 
     public virtual void Path(ObservableStack<HexagonCell> other = null)
     {
-        if (_modifier == null || Modified ) return;
+        if ( ! HasModifier || Modified ) return;
 
         
         Debug.Log("modifier? modifying? " + (other == null));
