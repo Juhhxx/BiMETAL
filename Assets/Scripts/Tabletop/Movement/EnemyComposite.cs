@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,22 @@ public class EnemyComposite : TabletopMovement
     protected List<EnemyTabletopMovement> _enemies;
     protected override void Start()
     {
-        base.Start();
         _player = FindFirstObjectByType<PlayerTabletopMovement>();
         _enemies = FindObjectsByType<EnemyTabletopMovement>(
             FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
     }
 
+    public Action EnemyTurn;
     protected override IEnumerator Move()
     {
         if (_player == null || _enemies == null || _enemies.Count == 0)
+        {
+            DoneMoving();
             yield break;
-
+        }
 
         List<EnemyTabletopMovement> leftEnemies = new(_enemies);
-        List<EnemyTabletopMovement> currentEnemies = new(_enemies);
+        List<EnemyTabletopMovement> currentEnemies;
         PieceInteractive playerPiece = null;
 
 
@@ -30,7 +33,13 @@ public class EnemyComposite : TabletopMovement
         {
             enemy.TogglePath();
             enemy.FindPath();
+
+            if (enemy.Interactive is PieceInteractive interactive)
+                interactive.Stop();
         }
+
+        yield return new WaitUntil(() => _enemies.All(t => t.Pathfinder.Done));
+        Debug.Log("Enemies done path finding.");
 
         leftEnemies.Sort();
         for (int i = 0; i < leftEnemies.Count; i++)
@@ -42,12 +51,14 @@ public class EnemyComposite : TabletopMovement
 
         while (leftEnemies.Count > 0)
         {
-            currentEnemies = new List<EnemyTabletopMovement>(leftEnemies);
+            Debug.Log("Moving enemies, count now: " + leftEnemies.Count);
+            currentEnemies = new(leftEnemies);
 
-            foreach (EnemyTabletopMovement enemy in leftEnemies)
+            foreach (EnemyTabletopMovement enemy in currentEnemies)
             {
-                if (enemy.Path.Count == 0)
+                if (enemy.Path.Count <= 0)
                 {
+                    Debug.Log("Removing " + enemy);
                     enemy.Stop();
                     leftEnemies.Remove(enemy);
                     continue;
@@ -60,22 +71,16 @@ public class EnemyComposite : TabletopMovement
                     .Where(other => other.Priority < enemy.Priority)
                     .Any(other => other.Path.Contains(nextCell));
 
-                if (!wait && nextCell.Piece == null)
+                if ( !wait && nextCell.Piece == null || nextCell == enemy.CurrentCell )
                     enemy.MoveEnemy();
-
-                if (nextCell.Piece is PieceInteractive pieceInteractive)
+                
+                else if (nextCell.Piece is PieceInteractive pieceInteractive)
                 {
                     if ( ! pieceInteractive.IsEnemy )
                         playerPiece = pieceInteractive;
 
                     else if (pieceInteractive.EnemyMovement.Path.Count <= 0)
                         enemy.Pathfinder.Stop();
-                }
-
-                if (enemy.Path.Count == 0)
-                {
-                    enemy.TogglePath();
-                    leftEnemies.Remove(enemy);
                 }
             }
 
@@ -84,5 +89,22 @@ public class EnemyComposite : TabletopMovement
 
         if (playerPiece != null)
             playerPiece.Interact();
+
+
+        foreach (EnemyTabletopMovement enemy in _enemies)
+        {
+            enemy.Stop();
+            enemy.TogglePath();
+
+            if (enemy.Interactive is PieceInteractive interactive)
+                interactive.Modify();
+        }
+
+        DoneMoving();
+    }
+
+    private void DoneMoving()
+    {
+        EnemyTurn.Invoke();
     }
 }

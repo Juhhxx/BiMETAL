@@ -12,13 +12,13 @@ public class HexagonCell : MonoBehaviour
     public Modifier Modifier { get; private set; }
     [SerializeField] private GameObject _Cosmetic;
 
-    public HexagonCell[] Neighbors;
+    public HexagonCell[] Neighbors { get; private set; }
 
     public bool Walkable() => Piece == null;
 
-    public bool IsNonAvoidable() => Piece is ModifierInteractive && !Piece.Modified;
+    public bool IsNonAvoidable() => Piece is EnvironmentInteractive piece && !piece.Modified;
 
-    public int Weight => 1 + (Modifier?.Weight ?? 0);
+    public int Weight => 1 + (Modifier != null ? Modifier.Weight : 0);
 
     public bool WalkOn(Interactive piece = null)
     {
@@ -29,6 +29,28 @@ public class HexagonCell : MonoBehaviour
         // probably use the piece in the future to communicate between each piece, create father class piece for tabletop movement and then branch into player and enemy movement
     }
 
+    /// <summary>
+    /// For blocking modifiers
+    /// </summary>
+    public void CutConnections()
+    {
+        for ( int i = 0; i < 6; i++)
+        {
+            if ( TryGetNeighborInDirection(i, out HexagonCell cell ))
+            {
+                if ( cell == null ) continue;
+
+                cell.CutConnection(ReverseDirection(i));
+            }
+            cell.Neighbors[i] = null;
+        }
+    }
+
+    /// <summary>
+    /// Neighbor set is private, must cut connection some other way
+    /// </summary>
+    /// <param name="dir"> the direction to cut the neighbor of. </param>
+    public void CutConnection(int dir) => Neighbors[dir] = null;
 
     // It needs to modify if its a modifier changing it but only modify if its null and its a piece changing it
     public bool Modify(Modifier mod, bool dynamic = false)
@@ -36,7 +58,7 @@ public class HexagonCell : MonoBehaviour
         if (dynamic && Modifier != null)
             return false;
 
-        Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
+        // Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
 
         // probably gonna have to implement a smarter way of knowing if someone else's modifier tat is the same scriptable object is already here
         if ( Modifier == mod )
@@ -44,9 +66,7 @@ public class HexagonCell : MonoBehaviour
         else
             Modifier = mod;
 
-        // _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.gray;
-
-        SetPoints();
+        _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.gray;
 
         return true;
     }
@@ -66,8 +86,6 @@ public class HexagonCell : MonoBehaviour
 
         if (_Cosmetic == null)
             _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
-
-        SetPoints();
 
         return CellValue;
     }
@@ -131,7 +149,7 @@ public class HexagonCell : MonoBehaviour
                 Mathf.RoundToInt(delta.y)
             );
 
-            Debug.Log("neighbor cel: " + neighbor + "    dir: " + (neighbor.CellValue - CellValue) + "    normal: " + delta + "    int dir: " + dir);
+            // Debug.Log("neighbor cel: " + neighbor + "    dir: " + (neighbor.CellValue - CellValue) + "    normal: " + delta + "    int dir: " + dir);
 
             for (int i = 0; i < 6; i++)
                 if (dir == directions[i])
@@ -142,18 +160,8 @@ public class HexagonCell : MonoBehaviour
                 }
         }
 
-        for ( int i = 0 ; i < 6 ; i++ )
-            Debug.Log("neighbor " + i + "  for dir: " + directions[i] + "  cel: " + Neighbors[i]);
-    }
-
-    private void SetPoints()
-    {
-        // viewer that changes material color for testing
-        // Weight = Random.Range(1, 4);
-        Material mat = GetComponentInChildren<Renderer>().material;
-
-        float grayscaleValue = Mathf.Lerp(1f, 0f, (Weight - 1) / 2f) / 2f;
-        mat.color = new Color(grayscaleValue, grayscaleValue, grayscaleValue);
+        /*for ( int i = 0 ; i < 6 ; i++ )
+            Debug.Log("neighbor " + i + "  for dir: " + directions[i] + "  cel: " + Neighbors[i]);*/
     }
 
 

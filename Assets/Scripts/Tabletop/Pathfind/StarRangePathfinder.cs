@@ -11,6 +11,8 @@ public class StarRangePathfinder : Pathfinder
     {
         if ( totalWeight < 1 ) yield break;
 
+        Done = false;
+
         HexagonCell current;
 
         // Debug.Log("Starting pathfinding from " + start + " to " + objective);
@@ -21,7 +23,7 @@ public class StarRangePathfinder : Pathfinder
         for ( int dir = 0; dir <= 6; dir++)
         {
             current = objective;
-            for (int e = 0; e <= totalWeight; e++ )
+            for (int e = 1; e <= totalWeight; e++ )
             {
                 if ( !current.TryGetNeighborInDirection(dir, out HexagonCell next) )
                     break;
@@ -36,7 +38,7 @@ public class StarRangePathfinder : Pathfinder
         foreach ( CellData cell in OpenList )
             Path.ObservePush(cell.Cell);
 
-        Debug.Log("piece? Path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
+        // Debug.Log("piece? Path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         Done = true;
     }
 }

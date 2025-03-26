@@ -10,6 +10,10 @@ public class HexRangePathfinder : Pathfinder
 
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
+        Done = false;
+
         yield return null;
+
+        Done = true;
     }
 }

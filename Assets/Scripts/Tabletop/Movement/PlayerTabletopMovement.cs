@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class PlayerTabletopMovement : TabletopMovement
 {
-    [SerializeField] private LayerMask _cellLayer;
+    public LayerMask CellLayer => HexagonTabletop.CellLayer;
     private HexagonCell _hoveredCell;
     private HexagonCell _selectedCell;
+
+    public bool InputEnabled { get; set; }
 
     protected override void Start()
     {
@@ -22,9 +25,9 @@ public class PlayerTabletopMovement : TabletopMovement
 
     private void CheckForHover()
     {
-        if (_moving) return;
+        if ( !InputEnabled || Moving) return;
 
-        if (InputManager.HoverCell(_cellLayer, out HexagonCell newCell))
+        if (InputManager.HoverCell(CellLayer, out HexagonCell newCell))
         {
             // ShowPath();
 
@@ -36,7 +39,7 @@ public class PlayerTabletopMovement : TabletopMovement
                 /*_pathfinder.Stop();
                 _hoveredCell.HoverCell(false);
                 _hoveredCell = null;*/
-                DoneMoving();
+                DoneHovering();
             }
 
             if (newCell == CurrentCell) return;
@@ -57,13 +60,14 @@ public class PlayerTabletopMovement : TabletopMovement
             /*_pathfinder.Stop();
             _hoveredCell.HoverCell(false);
             _hoveredCell = null;*/
-            DoneMoving();
+            DoneHovering();
         }
     }
 
+    public Action PlayerTurn;
     private void CheckForSelection()
     {
-        if (_moving || Path == null) return;
+        if ( ! InputEnabled || Moving || Path == null) return;
         // Chose up, so if the player hovers and buttons down the wrong button,
         // they can still navigate to another button so select it
 
@@ -84,8 +88,8 @@ public class PlayerTabletopMovement : TabletopMovement
     }
     protected override IEnumerator Move()
     {
-        Debug.Log("Starting movement from " + CurrentCell + " to " + _selectedCell);
-        _moving = true;
+        // Debug.Log("Starting movement from " + CurrentCell + " to " + _selectedCell);
+        Moving = true;
 
         // Stack<HexagonCell> path = _pathfinder.FindPath(CurrentCell, _selectedCell);
 
@@ -95,7 +99,7 @@ public class PlayerTabletopMovement : TabletopMovement
         {
             DoneMoving();
 
-            Debug.Log("Can't move there. ");
+            Debug.LogWarning("Can't move there. ");
             yield break;
         }
 
@@ -104,7 +108,7 @@ public class PlayerTabletopMovement : TabletopMovement
         _pathfinder.Reverse();
 
         _startCell = CurrentCell;
-        Debug.Log("Stop moving current? " + CurrentCell + "    path count: " + Path.Count);
+        // Debug.Log("Stop moving current? " + CurrentCell + "    path count: " + Path.Count);
 
         // HidePath();
 
@@ -118,7 +122,7 @@ public class PlayerTabletopMovement : TabletopMovement
             next = Path.Peek(); // previously giving an error here because pops where happening more than pushes, must also remove as hovered here
             // need to peek first so we dont spook the next pieces modifier interactive
 
-            Debug.Log("next: " + next + "      current: " + CurrentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
+            // Debug.Log("next: " + next + "      current: " + CurrentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
             // Debug.Log("current is selected? " + (CurrentCell == _selectedCell) + "  _current? " + CurrentCell );
 
             yield return new WaitForSeconds(0.2f);
@@ -164,14 +168,19 @@ public class PlayerTabletopMovement : TabletopMovement
         // Debug.Log("stopped moving start?" + _startCell);
     }
 
-    private void DoneMoving()
+    private void DoneHovering()
     {
-        _moving = false;
         _pathfinder.Stop();
 
         if ( _hoveredCell != null )
             _hoveredCell.HoverCell(false);
         
         _hoveredCell = null;
+    }
+    private void DoneMoving()
+    {
+        Moving = false;
+        DoneHovering();
+        PlayerTurn.Invoke();
     }
 }
