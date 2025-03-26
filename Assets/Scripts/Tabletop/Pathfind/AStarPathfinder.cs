@@ -61,8 +61,8 @@ public class AStarPathfinder : Pathfinder
                 yield break;
             }
 
-            foreach (HexagonCell neighbor in current.Neighbors.Where(t => ( t != null && 
-                t.Walkable() || ( _includeNonAvoidance && t.IsNonAvoidable() ) ||
+            foreach (HexagonCell neighbor in current.Neighbors.Where(t => t != null && 
+                ( t.Walkable() || ( _includeNonAvoidance && t.IsNonAvoidable() ) ||
                 t == objective) && !_closedList.Contains(t)))
             {
                 // by switching the distance here by Points (which is how many points it takes to cross times the distance)

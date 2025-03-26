@@ -59,7 +59,7 @@ public class PieceInteractive : ModifierInteractive
         
         // remove mods from any piece going into battle
         foreach (PieceInteractive piece in pieces)
-            if ( piece.IsEnemy )
+            if ( piece.IsEnemy && piece.HasModifier )
                 piece._modPathfinder.Stop();
 
         _controller.StartBattle(Cell.Modifier, pieces);

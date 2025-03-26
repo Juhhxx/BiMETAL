@@ -18,7 +18,7 @@ public class HexagonCell : MonoBehaviour
 
     public bool IsNonAvoidable() => Piece is EnvironmentInteractive piece && !piece.Modified;
 
-    public int Weight => 1 + (Modifier?.Weight ?? 0);
+    public int Weight => 1 + (Modifier != null ? Modifier.Weight : 0);
 
     public bool WalkOn(Interactive piece = null)
     {
@@ -66,9 +66,7 @@ public class HexagonCell : MonoBehaviour
         else
             Modifier = mod;
 
-        // _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.gray;
-
-        SetPoints();
+        _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.gray;
 
         return true;
     }
@@ -88,8 +86,6 @@ public class HexagonCell : MonoBehaviour
 
         if (_Cosmetic == null)
             _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
-
-        SetPoints();
 
         return CellValue;
     }
@@ -166,16 +162,6 @@ public class HexagonCell : MonoBehaviour
 
         /*for ( int i = 0 ; i < 6 ; i++ )
             Debug.Log("neighbor " + i + "  for dir: " + directions[i] + "  cel: " + Neighbors[i]);*/
-    }
-
-    private void SetPoints()
-    {
-        // viewer that changes material color for testing
-        // Weight = Random.Range(1, 4);
-        Material mat = GetComponentInChildren<Renderer>().material;
-
-        float grayscaleValue = Mathf.Lerp(1f, 0f, (Weight - 1) / 2f) / 2f;
-        mat.color = new Color(grayscaleValue, grayscaleValue, grayscaleValue);
     }
 
 

@@ -60,6 +60,7 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
 
     public void FindPath()
     {
+        _startCell = CurrentCell;
         _pathfinder.FindPath(CurrentCell, _player.CurrentCell, Points);
     }
     public void Stop()
@@ -70,6 +71,7 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
 
     public void MoveEnemy()
     {
+        Debug.Log("Moving? enemy: " + gameObject.name);
         IEnumerator cor = Move();
 
         _queue.Enqueue(cor);
@@ -80,48 +82,63 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
             StartCoroutine(cor);
         }
     }
+
     protected override IEnumerator Move()
     {
         Moving = true;
 
         yield return new WaitUntil(() => _pathfinder.Done);
 
-        if (Path == null || Path.Count < 0)
+        if (Path == null || Path.Count <= 0)
         {
+            DoneMoving();
             Debug.Log("Can't move more. ");
+            yield break;
         }
-        else
+
+        HexagonCell next = Path.Peek();
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (next.Piece != null && next != CurrentCell)
         {
-            HexagonCell next = Path.ObservePop();
-
-            yield return new WaitForSeconds(0.2f);
-
-            if (Path.Count > 0)
-            {
-                next = Path.Peek();
-
-                Vector3 target = next.transform.position;
-                target.y = transform.position.y;
-
-                transform.LookAt(target);
-            }
-
-            if (next.Piece is EnvironmentInteractive)
+            if (next.Piece is ModifierInteractive)
             {
                 Interact(next.Piece);
                 Pathfinder.Stop();
             }
-            else
-            {
-                CurrentCell.WalkOn();
-                CurrentCell = next;
-
-                next.WalkOn(Interactive);
-
-                transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
-            }
+            DoneMoving();
+            yield break;
         }
 
+        Path.ObservePop();
+
+        CurrentCell.WalkOn();
+        CurrentCell = next;
+        // Debug.Log("current is selected?2 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
+        next.WalkOn(Interactive);
+
+        // Debug.Log("count: " + final.Count);
+
+        // move
+        transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
+
+        // rotate
+        if (Path.Count > 0)
+        {
+            next = Path.Peek();
+
+            Vector3 target = next.transform.position;
+            target.y = transform.position.y;
+
+            transform.LookAt(target);
+        }
+
+        DoneMoving();
+    }
+
+    private void DoneMoving()
+    {
         _queue.Dequeue();
 
         if (_queue.Count > 0)

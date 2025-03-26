@@ -23,7 +23,7 @@ public class StarRangePathfinder : Pathfinder
         for ( int dir = 0; dir <= 6; dir++)
         {
             current = objective;
-            for (int e = 0; e <= totalWeight; e++ )
+            for (int e = 1; e <= totalWeight; e++ )
             {
                 if ( !current.TryGetNeighborInDirection(dir, out HexagonCell next) )
                     break;
