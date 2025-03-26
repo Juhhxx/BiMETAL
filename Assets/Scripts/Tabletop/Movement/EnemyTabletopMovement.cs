@@ -82,7 +82,7 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
     }
     protected override IEnumerator Move()
     {
-        _moving = true;
+        Moving = true;
 
         yield return new WaitUntil(() => _pathfinder.Done);
 
@@ -92,7 +92,6 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
         }
         else
         {
-
             HexagonCell next = Path.ObservePop();
 
             yield return new WaitForSeconds(0.2f);
@@ -107,7 +106,7 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
                 transform.LookAt(target);
             }
 
-            if (next.Piece is not PieceInteractive)
+            if (next.Piece is EnvironmentInteractive)
             {
                 Interact(next.Piece);
                 Pathfinder.Stop();
@@ -120,11 +119,7 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
                 next.WalkOn(Interactive);
 
                 transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
-
-                if (Interactive is PieceInteractive piece)
-                    piece.Modify();
             }
-
         }
 
         _queue.Dequeue();
@@ -132,6 +127,6 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
         if (_queue.Count > 0)
             StartCoroutine(_queue.Peek());
         else
-            _moving = false;
+            Moving = false;
     }
 }

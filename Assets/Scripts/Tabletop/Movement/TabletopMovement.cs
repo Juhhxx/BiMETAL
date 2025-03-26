@@ -14,7 +14,7 @@ public abstract class TabletopMovement : TabletopBase
     protected HexagonCell _startCell;
 
 
-    protected bool _moving;
+    public bool Moving { get; protected set; }
 
     protected override void Start()
     {
@@ -58,7 +58,7 @@ public abstract class TabletopMovement : TabletopBase
                 {
                     if (oldItem == _startCell)
                     {
-                        Debug.Log("Reset start?: " + _startCell);
+                        // Debug.Log("Reset start?: " + _startCell);
                         _startCell = null;
                         // continue;
                     }
@@ -78,11 +78,19 @@ public abstract class TabletopMovement : TabletopBase
         if (_queue.Count > 0)
             StartCoroutine(_queue.Peek());
     }
+    public void StartMoving()
+    {
+        StartCoroutine(Move());
+    }
     protected abstract IEnumerator Move();
 
     protected virtual void OnDisable()
     {
-        _moving = false;
+        Debug.LogWarning("Disabled: " + gameObject.name + "'s " + this);
+    }
+    protected virtual void OnDestroy()
+    {
+        Moving = false;
         if (_pathfinder != null)
             _pathfinder.Path.CollectionChanged -= DemonstratePath;
     }

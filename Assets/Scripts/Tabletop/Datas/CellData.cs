@@ -2,6 +2,7 @@ using System;
 
 public class CellData : IComparable<CellData>
 {
+    // Cost until now
     public float G { get; set; }
     public float H { get; set; }
     public float F => G + H;

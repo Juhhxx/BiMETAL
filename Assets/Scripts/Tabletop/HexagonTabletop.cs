@@ -4,11 +4,15 @@ using UnityEngine;
 public class HexagonTabletop : MonoBehaviour
 {
     public Dictionary<Vector2, HexagonCell> Cells { get; private set; }
+    [SerializeField] private LayerMask _cells;
+    public static LayerMask CellLayer;
 
     public Grid Grid { get; private set; }
 
     private void Awake()
     {
+        CellLayer = _cells;
+
         Cells = new Dictionary<Vector2, HexagonCell>();
         Grid = GetComponent<Grid>();
 

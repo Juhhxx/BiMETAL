@@ -3,16 +3,32 @@ using UnityEngine;
 
 public class TabletopController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private PlayerTabletopMovement _playerInput;
+    [SerializeField] private EnemyComposite _enemies;
+    private int _round;
+    private bool _playerRound;
+    
+    private void Start()
     {
+        _round = 0;
+        _playerInput.PlayerTurn += ToggleRound;
+        _enemies.EnemyTurn += ToggleRound;
 
+        _playerRound = true;
+        ToggleRound();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleRound()
     {
+        // Debug.Log("Toggling round number " + _round + "  in player round: " + _playerRound);
 
+        if ( !_playerRound )
+            _enemies.StartMoving();
+        
+        _playerInput.InputEnabled = _playerRound;
+
+        _round ++;
+        _playerRound = ! _playerRound;
     }
 
     public void StartBattle(Modifier mod, List<PieceInteractive> pieces)

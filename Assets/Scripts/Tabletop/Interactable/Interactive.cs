@@ -6,10 +6,8 @@ using UnityEngine;
 /// </summary>
 public abstract class Interactive : MonoBehaviour
 {
-    public bool Modified { get; protected set; } = true;
     protected TabletopBase _base;
-    public HexagonCell Cell => _base?.CurrentCell;
-    [SerializeField] private LayerMask _cells;
+    public HexagonCell Cell => _base != null ? _base.CurrentCell : null;
 
     protected virtual void Start()
     {
