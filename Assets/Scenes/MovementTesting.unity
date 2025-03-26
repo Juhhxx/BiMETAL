@@ -4101,9 +4101,6 @@ MonoBehaviour:
   <CurrentCell>k__BackingField: {fileID: 1671480133}
   <Interactive>k__BackingField: {fileID: 262858354}
   <Points>k__BackingField: 4
-  _cellLayer:
-    serializedVersion: 2
-    m_Bits: 131072
 --- !u!114 &262858354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4116,9 +4113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3268f3e23c4d92543be6444c87e496f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cells:
-    serializedVersion: 2
-    m_Bits: 131072
   _modifier: {fileID: 0}
   _modRangeType: 0
   _reach: 0
@@ -22431,9 +22425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3268f3e23c4d92543be6444c87e496f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cells:
-    serializedVersion: 2
-    m_Bits: 131072
   _modifier: {fileID: 11400000, guid: 231e10dcabdae2049b967184178f9f09, type: 2}
   _modRangeType: 4
   _reach: 3
@@ -23791,9 +23782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3268f3e23c4d92543be6444c87e496f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cells:
-    serializedVersion: 2
-    m_Bits: 131072
   _modifier: {fileID: 0}
   _modRangeType: 0
   _reach: 4
@@ -32124,6 +32112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ece54f8e1251384c85f32ef9b2694b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cells:
+    serializedVersion: 2
+    m_Bits: 131072
 --- !u!1001 &1815712059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32863,8 +32854,8 @@ GameObject:
   - component: {fileID: 1864365176}
   - component: {fileID: 1864365175}
   - component: {fileID: 1864365174}
-  - component: {fileID: 1864365173}
   - component: {fileID: 1864365177}
+  - component: {fileID: 1864365178}
   m_Layer: 0
   m_Name: Modifier
   m_TagString: Untagged
@@ -32872,24 +32863,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1864365173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864365172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c1bf60d9d5f694eb79ee6039c93b48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cells:
-    serializedVersion: 2
-    m_Bits: 131072
-  _modifier: {fileID: 11400000, guid: 231e10dcabdae2049b967184178f9f09, type: 2}
-  _modRangeType: 1
-  _reach: 2
 --- !u!23 &1864365174
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -32971,7 +32944,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 1888945559}
-  <Interactive>k__BackingField: {fileID: 1864365173}
+  <Interactive>k__BackingField: {fileID: 1864365178}
+--- !u!114 &1864365178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864365172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec333de3628451f43b91da83f2997ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _modifier: {fileID: 11400000, guid: 231e10dcabdae2049b967184178f9f09, type: 2}
+  _modRangeType: 1
+  _reach: 6
 --- !u!4 &1865026423 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2727851463618834284, guid: 70161868165544642b7370e092a8e6c3, type: 3}
@@ -34995,6 +34983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8657beb161926b04d8a9c3db05cfc69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInput: {fileID: 262858352}
+  _enemies: {fileID: 1992752557}
 --- !u!4 &2005068291 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2727851463618834284, guid: 70161868165544642b7370e092a8e6c3, type: 3}
