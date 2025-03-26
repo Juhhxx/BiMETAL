@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,63 +14,75 @@ public class PieceInteractive : ModifierInteractive
     {
         base.Start();
 
+        _controller = FindFirstObjectByType<TabletopController>();
+
         IsEnemy = _base is EnemyTabletopMovement;
 
         if ( IsEnemy )
+        {
             EnemyMovement = _base as EnemyTabletopMovement;
+            _dynamic = true;
 
-        _controller = FindFirstObjectByType<TabletopController>();
-        Modified = true;
-        _dynamic = true;
-
-
-        if (_modifier != null)
-            _modPathfinder.FindPath(Cell, null, _reach);
+            if ( HasModifier )
+                Modify();
+        }
     }
 
     public override void Hover(bool onOrOff = true)
     {
+        if ( ! IsEnemy ) return;
         base.Hover(onOrOff);
 
-        if ( IsEnemy )
+        if (onOrOff)
         {
-            if (onOrOff)
-            {
-                EnemyMovement.FindPath();
-                // Path(EnemyMovement.Path);
-                if ( HasModifier )
-                {
-                    Debug.Log("De-modifying. ");
-                    _modPathfinder.Stop();
-                }
+            EnemyMovement.FindPath();
 
-            }
-            else
+            if ( HasModifier )
             {
-                EnemyMovement.Stop();
-                // Path();
-                if ( HasModifier )
-                    _modPathfinder.FindPath(Cell, null, _reach);
+                // Debug.Log("De-modifying. ");
+                _modPathfinder.FindPath(Cell, null, _reach);
             }
+
+        }
+        else
+        {
+            EnemyMovement.Stop();
+
+            if ( HasModifier )
+                Modify();
         }
     }
 
     public override void Interact(Interactive other = null)
     {
         List<PieceInteractive> pieces = Cell.GetPieces();
+        
+        // remove mods from any piece going into battle
+        foreach (PieceInteractive piece in pieces)
+            if ( piece.IsEnemy )
+                piece._modPathfinder.Stop();
+
         _controller.StartBattle(Cell.Modifier, pieces);
     }
 
     public override void Select()
     {
-        throw new System.NotImplementedException();
+        if ( ! IsEnemy ) return;
+        base.Select();
     }
 
     public override void Modify()
     {
-        if (_modifier == null) return;
+        if ( ! HasModifier ) return;
 
-        // StartCoroutine(ModifyAtCell());
+        _modPathfinder.FindPath(Cell, null, _reach);
+    }
+
+    public void Stop()
+    {
+        if ( ! HasModifier ) return;
+
+        _modPathfinder.Stop();
     }
 
 
@@ -83,21 +94,38 @@ public class PieceInteractive : ModifierInteractive
     {
         if ( ! HasModifier ) return;
 
+
+        /*List<PieceInteractive> pieces = Cell.GetPieces();
+        
+        // remove mods from any piece going into battle
+        foreach (PieceInteractive piece in pieces)
+            if ( piece.IsEnemy )
+                piece.Modify();
+
         if ( other == null || other.Count <= 0 )
         {
-            Modify();
+            _modPathfinder.FindPath(Cell, null, _reach);
             return;
         }
+        
+        // remove mods from any piece "going into battle"
+        foreach (PieceInteractive piece in pieces)
+            if ( piece.IsEnemy )
+                piece._modPathfinder.Stop();*/
         
         // remove for now because he are using a bfs so there is no definite objective
         // StartCoroutine(ModifyAtCell(other.Peek()));
     }
 
+    /*
+    This only exists if we decide to let the player view the exact path of the enemy
+    when they are hovered
+    
     private IEnumerator ModifyAtCell()
     {
         yield return new WaitUntil(() => EnemyMovement.Pathfinder.Done);
 
         // here the pathfinder should get the ranged enemies range
         _modPathfinder.FindPath(Cell, null, _reach);
-    }
+    }*/
 }

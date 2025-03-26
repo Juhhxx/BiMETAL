@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using NaughtyAttributes;
 using UnityEngine;
 
-public class ModifierInteractive : Interactive
+public abstract class ModifierInteractive : Interactive
 {
     [SerializeField] protected Modifier _modifier;
     public bool HasModifier => _modifier != null;
@@ -23,7 +22,6 @@ public class ModifierInteractive : Interactive
     protected override void Start()
     {
         base.Start();
-        Modified = false;
 
         if ( HasModifier )
         {
@@ -38,73 +36,17 @@ public class ModifierInteractive : Interactive
     {
         base.Hover(onOrOff);
 
-        Debug.Log("modifier name: " + gameObject.name + "  cell: " + Cell);
-    }
-
-    public override void Interact(Interactive other = null)
-    {
-        if ( Modified ) return;
-
-        Modify();
-
-        Modified = true;
+        // Debug.Log("modifier name: " + gameObject.name + "  cell: " + Cell);
     }
 
     public override void Select()
     {
-        throw new System.NotImplementedException();
+        base.Select();
     }
 
-    public virtual void Modify()
-    {
-        if ( ! HasModifier ) return;
+    public abstract void Modify();
 
-        // some cosmetic way of saying the _modifier now already modifed and wont be modified again?
-        // foreach ( HexagonCell cell in _modPathfinder.Path)
-            //cell.Modify
-
-        Debug.Log("modifier? setting path as fr fr hopefully, is path null or count 0?  " + (_modPathfinder.Path.Count == 0 || _modPathfinder.Path == null));
-
-        // we just clear the current path to save the current cells settings and move on
-       _modPathfinder.Path.Clear();
-
-    }
-
-    public virtual void Path(ObservableStack<HexagonCell> other = null)
-    {
-        if ( ! HasModifier || Modified ) return;
-
-        
-        Debug.Log("modifier? modifying? " + (other == null));
-        // Debug.Log("modifier " + gameObject.name + " trying to path cell: " + Cell + " and other " + other?.Contains(Cell) + " contains it");
-        
-        if ( other == null || other.Count <= 0 )
-        {
-            Debug.Log("modifier? stopping");
-            _modPathfinder.Stop();
-            return;
-        }
-
-        ObservableStack<HexagonCell> clone = new(other);
-
-        HexagonCell last = clone.Peek();
-
-        while ( clone.Count > 0 && last != Cell)
-        {
-            last = clone.Pop();
-            // Debug.Log("modifier clone at: " + clone.Count);
-
-            if ( !clone.Any() || clone.Peek() == Cell)
-                break;
-        }
-
-        if ( clone.Count < 1 )
-            return;
-
-        Debug.Log("modifier? starting");
-        // only supposed to do this once
-        _modPathfinder.FindPath(Cell, last, _reach);
-    }
+    public abstract void Path(ObservableStack<HexagonCell> other = null);
 
 
     protected Queue<IEnumerator> _queue = new();
