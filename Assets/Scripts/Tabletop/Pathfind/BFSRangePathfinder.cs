@@ -24,11 +24,6 @@ public class BFSRangePathfinder : Pathfinder
     {
         Done = false;
 
-        _data.Clear();
-        _closedList.Clear();
-        OpenList.Clear();
-        Path.Clear();
-
         _set = new HashSet<HexagonCell>();
 
         // objective is start as stated before
@@ -63,6 +58,7 @@ public class BFSRangePathfinder : Pathfinder
                     OpenList.Remove(cellData);
 
                     cellData.G = costToNeighbor;
+                    
                     OpenList.Add(cellData);
 
                     _set.Add(neighbor);

@@ -19,6 +19,9 @@ public abstract class Pathfinder
     public SortedSet<CellData> OpenList { get; protected set; }
     protected HashSet<HexagonCell> _closedList;
 
+    // lpa based static path dictionary? uwu
+    // protected static Dictionary<HexagonCell, HexagonCell> _discoveredPaths;
+
     public Pathfinder(MonoBehaviour owner, bool nonAvoid)
     {
         _owner = owner;
