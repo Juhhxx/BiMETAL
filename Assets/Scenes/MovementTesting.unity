@@ -32959,7 +32959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modifier: {fileID: 11400000, guid: 231e10dcabdae2049b967184178f9f09, type: 2}
   _modRangeType: 1
-  _reach: 6
+  _reach: 4
 --- !u!4 &1865026423 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2727851463618834284, guid: 70161868165544642b7370e092a8e6c3, type: 3}

@@ -21,7 +21,6 @@ public class PieceInteractive : ModifierInteractive
         if ( IsEnemy )
         {
             EnemyMovement = _base as EnemyTabletopMovement;
-            _dynamic = true;
 
             if ( HasModifier )
                 Modify();
@@ -75,12 +74,15 @@ public class PieceInteractive : ModifierInteractive
     {
         if ( ! HasModifier ) return;
 
+        _modPathfinder.Stop();
         _modPathfinder.FindPath(Cell, null, _reach);
     }
 
     public void Stop()
     {
         if ( ! HasModifier ) return;
+
+        Debug.Log("Stopping mod in: " + gameObject.name);
 
         _modPathfinder.Stop();
     }

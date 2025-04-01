@@ -9,7 +9,14 @@ public class HexagonCell : MonoBehaviour
 
     // Any enemy can pass through here, but will take down the piece
     public Interactive Piece { get; private set; }
-    public Modifier Modifier { get; private set; }
+
+
+    public Modifier Modifier =>  _environmentMod ?? _dynamicMod;
+
+    private Modifier _dynamicMod;
+    private Modifier _environmentMod;
+
+
     [SerializeField] private GameObject _Cosmetic;
 
     public HexagonCell[] Neighbors { get; private set; }
@@ -53,18 +60,18 @@ public class HexagonCell : MonoBehaviour
     public void CutConnection(int dir) => Neighbors[dir] = null;
 
     // It needs to modify if its a modifier changing it but only modify if its null and its a piece changing it
-    public bool Modify(Modifier mod, bool dynamic = false)
+    public bool Modify(Modifier mod)
     {
-        if (dynamic && Modifier != null)
+        Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
+
+        if ( mod.Dynamic && Modifier != null && Modifier != mod )
             return false;
 
-        // Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
-
-        // probably gonna have to implement a smarter way of knowing if someone else's modifier tat is the same scriptable object is already here
-        if ( Modifier == mod )
-            Modifier = null;
+        // Changed modifier way of knowing if its dynamic or not
+        if (mod.Dynamic)
+            _dynamicMod = ( _dynamicMod == mod ) ? null : mod;
         else
-            Modifier = mod;
+            _environmentMod = mod;
 
         _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.gray;
 

@@ -27,6 +27,9 @@ public class StarRangePathfinder : Pathfinder
             {
                 if ( !current.TryGetNeighborInDirection(dir, out HexagonCell next) )
                     break;
+                // Don't let it modify environment modifier cells
+                if ( next.Piece != null && next.Piece is EnvironmentInteractive)
+                    continue;
                 
                 OpenList.Add(new CellData(next, 0f, next.GetDistance(objective), null));
                 current = next;

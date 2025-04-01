@@ -17,7 +17,6 @@ public abstract class ModifierInteractive : Interactive
 
 
     protected Pathfinder _modPathfinder;
-    protected bool _dynamic = false;
 
     protected override void Start()
     {
@@ -72,14 +71,15 @@ public abstract class ModifierInteractive : Interactive
                 foreach (HexagonCell newItem in e.NewItems)
                 {
                     yield return new WaitForSeconds(0.01f);
-                    newItem.Modify(_modifier, _dynamic);
+                    newItem.Modify(_modifier);
                 }
 
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
+                    Debug.Log("Modifying cell and count is: " + _modPathfinder.Path.Count);
                     yield return new WaitForSeconds(0.01f);
-                    oldItem.Modify(_modifier, _dynamic);
+                    oldItem.Modify(_modifier);
                 }
         }
 
