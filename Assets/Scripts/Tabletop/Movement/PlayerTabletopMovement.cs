@@ -67,7 +67,7 @@ public class PlayerTabletopMovement : TabletopMovement
     public Action PlayerTurn;
     private void CheckForSelection()
     {
-        if ( ! InputEnabled || Moving || Path == null) return;
+        if ( ! InputEnabled || Moving || Path == null ) return;
         // Chose up, so if the player hovers and buttons down the wrong button,
         // they can still navigate to another button so select it
 
@@ -95,7 +95,7 @@ public class PlayerTabletopMovement : TabletopMovement
 
         yield return new WaitUntil(() => _pathfinder.Done);
 
-        if (Path == null)
+        if (Path == null || Path.Count <= 0)
         {
             DoneMoving();
 
@@ -105,9 +105,8 @@ public class PlayerTabletopMovement : TabletopMovement
 
         // Stack<HexagonCell> final =  new(_pathfinder.Path);
 
-        _pathfinder.Reverse();
-
         _startCell = CurrentCell;
+        _pathfinder.Reverse();
         // Debug.Log("Stop moving current? " + CurrentCell + "    path count: " + Path.Count);
 
         // HidePath();
@@ -121,9 +120,6 @@ public class PlayerTabletopMovement : TabletopMovement
         {
             next = Path.Peek(); // previously giving an error here because pops where happening more than pushes, must also remove as hovered here
             // need to peek first so we dont spook the next pieces modifier interactive
-
-            // Debug.Log("next: " + next + "      current: " + CurrentCell + "      selected: " + _selectedCell + "      start: " + _startCell + "      are they the same? " + (next == _selectedCell));
-            // Debug.Log("current is selected? " + (CurrentCell == _selectedCell) + "  _current? " + CurrentCell );
 
             yield return new WaitForSeconds(0.2f);
 
@@ -164,8 +160,6 @@ public class PlayerTabletopMovement : TabletopMovement
         }
 
         DoneMoving();
-
-        // Debug.Log("stopped moving start?" + _startCell);
     }
 
     private void DoneHovering()

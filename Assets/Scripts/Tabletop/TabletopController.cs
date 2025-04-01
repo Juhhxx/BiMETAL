@@ -14,6 +14,8 @@ public class TabletopController : MonoBehaviour
         _playerInput.PlayerTurn += ToggleRound;
         _enemies.EnemyTurn += ToggleRound;
 
+        _playerInput.InputEnabled = true;
+
         _playerRound = true;
         ToggleRound();
     }

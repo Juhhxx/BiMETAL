@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using UnityEngine;
 
 public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
 {
@@ -22,8 +23,6 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
         OnCollectionChanged(NotifyCollectionChangedAction.Remove, item);
         // Debug.Log("count3 " + Count);
         Pop();
-
-        // Debug.Log("removing " + item);
 
         return item;
     }

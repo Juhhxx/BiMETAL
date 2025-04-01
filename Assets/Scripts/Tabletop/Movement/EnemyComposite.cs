@@ -12,7 +12,12 @@ public class EnemyComposite : TabletopMovement
     {
         _player = FindFirstObjectByType<PlayerTabletopMovement>();
         _enemies = FindObjectsByType<EnemyTabletopMovement>(
-            FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
+            FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
+    }
+
+    public void StartMoving()
+    {
+        StartCoroutine(Move());
     }
 
     public Action EnemyTurn;
@@ -56,10 +61,9 @@ public class EnemyComposite : TabletopMovement
 
             foreach (EnemyTabletopMovement enemy in currentEnemies)
             {
-                if (enemy.Path.Count <= 0)
+                if ( enemy.Path.Count <= 0 || enemy.QueueCount >= enemy.Path.Count )
                 {
                     Debug.Log("Removing " + enemy);
-                    enemy.Stop();
                     leftEnemies.Remove(enemy);
                     continue;
                 }
@@ -74,7 +78,7 @@ public class EnemyComposite : TabletopMovement
                 if ( !wait && nextCell.Piece == null || nextCell == enemy.CurrentCell )
                     enemy.MoveEnemy();
                 
-                else if (nextCell.Piece is PieceInteractive pieceInteractive)
+                else if ( nextCell.Piece is PieceInteractive pieceInteractive )
                 {
                     if ( ! pieceInteractive.IsEnemy )
                         playerPiece = pieceInteractive;
@@ -84,16 +88,19 @@ public class EnemyComposite : TabletopMovement
                 }
             }
 
+            Debug.Log("Still running enemy composite.");
+
             yield return new WaitForSeconds(0.1f);
         }
-
+        Debug.Log("Waiting for enemies to stop.");
+        yield return new WaitUntil(() => _enemies.Where(t =>  t != null ).All(t =>!t.Moving));
+        Debug.Log("Enemies stopped.");
+        
         if (playerPiece != null)
             playerPiece.Interact();
 
-
         foreach (EnemyTabletopMovement enemy in _enemies)
         {
-            enemy.Stop();
             enemy.TogglePath();
 
             if (enemy.Interactive is PieceInteractive interactive)
@@ -105,6 +112,7 @@ public class EnemyComposite : TabletopMovement
 
     private void DoneMoving()
     {
+        Debug.Log("Enemy un-turned.");
         EnemyTurn.Invoke();
     }
 }

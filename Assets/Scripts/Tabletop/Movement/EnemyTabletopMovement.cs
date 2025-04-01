@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletopMovement>
@@ -60,6 +61,7 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
 
     public void FindPath()
     {
+        Debug.Log("Reset start cell I think. path-d? " + _startCell);
         _startCell = CurrentCell;
         _pathfinder.FindPath(CurrentCell, _player.CurrentCell, Points);
     }
@@ -68,55 +70,68 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
         _pathfinder.Stop();
     }
 
+    // Casually spent two weeks trying to remember that I had to create my own queue
+    // and not use the base class's and thats why my system was completely broken
+    // AND fixed my start cell bug in the process
+    // I am stupid on a genius level
+    protected Queue<IEnumerator> _queue = new();
+    public int QueueCount => _queue.Count;
 
     public void MoveEnemy()
     {
-        Debug.Log("Moving? enemy: " + gameObject.name);
         IEnumerator cor = Move();
-
         _queue.Enqueue(cor);
 
         if (_queue.Count <= 1)
         {
-            _startCell = CurrentCell;
+            Moving = true;
             StartCoroutine(cor);
         }
     }
 
     protected override IEnumerator Move()
     {
-        Moving = true;
-
         yield return new WaitUntil(() => _pathfinder.Done);
 
-        if (Path == null || Path.Count <= 0)
+        Debug.Log("0 start? Enemy: " + gameObject.name + 
+            " | Path null? " + (Path == null) +
+            " | Path count: " + (Path?.Count ?? -1) +
+            " | CurrentCell: " + (CurrentCell != null ? CurrentCell : "null") +
+            " | StartCell: " + (_startCell != null ? _startCell : "null") +
+            " | Moving: " + Moving);
+
+        if ( Path == null || Path.Count <= 0 )
         {
-            DoneMoving();
-            Debug.Log("Can't move more. ");
+            Debug.LogWarning("Can't move more. ");
+            yield return EndMovement();
             yield break;
         }
 
         HexagonCell next = Path.Peek();
-
+        Debug.Log("1 start? path is: " + Path + " count: " + Path.Count + _startCell + " current? " + CurrentCell);
         yield return new WaitForSeconds(0.2f);
 
         if (next.Piece != null && next != CurrentCell)
         {
             if (next.Piece is ModifierInteractive)
-            {
                 Interact(next.Piece);
-                Pathfinder.Stop();
-            }
-            DoneMoving();
+
+            Debug.Log("Blocked by piece. Ending movement early for " + gameObject.name);
+            yield return EndMovement();
             yield break;
         }
 
+        Debug.Log("1.5 start? path is: " + Path + " count: " + Path.Count);
         Path.ObservePop();
+        Debug.Log("2 start? " + _startCell + " current? " + CurrentCell);
 
         CurrentCell.WalkOn();
         CurrentCell = next;
         // Debug.Log("current is selected?2 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
+        
         next.WalkOn(Interactive);
+
+        Debug.Log("3 start? " + _startCell + " current? " + CurrentCell);
 
         // Debug.Log("count: " + final.Count);
 
@@ -134,16 +149,25 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
             transform.LookAt(target);
         }
 
-        DoneMoving();
+        yield return EndMovement();
+    }
+
+    private IEnumerator EndMovement()
+    {
+        if (_queue.Count > 0)
+            _queue.Dequeue();
+
+        if (_queue.Count > 0)
+            yield return StartCoroutine(_queue.Peek());
+        else
+            DoneMoving();
     }
 
     private void DoneMoving()
     {
-        _queue.Dequeue();
-
-        if (_queue.Count > 0)
-            StartCoroutine(_queue.Peek());
-        else
-            Moving = false;
+        // _queue.Clear();
+        _pathfinder.Stop();
+        // _startCell?.StopPathCell();
+        Moving = false;
     }
 }
