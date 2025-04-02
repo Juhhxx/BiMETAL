@@ -58,6 +58,8 @@ public class EnvironmentInteractive : ModifierInteractive
 
     public override void Path(ObservableStack<HexagonCell> other = null)
     {
+        Debug.Log("Pathing: " + ( other != null && other.Count > 0 ) + " and modified is: " + Modified);
+
         if ( Modified ) return;
 
         
@@ -66,7 +68,7 @@ public class EnvironmentInteractive : ModifierInteractive
         
         if ( other == null || other.Count <= 0 )
         {
-            // Debug.Log("modifier? stopping");
+            Debug.Log("Un-Pathing modifier? stopping");
             _modPathfinder.Stop();
             return;
         }

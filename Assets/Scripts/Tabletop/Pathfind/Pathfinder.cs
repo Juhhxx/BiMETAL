@@ -36,7 +36,7 @@ public abstract class Pathfinder
     public Stack<HexagonCell> FindPath(HexagonCell start, HexagonCell objective, int points)
     {
         Stop();
-        Debug.Log("piece? owner: " + _owner + "  start: " + start + " objective: " + objective + "  points: " + points);
+        // Debug.Log("piece? owner: " + _owner + "  start: " + start + " objective: " + objective + "  points: " + points);
         _getPath = _owner.StartCoroutine(GetPath(start, objective, points));
         return Path;
     }
@@ -45,7 +45,7 @@ public abstract class Pathfinder
 
     public void Stop()
     {
-        Debug.Log("piece? stopping " + _owner + " path.");
+        // Debug.Log("piece? stopping " + _owner + " path.");
         
         if (_getPath != null)
         {

@@ -4100,7 +4100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 1671480133}
   <Interactive>k__BackingField: {fileID: 262858354}
-  <Points>k__BackingField: 4
+  <Points>k__BackingField: 7
 --- !u!114 &262858354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22344,7 +22344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1249616639
 Transform:
   m_ObjectHideFlags: 0
@@ -23754,7 +23754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1344085352
 Transform:
   m_ObjectHideFlags: 0

@@ -8,9 +8,19 @@ public class TabletopController : MonoBehaviour
     private int _round;
     private bool _playerRound;
     
-    private void Start()
+    private void OnEnable()
     {
         _round = 0;
+
+        if ( _playerInput == null )
+            _playerInput = FindFirstObjectByType<PlayerTabletopMovement>();
+
+        if ( _enemies == null )
+            _enemies = FindFirstObjectByType<EnemyComposite>();
+        
+        if ( _playerInput == null || _enemies == null )
+            return;
+
         _playerInput.PlayerTurn += ToggleRound;
         _enemies.EnemyTurn += ToggleRound;
 
@@ -35,6 +45,16 @@ public class TabletopController : MonoBehaviour
 
     public void StartBattle(Modifier mod, List<PieceInteractive> pieces)
     {
+        Debug.Log("Start battle between: " + pieces + " with mod: " + mod);
 
+    }
+
+    private void OnDisable()
+    {
+        if ( _playerInput == null || _enemies == null )
+            return;
+
+        _playerInput.PlayerTurn -= ToggleRound;
+        _enemies.EnemyTurn -= ToggleRound;
     }
 }
