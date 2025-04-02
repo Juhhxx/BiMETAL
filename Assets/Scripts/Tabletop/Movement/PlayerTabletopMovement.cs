@@ -175,6 +175,6 @@ public class PlayerTabletopMovement : TabletopMovement
     {
         Moving = false;
         DoneHovering();
-        PlayerTurn.Invoke();
+        PlayerTurn?.Invoke();
     }
 }

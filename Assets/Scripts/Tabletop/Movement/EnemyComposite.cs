@@ -13,6 +13,8 @@ public class EnemyComposite : TabletopMovement
         _player = FindFirstObjectByType<PlayerTabletopMovement>();
         _enemies = FindObjectsByType<EnemyTabletopMovement>(
             FindObjectsInactive.Exclude, FindObjectsSortMode.None).ToList();
+        
+        if ( _enemies.Count <= 0 ) gameObject.SetActive(false);
     }
 
     public void StartMoving()
@@ -113,6 +115,6 @@ public class EnemyComposite : TabletopMovement
     private void DoneMoving()
     {
         Debug.Log("Enemy un-turned.");
-        EnemyTurn.Invoke();
+        EnemyTurn?.Invoke();
     }
 }
