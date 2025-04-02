@@ -109,7 +109,7 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
 
         if (next.Piece != null && next != CurrentCell)
         {
-            if (next.Piece is ModifierInteractive)
+            if (next.Piece is EnvironmentInteractive)
                 Interact(next.Piece);
 
             Debug.Log("Blocked by piece. Ending movement early for " + gameObject.name);

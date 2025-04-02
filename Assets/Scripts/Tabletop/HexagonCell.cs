@@ -66,8 +66,8 @@ public class HexagonCell : MonoBehaviour
     {
         Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
 
-        if ( mod.Dynamic && Modifier != null && Modifier != mod )
-            return false;
+        /*if ( mod.Dynamic && Modifier != null && Modifier != mod )
+            return false;*/
 
         // Changed modifier way of knowing if its dynamic or not
         if (mod.Dynamic)
@@ -193,6 +193,8 @@ public class HexagonCell : MonoBehaviour
     {
         if (_hovered == onOrOff) return;
 
+        Debug.Log("Hovering cell: " + this);
+
         if (_hovered)
             _Cosmetic.transform.Translate(Vector3.down * 0.2f);
         else if (!_hovered)
@@ -218,10 +220,11 @@ public class HexagonCell : MonoBehaviour
 
         _pathStack++;
     }
-
+    
     private void CosmeticPathCell(bool upOrDown)
     {
         Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
+        
         if ( upOrDown )
             _Cosmetic.transform.Translate(Vector3.up * 0.1f);
         else
@@ -253,7 +256,7 @@ public class HexagonCell : MonoBehaviour
         Piece?.SelectionError();
     }
 
-    public override string ToString() => $"Hex({CellValue.x}, {CellValue.y}), W({Weight})";
+    public override string ToString() => $"Hex({CellValue.x}, {CellValue.y}), W({Weight}), P({Piece} is {Piece?.gameObject.name}), N({_pathStack})";
 
     public List<PieceInteractive> GetPieces(HashSet<HexagonCell> visited = null)
     {

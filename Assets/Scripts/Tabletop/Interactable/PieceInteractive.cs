@@ -38,8 +38,8 @@ public class PieceInteractive : ModifierInteractive
 
             if ( HasModifier )
             {
-                // Debug.Log("De-modifying. ");
-                _modPathfinder.FindPath(Cell, null, _reach);
+                Debug.Log("De-modifying. ");
+                _modPathfinder.Stop();
             }
 
         }
