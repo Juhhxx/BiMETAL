@@ -11,7 +11,6 @@ public abstract class TabletopMovement : TabletopBase
     public Pathfinder Pathfinder => _pathfinder;
     public ObservableStack<HexagonCell> Path => _pathfinder.Path;
     private Queue<IEnumerator> _queue = new();
-    protected HexagonCell _startCell;
 
 
     public bool Moving { get; protected set; }
@@ -45,12 +44,6 @@ public abstract class TabletopMovement : TabletopBase
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
-                    if (newItem == _startCell)
-                    {
-                        Debug.Log("path-d start: " + _startCell);
-                        continue;
-                    }
-
                     yield return new WaitForSeconds(0.05f);
                     newItem.PathCell();
 
@@ -62,15 +55,10 @@ public abstract class TabletopMovement : TabletopBase
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
-                    if (oldItem == _startCell)
-                    {
-                        Debug.Log("un-path-d start: " + _startCell);
-                        _startCell = null;
-                        continue;
-                    }
-
                     yield return new WaitForSeconds(0.02f);
-                    oldItem.StopPathCell();
+
+                    if ( oldItem.Piece == null || oldItem.Piece == Interactive )
+                        oldItem.StopPathCell();
 
                     // if (oldItem.IsNonAvoidable())
                     if (oldItem.Piece is ModifierInteractive piece)

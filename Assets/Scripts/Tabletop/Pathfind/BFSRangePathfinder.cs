@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// gets any cell you can walk to with total weight, accounting for avoidables and walkables
+/// gets any cell you can walk to with total weight, accounting for avoidables and walkables, not counting start cell (objective)
 /// </summary>
 public class BFSRangePathfinder : Pathfinder
 {
@@ -60,7 +60,7 @@ public class BFSRangePathfinder : Pathfinder
                     cellData.G = costToNeighbor;
                     
                     OpenList.Add(cellData);
-
+                    
                     _set.Add(neighbor);
                 }
             }
@@ -69,7 +69,8 @@ public class BFSRangePathfinder : Pathfinder
         }
 
         foreach (HexagonCell cell in _set)
-            Path.ObservePush(cell);
+            if ( cell != objective )
+                Path.ObservePush(cell);
 
         Done = true;
     }

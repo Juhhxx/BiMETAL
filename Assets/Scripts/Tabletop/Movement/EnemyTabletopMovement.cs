@@ -61,8 +61,6 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
 
     public void FindPath()
     {
-        Debug.Log("Reset start cell I think. path-d? " + _startCell);
-        _startCell = CurrentCell;
         _pathfinder.FindPath(CurrentCell, _player.CurrentCell, Points);
     }
     public void Stop()
@@ -97,7 +95,6 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
             " | Path null? " + (Path == null) +
             " | Path count: " + (Path?.Count ?? -1) +
             " | CurrentCell: " + (CurrentCell != null ? CurrentCell : "null") +
-            " | StartCell: " + (_startCell != null ? _startCell : "null") +
             " | Moving: " + Moving);
 
         if ( Path == null || Path.Count <= 0 )
@@ -108,7 +105,6 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
         }
 
         HexagonCell next = Path.Peek();
-        Debug.Log("1 start? path is: " + Path + " count: " + Path.Count + _startCell + " current? " + CurrentCell);
         yield return new WaitForSeconds(0.2f);
 
         if (next.Piece != null && next != CurrentCell)
@@ -123,15 +119,12 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
 
         Debug.Log("1.5 start? path is: " + Path + " count: " + Path.Count);
         Path.ObservePop();
-        Debug.Log("2 start? " + _startCell + " current? " + CurrentCell);
 
         CurrentCell.WalkOn();
         CurrentCell = next;
         // Debug.Log("current is selected?2 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
         
         next.WalkOn(Interactive);
-
-        Debug.Log("3 start? " + _startCell + " current? " + CurrentCell);
 
         // Debug.Log("count: " + final.Count);
 
@@ -167,7 +160,6 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
     {
         // _queue.Clear();
         _pathfinder.Stop();
-        // _startCell?.StopPathCell();
         Moving = false;
     }
 }

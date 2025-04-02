@@ -31,7 +31,9 @@ public class HexagonCell : MonoBehaviour
     {
         if (Piece != null && piece != null)
             return false;
+        
         Piece = piece;
+
         return true;
         // probably use the piece in the future to communicate between each piece, create father class piece for tabletop movement and then branch into player and enemy movement
     }
@@ -70,8 +72,8 @@ public class HexagonCell : MonoBehaviour
         // Changed modifier way of knowing if its dynamic or not
         if (mod.Dynamic)
             _dynamicMod = ( _dynamicMod == mod ) ? null : mod;
-        else
-            _environmentMod = mod;
+        else // Envionrment mod still needs to be able to get it to null despite the games visual behavior because of pathing visuals ( EnvironmentModifier )
+            _environmentMod = ( _environmentMod == mod ) ? null : mod;
 
         _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.gray;
 
@@ -210,13 +212,20 @@ public class HexagonCell : MonoBehaviour
     {
         if (_pathStack == 0)
         {
-            _Cosmetic.transform.Translate(Vector3.up * 0.1f);
-
-            /*if (Piece is ModifierInteractive piece)
-                piece.Path();*/
+            if ( Piece == null )
+                CosmeticPathCell(true);
         }
 
         _pathStack++;
+    }
+
+    private void CosmeticPathCell(bool upOrDown)
+    {
+        Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
+        if ( upOrDown )
+            _Cosmetic.transform.Translate(Vector3.up * 0.1f);
+        else
+            _Cosmetic.transform.Translate(Vector3.down * 0.1f);
     }
 
     /// <summary>
@@ -228,9 +237,10 @@ public class HexagonCell : MonoBehaviour
 
         if (_pathStack <= 0)
         {
-            _pathStack = 0;
-
-            _Cosmetic.transform.Translate(Vector3.down * 0.1f);
+            Debug.Log("Stop path count: " + _pathStack);
+            CosmeticPathCell(false);
+            
+            // _pathStack = 0;
         }
     }
 

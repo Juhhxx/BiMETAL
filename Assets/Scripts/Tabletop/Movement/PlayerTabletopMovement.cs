@@ -105,7 +105,6 @@ public class PlayerTabletopMovement : TabletopMovement
 
         // Stack<HexagonCell> final =  new(_pathfinder.Path);
 
-        _startCell = CurrentCell;
         _pathfinder.Reverse();
         // Debug.Log("Stop moving current? " + CurrentCell + "    path count: " + Path.Count);
 
