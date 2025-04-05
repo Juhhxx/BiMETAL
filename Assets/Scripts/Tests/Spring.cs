@@ -14,5 +14,7 @@ public class Spring : MonoBehaviour
             Debug.Log("Applying random acceleration of: " + newAccel);
             RigidBody.AddForce(newAccel, ForceMode.Acceleration);
         }
+
+        // think of adding a flocking kind of AI behavior, but to exploit it into being chaotic
     }
 }
