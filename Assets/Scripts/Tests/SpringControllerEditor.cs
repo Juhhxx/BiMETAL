@@ -1,14 +1,14 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(SpringController))]
+[CustomEditor(typeof(RigController))]
 public class SpringControllerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        SpringController controller = (SpringController)target;
+        RigController controller = (RigController)target;
 
         EditorGUILayout.Space(10);
 

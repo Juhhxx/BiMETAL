@@ -1,12 +1,14 @@
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
 /// <summary>
 /// Sets up physics based rig, for more chaotic movement change spring's rigidBody masses to very different values.
 /// </summary>
-public class SpringController : MonoBehaviour
+public class RigController : MonoBehaviour
 {
     [SerializeField] private Rigidbody _mainRigidBody;
+    [SerializeField] private Animator _animator;
 
     [Label("All spring joints")]
     [SerializeField] private Spring[] _joints;
@@ -30,19 +32,40 @@ public class SpringController : MonoBehaviour
     [SerializeField] private float _forceTolerance = 0.025f;
 
     [SerializeField] private float _wobbleStrength;
+    [SerializeField] private float _LimbLerpTime;
 
-    #if UNITY_EDITOR
+    [SerializeField] private AnimationCurve _massCurve = AnimationCurve.Linear(0, 1, 1, 2);
+
     private void Start()
     {
+        #if UNITY_EDITOR
         ApplySpringSettings();
+        #endif
+
+        ToggleRig();
     }
+
+    #if UNITY_EDITOR
     public void ApplySpringSettings()
     {
-        if (_joints == null) return;
+        if (_joints == null || _joints.Length == 0)
+        {
+            Debug.LogWarning("No joints assigned!");
+            return;
+        }
 
         foreach (Spring joint in _joints)
         {
-            if (joint == null) continue;
+            if (joint == null)
+                continue;
+
+            joint.SetComponents();
+
+            if (joint.RigidBody == null || joint.Joint == null)
+            {
+                Debug.LogWarning($"Missing Rigidbody or SpringJoint on {joint.name}");
+                continue;
+            }
 
             joint.WobbleStrength = _wobbleStrength;
 
@@ -51,6 +74,11 @@ public class SpringController : MonoBehaviour
             joint.Joint.minDistance = _minAnchorDistance;
             joint.Joint.maxDistance = _maxAnchorDistance;
             joint.Joint.tolerance = _forceTolerance;
+            joint.Joint.connectedBody = _mainRigidBody;
+            Physics.IgnoreCollision(GetComponentInChildren<Collider>(), joint.Collider);
+
+
+            joint.RigidBody.isKinematic = false;
 
             joint.Joint.autoConfigureConnectedAnchor = false;
             // connected anchor is father anchor
@@ -62,25 +90,62 @@ public class SpringController : MonoBehaviour
             joint.RigidBody.linearDamping = _linearDamping;
             joint.RigidBody.angularDamping = _angularDamping;
 
+            // joint.RigidBody.mass = joint.GetComponentInChildren<MeshFilter>().mesh.vertexCount / 100;
+            // Debug.Log("vertices now mass as: " + joint.RigidBody.mass);
+
             joint.RigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             joint.RigidBody.useGravity = true;
 
             // anchor is self anchor
             joint.Joint.anchor =  joint.RigidBody.centerOfMass;
         }
-
-        TurnOnPhysicsRig();
     }
     #endif
 
-    private void TurnOnPhysicsRig()
+    private IEnumerator TurnOnPhysicsRig()
     {
         foreach( Spring joint in _joints )
         {
             joint.Joint.connectedBody = _mainRigidBody;
             joint.RigidBody.isKinematic = false;
+            joint.Collider.enabled = true;
         }
 
-        // turn off animator after half a second or something
+        yield return new WaitForSeconds(_LimbLerpTime);
+
+        _animator.enabled = false;
+    }
+    private IEnumerator TurnOnAnimationRig()
+    {
+        _animator.enabled = true;
+
+        yield return new WaitForSeconds(_LimbLerpTime);
+
+        foreach( Spring joint in _joints )
+            joint.ResetSpring(_LimbLerpTime);
+    }
+
+    private bool _physics = true;
+
+    private void ToggleRig()
+    {
+        _physics = ! _physics;
+        
+        if ( _physics )
+        {
+            StartCoroutine(TurnOnAnimationRig());
+        }
+        else
+        {
+            StartCoroutine(TurnOnPhysicsRig());
+        }
+
+        Debug.Log("Toggle rig to: " + _physics);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+            ToggleRig();
     }
 }
