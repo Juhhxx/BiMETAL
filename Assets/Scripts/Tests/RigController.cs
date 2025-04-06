@@ -34,7 +34,11 @@ public class RigController : MonoBehaviour
     [SerializeField] private float _wobbleStrength;
     [SerializeField] private float _LimbLerpTime;
 
-    [SerializeField] private AnimationCurve _massCurve = AnimationCurve.Linear(0, 1, 1, 2);
+
+    [SerializeField] private float _AnimationSpring = 8000f;
+    [SerializeField] private float _AnimationDamper = 12000f;
+    [SerializeField] private float _AnimationMinDistance, _AnimationMaxDistance;
+    [SerializeField] private float _AnimationTolerance = 0.0001f;
 
     private void Start()
     {
@@ -136,11 +140,11 @@ public class RigController : MonoBehaviour
             // joint.ResetSpring(_LimbLerpTime);
             joint.Collider.enabled = false;
 
-            joint.Joint.spring = 8000f;
-            joint.Joint.damper = 12000f;
-            joint.Joint.minDistance = 0f;
-            joint.Joint.maxDistance = 0f;
-            joint.Joint.tolerance = 0.0001f;
+            joint.Joint.spring = _AnimationSpring;
+            joint.Joint.damper = _AnimationDamper;
+            joint.Joint.minDistance = _AnimationMinDistance;
+            joint.Joint.maxDistance = _AnimationMaxDistance;
+            joint.Joint.tolerance = _AnimationTolerance;
 
             joint.enabled = false;
         }
