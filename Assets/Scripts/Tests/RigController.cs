@@ -42,6 +42,8 @@ public class RigController : MonoBehaviour
         ApplySpringSettings();
         #endif
 
+        _animator.enabled = false;
+
         ToggleRig();
     }
 
@@ -75,14 +77,17 @@ public class RigController : MonoBehaviour
             joint.Joint.maxDistance = _maxAnchorDistance;
             joint.Joint.tolerance = _forceTolerance;
             joint.Joint.connectedBody = _mainRigidBody;
-            Physics.IgnoreCollision(GetComponentInChildren<Collider>(), joint.Collider);
+            // Physics.IgnoreCollision(GetComponentInChildren<Collider>(), joint.Collider);
+            joint.Joint.connectedMassScale = 0f;
 
 
             joint.RigidBody.isKinematic = false;
 
             joint.Joint.autoConfigureConnectedAnchor = false;
-            // connected anchor is father anchor
-            joint.Joint.connectedAnchor = joint.transform.localPosition;
+            // connected anchor is father anchor, where the spring connects on this Rigidbody, in local space
+            joint.Joint.anchor = joint.transform.InverseTransformPoint(joint.RigidBody.worldCenterOfMass);
+            // anchor is self anchor, where the spring connects to the main body, in the main body’s local space
+            joint.Joint.connectedAnchor = _mainRigidBody.transform.InverseTransformPoint(joint.transform.position);
 
             joint.Joint.enableCollision = true;
             joint.Joint.axis = Vector3.zero;
@@ -95,9 +100,6 @@ public class RigController : MonoBehaviour
 
             joint.RigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             joint.RigidBody.useGravity = true;
-
-            // anchor is self anchor
-            joint.Joint.anchor =  joint.RigidBody.centerOfMass;
         }
     }
     #endif
@@ -106,9 +108,17 @@ public class RigController : MonoBehaviour
     {
         foreach( Spring joint in _joints )
         {
-            joint.Joint.connectedBody = _mainRigidBody;
-            joint.RigidBody.isKinematic = false;
+            // joint.Joint.connectedBody = _mainRigidBody;
+            // joint.RigidBody.isKinematic = false;
             joint.Collider.enabled = true;
+
+            joint.Joint.spring = _springForce;
+            joint.Joint.damper = _springDamper;
+            joint.Joint.minDistance = _minAnchorDistance;
+            joint.Joint.maxDistance = _maxAnchorDistance;
+            joint.Joint.tolerance = _forceTolerance;
+
+            joint.enabled = true;
         }
 
         yield return new WaitForSeconds(_LimbLerpTime);
@@ -122,7 +132,18 @@ public class RigController : MonoBehaviour
         yield return new WaitForSeconds(_LimbLerpTime);
 
         foreach( Spring joint in _joints )
-            joint.ResetSpring(_LimbLerpTime);
+        {
+            // joint.ResetSpring(_LimbLerpTime);
+            joint.Collider.enabled = false;
+
+            joint.Joint.spring = 8000f;
+            joint.Joint.damper = 12000f;
+            joint.Joint.minDistance = 0f;
+            joint.Joint.maxDistance = 0f;
+            joint.Joint.tolerance = 0.0001f;
+
+            joint.enabled = false;
+        }
     }
 
     private bool _physics = true;

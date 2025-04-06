@@ -62,7 +62,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 15.275308, y: 10.37656, z: 10.798947}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 932803613822906892}
@@ -239,7 +239,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.4948335, y: 1.7022978, z: 2.327787}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5891245536845193413}
@@ -475,12 +475,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014825, y: 0.000009180837, z: -0.000026175736}
+  m_Anchor: {x: 0.000000328397, y: -0.00000063126356, z: -0.0000007837242}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.32361555, y: 0.3956544, z: 0.03206909}
+  m_ConnectedAnchor: {x: -0.95462793, y: -0.10815585, z: 1.8469859}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -489,7 +489,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &770440621500085004
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,12 +794,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014814, y: 0.000009180837, z: -0.000026175725}
+  m_Anchor: {x: 0.0000019147667, y: 0.00000029546914, z: 0.000001351342}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.29131314, y: 0.4044665, z: -0.15233809}
+  m_ConnectedAnchor: {x: -4.061041, y: 2.2398248, z: 1.3983743}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -808,7 +808,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &1053401341392571364
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.309703, y: 16.70535, z: 12.294709}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2089070178365430680}
@@ -1195,7 +1195,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.6810575, y: 6.1322446, z: 4.4234304}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3806713855877592583}
@@ -1304,7 +1304,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.3928823, y: 1.7528716, z: 2.3295815}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5273290530195281378}
@@ -1477,7 +1477,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.890749, y: 16.491388, z: 11.042636}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6850299623159483595}
@@ -1587,7 +1587,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 11.030747, y: 12.894629, z: 12.004247}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 519859933437076643}
@@ -1731,7 +1731,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -4.1814547, y: -3.054958, z: -4.1170173}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8388462700028448696}
@@ -1904,7 +1904,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0.7, y: 0, z: 0}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 189.73666
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -1913,7 +1913,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &1716766874143147116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,7 +1943,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.246785, y: 13.979584, z: 11.834027}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2535275905737814931}
@@ -2052,7 +2052,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -3.553058, y: -1.593184, z: -2.427761}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2850071546974545449}
@@ -2403,12 +2403,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014818, y: 0.000009180836, z: -0.000026175745}
+  m_Anchor: {x: -0.00000024887026, y: 0.00000014275267, z: -0.0000005036256}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.20635125, y: 0.78503996, z: 0.4277513}
+  m_ConnectedAnchor: {x: -1.5152191, y: 1.1764803, z: 2.0114663}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -2417,7 +2417,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &1954160747104740252
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,12 +2604,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014834, y: 0.000009180842, z: -0.000026175732}
+  m_Anchor: {x: 0.00000016426077, y: -0.00000058827084, z: 0.0000007799956}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.117711924, y: 0.23527846, z: -0.44652042}
+  m_ConnectedAnchor: {x: -0.5461459, y: 0.37539804, z: 1.6004169}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -2618,7 +2618,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &2142228542780761118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2677,7 +2677,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.1939916, y: 0.38691145, z: 0.8949649, w: 0.10818845}
   m_LocalPosition: {x: -0.19860536, y: -0.20090777, z: -0.017662102}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000157, y: 1.0000005, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6158334634645122439}
@@ -2773,12 +2773,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014814, y: 0.000009180834, z: -0.000026175725}
+  m_Anchor: {x: -0.00000021015845, y: -0.00000028954815, z: 0.0000006209545}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.039513502, y: 0.27575696, z: 0.28867003}
+  m_ConnectedAnchor: {x: -1.452369, y: -0.119702816, z: 1.3649007}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -2787,7 +2787,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &2302610174699850274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2876,12 +2876,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0024826336, y: 0.00008086765, z: -0.00081881584}
+  m_Anchor: {x: 0.03708945, y: 0.0046114326, z: -0.0073336363}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.011893072, y: 0.2988055, z: 0.021255283}
+  m_ConnectedAnchor: {x: -2.317237, y: 0.07164323, z: 1.6551424}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -2890,7 +2890,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &2589853267409348577
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,7 +2917,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.023148268, y: -0.069008425, z: -0.05637857, w: 0.9957527}
   m_LocalPosition: {x: 0.000000011175871, y: 0.12864843, z: -0.0012610776}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9999999, y: 0.99999994, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2803420574115015518}
@@ -3181,12 +3181,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014811, y: 0.000009180834, z: -0.000026175736}
+  m_Anchor: {x: 0.000022891725, y: 0.000024066512, z: 0.000008952325}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.03559359, y: 0.6082132, z: 0.01875432}
+  m_ConnectedAnchor: {x: -2.2270644, y: 0.52593386, z: 1.6465096}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -3195,7 +3195,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &2839410238749255360
 GameObject:
   m_ObjectHideFlags: 0
@@ -3284,12 +3284,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014805, y: 0.00000918084, z: -0.000026175741}
+  m_Anchor: {x: 0.00000011597231, y: -0.0000008524292, z: 0.000000049318743}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.39445305, y: 0.62890637, z: 0.39725196}
+  m_ConnectedAnchor: {x: -2.9577281, y: 1.2284708, z: 1.1975417}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -3298,7 +3298,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &2998351679424740740
 GameObject:
   m_ObjectHideFlags: 0
@@ -3387,12 +3387,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.000002901483, y: 0.000009180834, z: -0.000026175743}
+  m_Anchor: {x: 0.00000072399763, y: -0.00000062653527, z: -0.00000023950957}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.0070574568, y: 0.74454266, z: 0.1102111}
+  m_ConnectedAnchor: {x: -1.3900932, y: -0.43169123, z: 1.6615794}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -3401,7 +3401,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &3073674506692506343
 GameObject:
   m_ObjectHideFlags: 0
@@ -3572,7 +3572,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.2235365, y: 6.871019, z: 5.6571913}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2324465368745159395}
@@ -3740,12 +3740,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014811, y: 0.000009180835, z: -0.000026175736}
+  m_Anchor: {x: 0.000000460236, y: 0.0000015961166, z: 0.0000010940747}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.033071093, y: 0.14477918, z: -0.4636249}
+  m_ConnectedAnchor: {x: -3.8385346, y: 2.0023847, z: 1.7229855}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -3754,7 +3754,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &3427574721039436085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3875,12 +3875,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014814, y: 0.000009180837, z: -0.000026175738}
+  m_Anchor: {x: 0.000019550458, y: -0.0000029269213, z: -0.000043756827}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.009757161, y: 0.8073376, z: 0.13926728}
+  m_ConnectedAnchor: {x: -2.383399, y: 0.4446473, z: 1.5293465}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -3889,7 +3889,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &3744553553382531962
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,12 +4044,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014807, y: 0.000009180841, z: -0.000026175745}
+  m_Anchor: {x: -0.00000013316783, y: 0.0000006104573, z: -0.0000016597803}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.24578626, y: 0.886693, z: 0.1832429}
+  m_ConnectedAnchor: {x: -3.9928908, y: 1.6689286, z: 1.2692268}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -4058,7 +4058,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &3920659645858350499
 GameObject:
   m_ObjectHideFlags: 0
@@ -4120,7 +4120,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.3692276, y: 1.711289, z: 2.3877366}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1145448676831088484}
@@ -4288,12 +4288,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014818, y: 0.000009180835, z: -0.000026175741}
+  m_Anchor: {x: 0.00000008358404, y: 0.00000023388719, z: -0.0000009716854}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.17055856, y: 0.6242556, z: 0.17580779}
+  m_ConnectedAnchor: {x: -0.8424404, y: 0.0673877, z: 1.9611504}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -4302,7 +4302,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &4014704947634977375
 GameObject:
   m_ObjectHideFlags: 0
@@ -4332,7 +4332,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.193948, y: 11.895945, z: 13.462628}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2004121089619198678}
@@ -4500,12 +4500,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.000002901482, y: 0.000009180837, z: -0.000026175723}
+  m_Anchor: {x: -0.0000010201175, y: 0.00000062824665, z: 0.00000060217735}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.06966316, y: 0.2101246, z: -0.49691188}
+  m_ConnectedAnchor: {x: -0.70282733, y: 0.28052175, z: 1.4494243}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -4514,7 +4514,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &4129078072784557392
 GameObject:
   m_ObjectHideFlags: 0
@@ -4541,7 +4541,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.8186394, y: 0.27244458, z: 0.15899652, w: 0.47992045}
   m_LocalPosition: {x: 0.09441999, y: -0.0039174473, z: 2.301399}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1570637878906942809}
@@ -4578,7 +4578,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 16.010902, y: 24.20609, z: 16.2474}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5664700237747686755}
@@ -4686,7 +4686,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -1.815, y: -1.14, z: 1.731}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.7595615, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9048441438206053413}
@@ -4700,7 +4700,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4217911237248054795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: e7c78dd5978edaf418d90e28705dc5c5, type: 2}
   m_CullingMode: 0
@@ -4802,12 +4802,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014818, y: 0.000009180835, z: -0.000026175732}
+  m_Anchor: {x: -0.0000003578959, y: -0.00000038981364, z: -0.00000029478545}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.031940747, y: 0.5407885, z: -0.2633611}
+  m_ConnectedAnchor: {x: -1.552095, y: 0.40744162, z: 1.7267566}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -4816,7 +4816,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &4381850192331664095
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,12 +4905,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014807, y: 0.000009180838, z: -0.000026175743}
+  m_Anchor: {x: -0.00000093189715, y: -0.00000013442701, z: -0.00000053882616}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.21259746, y: 0.7526877, z: 0.35801643}
+  m_ConnectedAnchor: {x: -0.97191805, y: 0.6445768, z: 2.0538511}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -4919,7 +4919,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &5153570525635985152
 GameObject:
   m_ObjectHideFlags: 0
@@ -5080,7 +5080,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -6.724327, y: -9.023603, z: -15.608688}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4176800394921796835}
@@ -5281,12 +5281,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014811, y: 0.000009180838, z: -0.000026175738}
+  m_Anchor: {x: 0.0000011628088, y: 0.0000012213881, z: 0.0000012412066}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.05831397, y: 0.17080681, z: -0.450764}
+  m_ConnectedAnchor: {x: -3.79194, y: 2.1176395, z: 1.6907439}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -5295,7 +5295,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &5538059440390860486
 GameObject:
   m_ObjectHideFlags: 0
@@ -5325,7 +5325,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -6.719762, y: -5.9942317, z: -4.29359}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3514522586878196432}
@@ -5563,7 +5563,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: -0.351, y: 1.01, z: -0.585}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 189.73666
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -5572,7 +5572,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &5768501488734554509
 GameObject:
   m_ObjectHideFlags: 0
@@ -5602,7 +5602,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 9.89794, y: 6.9631953, z: 7.327313}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1851948606082539588}
@@ -6111,7 +6111,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5.4852486, y: 1.6141454, z: 2.3366578}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7386767943148307219}
@@ -6279,12 +6279,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014811, y: 0.000009180835, z: -0.000026175725}
+  m_Anchor: {x: 0.0000006679273, y: 0.0000011987784, z: 0.00000040613185}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.3963711, y: 0.9007797, z: 0.33385906}
+  m_ConnectedAnchor: {x: -3.2315226, y: 1.2753859, z: 1.1764238}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -6293,7 +6293,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &6558684233044959004
 GameObject:
   m_ObjectHideFlags: 0
@@ -6323,7 +6323,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8.9210005, y: 11.861229, z: 14.728903}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8413399778397541674}
@@ -6496,7 +6496,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.2235365, y: 6.871019, z: 5.6571913}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4501265756353300420}
@@ -6664,12 +6664,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014807, y: 0.000009180834, z: -0.000026175736}
+  m_Anchor: {x: -0.00000021913581, y: -0.00000038790057, z: 0.0000007224132}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.084448986, y: -1.2076926, z: 0.47454232}
+  m_ConnectedAnchor: {x: -2.1786833, y: 0.4865787, z: 1.5526642}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -6678,7 +6678,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &7106431427878153022
 GameObject:
   m_ObjectHideFlags: 0
@@ -6767,12 +6767,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000671745, y: -0.0006792165, z: 0.000022865903}
+  m_Anchor: {x: -0.00030238, y: -0.009451631, z: 0.0010719821}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.0741017, y: -0.92967975, z: 0.42046222}
+  m_ConnectedAnchor: {x: -2.2107725, y: 0.7590314, z: 1.4986198}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 169.70563
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -6781,7 +6781,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &7151119222850588878
 GameObject:
   m_ObjectHideFlags: 0
@@ -6875,7 +6875,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: -0.7, y: 0, z: 0}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 189.73666
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -6884,7 +6884,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &7161472166180847569
 GameObject:
   m_ObjectHideFlags: 0
@@ -6911,7 +6911,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.0057093343, y: 0.5538284, z: 0.83226377, w: -0.024053704}
   m_LocalPosition: {x: 0.19860533, y: -0.20090808, z: -0.017662134}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000144, y: 1, z: 1.0000005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8812055690582902144}
@@ -7070,12 +7070,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014807, y: 0.000009180832, z: -0.000026175725}
+  m_Anchor: {x: 0.0000007559104, y: 0.0000014824532, z: 0.0000014756083}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.100067705, y: 0.18836707, z: -0.44828996}
+  m_ConnectedAnchor: {x: -3.9405842, y: 1.9236064, z: 1.7399101}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -7084,7 +7084,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &7678604450861905559
 GameObject:
   m_ObjectHideFlags: 0
@@ -7178,7 +7178,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0.7, y: -0.407, z: 0}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 189.73666
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -7187,7 +7187,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &7689685665788977436
 GameObject:
   m_ObjectHideFlags: 0
@@ -7276,12 +7276,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014818, y: 0.000009180835, z: -0.000026175745}
+  m_Anchor: {x: 0.0000005385377, y: -0.0000001041459, z: 0.00000003211997}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.08600092, y: 0.9826493, z: 0.013349704}
+  m_ConnectedAnchor: {x: -1.6346534, y: 0.08539271, z: 1.4189689}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -7290,7 +7290,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &7790463011439605481
 GameObject:
   m_ObjectHideFlags: 0
@@ -7526,7 +7526,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: -0.7, y: -0.407, z: 0}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 189.73666
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -7535,7 +7535,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &7882494828111690385
 GameObject:
   m_ObjectHideFlags: 0
@@ -7624,12 +7624,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014839, y: 0.000009180841, z: -0.000026175723}
+  m_Anchor: {x: -0.00000049356674, y: 0.0000012305013, z: 0.0000005221972}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.11160613, y: 0.23012698, z: -0.43687567}
+  m_ConnectedAnchor: {x: -0.6162605, y: 0.26465273, z: 1.5322341}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -7638,7 +7638,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &8033377282102266829
 GameObject:
   m_ObjectHideFlags: 0
@@ -7727,12 +7727,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: -0.000104256265, y: 0.00030758666, z: 0.0013300665}
+  m_Anchor: {x: -0.0022015944, y: 0.005417385, z: 0.020054657}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.04092776, y: -0.6329388, z: 0.29144502}
+  m_ConnectedAnchor: {x: -1.7766292, y: 0.922819, z: 1.7030754}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 281.42496
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -7741,7 +7741,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &8380084710436970580
 GameObject:
   m_ObjectHideFlags: 0
@@ -7830,12 +7830,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014818, y: 0.000009180834, z: -0.000026175725}
+  m_Anchor: {x: 0.000008980235, y: 0.000011758462, z: -0.000020307618}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.0038566017, y: 0.7677958, z: -0.15981218}
+  m_ConnectedAnchor: {x: -2.1262307, y: -0.29767907, z: 1.8698714}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -7844,7 +7844,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &8405042513068471331
 GameObject:
   m_ObjectHideFlags: 0
@@ -7874,7 +7874,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10.887346, y: 16.163706, z: 5.315208}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1430812385448414572}
@@ -8125,7 +8125,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -3.3613863, y: -1.5972828, z: -2.5278654}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6504634030451397567}
@@ -8269,7 +8269,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -3.4694374, y: -1.5969865, z: -2.4712596}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8019114457951876148}
@@ -8469,12 +8469,12 @@ SpringJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 2377669746884431159}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0.0000029014807, y: 0.0000091808315, z: -0.000026175725}
+  m_Anchor: {x: -0.0000002993614, y: 0.00000021043007, z: 0.00000053602287}
   m_Axis: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.0361873, y: -0.7001004, z: 0.035107348}
+  m_ConnectedAnchor: {x: -1.7053746, y: 0.66232896, z: 1.8766875}
   m_Spring: 450
-  m_Damper: 40
+  m_Damper: 120
   m_MinDistance: 0.02
   m_MaxDistance: 0.05
   m_Tolerance: 0.02
@@ -8483,7 +8483,7 @@ SpringJoint:
   m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 0.00001
+  m_ConnectedMassScale: 0
 --- !u!1 &9011064604802832844
 GameObject:
   m_ObjectHideFlags: 0

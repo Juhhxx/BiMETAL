@@ -5612,105 +5612,25 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 476486858}
-    - target: {fileID: 420813056700403769, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -3.4694374
+    - target: {fileID: 553525782871879281, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 420813056700403769, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -1.5969865
-      objectReference: {fileID: 0}
-    - target: {fileID: 420813056700403769, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -2.4712596
-      objectReference: {fileID: 0}
-    - target: {fileID: 501986638081371427, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7.6810575
-      objectReference: {fileID: 0}
-    - target: {fileID: 501986638081371427, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6.1322446
-      objectReference: {fileID: 0}
-    - target: {fileID: 501986638081371427, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 4.4234304
-      objectReference: {fileID: 0}
-    - target: {fileID: 903199796364442584, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 9.89794
-      objectReference: {fileID: 0}
-    - target: {fileID: 903199796364442584, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6.9631953
-      objectReference: {fileID: 0}
-    - target: {fileID: 903199796364442584, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 7.327313
-      objectReference: {fileID: 0}
-    - target: {fileID: 1189935083567669983, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 11.030747
-      objectReference: {fileID: 0}
-    - target: {fileID: 1189935083567669983, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 12.894629
-      objectReference: {fileID: 0}
-    - target: {fileID: 1189935083567669983, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 12.004247
+    - target: {fileID: 746686481320451834, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1220444770989456567, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1751893816}
-    - target: {fileID: 1235779408563415038, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 16.010902
+    - target: {fileID: 1734298393350092574, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 1235779408563415038, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 24.20609
-      objectReference: {fileID: 0}
-    - target: {fileID: 1235779408563415038, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 16.2474
-      objectReference: {fileID: 0}
-    - target: {fileID: 1384836458386921220, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7.2235365
-      objectReference: {fileID: 0}
-    - target: {fileID: 1384836458386921220, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6.871019
-      objectReference: {fileID: 0}
-    - target: {fileID: 1384836458386921220, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.6571913
-      objectReference: {fileID: 0}
-    - target: {fileID: 1516576240842676108, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5.4852486
-      objectReference: {fileID: 0}
-    - target: {fileID: 1516576240842676108, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.6141454
-      objectReference: {fileID: 0}
-    - target: {fileID: 1516576240842676108, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.3366578
-      objectReference: {fileID: 0}
-    - target: {fileID: 1570637878906942809, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0000157
-      objectReference: {fileID: 0}
-    - target: {fileID: 1570637878906942809, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0000005
-      objectReference: {fileID: 0}
-    - target: {fileID: 1570637878906942809, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.9999999
+    - target: {fileID: 1812646872275545877, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1826011327942862244, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Name
@@ -5720,10 +5640,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 738780360}
+    - target: {fileID: 2161953095778941108, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180780056441240140, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2209750079183414289, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1052999890}
+    - target: {fileID: 2219462574679839746, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2246856020945461271, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5732,33 +5664,25 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 363011899}
-    - target: {fileID: 2417490061935475958, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -3.3613863
+    - target: {fileID: 2383103760279909114, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 2417490061935475958, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -1.5972828
-      objectReference: {fileID: 0}
-    - target: {fileID: 2417490061935475958, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -2.5278654
+    - target: {fileID: 2592239353234908292, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2633239144785743464, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1798692813}
-    - target: {fileID: 2893034471224805522, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -3.553058
+    - target: {fileID: 2813090357359041803, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 2893034471224805522, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -1.593184
-      objectReference: {fileID: 0}
-    - target: {fileID: 2893034471224805522, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -2.427761
+    - target: {fileID: 3018315815362091274, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3186533982448470297, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
@@ -5772,57 +5696,37 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1781836455}
-    - target: {fileID: 3585664925986204849, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.7595615
+    - target: {fileID: 3522907323977335843, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3857719116847521709, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 800775067}
-    - target: {fileID: 4016019263085580609, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -6.724327
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016019263085580609, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -9.023603
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016019263085580609, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -15.608688
+    - target: {fileID: 3867992682065586379, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4172549694816355367, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1514973194}
-    - target: {fileID: 4291362719887265511, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10.890749
+    - target: {fileID: 4338481805115638739, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 4291362719887265511, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 16.491388
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291362719887265511, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 11.042636
+    - target: {fileID: 4450781223416820747, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4521114826030056691, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1614236978}
-    - target: {fileID: 4563605785271159808, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10.887346
-      objectReference: {fileID: 0}
-    - target: {fileID: 4563605785271159808, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 16.163706
-      objectReference: {fileID: 0}
-    - target: {fileID: 4563605785271159808, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.315208
+    - target: {fileID: 4710345090113762677, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4780275390500728712, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5864,13 +5768,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5122585444840766234, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.0000144
+    - target: {fileID: 4941349744744161085, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 5122585444840766234, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.0000005
+    - target: {fileID: 4984065705653395243, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5140981957905659682, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
@@ -5892,69 +5796,29 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 592800850}
-    - target: {fileID: 5314647978667363275, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10.193948
+    - target: {fileID: 5536571840965391588, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 5314647978667363275, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 11.895945
+    - target: {fileID: 6008157855306251051, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 5314647978667363275, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 13.462628
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484112070077520612, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -6.719762
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484112070077520612, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -5.9942317
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484112070077520612, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -4.29359
-      objectReference: {fileID: 0}
-    - target: {fileID: 6023591662349224939, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10.309703
-      objectReference: {fileID: 0}
-    - target: {fileID: 6023591662349224939, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 16.70535
-      objectReference: {fileID: 0}
-    - target: {fileID: 6023591662349224939, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 12.294709
+    - target: {fileID: 6031230868594892383, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6178796686461099811, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1743635505}
-    - target: {fileID: 6490511897779374469, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7.2235365
+    - target: {fileID: 6303526940287337791, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 6490511897779374469, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6.871019
-      objectReference: {fileID: 0}
-    - target: {fileID: 6490511897779374469, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.6571913
-      objectReference: {fileID: 0}
-    - target: {fileID: 6809190311369124802, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 8.9210005
-      objectReference: {fileID: 0}
-    - target: {fileID: 6809190311369124802, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 11.861229
-      objectReference: {fileID: 0}
-    - target: {fileID: 6809190311369124802, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 14.728903
+    - target: {fileID: 6579444684128742885, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6871597612312997898, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
@@ -5964,57 +5828,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1511881846}
-    - target: {fileID: 6934033362499499666, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.3692276
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934033362499499666, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.711289
-      objectReference: {fileID: 0}
-    - target: {fileID: 6934033362499499666, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.3877366
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995186037693116380, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10.246785
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995186037693116380, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 13.979584
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995186037693116380, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 11.834027
-      objectReference: {fileID: 0}
-    - target: {fileID: 7235258983391547896, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -4.1814547
-      objectReference: {fileID: 0}
-    - target: {fileID: 7235258983391547896, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: -3.054958
-      objectReference: {fileID: 0}
-    - target: {fileID: 7235258983391547896, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: -4.1170173
-      objectReference: {fileID: 0}
     - target: {fileID: 7319652017013750871, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1363186001}
-    - target: {fileID: 7441584430366593684, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.4948335
+    - target: {fileID: 7355758859132268581, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 7441584430366593684, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.7022978
+    - target: {fileID: 7569263415106529773, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 7441584430366593684, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.327787
+    - target: {fileID: 7579198830898019464, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7800326646220327606, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
@@ -6024,21 +5852,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 167194663}
+    - target: {fileID: 7902376432930461034, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921830717087525200, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7961791221523912505, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 620255266}
-    - target: {fileID: 8138398975381073676, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.3928823
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138398975381073676, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.7528716
-      objectReference: {fileID: 0}
-    - target: {fileID: 8138398975381073676, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.3295815
+    - target: {fileID: 8126921043084221582, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8228670104627001930, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
       propertyPath: m_Mesh
@@ -6056,37 +5884,13 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 28490150}
-    - target: {fileID: 8789474353163550646, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.9999999
+    - target: {fileID: 8997756942663564824, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 8789474353163550646, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.99999994
-      objectReference: {fileID: 0}
-    - target: {fileID: 8789474353163550646, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.9999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 9048441438206053413, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.99999994
-      objectReference: {fileID: 0}
-    - target: {fileID: 9048441438206053413, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.9999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 9127088036075051715, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 15.275308
-      objectReference: {fileID: 0}
-    - target: {fileID: 9127088036075051715, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10.37656
-      objectReference: {fileID: 0}
-    - target: {fileID: 9127088036075051715, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 10.798947
+    - target: {fileID: 9065325582303760863, guid: 3254a0c8b4505234195883ec9af776a9, type: 3}
+      propertyPath: m_Damper
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

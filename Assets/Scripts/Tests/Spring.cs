@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spring : MonoBehaviour
@@ -27,8 +26,6 @@ public class Spring : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ( RigidBody.isKinematic ) return;
-
         if ( RigidBody.linearVelocity.magnitude > 1f )
         {
             Vector3 newAccel = RigidBody.linearVelocity.magnitude * WobbleStrength * Random.insideUnitSphere;
@@ -48,20 +45,21 @@ public class Spring : MonoBehaviour
     {
         RigidBody.linearVelocity = Vector3.zero;
         RigidBody.angularVelocity = Vector3.zero;
-
-        Joint.connectedBody = null;
-
-        RigidBody.isKinematic = true;
+        // Joint.connectedBody = null;
+        // RigidBody.isKinematic = true;
         Collider.enabled = false;
 
+        yield return null;
+
         float t = 0f;
-    
-        while ( t < length )
+
+        while (t < length)
         {
             t += Time.deltaTime;
 
             transform.SetLocalPositionAndRotation(
-                Vector3.Lerp(transform.localPosition, _initPos, t/length ), Quaternion.Slerp( transform.localRotation, _initRot, t/length ));
+                Vector3.Lerp(transform.localPosition, _initPos, t / length), 
+                Quaternion.Slerp(transform.localRotation, _initRot, t / length));
             
             yield return null;
         }
