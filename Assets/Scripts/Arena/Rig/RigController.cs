@@ -31,8 +31,8 @@ public class RigController : MonoBehaviour
     [BoxGroup("Spring Settings"), Label("Allowed slack before spring kicks in")]
     [SerializeField] private float _forceTolerance = 0.025f;
 
-    [SerializeField] private float _wobbleStrength;
-    [SerializeField] private float _LimbLerpTime;
+    [SerializeField] private float _airResistanceStrength;
+    [SerializeField] private float _rigTransitionTime;
 
 
     [SerializeField] private float _AnimationSpring = 8000f;
@@ -40,6 +40,8 @@ public class RigController : MonoBehaviour
     [SerializeField] private float _AnimationMinDistance, _AnimationMaxDistance;
     [SerializeField] private float _AnimationTolerance = 0.0001f;
     [SerializeField] private float _AnimationLinearDamping = 4f, _AnimationAngularDamping = 4f;
+
+    private WaitForSeconds _wait;
 
     private void Start()
     {
@@ -49,10 +51,15 @@ public class RigController : MonoBehaviour
 
         _animator.enabled = false;
 
+        _wait = new WaitForSeconds(_rigTransitionTime);
+
         ToggleRig();
     }
 
     #if UNITY_EDITOR
+    /// <summary>
+    /// This only happens at editor inspector or editor play, the values should come set and referenced on build.
+    /// </summary>
     public void ApplySpringSettings()
     {
         if (_joints == null || _joints.Length == 0)
@@ -74,7 +81,7 @@ public class RigController : MonoBehaviour
                 continue;
             }
 
-            joint.WobbleStrength = _wobbleStrength;
+            joint.WobbleStrength = _airResistanceStrength;
 
             joint.Joint.spring = _springForce;
             joint.Joint.damper = _springDamper;
@@ -107,6 +114,12 @@ public class RigController : MonoBehaviour
             joint.RigidBody.useGravity = true;
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+            ToggleRig();
+    }
     #endif
 
     private IEnumerator TurnOnPhysicsRig()
@@ -129,7 +142,7 @@ public class RigController : MonoBehaviour
             joint.enabled = true;
         }
 
-        yield return new WaitForSeconds(_LimbLerpTime);
+        yield return _wait;
 
         _animator.enabled = false;
     }
@@ -137,11 +150,11 @@ public class RigController : MonoBehaviour
     {
         _animator.enabled = true;
 
-        yield return new WaitForSeconds(_LimbLerpTime);
+        yield return _wait;
 
         foreach( Spring joint in _joints )
         {
-            // joint.ResetSpring(_LimbLerpTime);
+            // joint.ResetSpring(_rigTransitionTime);
             joint.Collider.enabled = false;
 
             joint.Joint.spring = _AnimationSpring;
@@ -159,25 +172,15 @@ public class RigController : MonoBehaviour
 
     private bool _physics = true;
 
-    private void ToggleRig()
+    public void ToggleRig()
     {
         _physics = ! _physics;
         
         if ( _physics )
-        {
             StartCoroutine(TurnOnAnimationRig());
-        }
         else
-        {
             StartCoroutine(TurnOnPhysicsRig());
-        }
 
         Debug.Log("Toggle rig to: " + _physics);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-            ToggleRig();
     }
 }

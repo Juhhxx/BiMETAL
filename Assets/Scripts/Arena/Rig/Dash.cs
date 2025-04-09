@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Just a debugging script, not build logic
+/// </summary>
 public class Dash : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidBody;
