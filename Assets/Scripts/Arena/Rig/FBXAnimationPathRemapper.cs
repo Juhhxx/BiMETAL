@@ -10,7 +10,7 @@ public class ExtractAndRemapAnimations : EditorWindow
         var selected = Selection.activeObject;
         if (selected == null)
         {
-            Debug.LogWarning("❌ Please select an FBX model first.");
+            Debug.LogWarning("Please select an FBX model first.");
             return;
         }
 
@@ -62,7 +62,7 @@ public class ExtractAndRemapAnimations : EditorWindow
                         }
 
                         pathProp.stringValue = newPath;
-                        Debug.Log($"🔁 Remapped: {oldPath} → {newPath} in clip {clipName}");
+                        Debug.Log($"Remapped: {oldPath} → {newPath} in clip {clipName}");
                         remapCount++;
                     }
                 }
@@ -75,6 +75,6 @@ public class ExtractAndRemapAnimations : EditorWindow
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log($"✅ Done! Extracted and remapped {remapCount} paths.");
+        Debug.Log($"Done! Extracted and remapped {remapCount} paths.");
     }
 }
