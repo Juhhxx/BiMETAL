@@ -39,6 +39,7 @@ public class RigController : MonoBehaviour
     [SerializeField] private float _AnimationDamper = 12000f;
     [SerializeField] private float _AnimationMinDistance, _AnimationMaxDistance;
     [SerializeField] private float _AnimationTolerance = 0.0001f;
+    [SerializeField] private float _AnimationLinearDamping = 4f, _AnimationAngularDamping = 4f;
 
     private void Start()
     {
@@ -122,6 +123,9 @@ public class RigController : MonoBehaviour
             joint.Joint.maxDistance = _maxAnchorDistance;
             joint.Joint.tolerance = _forceTolerance;
 
+            joint.RigidBody.linearDamping = _linearDamping;
+            joint.RigidBody.angularDamping = _angularDamping;
+
             joint.enabled = true;
         }
 
@@ -145,6 +149,9 @@ public class RigController : MonoBehaviour
             joint.Joint.minDistance = _AnimationMinDistance;
             joint.Joint.maxDistance = _AnimationMaxDistance;
             joint.Joint.tolerance = _AnimationTolerance;
+
+            joint.RigidBody.linearDamping = _AnimationLinearDamping;
+            joint.RigidBody.angularDamping = _AnimationAngularDamping;
 
             joint.enabled = false;
         }
