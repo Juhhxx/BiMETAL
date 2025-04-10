@@ -1,31 +1,54 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Player Gameobjects")]
+    [Space(5)]
     [SerializeField] private GameObject _playerModel;
     [SerializeField] private GameObject _cameraRig;
+
+    [Space(10)]
+    [Header("Player Movement Parameters")]
+    [Space(5)]
     [SerializeField] private float _maxForwardSpeed;
     [SerializeField] private float _maxStrafeSpeed;
     [SerializeField] private float _maxBackwardSpeed;
     [SerializeField] private float _jumpSpeed;
+    [SerializeField] private float _dashSpeed;
+    [SerializeField] private float _dashTimer;
+    [SerializeField] private LayerMask _ignoreWhenDashing;
     [SerializeField] private float _gravity;
     [SerializeField] private float _maxFallSpeed;
-    [SerializeField][Range (1,5)] private float _mouseSensitivity;
 
+    [Space(10)]
+    [Header("Player Events")]
+    [Space(5)]
+    public UnityEvent OnPlayerDashStart;
+    public UnityEvent OnPlayerDashEnd;
+    public UnityEvent OnPlayerJump;
+
+    // References and Variables
     private CharacterController _controller;
+    private Animator            _anim;
     private Vector3             _velocityHor;
     private Vector3             _velocityVer;
     private Vector3             _motion;
     private bool                _jump;
+    private bool                _dash;
+    private float               _dashCountDown;
 
     private void Start()
     {
         _controller     = GetComponent<CharacterController>();
+        _anim           = GetComponent<Animator>();
         _velocityHor    = Vector3.zero;
         _velocityVer    = Vector3.zero;
         _motion         = Vector3.zero;
         _jump           = false;
+        _dash           = false;
 
         HideCursor();
     }
@@ -33,11 +56,16 @@ public class PlayerMovement : MonoBehaviour
     {
         UpdateRotation();
         CheckForJump();
+        CheckForDash();
+
+        _anim.SetBool("IsGrounded",_controller.isGrounded);        
+        _anim.SetBool("IsDashing",_dash);        
     }
     private void FixedUpdate()
     {
         UpdateVelocityHor();
         UpdateVelocitYVer();
+        UpdateDash();
         UpdatePosition();
     }
 
@@ -45,22 +73,22 @@ public class PlayerMovement : MonoBehaviour
     {
         float rotation = 0;
 
-        if (!Input.GetButton("Camera"))
-            rotation = Input.GetAxis("Mouse X") * _mouseSensitivity;
-        else
-            rotation = Input.GetAxis("Mouse X");
-
+        rotation = InputManager.MouseX();
+    
         _playerModel.transform.Rotate( 0f, rotation, 0f);
     }
     private void CheckForJump()
     {
-        if (Input.GetButtonDown("Jump") && _controller.isGrounded)
+        if (InputManager.Jump() && _controller.isGrounded)
+        {
             _jump = true;
+            OnPlayerJump?.Invoke();
+        }
     }
     private void UpdateVelocityHor()
     {
-        float forwardAxis = Input.GetAxis("Forward");
-        float strafeAxis = Input.GetAxis("Strafe");
+        float forwardAxis = InputManager.Forward();
+        float strafeAxis = InputManager.Strafe();
 
         _velocityHor.x = strafeAxis  * _maxStrafeSpeed;
 
@@ -80,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
             _velocityHor.z = 0f;
-        
     }
     private void UpdateVelocitYVer()
     {
@@ -106,7 +133,44 @@ public class PlayerMovement : MonoBehaviour
 
         _controller.Move(_motion);
 
-        Debug.Log($"Speed: {_motion}");
+        // Debug.Log($"Speed: {_motion}");
+    }
+    // Dash Control
+    private void UpdateDash()
+    {
+        if (_dash)
+        {
+            _velocityHor.z  = _dashSpeed;
+            CountDashTimer();
+        }
+    }
+    private void CheckForDash()
+    {
+        if (InputManager.Dash())
+        {
+            _dash = true;
+            OnPlayerDashStart?.Invoke();
+            _controller.excludeLayers = _ignoreWhenDashing;
+            _dashCountDown  = _dashTimer;
+        }
+    }
+    private void CountDashTimer()
+    {
+        if (_dash && _dashCountDown > 0)
+        {
+            _dashCountDown -= Time.fixedDeltaTime;
+        }
+        else if (_dashCountDown <= 0)
+        {
+            ResetDashTimer();
+        }
+    }
+    private void ResetDashTimer()
+    {
+        _dashCountDown = _dashTimer;
+        _dash = false;
+        _controller.excludeLayers = 0;
+        OnPlayerDashEnd?.Invoke();
     }
     private void HideCursor()
     {

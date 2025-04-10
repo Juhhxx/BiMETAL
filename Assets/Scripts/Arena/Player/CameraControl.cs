@@ -1,14 +1,27 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CameraControl : MonoBehaviour
 {
+    [Header("Camera Movement Parameters")]
+    [Space(5)]
     [SerializeField] private GameObject _cameraRig;
     [SerializeField] private float      _resetRotationSpeed;
     [SerializeField] private float      _maxLookUpAngle;
     [SerializeField] private float      _maxLookDownAngle;
+    [SerializeField] private bool       _lockOnPlayer;
+
+    [Space(10)]
+    [Header("Camera Zoom Parameters")]
+    [Space(5)]
     [SerializeField] private float      _zoomMinDistance;
     [SerializeField] private float      _zoomMaxDistance;
     [SerializeField] private float      _zoomDeceleration;
+
+    [Space(10)]
+    [Header("Deocclusion Parameters")]
+    [Space(5)]
     [SerializeField] private bool       _doDeocclusion;
     [SerializeField] private Transform  _deocclusionPivot;
     [SerializeField] private LayerMask  _deocclusionLayerMask;
@@ -45,10 +58,14 @@ public class CameraControl : MonoBehaviour
 
     private void UpdateRotation()
     {
-        if (Input.GetButton("Camera"))
+        bool cameraButtonCheck = InputManager.Camera();
+
+        if (_lockOnPlayer) cameraButtonCheck = !cameraButtonCheck;
+
+        if (cameraButtonCheck)
         {
             _rotation = _cameraRig.transform.localEulerAngles;
-            _rotation.y += Input.GetAxis("Mouse X");
+            _rotation.y += InputManager.MouseX();
 
             _cameraRig.transform.localEulerAngles = _rotation;
         }
@@ -72,7 +89,7 @@ public class CameraControl : MonoBehaviour
     private void UpdateHeight()
     {
         _rotation = _cameraRig.transform.localEulerAngles;
-        _rotation.x -= Input.GetAxis("Mouse Y");
+        _rotation.x -= InputManager.MouseY();
 
         if (_rotation.x < 180f)
             _rotation.x = Mathf.Min(_maxLookDownAngle, _rotation.x);
@@ -90,7 +107,7 @@ public class CameraControl : MonoBehaviour
 
     private void UpdateZoomVelocity()
     {
-        _zoomAcceleration = Input.GetAxis("Zoom");
+        _zoomAcceleration = InputManager.Zoom();
 
         if (_zoomAcceleration != 0f)
             _zoomVelocity += _zoomAcceleration * Time.deltaTime;
