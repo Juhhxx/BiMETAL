@@ -70,14 +70,20 @@ public class HexagonCell : MonoBehaviour
             return false;*/
 
         // Changed modifier way of knowing if its dynamic or not
+
         if (mod.Dynamic)
             _dynamicMod = ( _dynamicMod == mod ) ? null : mod;
         else // Envionrment mod still needs to be able to get it to null despite the games visual behavior because of pathing visuals ( EnvironmentModifier )
             _environmentMod = ( _environmentMod == mod ) ? null : mod;
 
-        _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.gray;
+        CosmeticModify();
 
         return true;
+    }
+
+    private void CosmeticModify()
+    {
+        _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.white;
     }
 
 
@@ -95,6 +101,9 @@ public class HexagonCell : MonoBehaviour
 
         if (_Cosmetic == null)
             _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
+
+
+        CosmeticModify();
 
         return CellValue;
     }
