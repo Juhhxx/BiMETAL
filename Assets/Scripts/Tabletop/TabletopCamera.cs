@@ -3,7 +3,6 @@ using UnityEngine;
 public class Tabletop_camera : MonoBehaviour
 {
     [SerializeField] private Camera _cam;
-    [SerializeField] private Transform _focus;
     [SerializeField] private float _rotSpeed = 50f;
     [SerializeField] private float _zoomSpeed = 5f;
     [SerializeField] private float _movSpeed = 10f;
@@ -16,9 +15,6 @@ public class Tabletop_camera : MonoBehaviour
     {
         if (_cam == null)
             _cam = Camera.main;
-
-        if (_focus == null)
-            _focus = FindFirstObjectByType<HexagonTabletop>().transform;
 
         _currentZoom = _cam.orthographicSize;
         _pitch = 40f;
@@ -61,15 +57,6 @@ public class Tabletop_camera : MonoBehaviour
     {
         if (InputManager.CamRotDown() || start)
         {
-            /*float horizontalRotation = InputManager.CamRot().x * _rotSpeed * Time.deltaTime;
-            transform.RotateAround(_focus.position, Vector3.up, horizontalRotation);
-
-            pitch -= InputManager.CamRot().y * _rotSpeed * Time.deltaTime;
-            pitch = Mathf.Clamp(pitch, 0f, 90f);
-            transform.rotation = Quaternion.Euler(pitch, transform.eulerAngles.y, 0);
-            
-            // transform.LookAt(_focus);*/
-
             float horizontalRotation = InputManager.CamRot().x * _rotSpeed;
             float verticalRotation = -InputManager.CamRot().y * _rotSpeed;
 
