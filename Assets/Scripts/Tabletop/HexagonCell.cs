@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class HexagonCell : MonoBehaviour
@@ -21,7 +20,7 @@ public class HexagonCell : MonoBehaviour
 
     public HexagonCell[] Neighbors { get; private set; }
 
-    public bool Walkable() => Piece == null;
+    public bool Walkable() => Piece == null && ( Modifier ? ! Modifier.NonWalkable : true );
 
     public bool IsNonAvoidable() => Piece is EnvironmentInteractive piece && !piece.Modified;
 
