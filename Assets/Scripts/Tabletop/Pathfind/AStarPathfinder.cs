@@ -35,7 +35,8 @@ public class AStarPathfinder : Pathfinder
 
             if (current == objective)
             {
-                HexagonCell currentCell = objective;
+                Path.ObservePush(objective);
+                HexagonCell currentCell = _data[objective].Connection.Cell;
                 int weight = 0;
                 while (currentCell != start)
                 {

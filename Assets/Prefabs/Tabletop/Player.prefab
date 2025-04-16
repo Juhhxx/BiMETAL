@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 0}
   <Interactive>k__BackingField: {fileID: 2495697816207425113}
-  <Points>k__BackingField: 7
+  <Points>k__BackingField: 4
 --- !u!114 &2495697816207425113
 MonoBehaviour:
   m_ObjectHideFlags: 0
