@@ -10,11 +10,11 @@ public class HexagonCell : MonoBehaviour
     public Interactive Piece { get; private set; }
 
 
-    public Modifier Modifier =>  _tempMod ?? _environmentMod ?? _dynamicMod;
+    public Modifier Modifier =>  _temporaryMod ?? _environmentMod ?? _dynamicMod;
 
     private Modifier _dynamicMod;
+    private Modifier _temporaryMod;
     private Modifier _environmentMod;
-    private Modifier _tempMod;
 
 
     [SerializeField] private GameObject _Cosmetic;
@@ -66,6 +66,8 @@ public class HexagonCell : MonoBehaviour
     {
         Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
 
+        if ( Modifier != null && Modifier.NonWalkable ) return false;
+
         /*if ( mod.Dynamic && Modifier != null && Modifier != mod )
             return false;*/
 
@@ -74,11 +76,15 @@ public class HexagonCell : MonoBehaviour
         if (mod.Dynamic)
             _dynamicMod = ( _dynamicMod == mod ) ? null : mod;
         else // Envionrment mod still needs to be able to get it to null despite the games visual behavior because of pathing visuals ( EnvironmentModifier )
-            _environmentMod = ( _environmentMod == mod ) ? null : mod;
+            _temporaryMod = ( _temporaryMod == mod ) ? _environmentMod : mod;
 
         CosmeticModify();
 
         return true;
+    }
+    public void SetEnvironment()
+    {
+        _environmentMod = _temporaryMod;
     }
 
     private void CosmeticModify()
@@ -165,7 +171,7 @@ public class HexagonCell : MonoBehaviour
 
             // :(
             // this works better than my correct code
-            
+
             if ( delta.x > 0 && delta.y > 0 )
                 Neighbors[0] = neighbor;
             if ( delta.x > 0 && delta.y == 0 )

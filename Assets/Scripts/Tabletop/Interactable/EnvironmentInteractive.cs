@@ -52,8 +52,10 @@ public class EnvironmentInteractive : ModifierInteractive
         // Debug.Log("modifier? setting path as fr fr hopefully, is path null or count 0?  " + (_modPathfinder.Path.Count == 0 || _modPathfinder.Path == null));
 
         // we just clear the current path to save the current cells settings and move on
-       _modPathfinder.Path.Clear();
 
+        foreach ( HexagonCell cell in _modPathfinder.Path)
+            cell.SetEnvironment();
+       _modPathfinder.Path.Clear();
     }
 
     public override void Path(ObservableStack<HexagonCell> other = null)
