@@ -1278,10 +1278,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6794169821423685380, guid: 8d3a87ecf003128478199aa509282372, type: 3}
-      propertyPath: <Points>k__BackingField
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6794169821423685380, guid: 8d3a87ecf003128478199aa509282372, type: 3}
       propertyPath: <CurrentCell>k__BackingField
       value: 
       objectReference: {fileID: 2067850516}

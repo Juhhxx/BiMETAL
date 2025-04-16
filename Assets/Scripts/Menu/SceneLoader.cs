@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] private string _scene;
     private const string _loadScene = "LoadScene";
     public static string SceneToLoad { get; private set; }
 
@@ -27,6 +26,8 @@ public class SceneLoader : MonoBehaviour
     /// </summary>
     private IEnumerator Start()
     {
+        // test SceneToLoad ??= "LoadScene";
+
         // wait prePostWaitTime before trying to load
         yield return new WaitForSeconds(prePostWaitTime);
 
