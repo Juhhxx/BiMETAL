@@ -11,11 +11,12 @@ public class Tabletop_camera : MonoBehaviour
     [SerializeField] private bool _rotate = true;
     [SerializeField] private float _easeTime = 0.05f;
 
-    void Start()
+    private void Awake()
     {
         if (_cam == null)
             _cam = Camera.main;
 
+        _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize, _minZoom, _maxZoom);
         _currentZoom = _cam.orthographicSize;
         _pitch = 40f;
         HandleRotation(true);
@@ -23,7 +24,7 @@ public class Tabletop_camera : MonoBehaviour
         _targetPosition = transform.position;
     }
 
-    void Update()
+    private void Update()
     {
         HandleZoom();
         if (_rotate)
