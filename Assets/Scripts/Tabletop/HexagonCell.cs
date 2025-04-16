@@ -66,7 +66,7 @@ public class HexagonCell : MonoBehaviour
     {
         Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
 
-        if ( Modifier != null && Modifier.NonWalkable ) return false;
+        if ( Modifier != null && Modifier.NonWalkable && Modifier != mod ) return false;
 
         /*if ( mod.Dynamic && Modifier != null && Modifier != mod )
             return false;*/
