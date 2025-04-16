@@ -19,6 +19,12 @@ public class HexagonTabletop : MonoBehaviour
         CreateCells();
     }
 
+    private void Start()
+    {
+        foreach (HexagonCell cell in Cells.Values)
+            cell.SetNeighbors();
+    }
+
     public void CreateCells()
     {
         HexagonCell[] cells = GetComponentsInChildren<HexagonCell>();
@@ -27,8 +33,6 @@ public class HexagonTabletop : MonoBehaviour
 
         foreach (HexagonCell cell in cells)
             Cells[cell.InitializeCell(this)] = cell;
-        foreach (HexagonCell cell in cells)
-            cell.SetNeighbors();
 
         // Debug.Log("Initialized " + Cells.Count + " cells.");
     }

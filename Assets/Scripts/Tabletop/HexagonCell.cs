@@ -10,15 +10,16 @@ public class HexagonCell : MonoBehaviour
     public Interactive Piece { get; private set; }
 
 
-    public Modifier Modifier =>  _environmentMod ?? _dynamicMod;
+    public Modifier Modifier =>  _tempMod ?? _environmentMod ?? _dynamicMod;
 
     private Modifier _dynamicMod;
     private Modifier _environmentMod;
+    private Modifier _tempMod;
 
 
     [SerializeField] private GameObject _Cosmetic;
 
-    public HexagonCell[] Neighbors { get; private set; }
+    [field:SerializeField] public HexagonCell[] Neighbors { get; private set; }
 
     public bool Walkable() => Piece == null && ( Modifier ? ! Modifier.NonWalkable : true );
 
@@ -134,7 +135,7 @@ public class HexagonCell : MonoBehaviour
         new(0, -1),
         new(-1, 0),
         new(-1, +1)
-    */
+    
     private static readonly Vector2Int[] Directions = new Vector2Int[]
     {
         new(+1, +1),
@@ -143,14 +144,11 @@ public class HexagonCell : MonoBehaviour
         new(-1, -1),
         new(-1, 0),
         new(-1, +1)
-    };
+    };    */
 
     public void SetNeighbors()
     {
         Neighbors = new HexagonCell[6];
-
-        Vector2Int[] directions = Directions;
-
         Collider[] colliders = Physics.OverlapSphere(transform.position, _tabletop.Grid.cellSize.x * 0.75f);
 
         foreach (Collider col in colliders)
@@ -161,20 +159,34 @@ public class HexagonCell : MonoBehaviour
             Vector2 delta = neighbor.CellValue - CellValue;
             delta = delta.normalized;
 
-           Vector2Int dir = new(
-                Mathf.RoundToInt(delta.x),
-                Mathf.RoundToInt(delta.y)
-            );
+            // if ( Piece != null && Piece is PieceInteractive piece && ! piece.IsEnemy )
+            Debug.Log("neighbor cel: " + neighbor + "    dir: " + (neighbor.CellValue - CellValue) + "    int dir: " + delta);
 
-            // Debug.Log("neighbor cel: " + neighbor + "    dir: " + (neighbor.CellValue - CellValue) + "    normal: " + delta + "    int dir: " + dir);
 
-            for (int i = 0; i < 6; i++)
-                if (dir == directions[i])
+            // :(
+            // this works better than my correct code
+            
+            if ( delta.x > 0 && delta.y > 0 )
+                Neighbors[0] = neighbor;
+            if ( delta.x > 0 && delta.y == 0 )
+                Neighbors[1] = neighbor;
+            if ( delta.x > 0 && delta.y < 0 )
+                Neighbors[2] = neighbor;
+            if ( delta.x < 0 && delta.y < 0 )
+                Neighbors[3] = neighbor;
+            if ( delta.x < 0 && delta.y == 0 )
+                Neighbors[4] = neighbor;
+            if ( delta.x < 0 && delta.y > 0 )
+                Neighbors[5] = neighbor;
+
+            /*for (int i = 0; i < 6; i++)
+                if (delta == Directions[i])
                 {
-                    // Debug.Log("new neighbor " + i + "  cel: " + neighbor);
+                    // if ( Piece != null && Piece is PieceInteractive piece2 && ! piece2.IsEnemy )
+                    Debug.Log("new neighbor " + i + "  cel: " + neighbor + "    dir: " + Directions[i]);
                     Neighbors[i] = neighbor;
                     break;
-                }
+                }*/
         }
 
         /*for ( int i = 0 ; i < 6 ; i++ )
