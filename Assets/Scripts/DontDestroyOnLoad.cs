@@ -2,8 +2,16 @@
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
+    // :p
+    public static DontDestroyOnLoad Instance { get; private set; }
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
     }
 }
