@@ -9,5 +9,6 @@ public enum PathfinderType
     OpenStar,
     BFSRange,
     HexagonRange,
-    StarRange
+    StarRange,
+    LineRange
 }
