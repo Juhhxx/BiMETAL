@@ -18,6 +18,8 @@ public class Tabletop_camera : MonoBehaviour
 
         _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize, _minZoom, _maxZoom);
         _currentZoom = _cam.orthographicSize;
+        _targetZoom = _currentZoom;
+
         _pitch = 40f;
         HandleRotation(true);
 
@@ -44,7 +46,7 @@ public class Tabletop_camera : MonoBehaviour
         float change = InputManager.CamZoom() * _zoomSpeed;
         _targetZoom = Mathf.Clamp(_targetZoom - change, _minZoom, _maxZoom);
 
-        _currentZoom = Mathf.SmoothDamp(_currentZoom, _targetZoom, ref _zoomVelocity, _easeTime);
+        _currentZoom = Mathf.SmoothDamp(_currentZoom, _targetZoom, ref _zoomVelocity, _easeTime * _zoomSpeed);
         _cam.orthographicSize = _currentZoom;
 
         // Probably temporary
@@ -64,8 +66,8 @@ public class Tabletop_camera : MonoBehaviour
             float targetYaw = transform.eulerAngles.y + horizontalRotation * Time.deltaTime;
             float targetPitch = Mathf.Clamp(_pitch + verticalRotation * Time.deltaTime, 2f, 88f);
 
-            _pitch = Mathf.SmoothDamp(_pitch, targetPitch, ref _pitchVelocity, _easeTime);
-            float smoothedYaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetYaw, ref _yawVelocity, _easeTime);
+            _pitch = Mathf.SmoothDamp(_pitch, targetPitch, ref _pitchVelocity, _easeTime );
+            float smoothedYaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetYaw, ref _yawVelocity, _easeTime );
 
             transform.rotation = Quaternion.Euler(_pitch, smoothedYaw, 0);
         }
@@ -93,6 +95,6 @@ public class Tabletop_camera : MonoBehaviour
 
             _targetPosition -= moveDirection;
         }
-        transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _velocity, _easeTime);
+        transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _velocity, _easeTime * _movSpeed);
     }
 }

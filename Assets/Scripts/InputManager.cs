@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public static float MouseSensitivity;
+    public static float MouseSensitivity = 1f;
     public static bool CamRotDown()
     {
         return Input.GetMouseButton(1);
