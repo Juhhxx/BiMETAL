@@ -11,13 +11,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float      _maxLookUpAngle;
     [SerializeField] private float      _maxLookDownAngle;
     [SerializeField] private bool       _lockOnPlayer;
-
-    [Space(10)]
-    [Header("Camera Zoom Parameters")]
-    [Space(5)]
-    [SerializeField] private float      _zoomMinDistance;
-    [SerializeField] private float      _zoomMaxDistance;
-    [SerializeField] private float      _zoomDeceleration;
+    [SerializeField] private bool       _switchCameraModes;
 
     [Space(10)]
     [Header("Deocclusion Parameters")]
@@ -31,8 +25,6 @@ public class CameraControl : MonoBehaviour
     private Transform   _cameraTransform;
     private Vector3     _rotation;
     private Vector3     _position;
-    private float       _zoomAcceleration;
-    private float       _zoomVelocity;
     private float       _zoomPosition;
     private Vector3     _deocclusionVector;
     private Vector3     _deocclusionPoint;
@@ -41,26 +33,24 @@ public class CameraControl : MonoBehaviour
     {
         _cameraTransform    = _cameraRig.GetComponentInChildren<Camera>().transform;
         _rotation           = transform.localEulerAngles;
-        _zoomVelocity       = 0f;
         _zoomPosition       = _cameraTransform.localPosition.z;
         _deocclusionVector  = new Vector3(0f, 0f, _deocclusionThreshold);
     }
-
     void Update()
     {
         UpdateRotation();
         UpdateHeight();
-        UpdateZoom();
 
         if (_doDeocclusion)
             PreventOcclusion();
+
     }
 
     private void UpdateRotation()
     {
         bool cameraButtonCheck = InputManager.Camera();
 
-        if (_lockOnPlayer) cameraButtonCheck = !cameraButtonCheck;
+        if (_lockOnPlayer != _switchCameraModes) cameraButtonCheck = !cameraButtonCheck;
 
         if (cameraButtonCheck)
         {
@@ -72,7 +62,6 @@ public class CameraControl : MonoBehaviour
         // else
         //     ResetRotation();
     }
-
     private void ResetRotation()
     {
         if (_rotation.y != 0f)
@@ -85,7 +74,6 @@ public class CameraControl : MonoBehaviour
             _cameraRig.transform.localEulerAngles = _rotation;
         }
     }
-
     private void UpdateHeight()
     {
         _rotation = _cameraRig.transform.localEulerAngles;
@@ -98,49 +86,6 @@ public class CameraControl : MonoBehaviour
 
         _cameraRig.transform.localEulerAngles = _rotation;
     }
-
-    private void UpdateZoom()
-    {
-        UpdateZoomVelocity();
-        UpdateZoomPosition();
-    }
-
-    private void UpdateZoomVelocity()
-    {
-        _zoomAcceleration = InputManager.Zoom();
-
-        if (_zoomAcceleration != 0f)
-            _zoomVelocity += _zoomAcceleration * Time.deltaTime;
-        else if (_zoomVelocity > 0f)
-        {
-            _zoomVelocity -= _zoomDeceleration * Time.deltaTime;
-            _zoomVelocity = Mathf.Max(0f, _zoomVelocity);
-        }
-        else
-        {
-            _zoomVelocity += _zoomDeceleration * Time.deltaTime;
-            _zoomVelocity = Mathf.Min(0f, _zoomVelocity);
-        }
-    }
-
-    private void UpdateZoomPosition()
-    {
-        if (_zoomVelocity != 0f)
-        {
-            _position = _cameraTransform.localPosition;
-            _position.z += _zoomVelocity * Time.deltaTime;
-
-            if (_position.z > -_zoomMinDistance || _position.z < -_zoomMaxDistance)
-            {
-                _position.z = Mathf.Clamp(_position.z, -_zoomMaxDistance, -_zoomMinDistance);
-                _zoomVelocity = 0f;
-            }
-
-            _cameraTransform.localPosition = _position;
-            _zoomPosition = _position.z;
-        }
-    }
-
     private void PreventOcclusion()
     {
         _deocclusionPoint = _cameraTransform.position - _cameraTransform.TransformDirection(_deocclusionVector);
@@ -152,7 +97,6 @@ public class CameraControl : MonoBehaviour
         else
             RevertDeocclusion();
     }
-
     private void RevertDeocclusion()
     {
         _position = _cameraTransform.localPosition;

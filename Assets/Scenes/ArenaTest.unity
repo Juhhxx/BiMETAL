@@ -1631,17 +1631,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerModel: {fileID: 180611257}
   _cameraRig: {fileID: 493547636}
+  _movementType: 1
   _maxForwardSpeed: 10
   _maxStrafeSpeed: 5
   _maxBackwardSpeed: 3.5
+  _rotationSpeed: 20
   _jumpSpeed: 20
+  _gravity: 50
+  _maxFallSpeed: 100
   _dashSpeed: 20
   _dashTimer: 0.3
   _ignoreWhenDashing:
     serializedVersion: 2
     m_Bits: 128
-  _gravity: 50
-  _maxFallSpeed: 100
   OnPlayerDashStart:
     m_PersistentCalls:
       m_Calls:
@@ -1716,10 +1718,8 @@ MonoBehaviour:
   _resetRotationSpeed: 0
   _maxLookUpAngle: 320
   _maxLookDownAngle: 60
-  _lockOnPlayer: 1
-  _zoomMinDistance: 2
-  _zoomMaxDistance: 10
-  _zoomDeceleration: 5
+  _lockOnPlayer: 0
+  _switchCameraModes: 0
   _doDeocclusion: 0
   _deocclusionPivot: {fileID: 974902086}
   _deocclusionLayerMask:
@@ -2015,13 +2015,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691983217}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.8392424, y: -0.12813601, z: 0.22487429, w: 0.4782102}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 120.65, y: -30, z: 0}
 --- !u!114 &1691983220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2315,6 +2315,10 @@ PrefabInstance:
       propertyPath: _updateSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7323746800679426373, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8016307349417020886, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2353,6 +2357,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8016307349417020886, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889486592719313691, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
