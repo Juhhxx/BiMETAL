@@ -52,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
     private bool                _jump;
     private bool                _dash;
     private float               _dashCountDown;
+    private bool                _doRotation = true;
+    public bool                 DoRotation
+    {
+        get => _doRotation;
+        set => _doRotation = value;
+    }
 
     private void Start()
     {
@@ -67,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (IsMouseMovement) UpdateRotation();
+        if (IsMouseMovement && _doRotation) UpdateRotation();
         CheckForJump();
         CheckForDash();
 

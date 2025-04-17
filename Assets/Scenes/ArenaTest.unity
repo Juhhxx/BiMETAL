@@ -1631,7 +1631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerModel: {fileID: 180611257}
   _cameraRig: {fileID: 493547636}
-  _movementType: 1
+  _movementType: 0
   _maxForwardSpeed: 10
   _maxStrafeSpeed: 5
   _maxBackwardSpeed: 3.5
@@ -1718,8 +1718,8 @@ MonoBehaviour:
   _resetRotationSpeed: 0
   _maxLookUpAngle: 320
   _maxLookDownAngle: 60
-  _lockOnPlayer: 0
-  _switchCameraModes: 0
+  _switchCameraModes: 1
+  _lockOnPlayer: 1
   _doDeocclusion: 0
   _deocclusionPivot: {fileID: 974902086}
   _deocclusionLayerMask:
@@ -1858,7 +1858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f501a2386b369e4a959b8f94dbbabc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mouseSensitivitySetter: 2
 --- !u!1001 &1404303789
 PrefabInstance:
   m_ObjectHideFlags: 0

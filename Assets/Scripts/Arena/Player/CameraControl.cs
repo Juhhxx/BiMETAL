@@ -1,6 +1,5 @@
-using Unity.VisualScripting;
+using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class CameraControl : MonoBehaviour
 {
@@ -10,8 +9,8 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float      _resetRotationSpeed;
     [SerializeField] private float      _maxLookUpAngle;
     [SerializeField] private float      _maxLookDownAngle;
-    [SerializeField] private bool       _lockOnPlayer;
     [SerializeField] private bool       _switchCameraModes;
+    [ShowIf("_switchCameraModes")][SerializeField] private bool _lockOnPlayer = true;
 
     [Space(10)]
     [Header("Deocclusion Parameters")]
@@ -22,16 +21,18 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float      _deocclusionThreshold;
     [SerializeField] private float      _deocclusionSpeed;
 
-    private Transform   _cameraTransform;
-    private Vector3     _rotation;
-    private Vector3     _position;
-    private float       _zoomPosition;
-    private Vector3     _deocclusionVector;
-    private Vector3     _deocclusionPoint;
+    private Transform       _cameraTransform;
+    private PlayerMovement  _playerMovement;
+    private Vector3         _rotation;
+    private Vector3         _position;
+    private float           _zoomPosition;
+    private Vector3         _deocclusionVector;
+    private Vector3         _deocclusionPoint;
 
     void Start()
     {
         _cameraTransform    = _cameraRig.GetComponentInChildren<Camera>().transform;
+        _playerMovement     = GetComponent<PlayerMovement>();
         _rotation           = transform.localEulerAngles;
         _zoomPosition       = _cameraTransform.localPosition.z;
         _deocclusionVector  = new Vector3(0f, 0f, _deocclusionThreshold);
@@ -43,35 +44,29 @@ public class CameraControl : MonoBehaviour
 
         if (_doDeocclusion)
             PreventOcclusion();
-
     }
 
     private void UpdateRotation()
     {
         bool cameraButtonCheck = InputManager.Camera();
 
-        if (_lockOnPlayer != _switchCameraModes) cameraButtonCheck = !cameraButtonCheck;
+        _rotation = _cameraRig.transform.localEulerAngles;
+        _rotation.y += InputManager.MouseX();
 
-        if (cameraButtonCheck)
-        {
-            _rotation = _cameraRig.transform.localEulerAngles;
-            _rotation.y += InputManager.MouseX();
+        _cameraRig.transform.localEulerAngles = _rotation;
 
-            _cameraRig.transform.localEulerAngles = _rotation;
-        }
-        // else
-        //     ResetRotation();
-    }
-    private void ResetRotation()
-    {
-        if (_rotation.y != 0f)
+        if (!_lockOnPlayer) cameraButtonCheck = !cameraButtonCheck;
+
+        if (_switchCameraModes)
         {
-            if (_rotation.y < 180f)
-                _rotation.y = Mathf.Max(0f, _rotation.y - _resetRotationSpeed * Time.deltaTime);
+            if (cameraButtonCheck)
+            {
+                _playerMovement.DoRotation = false;
+            }
             else
-                _rotation.y = Mathf.Min(360f, _rotation.y + _resetRotationSpeed * Time.deltaTime);
-
-            _cameraRig.transform.localEulerAngles = _rotation;
+            {
+                _playerMovement.DoRotation = true;
+            }
         }
     }
     private void UpdateHeight()
