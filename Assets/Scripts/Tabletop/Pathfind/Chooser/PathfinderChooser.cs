@@ -14,6 +14,7 @@ public class PathfinderChooser
             PathfinderType.BFSRange => new BFSRangePathfinder(other, nonAvoid),
             PathfinderType.HexagonRange => new HexRangePathfinder(other, nonAvoid),
             PathfinderType.StarRange => new StarRangePathfinder(other, nonAvoid),
+            PathfinderType.LineRange => new LineRangePathfinder(other, nonAvoid),
 
             // fallback on AStar
             _ => new AStarPathfinder(other, nonAvoid),

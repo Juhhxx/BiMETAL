@@ -2,13 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] [Range(1,5)] private float _mouseSensitivitySetter;
-    private static float _mouseSensitivity;
-    private void Awake()
-    {
-        _mouseSensitivity = _mouseSensitivitySetter;
-        // DontDestroyOnLoad(gameObject);
-    }
+    public static float MouseSensitivity = 1f;
     public static bool CamRotDown()
     {
         return Input.GetMouseButton(1);
@@ -36,11 +30,11 @@ public class InputManager : MonoBehaviour
     }
     public static float MouseX()
     {
-        return Input.GetAxis("Mouse X") * _mouseSensitivity;
+        return Input.GetAxis("Mouse X") * MouseSensitivity;
     }
     public static float MouseY()
     {
-        return Input.GetAxis("Mouse Y") * _mouseSensitivity;
+        return Input.GetAxis("Mouse Y") * MouseSensitivity;
     }
     public static float Forward()
     {

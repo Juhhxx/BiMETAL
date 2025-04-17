@@ -5,11 +5,14 @@ public class TabletopController : MonoBehaviour
 {
     [SerializeField] private PlayerTabletopMovement _playerInput;
     [SerializeField] private EnemyComposite _enemies;
+    [SerializeField] private int _baseHealth;
     private int _round;
+    private int _health;
     private bool _playerRound;
     
     private void OnEnable()
     {
+        _health = _baseHealth;
         _round = 0;
 
         if ( _playerInput == null )
@@ -43,10 +46,31 @@ public class TabletopController : MonoBehaviour
         _playerRound = ! _playerRound;
     }
 
+    private List<PieceInteractive> _battlePieces;
     public void StartBattle(Modifier mod, List<PieceInteractive> pieces)
     {
+        _battlePieces = pieces;
         Debug.Log("Start battle between: " + pieces + " with mod: " + mod);
+    }
 
+    public void EndBattle(bool playerWon)
+    {
+        if ( ! playerWon )
+        {
+            _health --;
+            // foreach
+            // _battlePieces.ResetPlacements();
+        }
+        else
+        {
+            // foreach
+            // not player
+            // _battlePieces.Die();
+        }
+
+        // should the tabletop check if the player died or should the arena? Then, GameOver.
+
+        Debug.Log("End battle between");
     }
 
     private void OnDisable()

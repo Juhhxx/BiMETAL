@@ -3,7 +3,6 @@ using UnityEngine;
 public class Tabletop_camera : MonoBehaviour
 {
     [SerializeField] private Camera _cam;
-    [SerializeField] private Transform _focus;
     [SerializeField] private float _rotSpeed = 50f;
     [SerializeField] private float _zoomSpeed = 5f;
     [SerializeField] private float _movSpeed = 10f;
@@ -12,22 +11,22 @@ public class Tabletop_camera : MonoBehaviour
     [SerializeField] private bool _rotate = true;
     [SerializeField] private float _easeTime = 0.05f;
 
-    void Start()
+    private void Awake()
     {
         if (_cam == null)
             _cam = Camera.main;
 
-        if (_focus == null)
-            _focus = FindFirstObjectByType<HexagonTabletop>().transform;
-
+        _cam.orthographicSize = Mathf.Clamp(_cam.orthographicSize, _minZoom, _maxZoom);
         _currentZoom = _cam.orthographicSize;
+        _targetZoom = _currentZoom;
+
         _pitch = 40f;
         HandleRotation(true);
 
         _targetPosition = transform.position;
     }
 
-    void Update()
+    private void Update()
     {
         HandleZoom();
         if (_rotate)
@@ -47,7 +46,7 @@ public class Tabletop_camera : MonoBehaviour
         float change = InputManager.CamZoom() * _zoomSpeed;
         _targetZoom = Mathf.Clamp(_targetZoom - change, _minZoom, _maxZoom);
 
-        _currentZoom = Mathf.SmoothDamp(_currentZoom, _targetZoom, ref _zoomVelocity, _easeTime);
+        _currentZoom = Mathf.SmoothDamp(_currentZoom, _targetZoom, ref _zoomVelocity, _easeTime * _zoomSpeed);
         _cam.orthographicSize = _currentZoom;
 
         // Probably temporary
@@ -61,23 +60,14 @@ public class Tabletop_camera : MonoBehaviour
     {
         if (InputManager.CamRotDown() || start)
         {
-            /*float horizontalRotation = InputManager.CamRot().x * _rotSpeed * Time.deltaTime;
-            transform.RotateAround(_focus.position, Vector3.up, horizontalRotation);
-
-            pitch -= InputManager.CamRot().y * _rotSpeed * Time.deltaTime;
-            pitch = Mathf.Clamp(pitch, 0f, 90f);
-            transform.rotation = Quaternion.Euler(pitch, transform.eulerAngles.y, 0);
-            
-            // transform.LookAt(_focus);*/
-
             float horizontalRotation = InputManager.CamRot().x * _rotSpeed;
             float verticalRotation = -InputManager.CamRot().y * _rotSpeed;
 
             float targetYaw = transform.eulerAngles.y + horizontalRotation * Time.deltaTime;
             float targetPitch = Mathf.Clamp(_pitch + verticalRotation * Time.deltaTime, 2f, 88f);
 
-            _pitch = Mathf.SmoothDamp(_pitch, targetPitch, ref _pitchVelocity, _easeTime);
-            float smoothedYaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetYaw, ref _yawVelocity, _easeTime);
+            _pitch = Mathf.SmoothDamp(_pitch, targetPitch, ref _pitchVelocity, _easeTime );
+            float smoothedYaw = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetYaw, ref _yawVelocity, _easeTime );
 
             transform.rotation = Quaternion.Euler(_pitch, smoothedYaw, 0);
         }
@@ -105,6 +95,6 @@ public class Tabletop_camera : MonoBehaviour
 
             _targetPosition -= moveDirection;
         }
-        transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _velocity, _easeTime);
+        transform.position = Vector3.SmoothDamp(transform.position, _targetPosition, ref _velocity, _easeTime * _movSpeed);
     }
 }
