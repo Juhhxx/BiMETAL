@@ -38,12 +38,14 @@ public class Settings : MonoBehaviour
 
     public void TurnOnSettings()
     {
-        _settingsObject.SetActive(true);
+        if ( _settingsObject != null )
+            _settingsObject.SetActive(true);
     }
 
     public void TurnOffSettings()
     {
-        _settingsObject.SetActive(false);
+        if ( _settingsObject != null )
+            _settingsObject.SetActive(false);
     }
 
     public void ChangeBrightness(float value)

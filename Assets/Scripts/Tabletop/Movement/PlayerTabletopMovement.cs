@@ -67,11 +67,11 @@ public class PlayerTabletopMovement : TabletopMovement
     public Action PlayerTurn;
     private void CheckForSelection()
     {
-        if ( ! InputEnabled || Moving || Path == null ) return;
+        if ( ! InputEnabled || Moving || Path == null || _hoveredCell == null || _selectedCell != null ) return;
         // Chose up, so if the player hovers and buttons down the wrong button,
         // they can still navigate to another button so select it
 
-        if (_hoveredCell != null && InputManager.Select())
+        if ( InputManager.Select() )
         {
             // Previously the points were counting with the first and last cell we find in the pathfinded stack, we should change it to not count the first cell, so we add one
             if (Path.Count <= Points + 1)
@@ -173,6 +173,7 @@ public class PlayerTabletopMovement : TabletopMovement
     private void DoneMoving()
     {
         Moving = false;
+        _selectedCell = null;
         DoneHovering();
         PlayerTurn?.Invoke();
     }
