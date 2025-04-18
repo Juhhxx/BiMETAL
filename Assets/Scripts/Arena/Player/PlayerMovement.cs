@@ -1,7 +1,7 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using NaughtyAttributes;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,16 +13,29 @@ public class PlayerMovement : MonoBehaviour
     [Space(10)]
     [Header("Player Movement Parameters")]
     [Space(5)]
-    [SerializeField] private float _maxForwardSpeed;
-    [SerializeField] private float _maxStrafeSpeed;
-    [SerializeField] private float _maxBackwardSpeed;
+    [SerializeField] private MovementType                       _movementType;
+    [SerializeField] private float                              _maxForwardSpeed;
+    [ShowIf("IsMouseMovement")][SerializeField] private float   _maxStrafeSpeed;
+    [ShowIf("IsMouseMovement")][SerializeField] private float   _maxBackwardSpeed;
+    [HideIf("IsMouseMovement")][SerializeField] private float   _rotationSpeed;
+
+    private enum MovementType { Directional , MouseRotationBased }
+    private bool IsMouseMovement => _movementType == MovementType.MouseRotationBased;
+
+    [Space(10)]
+    [Header("Player Jump Parameters")]
+    [Space(5)]
     [SerializeField] private float _jumpSpeed;
-    [SerializeField] private float _dashSpeed;
-    [SerializeField] private float _dashTimer;
-    [SerializeField] private LayerMask _ignoreWhenDashing;
     [SerializeField] private float _gravity;
     [SerializeField] private float _maxFallSpeed;
 
+    [Space(10)]
+    [Header("Player Dash Parameters")]
+    [Space(5)]
+    [SerializeField] private float _dashSpeed;
+    [SerializeField] private float _dashTimer;
+    [SerializeField] private LayerMask _ignoreWhenDashing;
+    
     [Space(10)]
     [Header("Player Events")]
     [Space(5)]
@@ -39,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
     private bool                _jump;
     private bool                _dash;
     private float               _dashCountDown;
+    private bool                _doRotation = true;
+    public bool                 DoRotation
+    {
+        get => _doRotation;
+        set => _doRotation = value;
+    }
 
     private void Start()
     {
@@ -54,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        UpdateRotation();
+        if (IsMouseMovement && _doRotation) UpdateRotation();
         CheckForJump();
         CheckForDash();
 
@@ -63,12 +82,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        UpdateVelocityHor();
+        if (IsMouseMovement) UpdateVelocityHor();
+        else UpdateVelocityRotationDirectional();
         UpdateVelocitYVer();
         UpdateDash();
         UpdatePosition();
     }
 
+    // Movement Control
     private void UpdateRotation()
     {
         float rotation = 0;
@@ -76,14 +97,6 @@ public class PlayerMovement : MonoBehaviour
         rotation = InputManager.MouseX();
     
         _playerModel.transform.Rotate( 0f, rotation, 0f);
-    }
-    private void CheckForJump()
-    {
-        if (InputManager.Jump() && _controller.isGrounded)
-        {
-            _jump = true;
-            OnPlayerJump?.Invoke();
-        }
     }
     private void UpdateVelocityHor()
     {
@@ -105,6 +118,30 @@ public class PlayerMovement : MonoBehaviour
 
             if (_velocityHor.magnitude > _maxBackwardSpeed)
                 _velocityHor = _velocityHor.normalized * _maxBackwardSpeed;
+        }
+        else
+            _velocityHor.z = 0f;
+    }
+    private void UpdateVelocityRotationDirectional()
+    {
+        Vector3 movementAxis = Vector3.zero;
+        Vector3 rotation = Vector3.zero;
+
+        movementAxis.z = InputManager.Forward();
+        movementAxis.x = InputManager.Strafe();
+
+
+        if (movementAxis.magnitude > 0.1f)
+        {
+            Vector3 alignedMovementAxis = _cameraRig.transform.TransformVector(movementAxis);
+            alignedMovementAxis.y = 0f;
+            rotation = Quaternion.LookRotation(alignedMovementAxis).eulerAngles;
+
+            _playerModel.transform.localRotation = Quaternion.Slerp(_playerModel.transform.rotation,
+                                                                    Quaternion.Euler(rotation),
+                                                                    Time.fixedDeltaTime * _rotationSpeed);
+
+            _velocityHor.z = _maxForwardSpeed;
         }
         else
             _velocityHor.z = 0f;
@@ -135,6 +172,17 @@ public class PlayerMovement : MonoBehaviour
 
         // Debug.Log($"Speed: {_motion}");
     }
+    
+    // Jump Control
+    private void CheckForJump()
+    {
+        if (InputManager.Jump() && _controller.isGrounded)
+        {
+            _jump = true;
+            OnPlayerJump?.Invoke();
+        }
+    }
+    
     // Dash Control
     private void UpdateDash()
     {
