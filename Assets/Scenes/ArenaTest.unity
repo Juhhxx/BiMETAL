@@ -1631,7 +1631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerModel: {fileID: 180611257}
   _cameraRig: {fileID: 493547636}
-  _movementType: 0
+  _movementType: 1
   _maxForwardSpeed: 10
   _maxStrafeSpeed: 5
   _maxBackwardSpeed: 3.5
