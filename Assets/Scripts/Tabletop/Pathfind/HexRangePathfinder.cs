@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 public class HexRangePathfinder : Pathfinder
@@ -42,8 +41,8 @@ public class HexRangePathfinder : Pathfinder
 
                     adjacentDir = HexagonCell.ReverseDirection(dir);
 
-                    AddAdjacent(next, adjacentDir +1, totalWeight, objective);
-                    AddAdjacent(next, adjacentDir -1, totalWeight, objective);
+                    AddAdjacent(next, adjacentDir +1, totalWeight);
+                    AddAdjacent(next, adjacentDir -1, totalWeight);
                 }
 
                 current = next;
@@ -63,7 +62,7 @@ public class HexRangePathfinder : Pathfinder
         Done = true;
     }
 
-    private void AddAdjacent(HexagonCell start, int dir, int totalWeight, HexagonCell objective)
+    private void AddAdjacent(HexagonCell start, int dir, int totalWeight)
     {
         HexagonCell current = start;
 
