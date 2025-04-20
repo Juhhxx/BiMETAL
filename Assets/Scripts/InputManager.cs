@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
     {
         if ( Paused ) return false;
         
-        Debug.Log("Pause off and select");
+        // Debug.Log("Pause off and select");
 
         return Input.GetMouseButtonDown(0);
     }

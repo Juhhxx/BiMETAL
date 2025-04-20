@@ -65,12 +65,15 @@ public class BFSRangePathfinder : Pathfinder
                 }
             }
 
-            yield return null;
+            // consuming a lot of time again
+            // yield return null;
         }
 
         foreach (HexagonCell cell in _set)
             if ( cell != objective )
                 Path.ObservePush(cell);
+
+        yield return null;
 
         Done = true;
     }

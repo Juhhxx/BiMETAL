@@ -211,7 +211,17 @@ public class HexagonCell : MonoBehaviour
         // Are these heuristics correct? lol
 
         // Calculating the axial distance
-        return Mathf.Max(Mathf.Abs(dis.x), Mathf.Abs(dis.y), Mathf.Abs(dis.x + dis.y));
+        float distance = Mathf.Max(
+            Mathf.Abs(dis.x),
+            Mathf.Abs(dis.y),
+            Mathf.Abs(dis.x + dis.y)
+        );
+
+        // Draw a debug ray from this cell to the other (in world space)
+        Debug.DrawRay(transform.position, other.transform.position - transform.position, Color.magenta, 1f);
+        Debug.Log("Distance: " + distance);
+
+        return distance;
     }
 
     private bool _hovered = false;

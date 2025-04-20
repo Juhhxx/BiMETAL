@@ -25,9 +25,9 @@ public class PlayerTabletopMovement : TabletopMovement
 
     private void CheckForHover()
     {
-        if ( !InputEnabled || Moving) return;
+        if ( !InputEnabled || Moving ) return;
 
-        if (InputManager.HoverCell(CellLayer, out HexagonCell newCell))
+        if ( InputManager.HoverCell(CellLayer, out HexagonCell newCell ))
         {
             // ShowPath();
 
@@ -42,17 +42,15 @@ public class PlayerTabletopMovement : TabletopMovement
                 DoneHovering();
             }
 
-            if (newCell == CurrentCell) return;
+            if (newCell == CurrentCell
+                || InputManager.MouseX() != 0 || InputManager.MouseY() != 0  ) return;
 
             _hoveredCell = newCell;
 
             // Only show cell has selectable if it's in range and is not already hovered ( it twitches otherwise )
-            // Doesnt apply for the players current cell because it think its self explanatory for them
-            if (newCell != CurrentCell)
-            {
-                _hoveredCell.HoverCell();
-                _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
-            }
+            // Doesnt apply for the players current cell because i think its self explanatory for them
+            _hoveredCell.HoverCell();
+            _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
         }
         else if (_hoveredCell != null)
         {
