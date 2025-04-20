@@ -521,6 +521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GruntMeleeEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 43057259085783709, guid: 66bb2bd9ca6351a46ab292d250ae3876, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5807718964491243264, guid: 66bb2bd9ca6351a46ab292d250ae3876, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.02
@@ -639,6 +643,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3217727181888802494, guid: 48d4815d32a2eae43b1bc9cf1bc72385, type: 3}
+      propertyPath: _reach
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3217727181888802494, guid: 48d4815d32a2eae43b1bc9cf1bc72385, type: 3}
+      propertyPath: _modRangeType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3465584886289220771, guid: 48d4815d32a2eae43b1bc9cf1bc72385, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
