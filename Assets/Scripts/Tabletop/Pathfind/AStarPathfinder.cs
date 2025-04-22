@@ -18,7 +18,7 @@ public class AStarPathfinder : Pathfinder
 
         OpenList.Add(_data[start]);
 
-        Debug.Log("Starting pathfinding from " + start + " to " + objective);
+        // Debug.Log("Starting pathfinding from " + start + " to " + objective);
         // Debug.Log("Finding path. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         /*foreach(HexagonCell cell in _data.Keys)
         {

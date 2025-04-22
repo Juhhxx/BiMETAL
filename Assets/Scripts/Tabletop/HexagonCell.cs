@@ -64,7 +64,7 @@ public class HexagonCell : MonoBehaviour
     // It needs to modify if its a modifier changing it but only modify if its null and its a piece changing it
     public bool Modify(Modifier mod)
     {
-        Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
+        // Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
 
         if ( Modifier != null && Modifier.NonWalkable && Modifier != mod ) return false;
 
@@ -166,7 +166,7 @@ public class HexagonCell : MonoBehaviour
             delta = delta.normalized;
 
             // if ( Piece != null && Piece is PieceInteractive piece && ! piece.IsEnemy )
-            Debug.Log("neighbor cel: " + neighbor + "    dir: " + (neighbor.CellValue - CellValue) + "    int dir: " + delta);
+            // Debug.Log("neighbor cel: " + neighbor + "    dir: " + (neighbor.CellValue - CellValue) + "    int dir: " + delta);
 
 
             // :(
@@ -218,8 +218,8 @@ public class HexagonCell : MonoBehaviour
         );
 
         // Draw a debug ray from this cell to the other (in world space)
-        Debug.DrawRay(transform.position, other.transform.position - transform.position, Color.magenta, 1f);
-        Debug.Log("Distance: " + distance);
+        // Debug.DrawRay(transform.position, other.transform.position - transform.position, Color.magenta, 1f);
+        // Debug.Log("Distance: " + distance);
 
         return distance;
     }
@@ -229,7 +229,7 @@ public class HexagonCell : MonoBehaviour
     {
         if (_hovered == onOrOff) return;
 
-        Debug.Log("Hovering cell: " + this);
+        // Debug.Log("Hovering cell: " + this);
 
         if (_hovered)
             _Cosmetic.transform.Translate(Vector3.down * 0.2f);
@@ -259,7 +259,7 @@ public class HexagonCell : MonoBehaviour
     
     private void CosmeticPathCell(bool upOrDown)
     {
-        Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
+        // Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
         
         if ( upOrDown )
             _Cosmetic.transform.Translate(Vector3.up * 0.1f);
@@ -276,7 +276,7 @@ public class HexagonCell : MonoBehaviour
 
         if (_pathStack <= 0)
         {
-            Debug.Log("Stop path count: " + _pathStack);
+            // Debug.Log("Stop path count: " + _pathStack);
             CosmeticPathCell(false);
             
             // _pathStack = 0;

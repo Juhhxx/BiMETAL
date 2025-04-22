@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class TabletopMovement : TabletopBase
 {
     [field: SerializeField] public int Points { get; protected set; } = 7;
+    [SerializeField] private Animation _hopAnimation;
 
     protected Pathfinder _pathfinder;
     public Pathfinder Pathfinder => _pathfinder;
@@ -83,6 +84,55 @@ public abstract class TabletopMovement : TabletopBase
         Moving = false;
         if (_pathfinder != null)
             _pathfinder.Path.CollectionChanged -= DemonstratePath;
+    }
+
+    protected IEnumerator Step(HexagonCell current, HexagonCell next)
+    {
+        if (_hopAnimation == null || _hopAnimation.clip == null)
+        {
+            Debug.LogWarning("Missing hop animation");
+            yield break;
+        }
+
+        _hopAnimation.Stop();
+        _hopAnimation.Play();
+
+        // movement start and end
+        Vector3 startPos = transform.position;
+        Vector3 endPos = current.transform.position;
+        endPos.y = startPos.y;
+
+        // rotation start and end
+        Quaternion startRot = transform.rotation;
+        Quaternion endRot = startRot;
+
+        if (next != null)
+        {
+            Vector3 direction = (next.transform.position - current.transform.position).normalized;
+            direction.y = 0f;
+            if (direction != Vector3.zero) // it gives weird long rotations if end rotation is zero, still giving some, but not as long as before
+                endRot = Quaternion.LookRotation(direction);
+        }
+
+        float duration = _hopAnimation.clip.length;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            float t = time / duration;
+
+            float eased = Mathf.SmoothStep(0f, 1f, t); // creates a smooth convex curve for easing movement (half sin wave)
+
+            transform.SetPositionAndRotation(
+                Vector3.Lerp(startPos, endPos, eased),
+                Quaternion.Slerp(startRot, endRot, eased));
+            
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        // final snap to clean up
+        transform.SetPositionAndRotation(endPos, endRot);
     }
 
     protected void Interact(Interactive other)

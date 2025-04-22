@@ -63,10 +63,6 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
     {
         _pathfinder.FindPath(CurrentCell, _player.CurrentCell, Points);
     }
-    public void Stop()
-    {
-        _pathfinder.Stop();
-    }
 
     // Casually spent two weeks trying to remember that I had to create my own queue
     // and not use the base class's and thats why my system was completely broken
@@ -87,15 +83,16 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
         }
     }
 
+    public HexagonCell last;
     protected override IEnumerator Move()
     {
         yield return new WaitUntil(() => _pathfinder.Done);
 
-        Debug.Log("0 start? Enemy: " + gameObject.name + 
+        /*Debug.Log("0 start? Enemy: " + gameObject.name + 
             " | Path null? " + (Path == null) +
             " | Path count: " + (Path?.Count ?? -1) +
             " | CurrentCell: " + (CurrentCell != null ? CurrentCell : "null") +
-            " | Moving: " + Moving);
+            " | Moving: " + Moving);*/
 
         if ( Path == null || Path.Count <= 0 )
         {
@@ -105,42 +102,40 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
         }
 
         HexagonCell next = Path.Peek();
-        yield return new WaitForSeconds(0.2f);
 
-        if (next.Piece != null && next != CurrentCell)
+        if (next.Piece != null )
         {
-            if (next.Piece is EnvironmentInteractive)
-                Interact(next.Piece);
-
-            Debug.Log("Blocked by piece. Ending movement early for " + gameObject.name);
-            yield return EndMovement();
-            yield break;
+            if ( next.Piece is PieceInteractive piece && piece.IsEnemy )
+            {
+                Debug.Log("Blocked by piece. Waiting for movement for " + gameObject.name);
+                yield return new WaitUntil ( () => next.Piece == null );
+            }
+            else
+            {
+                if (next.Piece is not EnvironmentInteractive)
+                    Interact(next.Piece);
+                // here we have to wait until the interaction is done...
+                // yield return WaitUntil(() )
+                // break for now
+                Stop();
+                yield return EndMovement();
+                yield break;
+            }
         }
 
-        Debug.Log("1.5 start? path is: " + Path + " count: " + Path.Count);
         Path.ObservePop();
 
         CurrentCell.WalkOn();
         CurrentCell = next;
-        // Debug.Log("current is selected?2 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
+        CurrentCell.WalkOn(Interactive);
         
-        next.WalkOn(Interactive);
+        next = Path.Count > 0 ? Path.Peek() : null;
 
-        // Debug.Log("count: " + final.Count);
+        Debug.Log("last position before: " + transform.position + "  cell: " + CurrentCell);
+        yield return Step(CurrentCell, next);
+        Debug.Log("last position after: " + transform.position + "  cell: " + CurrentCell);
 
-        // move
-        transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
-
-        // rotate
-        if (Path.Count > 0)
-        {
-            next = Path.Peek();
-
-            Vector3 target = next.transform.position;
-            target.y = transform.position.y;
-
-            transform.LookAt(target);
-        }
+        Debug.Log("current is last? " + (CurrentCell == last) + "      current: " + CurrentCell + "      last: " + last + "      next: " + next);
 
         yield return EndMovement();
     }
@@ -159,7 +154,12 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
     private void DoneMoving()
     {
         // _queue.Clear();
-        _pathfinder.Stop();
+        // _pathfinder.Stop();
         Moving = false;
+    }
+    public void Stop()
+    {
+        _pathfinder.Stop();
+        _queue.Clear();
     }
 }
