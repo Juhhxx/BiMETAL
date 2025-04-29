@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class PlayerTabletopMovement : TabletopMovement
 {
+    [SerializeField] private CellInfo _cellInformation;
     public LayerMask CellLayer => HexagonTabletop.CellLayer;
-    private HexagonCell _hoveredCell;
+
+    private HexagonCell _hover;
+    private HexagonCell _hoveredCell {
+        get => _hover;
+        set {
+            _hover = value;
+            if ( _cellInformation != null )
+                _cellInformation.Hover(_hover);
+        }
+    }
     private HexagonCell _selectedCell;
 
     public bool InputEnabled { get; set; }
@@ -15,6 +25,9 @@ public class PlayerTabletopMovement : TabletopMovement
         base.Start();
         _pathfinder = new AStarPathfinder(this, false);
         _pathfinder.Path.CollectionChanged += DemonstratePath;
+
+        if ( _cellInformation == null )
+            _cellInformation = FindFirstObjectByType<CellInfo>();
     }
 
     private void Update()
@@ -42,13 +55,15 @@ public class PlayerTabletopMovement : TabletopMovement
                 DoneHovering();
             }
 
-            if (newCell == CurrentCell
-                || InputManager.MouseX() != 0 || InputManager.MouseY() != 0  ) return;
+            if ( InputManager.MouseX() != 0 || InputManager.MouseY() != 0  ) return;
 
             _hoveredCell = newCell;
 
             // Only show cell has selectable if it's in range and is not already hovered ( it twitches otherwise )
             // Doesnt apply for the players current cell because i think its self explanatory for them
+
+            if ( newCell == CurrentCell ) return;
+            
             _hoveredCell.HoverCell();
             _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
         }
@@ -71,8 +86,8 @@ public class PlayerTabletopMovement : TabletopMovement
 
         if ( InputManager.Select() )
         {
-            // Previously the points were counting with the first and last cell we find in the pathfinded stack, we should change it to not count the first cell, so we add one
-            if (Path.Count <= Points + 1)
+            // not whats happening anymore // Previously the points were counting with the first and last cell we find in the pathfinded stack, we should change it to not count the first cell, so we add one
+            if ( _hoveredCell != CurrentCell )
             {
                 _selectedCell = _hoveredCell;
                 StartCoroutine(Move());

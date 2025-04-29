@@ -6,12 +6,14 @@ using UnityEngine;
 /// </summary>
 public abstract class Interactive : MonoBehaviour
 {
-    protected TabletopBase _base;
+    [SerializeField] protected TabletopBase _base;
+    [field:SerializeField] public string Name { get; private set; }
     public HexagonCell Cell => _base != null ? _base.CurrentCell : null;
 
     protected virtual void Start()
     {
-        _base = GetComponentInChildren<TabletopBase>();
+        if ( _base == null )
+            _base = GetComponentInChildren<TabletopBase>();
     }
 
 

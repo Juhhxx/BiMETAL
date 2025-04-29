@@ -41,8 +41,10 @@ public class EnemyComposite : TabletopMovement
             enemy.TogglePath();
             enemy.FindPath();
 
-            if (enemy.Interactive is PieceInteractive interactive)
-                interactive.Stop();
+            PieceInteractive piece = enemy.Interactive as PieceInteractive;
+
+            if ( piece != null )
+                piece.Stop();
         }
 
         yield return new WaitUntil(() => _enemies.All(t => t.Pathfinder.Done));
@@ -60,15 +62,15 @@ public class EnemyComposite : TabletopMovement
             enemy.Path.Pop();
         }
 
+        Debug.Log("Moving enemies, count now: " + leftEnemies.Count);
 
         while (leftEnemies.Count > 0)
         {
-            Debug.Log("Moving enemies, count now: " + leftEnemies.Count);
             currentEnemies = new(leftEnemies);
 
             foreach (EnemyTabletopMovement enemy in currentEnemies)
             {
-                if ( enemy.Path.Count <= 0 || enemy.QueueCount >= enemy.Path.Count || enemy.Moving )
+                if ( enemy.Path.Count <= 0 || enemy.QueueCount > enemy.Path.Count || enemy.Moving )
                 {
                     if ( enemy.Path.Count <= 0 )
                     {
@@ -81,18 +83,9 @@ public class EnemyComposite : TabletopMovement
 
                 HexagonCell nextCell = enemy.Path.Peek();
 
-                if ( nextCell == enemy.last )
-                    Debug.Log("found last at path count: " + enemy.Path.Count + " queue count: " + enemy.QueueCount);
+                PieceInteractive piece = nextCell.Piece as PieceInteractive;
 
-                // Is this cell planned by any higher-priority enemy?
-                bool wait = leftEnemies
-                    .Where(other => other.Priority < enemy.Priority)
-                    .Any(other => other.Path.Contains(nextCell));
-
-                if ( ! wait )
-                    enemy.MoveEnemy();
-                
-                else if ( nextCell.Piece is PieceInteractive piece )
+                if ( piece != null  )
                 {
                     if ( ! piece.IsEnemy ) // is enemy is based on if enemy movement is null or not
                     {
@@ -105,10 +98,19 @@ public class EnemyComposite : TabletopMovement
                         enemy.Stop();
                         leftEnemies.Remove(enemy);
                     }
+                    continue;
                 }
+
+                // Is this cell planned by any higher-priority enemy?
+                bool wait = leftEnemies
+                    .Where(other => other.Priority < enemy.Priority)
+                    .Any(other => other.Path.Contains(nextCell));
+
+                if ( ! wait )
+                    enemy.MoveEnemy();
             }
 
-            Debug.Log("Still running enemy composite.");
+            // Debug.Log("Still running enemy composite.");
 
             yield return null;
         }
@@ -123,8 +125,10 @@ public class EnemyComposite : TabletopMovement
         {
             enemy.TogglePath();
 
-            if (enemy.Interactive is PieceInteractive interactive)
-                interactive.Modify();
+            PieceInteractive piece = enemy.Interactive as PieceInteractive;
+
+            if ( piece != null )
+                piece.Modify();
         }
 
         DoneMoving();

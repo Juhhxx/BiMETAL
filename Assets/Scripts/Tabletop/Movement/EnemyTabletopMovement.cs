@@ -105,15 +105,17 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
 
         if (next.Piece != null )
         {
-            if ( next.Piece is PieceInteractive piece && piece.IsEnemy )
+            PieceInteractive piece = next.Piece as PieceInteractive;
+            if ( piece != null && piece.IsEnemy )
             {
                 Debug.Log("Blocked by piece. Waiting for movement for " + gameObject.name);
                 yield return new WaitUntil ( () => next.Piece == null );
             }
             else
             {
-                if (next.Piece is not EnvironmentInteractive)
-                    Interact(next.Piece);
+                EnvironmentInteractive interactive = next.Piece as EnvironmentInteractive;
+                if ( interactive != null )
+                    Interact(interactive);
                 // here we have to wait until the interaction is done...
                 // yield return WaitUntil(() )
                 // break for now
