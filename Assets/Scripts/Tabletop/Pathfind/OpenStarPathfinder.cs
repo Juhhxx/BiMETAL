@@ -86,8 +86,9 @@ public class OpenStarPathfinder : Pathfinder
                     OpenList.Add(cellData);
                 }
             }
-
-            yield return null;
+            
+            // consuming a lot of time again
+            // yield return null;
         }
 
         // DEBUG objective.StopPathCell();

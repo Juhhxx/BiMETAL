@@ -25,9 +25,9 @@ public class PlayerTabletopMovement : TabletopMovement
 
     private void CheckForHover()
     {
-        if ( !InputEnabled || Moving) return;
+        if ( !InputEnabled || Moving ) return;
 
-        if (InputManager.HoverCell(CellLayer, out HexagonCell newCell))
+        if ( InputManager.HoverCell(CellLayer, out HexagonCell newCell ))
         {
             // ShowPath();
 
@@ -42,17 +42,15 @@ public class PlayerTabletopMovement : TabletopMovement
                 DoneHovering();
             }
 
-            if (newCell == CurrentCell) return;
+            if (newCell == CurrentCell
+                || InputManager.MouseX() != 0 || InputManager.MouseY() != 0  ) return;
 
             _hoveredCell = newCell;
 
             // Only show cell has selectable if it's in range and is not already hovered ( it twitches otherwise )
-            // Doesnt apply for the players current cell because it think its self explanatory for them
-            if (newCell != CurrentCell)
-            {
-                _hoveredCell.HoverCell();
-                _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
-            }
+            // Doesnt apply for the players current cell because i think its self explanatory for them
+            _hoveredCell.HoverCell();
+            _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
         }
         else if (_hoveredCell != null)
         {
@@ -105,24 +103,27 @@ public class PlayerTabletopMovement : TabletopMovement
 
         // Stack<HexagonCell> final =  new(_pathfinder.Path);
 
+        // HexagonCell last = Path.Peek();
         _pathfinder.Reverse();
         // Debug.Log("Stop moving current? " + CurrentCell + "    path count: " + Path.Count);
-
-        // HidePath();
-
-        HexagonCell next;
 
         _hoveredCell?.HoverCell(false);
         _hoveredCell = null;
 
-        while (CurrentCell != _selectedCell && Path.Count > 0)
+        // remove start
+        Path.Pop();
+        // get the next cell
+        HexagonCell next = Path.Peek();
+
+        while ( Path.Count > 0 ) // uses >= 0 count as next is loa
         {
-            next = Path.Peek(); // previously giving an error here because pops where happening more than pushes, must also remove as hovered here
+            /*next = Path.Peek(); // previously giving an error here because pops where happening more than pushes, must also remove as hovered here
             // need to peek first so we dont spook the next pieces modifier interactive
+            Debug.Log("peek1: " + next);*/
 
-            yield return new WaitForSeconds(0.2f);
+            // yield return new WaitForSeconds(0.2f);
 
-            if (next.Piece != null && next != CurrentCell)
+            if ( next.Piece != null )
             {
                 Interact(next.Piece);
                 // here we have to wait until the interaction is done...
@@ -136,26 +137,15 @@ public class PlayerTabletopMovement : TabletopMovement
 
             CurrentCell.WalkOn();
             CurrentCell = next;
-            // Debug.Log("current is selected?2 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
-            next.WalkOn(Interactive);
+            CurrentCell.WalkOn(Interactive);
 
-            // Debug.Log("count: " + final.Count);
+            next = Path.Count > 0 ? Path.Peek() : null;
+            
+            // Debug.Log("last position before: " + transform.position + "  cell: " + CurrentCell);
+            yield return Step(CurrentCell, next);
+            // Debug.Log("last position after: " + transform.position + "  cell: " + CurrentCell);
 
-            // move
-            transform.position = new Vector3(next.transform.position.x, transform.position.y, next.transform.position.z);
-
-            // rotate
-            if (Path.Count > 0)
-            {
-                next = Path.Peek();
-
-                Vector3 target = next.transform.position;
-                target.y = transform.position.y;
-
-                transform.LookAt(target);
-            }
-
-            // Debug.Log("current is selected?3 " + (CurrentCell == _selectedCell) + "      current: " + CurrentCell + "      selected: " + _selectedCell );
+            // Debug.Log("current is last? " + (CurrentCell == last) + "      current: " + CurrentCell + "      last: " + last + "      next: " + next);
         }
 
         DoneMoving();

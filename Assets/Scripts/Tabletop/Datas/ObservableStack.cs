@@ -24,6 +24,8 @@ public class ObservableStack<T> : Stack<T>, INotifyCollectionChanged
         // Debug.Log("count3 " + Count);
         Pop();
 
+        Debug.Log("last Popping");
+
         return item;
     }
 

@@ -105,7 +105,8 @@ public class AStarPathfinder : Pathfinder
                 }
             }
 
-            yield return null;
+            // this line was consuming a lot of time
+            // yield return null;
         }
 
         // Debug.Log("No path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
