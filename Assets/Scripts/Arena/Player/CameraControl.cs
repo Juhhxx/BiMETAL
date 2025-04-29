@@ -1,3 +1,4 @@
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ public class CameraControl : MonoBehaviour
     [Header("Camera Movement Parameters")]
     [Space(5)]
     [SerializeField] private GameObject _cameraRig;
-    [SerializeField] private float      _resetRotationSpeed;
     [SerializeField] private float      _maxLookUpAngle;
     [SerializeField] private float      _maxLookDownAngle;
     [SerializeField] private bool       _switchCameraModes;
@@ -20,14 +20,18 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private LayerMask  _deocclusionLayerMask;
     [SerializeField] private float      _deocclusionThreshold;
     [SerializeField] private float      _deocclusionSpeed;
+    
+    private Vector3 _deocclusionVector;
+    private Vector3 _deocclusionPoint;
 
+    // Other References and Variables
     private Transform       _cameraTransform;
     private PlayerMovement  _playerMovement;
     private Vector3         _rotation;
     private Vector3         _position;
     private float           _zoomPosition;
-    private Vector3         _deocclusionVector;
-    private Vector3         _deocclusionPoint;
+    private Transform       _target = null;
+    private float           _lockTimer = 0f;
 
     void Start()
     {
@@ -41,6 +45,7 @@ public class CameraControl : MonoBehaviour
     {
         UpdateRotation();
         UpdateHeight();
+        DoLockOnPoint();
 
         if (_doDeocclusion)
             PreventOcclusion();
@@ -80,6 +85,20 @@ public class CameraControl : MonoBehaviour
             _rotation.x = Mathf.Max(_maxLookUpAngle, _rotation.x);
 
         _cameraRig.transform.localEulerAngles = _rotation;
+    }
+    public void LockOnPoint(Transform point, float time)
+    {
+        _target     = point;
+        _lockTimer  = time;
+
+    }
+    private void DoLockOnPoint()
+    {
+        if (_lockTimer > 0)
+        {
+            _cameraRig.transform.LookAt(_target);
+            _lockTimer -= Time.deltaTime;
+        }
     }
     private void PreventOcclusion()
     {

@@ -1,4 +1,5 @@
 using System;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Camera Parameters")]
     [Space(5)]
     [SerializeField] private bool _lockCamera;
+    [ShowIf("_lockCamera")] [SerializeField] private float _lockTime;
 
     [Space(10)]
     [Header("Combo Parameters")]
@@ -41,8 +43,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void Start()
     {
-        _character = GetComponent<CharController>();
-        _comboTimer = _maxComboTime;
+        _cameraControl  = GetComponent<CameraControl>();
+        _character      = GetComponent<CharController>();
+        _comboTimer     = _maxComboTime;
     }
     private void OnEnable()
     {
@@ -123,6 +126,7 @@ public class PlayerAttack : MonoBehaviour
         if (otherChar != null)
         {
             _character.GiveDamage(otherChar, CalculateAttackDamage(self, other));
+            if (_lockCamera) _cameraControl.LockOnPoint(other.transform, _lockTime);
         }
 
         Debug.Log($"Collision detected with {e.other.gameObject.name} from {gameObject.name}");
