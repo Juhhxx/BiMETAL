@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec333de3628451f43b91da83f2997ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 0}
+  <Name>k__BackingField: Blocking Modifier
   _modifier: {fileID: 11400000, guid: 807d97c7d28a27d4081345cd3d361288, type: 2}
   _modRangeType: 5
   _reach: 3
