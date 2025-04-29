@@ -6,6 +6,7 @@ public class PieceInteractive : ModifierInteractive
     private TabletopController _controller;
     public bool IsEnemy { get; protected set; }
     // [SerializeField] protected PathfinderType _rangeType;
+    public TabletopMovement Movement { get; protected set; }
     public EnemyTabletopMovement EnemyMovement { get; protected set; }
 
     // Add here other piece stats like if its player or the prefab it needs to load in battle or something
@@ -16,14 +17,27 @@ public class PieceInteractive : ModifierInteractive
 
         _controller = FindFirstObjectByType<TabletopController>();
 
-        IsEnemy = _base is EnemyTabletopMovement;
+        if ( _base == null )
+            Debug.Log("Base is null on init");
 
-        if ( IsEnemy )
+        EnemyMovement = _base as EnemyTabletopMovement;
+        if ( EnemyMovement != null )
         {
-            EnemyMovement = _base as EnemyTabletopMovement;
+            IsEnemy = true;
+            Movement = EnemyMovement;
+            Debug.Log("Init Movement in piece " + gameObject.name);
 
-            if ( HasModifier )
+            if (HasModifier)
                 Modify();
+        }
+        else
+        {
+            PlayerTabletopMovement baseP = _base as PlayerTabletopMovement;
+            if (baseP != null)
+            {
+                Movement = baseP;
+                Debug.Log("Init Movement in piece " + gameObject.name);
+            }
         }
     }
 

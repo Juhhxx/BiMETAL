@@ -50,6 +50,7 @@ MonoBehaviour:
   <Interactive>k__BackingField: {fileID: 1023831215645743453}
   <Points>k__BackingField: 3
   _hopAnimation: {fileID: 1740922154331630829}
+  last: {fileID: 0}
 --- !u!114 &1023831215645743453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +63,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3268f3e23c4d92543be6444c87e496f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 8696197932562567021}
+  <Name>k__BackingField: Grunt Enemy
   _modifier: {fileID: 0}
   _modRangeType: 0
   _reach: 4

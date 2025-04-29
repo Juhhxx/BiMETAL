@@ -103,6 +103,8 @@ MonoBehaviour:
   <CurrentCell>k__BackingField: {fileID: 0}
   <Interactive>k__BackingField: {fileID: 3217727181888802494}
   <Points>k__BackingField: 3
+  _hopAnimation: {fileID: 0}
+  last: {fileID: 0}
 --- !u!114 &3217727181888802494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3268f3e23c4d92543be6444c87e496f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 6331121909045825388}
+  <Name>k__BackingField: Sniper Enemy
   _modifier: {fileID: 11400000, guid: 62cee6b0a78a81148854ace9c50143a3, type: 2}
   _modRangeType: 4
   _reach: 3

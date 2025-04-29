@@ -50,6 +50,7 @@ MonoBehaviour:
   <Interactive>k__BackingField: {fileID: 2495697816207425113}
   <Points>k__BackingField: 4
   _hopAnimation: {fileID: 2288109693588652710}
+  _cellInformation: {fileID: 0}
 --- !u!114 &2495697816207425113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +63,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3268f3e23c4d92543be6444c87e496f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _base: {fileID: 6794169821423685380}
+  <Name>k__BackingField: Automaton
   _modifier: {fileID: 0}
   _modRangeType: 0
   _reach: 0

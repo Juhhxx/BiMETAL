@@ -570,8 +570,6 @@ GameObject:
   - component: {fileID: 8956605770910314448}
   - component: {fileID: 7753269774489333565}
   - component: {fileID: 1903995097612900806}
-  - component: {fileID: 6035549842038905835}
-  - component: {fileID: 2170602617960960972}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -622,36 +620,6 @@ MonoBehaviour:
   _cells:
     serializedVersion: 2
     m_Bits: 131072
---- !u!114 &6035549842038905835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9111267153690051666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57bb1817fc8fbda4aa3454f11fdd8aaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <CurrentCell>k__BackingField: {fileID: 0}
-  <Interactive>k__BackingField: {fileID: 0}
-  <Points>k__BackingField: 7
---- !u!114 &2170602617960960972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9111267153690051666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8657beb161926b04d8a9c3db05cfc69e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerInput: {fileID: 0}
-  _enemies: {fileID: 6035549842038905835}
-  _baseHealth: 6
 --- !u!1001 &18216804681181118
 PrefabInstance:
   m_ObjectHideFlags: 0

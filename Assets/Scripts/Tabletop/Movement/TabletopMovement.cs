@@ -49,8 +49,9 @@ public abstract class TabletopMovement : TabletopBase
                     newItem.PathCell();
 
                     // if (newItem.IsNonAvoidable())
-                    if (newItem.Piece is ModifierInteractive piece)
-                        piece.Path(_pathfinder.Path);
+                    ModifierInteractive mod = newItem.Piece as ModifierInteractive;
+                    if ( mod != null )
+                        mod.Path(_pathfinder.Path);
                 }
 
             if (e.OldItems != null)
@@ -62,8 +63,9 @@ public abstract class TabletopMovement : TabletopBase
                         oldItem.StopPathCell();
 
                     // if (oldItem.IsNonAvoidable())
-                    if (oldItem.Piece is ModifierInteractive piece)
-                        piece.Path();
+                    ModifierInteractive mod = oldItem.Piece as ModifierInteractive;
+                    if ( mod != null )
+                        mod.Path();
                 }
         }
 

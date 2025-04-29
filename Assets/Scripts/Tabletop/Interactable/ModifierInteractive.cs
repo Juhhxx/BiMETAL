@@ -7,7 +7,9 @@ using UnityEngine;
 public abstract class ModifierInteractive : Interactive
 {
     [SerializeField] protected Modifier _modifier;
+    public Modifier Modifier => _modifier;
     public bool HasModifier => _modifier != null;
+    public bool Modified { get; protected set; } = false;
 
     [ShowIf(nameof(HasModifier))]
     [SerializeField] protected PathfinderType _modRangeType;

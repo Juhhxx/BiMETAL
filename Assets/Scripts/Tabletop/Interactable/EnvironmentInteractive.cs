@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class EnvironmentInteractive : ModifierInteractive
 {
-    public bool Modified { get; protected set; } = true;
-
     protected override void Start()
     {
         base.Start();

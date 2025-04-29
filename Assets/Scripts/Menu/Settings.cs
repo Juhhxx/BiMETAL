@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -7,8 +8,11 @@ public class Settings : MonoBehaviour
 {
     [SerializeField] private GameObject _settingsObject;
     [SerializeField] private Slider _brightness;
+    [SerializeField] private TMP_Text _brightnessText;
     [SerializeField] private Slider _sensitivity;
+    [SerializeField] private TMP_Text _sensitivityText;
     [SerializeField] private Slider _volume;
+    [SerializeField] private TMP_Text _volumeText;
 
 
     [SerializeField] private float _maxSensitivity = 10f;
@@ -52,21 +56,42 @@ public class Settings : MonoBehaviour
     {
         if ( _postExposure == null ) return;
         
-        _postExposure.postExposure.value =  _clampBrightness * (value - _brightness.minValue)
+        float final =  _clampBrightness * (value - _brightness.minValue)
             / (_brightness.maxValue - _brightness.minValue);
+
+        _postExposure.postExposure.value =  final;
+        
+        _brightnessText.text = FormatShort(final);
     }
 
     public void ChangeSensitivity(float value)
     {
         float final = _maxSensitivity * (value - _sensitivity.minValue)
             / (_sensitivity.maxValue - _sensitivity.minValue);
-        InputManager.MouseSensitivity = Mathf.Max(0.1f, final);
+
+        final = Mathf.Max(1f, final);
+
+        InputManager.MouseSensitivity = final;
+
+        _sensitivityText.text = FormatShort(final);
     }
 
     public void ChangeVolume(float value)
     {
-        AudioListener.volume = _maxVolume * (value - _volume.minValue)
+        float final = _maxVolume * (value - _volume.minValue)
             / (_volume.maxValue - _volume.minValue);
+            
+        AudioListener.volume = final;
+        
+        _volumeText.text = FormatShort(final);
+    }
+
+    private string FormatShort(float value)
+    {
+        if (value >= 10f)
+            return Mathf.RoundToInt(value).ToString();
+        else
+            return value.ToString("0.0");
     }
 
     public void OnDestroy()
