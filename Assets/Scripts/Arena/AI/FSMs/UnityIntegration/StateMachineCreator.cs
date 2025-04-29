@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Scripts.AI.FSMs.BaseFiles;
+using AI.FSMs.BaseFiles;
 using NaughtyAttributes;
 
-namespace Scripts.AI.FSMs.UnityIntegration
+namespace AI.FSMs.UnityIntegration
 {
     /// <summary>
     /// Scriptable Object that creates State Machines that can be edited through the Inspector.

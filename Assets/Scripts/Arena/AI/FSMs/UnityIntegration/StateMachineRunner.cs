@@ -1,7 +1,7 @@
 using UnityEngine;
 using NaughtyAttributes;
 
-namespace Scripts.AI.FSMs.UnityIntegration
+namespace AI.FSMs.UnityIntegration
 {
     public class StateMachineRunner : MonoBehaviour
     {

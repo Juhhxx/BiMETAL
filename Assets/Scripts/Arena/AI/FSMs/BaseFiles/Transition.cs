@@ -1,6 +1,6 @@
 using System;
 
-namespace Scripts.AI.FSMs.BaseFiles
+namespace AI.FSMs.BaseFiles
 {
     /// <summary>
     /// Class that defines a Transition to be used in a State Machine.

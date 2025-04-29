@@ -1,7 +1,6 @@
 using System;
-using System.Linq;
 
-namespace Scripts.AI.FSMs.BaseFiles
+namespace AI.FSMs.BaseFiles
 {
     /// <summary>
     /// Class that defines and controls a State Machine.

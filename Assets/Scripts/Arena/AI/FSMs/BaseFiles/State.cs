@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scripts.AI.FSMs.BaseFiles
+namespace AI.FSMs.BaseFiles
 {
     /// <summary>
     /// Class that defines a State to be used in a State Machine.

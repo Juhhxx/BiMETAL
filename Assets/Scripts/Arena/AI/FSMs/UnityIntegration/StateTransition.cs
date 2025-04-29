@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 
-namespace Scripts.AI.FSMs.UnityIntegration
+namespace AI.FSMs.UnityIntegration
 {
     /// <summary>
     /// Struct for defining a State and it's Transitions.

@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
-using Scripts.AI.FSMs.BaseFiles;
+using AI.FSMs.BaseFiles;
 
-namespace Scripts.AI.FSMs.UnityIntegration
+namespace AI.FSMs.UnityIntegration
 {
     /// <summary>
     /// Abstract Scriptable Object that defines everything a Transition needs.
