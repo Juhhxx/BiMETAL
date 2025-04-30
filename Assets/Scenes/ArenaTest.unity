@@ -1281,7 +1281,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -1715,18 +1715,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraRig: {fileID: 493547636}
-  _resetRotationSpeed: 0
   _maxLookUpAngle: 320
   _maxLookDownAngle: 60
   _switchCameraModes: 1
   _lockOnPlayer: 1
-  _doDeocclusion: 0
+  _doDeocclusion: 1
   _deocclusionPivot: {fileID: 974902086}
   _deocclusionLayerMask:
     serializedVersion: 2
-    m_Bits: 131127
+    m_Bits: 131191
   _deocclusionThreshold: 0
-  _deocclusionSpeed: 10
 --- !u!114 &1367321181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1742,7 +1740,8 @@ MonoBehaviour:
   _attackCollider: {fileID: 589556339}
   _dashAttackCollider: {fileID: 774264576}
   _jumpAttackCollider: {fileID: 461409316}
-  _lockCamera: 0
+  _lockCamera: 1
+  _lockTime: 2
   _maxComboTime: 0.5
   _onAirDistance: 3
   _groundLayer:
