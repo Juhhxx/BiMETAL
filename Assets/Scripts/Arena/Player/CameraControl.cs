@@ -17,6 +17,7 @@ public class CameraControl : MonoBehaviour
     [Space(5)]
     [SerializeField] private bool       _doDeocclusion;
     [SerializeField] private Transform  _deocclusionPivot;
+    [SerializeField] private Transform  _deocclusionPivotCamera;
     [SerializeField] private LayerMask  _deocclusionLayerMask;
     [SerializeField] private float      _deocclusionThreshold;
     
@@ -101,12 +102,9 @@ public class CameraControl : MonoBehaviour
     }
     private void PreventOcclusion()
     {
-        _deocclusionPoint = _cameraTransform.position;
-        _deocclusionPoint.z = _zoomPosition;
+        Debug.DrawLine(_deocclusionPivot.position, _deocclusionPivotCamera.position);
 
-        Debug.DrawLine(_deocclusionPivot.position, _deocclusionPoint);
-
-        if (Physics.Linecast(_deocclusionPivot.position, _deocclusionPoint, out RaycastHit hitInfo, _deocclusionLayerMask.value))
+        if (Physics.Linecast(_deocclusionPivot.position, _deocclusionPivotCamera.position, out RaycastHit hitInfo, _deocclusionLayerMask.value))
         {
             _cameraTransform.position = hitInfo.point + _cameraTransform.TransformDirection(_deocclusionVector);
 
@@ -121,17 +119,13 @@ public class CameraControl : MonoBehaviour
     }
     private void RevertDeocclusion()
     {
-        Debug.LogWarning("RESSETING ZOOM");
         _position = _cameraTransform.localPosition;
 
         if (_position.z > _zoomPosition)
         {
-            // _position.z = Mathf.Max(_position.z - _deocclusionSpeed * Time.deltaTime, _zoomPosition);
-            // _deocclusionPoint = transform.TransformPoint(_position) - _cameraTransform.TransformDirection(_deocclusionVector);
-            Debug.LogWarning("RESSETING ZOOM 2");
             _position.z = _zoomPosition;
 
-            if (!Physics.Linecast(_deocclusionPivot.position, _deocclusionPoint))
+            if (!Physics.Linecast(_deocclusionPivot.position, _deocclusionPivotCamera.position))
                 _cameraTransform.localPosition = _position;
         }
     }

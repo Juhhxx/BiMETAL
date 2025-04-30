@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3658913798e804d8fef6141f7dae50, type: 3}
   m_Name: StateMachineGrunt
   m_EditorClassIdentifier: 
-  StateTransitions: []
+  StateTransitions:
+  - State: {fileID: 0}
+    Transitions: []
+  - State: {fileID: 0}
+    Transitions: []
