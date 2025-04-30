@@ -43,11 +43,13 @@ public class EnemyComposite : TabletopMovement
 
             PieceInteractive piece = enemy.Interactive as PieceInteractive;
 
-            if ( piece != null )
-                piece.Stop();
+            // if ( piece != null )
+           //      piece.Stop();
         }
 
-        yield return new WaitUntil(() => _enemies.All(t => t.Pathfinder.Done));
+        yield return new WaitUntil(() => _enemies.All(t => t.Pathfinder.Done &&
+            ( t.Pathfinder.ModPath == null ||
+            ( t.Pathfinder.ModPath.Done && t.Pathfinder.ModPath.Path.Count > 0 ) )));
         Debug.Log("Enemies done path finding.");
 
         leftEnemies.Sort();
@@ -62,7 +64,7 @@ public class EnemyComposite : TabletopMovement
             enemy.Path.Pop();
         }
 
-        Debug.Log("Moving enemies, count now: " + leftEnemies.Count);
+        Debug.Log("envi Moving enemies, count now: " + leftEnemies.Count);
 
         while (leftEnemies.Count > 0)
         {
@@ -87,6 +89,7 @@ public class EnemyComposite : TabletopMovement
 
                 if ( piece != null  )
                 {
+                    Debug.Log("envi removed for: " + piece.Name);
                     if ( ! piece.IsEnemy ) // is enemy is based on if enemy movement is null or not
                     {
                         playerPiece = piece;

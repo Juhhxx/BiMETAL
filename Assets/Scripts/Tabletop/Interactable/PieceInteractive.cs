@@ -53,7 +53,7 @@ public class PieceInteractive : ModifierInteractive
             if ( HasModifier )
             {
                 Debug.Log("De-modifying. ");
-                _modPathfinder.Stop();
+                ModPathfinder.Stop();
             }
 
         }
@@ -73,7 +73,7 @@ public class PieceInteractive : ModifierInteractive
         // remove mods from any piece going into battle
         foreach (PieceInteractive piece in pieces)
             if ( piece.IsEnemy && piece.HasModifier )
-                piece._modPathfinder.Stop();
+                piece.ModPathfinder.Stop();
 
         _controller.StartBattle(Cell.Modifier, pieces);
     }
@@ -88,8 +88,8 @@ public class PieceInteractive : ModifierInteractive
     {
         if ( ! HasModifier ) return;
 
-        _modPathfinder.Stop();
-        _modPathfinder.FindPath(Cell, null, _reach);
+        ModPathfinder.Stop();
+        ModPathfinder.FindPath(Cell, null, _reach);
     }
 
     public void Stop()
@@ -98,7 +98,7 @@ public class PieceInteractive : ModifierInteractive
 
         Debug.Log("Stopping mod in: " + gameObject.name);
 
-        _modPathfinder.Stop();
+        ModPathfinder.Stop();
     }
 
 
@@ -120,14 +120,14 @@ public class PieceInteractive : ModifierInteractive
 
         if ( other == null || other.Count <= 0 )
         {
-            _modPathfinder.FindPath(Cell, null, _reach);
+            ModPathfinder.FindPath(Cell, null, _reach);
             return;
         }
         
         // remove mods from any piece "going into battle"
         foreach (PieceInteractive piece in pieces)
             if ( piece.IsEnemy )
-                piece._modPathfinder.Stop();*/
+                piece.ModPathfinder.Stop();*/
         
         // remove for now because he are using a bfs so there is no definite objective
         // StartCoroutine(ModifyAtCell(other.Peek()));
@@ -142,6 +142,6 @@ public class PieceInteractive : ModifierInteractive
         yield return new WaitUntil(() => EnemyMovement.Pathfinder.Done);
 
         // here the pathfinder should get the ranged enemies range
-        _modPathfinder.FindPath(Cell, null, _reach);
+        ModPathfinder.FindPath(Cell, null, _reach);
     }*/
 }

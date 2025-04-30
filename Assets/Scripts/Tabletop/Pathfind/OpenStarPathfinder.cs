@@ -16,7 +16,7 @@ public class OpenStarPathfinder : Pathfinder
     {
         // objective and start are switched
 
-        // Debug.Log("modifier? starting pathfinder at " + _owner.gameObject.name);
+        Debug.Log("envi: modifier? starting pathfinder at " + _owner.gameObject.name);
         Done = false;
 
 
@@ -51,6 +51,7 @@ public class OpenStarPathfinder : Pathfinder
             if ( current == objective )
             {
                 // Debug.Log("modifier? Found start");
+                Done = true;
                 yield break;
             }
 
@@ -93,7 +94,7 @@ public class OpenStarPathfinder : Pathfinder
 
         // DEBUG objective.StopPathCell();
 
-        // Debug.Log("modifier? Path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
+        Debug.Log("envi: modifier? Path found. Stats:   open " + OpenList.Count + "   closed " + _closedList.Count + "   data " + _data.Count);
         Done = true;
     }
 

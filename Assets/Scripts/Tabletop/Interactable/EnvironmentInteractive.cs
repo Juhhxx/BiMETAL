@@ -10,10 +10,10 @@ public class EnvironmentInteractive : ModifierInteractive
 
         if ( HasModifier )
         {
-            _modPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
+            ModPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
 
-            if ( _modPathfinder != null )
-                _modPathfinder.Path.CollectionChanged += DemonstratePath;
+            if ( ModPathfinder != null )
+                ModPathfinder.Path.CollectionChanged += DemonstratePath;
         }
         else
         {
@@ -47,18 +47,18 @@ public class EnvironmentInteractive : ModifierInteractive
     {
         // some cosmetic way of saying the _modifier now already modified and wont be modified again?
 
-        // Debug.Log("modifier? setting path as fr fr hopefully, is path null or count 0?  " + (_modPathfinder.Path.Count == 0 || _modPathfinder.Path == null));
+        // Debug.Log("modifier? setting path as fr fr hopefully, is path null or count 0?  " + (ModPathfinder.Path.Count == 0 || ModPathfinder.Path == null));
 
         // we just clear the current path to save the current cells settings and move on
 
-        foreach ( HexagonCell cell in _modPathfinder.Path)
+        foreach ( HexagonCell cell in ModPathfinder.Path)
             cell.SetEnvironment();
-       _modPathfinder.Path.Clear();
+       ModPathfinder.Path.Clear();
     }
 
     public override void Path(ObservableStack<HexagonCell> other = null)
     {
-        Debug.Log("Pathing: " + ( other != null && other.Count > 0 ) + " and modified is: " + Modified);
+        Debug.Log("envi Pathing: " + ( other != null && other.Count > 0 ) + " and modified is: " + Modified);
 
         if ( Modified ) return;
 
@@ -68,8 +68,8 @@ public class EnvironmentInteractive : ModifierInteractive
         
         if ( other == null || other.Count <= 0 )
         {
-            Debug.Log("Un-Pathing modifier? stopping");
-            _modPathfinder.Stop();
+            Debug.Log("envi Un-Pathing modifier? stopping");
+            ModPathfinder.Stop();
             return;
         }
 
@@ -80,7 +80,7 @@ public class EnvironmentInteractive : ModifierInteractive
         while ( clone.Count > 0 && last != Cell)
         {
             last = clone.Pop();
-            // Debug.Log("modifier clone at: " + clone.Count);
+            Debug.Log("envi modifier clone at: " + clone.Count);
 
             if ( !clone.Any() || clone.Peek() == Cell)
                 break;
@@ -89,8 +89,13 @@ public class EnvironmentInteractive : ModifierInteractive
         if ( clone.Count < 1 )
             return;
 
-        // Debug.Log("modifier? starting");
+        Debug.Log("envi modifier? starting");
         // only supposed to do this once
-        _modPathfinder.FindPath(Cell, last, _reach);
+        ModPathfinder.FindPath(Cell, last, _reach);
+    }
+
+    public int PathCount()
+    {
+        return ModPathfinder.Path.Count;
     }
 }

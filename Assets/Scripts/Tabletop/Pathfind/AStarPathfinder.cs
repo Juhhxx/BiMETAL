@@ -46,6 +46,14 @@ public class AStarPathfinder : Pathfinder
 
                     if (_includeNonAvoidance && currentCell.IsNonAvoidable())
                     {
+                        if ( currentCell.Piece is EnvironmentInteractive envi )
+                        {
+                            ModPath = envi.ModPathfinder;
+                            Debug.Log("envi: " + envi.ModPathfinder.Done);
+                            yield return new WaitUntil(() => envi.ModPathfinder.Done);
+                        }
+                        
+                        Debug.Log("Stopped at envi: " + currentCell.Piece.Name);
                         Done = true;
                         yield break;
                     }

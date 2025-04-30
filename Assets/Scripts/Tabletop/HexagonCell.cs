@@ -23,7 +23,13 @@ public class HexagonCell : MonoBehaviour
 
     public bool Walkable() => Piece == null && ( Modifier ? ! Modifier.NonWalkable : true );
 
-    public bool IsNonAvoidable() => Piece is EnvironmentInteractive piece && !piece.Modified;
+    public bool IsNonAvoidable()
+    {
+        EnvironmentInteractive envi = Piece as EnvironmentInteractive;
+        if ( envi != null )
+            Debug.Log("enviornment variable? " + envi.Name);
+        return envi != null && !envi.Modified;
+    }
 
     public int Weight => 1 + (Modifier != null ? Modifier.Weight : 0);
 

@@ -118,4 +118,4 @@ MonoBehaviour:
   <Name>k__BackingField: Blocking Modifier
   _modifier: {fileID: 11400000, guid: 807d97c7d28a27d4081345cd3d361288, type: 2}
   _modRangeType: 5
-  _reach: 3
+  _reach: 2

@@ -18,7 +18,7 @@ public abstract class ModifierInteractive : Interactive
     [SerializeField] protected int _reach;
 
 
-    protected Pathfinder _modPathfinder;
+    public Pathfinder ModPathfinder { get; protected set; }
 
     protected override void Start()
     {
@@ -26,10 +26,10 @@ public abstract class ModifierInteractive : Interactive
 
         if ( HasModifier )
         {
-            _modPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
+            ModPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
 
-            if ( _modPathfinder != null )
-                _modPathfinder.Path.CollectionChanged += DemonstratePath;
+            if ( ModPathfinder != null )
+                ModPathfinder.Path.CollectionChanged += DemonstratePath;
         }
     }
 
@@ -72,7 +72,7 @@ public abstract class ModifierInteractive : Interactive
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
-                    Debug.Log("Un-Pathing Modifying cell and count is: " + _modPathfinder.Path.Count);
+                    Debug.Log("Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
                     yield return new WaitForSeconds(0.01f);
                     newItem.Modify(_modifier);
                 }
@@ -80,7 +80,7 @@ public abstract class ModifierInteractive : Interactive
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
-                    Debug.Log("Un-Pathing Modifying cell and count is: " + _modPathfinder.Path.Count);
+                    Debug.Log("Un-Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
                     yield return new WaitForSeconds(0.01f);
                     oldItem.Modify(_modifier);
                 }
@@ -95,7 +95,7 @@ public abstract class ModifierInteractive : Interactive
 
     protected virtual void OnDisable()
     {
-        if ( _modPathfinder != null )
-            _modPathfinder.Path.CollectionChanged -= DemonstratePath;
+        if ( ModPathfinder != null )
+            ModPathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 }

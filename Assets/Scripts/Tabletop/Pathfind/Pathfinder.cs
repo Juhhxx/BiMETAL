@@ -18,6 +18,7 @@ public abstract class Pathfinder
     // becomes open for environment variables to see
     public SortedSet<CellData> OpenList { get; protected set; }
     protected HashSet<HexagonCell> _closedList;
+    public Pathfinder ModPath { get; protected set; }
 
     // lpa based static path dictionary? uwu
     // protected static Dictionary<HexagonCell, HexagonCell> _discoveredPaths;
@@ -35,6 +36,9 @@ public abstract class Pathfinder
     }
     public Stack<HexagonCell> FindPath(HexagonCell start, HexagonCell objective, int points)
     {
+        ModPath = null;
+        Done = false;
+
         Stop();
         // Debug.Log("piece? owner: " + _owner + "  start: " + start + " objective: " + objective + "  points: " + points);
         _getPath = _owner.StartCoroutine(GetPath(start, objective, points));

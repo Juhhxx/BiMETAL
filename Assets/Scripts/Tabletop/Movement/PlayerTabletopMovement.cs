@@ -106,7 +106,9 @@ public class PlayerTabletopMovement : TabletopMovement
 
         // Stack<HexagonCell> path = _pathfinder.FindPath(CurrentCell, _selectedCell);
 
-        yield return new WaitUntil(() => _pathfinder.Done);
+        yield return new WaitUntil( () => _pathfinder.Done &&
+            ( _pathfinder.ModPath == null ||
+            ( _pathfinder.ModPath.Done && _pathfinder.ModPath.Path.Count > 0 ) ));
 
         if (Path == null || Path.Count <= 0)
         {
