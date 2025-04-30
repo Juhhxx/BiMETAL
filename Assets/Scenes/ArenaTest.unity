@@ -566,7 +566,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 954019887}
-  - {fileID: 974902086}
+  - {fileID: 1289895093}
   m_Father: {fileID: 1367321177}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &589556334
@@ -1370,7 +1370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 974902086}
   m_Layer: 3
-  m_Name: Deocclusion Point
+  m_Name: Deocclusion Point Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1384,12 +1384,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974902085}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.8, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 493547637}
+  m_Father: {fileID: 1367321177}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &977094067 stripped
 Transform:
@@ -1576,6 +1576,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8016307349417020886, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
   m_PrefabInstance: {fileID: 1811074454}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1289895092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1289895093}
+  m_Layer: 3
+  m_Name: Deocclusion Point Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1289895093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289895092}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 493547637}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1367321176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,6 +1644,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 180611258}
+  - {fileID: 974902086}
   - {fileID: 493547637}
   - {fileID: 461409312}
   m_Father: {fileID: 0}
@@ -1721,6 +1753,7 @@ MonoBehaviour:
   _lockOnPlayer: 1
   _doDeocclusion: 1
   _deocclusionPivot: {fileID: 974902086}
+  _deocclusionPivotCamera: {fileID: 1289895093}
   _deocclusionLayerMask:
     serializedVersion: 2
     m_Bits: 131191
@@ -1740,7 +1773,7 @@ MonoBehaviour:
   _attackCollider: {fileID: 589556339}
   _dashAttackCollider: {fileID: 774264576}
   _jumpAttackCollider: {fileID: 461409316}
-  _lockCamera: 1
+  _lockCamera: 0
   _lockTime: 2
   _maxComboTime: 0.5
   _onAirDistance: 3
