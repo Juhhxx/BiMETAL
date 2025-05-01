@@ -13,6 +13,7 @@ public class TabletopController : MonoBehaviour
     [SerializeField] private int _baseHealth;
     [SerializeField] private Transform _healthParent;
     [SerializeField] private TMP_Text _roundText;
+    [SerializeField] private GameObject _canvas;
     private int _round;
     private int _health;
     private bool _playerRound;
@@ -25,6 +26,8 @@ public class TabletopController : MonoBehaviour
     private void Enable()
     {
         Debug.Log("starting");
+
+        _canvas.SetActive(true);
 
         _playerInput = FindFirstObjectByType<PlayerTabletopMovement>();
         _enemies = FindFirstObjectByType<EnemyComposite>();
@@ -312,6 +315,8 @@ public class TabletopController : MonoBehaviour
 
     private void OnDisable()
     {
+        _canvas.SetActive(false);
+
         if ( _playerInput == null || _enemies == null )
             return;
 
