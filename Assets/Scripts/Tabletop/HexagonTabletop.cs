@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class HexagonTabletop : MonoBehaviour
 {
-    public Dictionary<Vector2, HexagonCell> Cells { get; private set; }
+    public Dictionary<Vector2, HexagonCell> CellDict { get; private set; }
+    public HexagonCell[] Cells { get; private set; }
     [SerializeField] private LayerMask _cells;
     public static LayerMask CellLayer;
 
@@ -13,7 +14,7 @@ public class HexagonTabletop : MonoBehaviour
     {
         CellLayer = _cells;
 
-        Cells = new Dictionary<Vector2, HexagonCell>();
+        CellDict = new Dictionary<Vector2, HexagonCell>();
         Grid = GetComponent<Grid>();
 
         CreateCells();
@@ -21,23 +22,35 @@ public class HexagonTabletop : MonoBehaviour
 
     private void Start()
     {
-        foreach (HexagonCell cell in Cells.Values)
+        foreach (HexagonCell cell in Cells)
             cell.SetNeighbors();
     }
 
     public void CreateCells()
     {
-        HexagonCell[] cells = GetComponentsInChildren<HexagonCell>();
+        Cells = GetComponentsInChildren<HexagonCell>();
 
         // Debug.Log("Found " + cells.Length + " cells.");
 
-        foreach (HexagonCell cell in cells)
-            Cells[cell.InitializeCell(this)] = cell;
+        foreach (HexagonCell cell in Cells)
+            CellDict[cell.InitializeCell(this)] = cell;
 
         // Debug.Log("Initialized " + Cells.Count + " cells.");
     }
 
-    public HexagonCell GetCell(Vector2 pos) => Cells.TryGetValue(pos, out HexagonCell tile) ? tile : null;
+    public void ResetPaths()
+    {
+        foreach (HexagonCell cell in Cells)
+       {
+            while ( cell.PathStack != 0 )
+            {
+                if ( cell.PathStack > 0 )
+                    cell.StopPathCell();
+                else if ( cell.PathStack < 0 )
+                    cell.PathCell();
+            }
+       }
+    }
 
-    // pass cell visualization handleing to here
+    public HexagonCell GetCell(Vector2 pos) => CellDict.TryGetValue(pos, out HexagonCell tile) ? tile : null;
 }

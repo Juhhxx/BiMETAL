@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class PieceInteractive : ModifierInteractive
     // [SerializeField] protected PathfinderType _rangeType;
     public TabletopMovement Movement { get; protected set; }
     public EnemyTabletopMovement EnemyMovement { get; protected set; }
+    [SerializeField] private Renderer _renderer;
+    [SerializeField] private Rigidbody _rigidBody;
 
     // Add here other piece stats like if its player or the prefab it needs to load in battle or something
 
@@ -75,7 +78,7 @@ public class PieceInteractive : ModifierInteractive
             if ( piece.IsEnemy && piece.HasModifier )
                 piece.ModPathfinder.Stop();
 
-        _controller.StartBattle(Cell.Modifier, pieces);
+        _controller.StartBattle(Cell, pieces);
     }
 
     public override void Select()
@@ -144,4 +147,44 @@ public class PieceInteractive : ModifierInteractive
         // here the pathfinder should get the ranged enemies range
         ModPathfinder.FindPath(Cell, null, _reach);
     }*/
+
+    public void Die(Vector2 awayPos)
+    {
+        StartCoroutine( DieRoutine(awayPos) );
+    }
+
+    public void Hurt()
+    {
+        StartCoroutine(HurtRoutine());
+    }
+
+    private IEnumerator HurtRoutine()
+    {
+        if (_renderer == null)
+            _renderer = GetComponentInChildren<Renderer>();
+
+        Color original = _renderer.material.color;
+        Color noColor = new Color(1f, 1f, 1f, 0f);
+
+        for (int i = 0; i < 4f; i++)
+        {
+            _renderer.material.color = noColor;
+            yield return new WaitForSeconds( 0.1f );
+            _renderer.material.color = original;
+            yield return new WaitForSeconds( 0.1f );
+        }
+    }
+
+    private IEnumerator DieRoutine(Vector2 awayPos)
+    {
+
+        Vector3 forceDirection = new Vector3(awayPos.x, -1f, awayPos.y).normalized;
+        _rigidBody.AddForce(forceDirection * 10f, ForceMode.Impulse);
+
+        yield return StartCoroutine(HurtRoutine());
+
+        yield return new WaitUntil(() => _rigidBody.linearVelocity.magnitude < 0.5f);
+
+        gameObject.SetActive(false);
+    }
 }

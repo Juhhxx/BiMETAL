@@ -58,9 +58,13 @@ public class EnemyComposite : TabletopMovement
 
         foreach (EnemyTabletopMovement enemy in leftEnemies)
         {
+            if ( enemy.Path == null || enemy.Path.Count <= 0 )
+                continue;
+
             enemy.last = enemy.Path.Peek();
             enemy.Pathfinder.Reverse();
-            // remove start
+            
+            yield return null;
             enemy.Path.Pop();
         }
 

@@ -1,11 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TabletopController : MonoBehaviour
 {
     [SerializeField] private PlayerTabletopMovement _playerInput;
     [SerializeField] private EnemyComposite _enemies;
+    [SerializeField] private HexagonTabletop _tabletop;
     [SerializeField] private int _baseHealth;
     [SerializeField] private Transform _healthParent;
     [SerializeField] private TMP_Text _roundText;
@@ -13,8 +17,47 @@ public class TabletopController : MonoBehaviour
     private int _health;
     private bool _playerRound;
 
+    private string _currentTabletop;
+
+    private TabletopBase[] _pieces;
+    private EnvironmentInteractive[] _mods;
+
+    private void Enable()
+    {
+        Debug.Log("starting");
+
+        _playerInput = FindFirstObjectByType<PlayerTabletopMovement>();
+        _enemies = FindFirstObjectByType<EnemyComposite>();
+        _tabletop = FindFirstObjectByType<HexagonTabletop>();
+
+        if (_playerInput == null || _enemies == null || _tabletop == null)
+        {
+            Debug.LogWarning("One or more core components not found.");
+            return;
+        }
+
+        List<TabletopBase> bases = FindObjectsByType<EnemyTabletopMovement>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+            .Cast<TabletopBase>()
+            .ToList();
+        bases.Add(_playerInput);
+        _pieces = bases.ToArray();
+
+        _mods = FindObjectsByType<EnvironmentInteractive>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        _playerInput.PlayerTurn += ToggleRound;
+        _enemies.EnemyTurn += ToggleRound;
+
+        Debug.Log("started");
+
+        _playerInput.InputEnabled = true;
+    }
+
     private void Start()
     {
+        Enable();
+
+        _currentTabletop = SceneManager.GetActiveScene().name;
+
         _health = _baseHealth;
         _round = 0;
 
@@ -22,24 +65,12 @@ public class TabletopController : MonoBehaviour
         {
             Instantiate(_healthParent.GetChild(0), _healthParent);
         }
+
+        StartNewTabletop();
     }
-    
-    private void OnEnable()
+
+    private void StartNewTabletop()
     {
-        if ( _playerInput == null )
-            _playerInput = FindFirstObjectByType<PlayerTabletopMovement>();
-
-        if ( _enemies == null )
-            _enemies = FindFirstObjectByType<EnemyComposite>();
-        
-        if ( _playerInput == null || _enemies == null )
-            return;
-
-        _playerInput.PlayerTurn += ToggleRound;
-        _enemies.EnemyTurn += ToggleRound;
-
-        _playerInput.InputEnabled = true;
-
         _playerRound = true;
         ToggleRound();
     }
@@ -48,49 +79,243 @@ public class TabletopController : MonoBehaviour
     {
         // Debug.Log("Toggling round number " + _round + "  in player round: " + _playerRound);
 
+        // save last infos before each turn
+
         if ( !_playerRound )
+        {
             _enemies.StartMoving();
+        }
+        else // Only calls this if player did not enter battle, so it saves from the player's last step
+        {
+            Debug.Log("Setting last");
+            foreach ( HexagonCell cell in _tabletop.Cells )
+                cell.SetLast();
+            foreach ( TabletopBase piece in _pieces )
+                piece.SetLast();
+            foreach ( EnvironmentInteractive mod in _mods )
+                mod.SetLast();
+        }
         
         _playerInput.InputEnabled = _playerRound;
+
+        _tabletop.ResetPaths();
 
         _round ++;
         _roundText.text = _round.ToString();
         _playerRound = ! _playerRound;
     }
 
-    private List<PieceInteractive> _battlePieces;
-    public void StartBattle(Modifier mod, List<PieceInteractive> pieces)
+    public List<PieceInteractive> BattlePieces { get; private set; }
+    public List<string> BattleIDs { get; private set; }
+    public HexagonCell BattleCell { get; private set; }
+
+    /// <summary>
+    /// Starts an arena battle and saves information to be reloaded when it comes back
+    /// </summary>
+    /// <param name="mod"> The modifier to modify the next battle's arena </param>
+    /// <param name="pieces"> The pieces that are going into battle </param>
+    [field:SerializeField] public BattleState Snapshot { get; private set; }
+
+    public void StartBattle(HexagonCell cell, List<PieceInteractive> pieces)
     {
-        _battlePieces = pieces;
-        Debug.Log("Start battle between: " + pieces + " with mod: " + mod);
+        BattlePieces = pieces;
+        BattleIDs = new();
+
+        foreach ( PieceInteractive piece in BattlePieces)
+            BattleIDs.Add(piece.gameObject.name);
+
+        BattleCell = cell;
+
+        Debug.Log("Starting battle");
+
+        SaveSnapshot();
+
+        SceneLoader.Load("BattleArena");
+
+        Debug.Log("Setting? Player cells: "+ _playerInput.CurrentCell + " l: " + _playerInput.LastCell);
+
+        enabled = false;
     }
 
     public void EndBattle(bool playerWon)
     {
-        if ( ! playerWon )
+        SceneLoader.Load(_currentTabletop);
+
+        StartCoroutine( RestoreAfterSceneLoad(playerWon) );
+    }
+
+    private IEnumerator RestoreAfterSceneLoad(bool won)
+    {
+        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == _currentTabletop);
+
+        enabled = true;
+        Enable();
+
+        Debug.Log("started restore");
+
+        if ( ! won )
         {
-            
-            _healthParent.GetChild(_health).gameObject.SetActive(false);
-            _health --;
-            // foreach
-            // _battlePieces.ResetPlacements();
+            _healthParent.GetChild(_health-1).gameObject.SetActive(false);
+            _health--;
+
+            RestoreSnapshot( false );
+
+            PieceInteractive piece = _playerInput.Interactive as PieceInteractive;
+            if ( piece != null )
+            {
+                piece.Hurt();
+            }
         }
         else
         {
-            // foreach
-            // not player
-            // _battlePieces.Die();
+            RestoreSnapshot( true );
+
+            foreach ( PieceInteractive piece in BattlePieces )
+            {
+                if ( piece.IsEnemy )
+                    piece.Die(BattleCell.CellValue);
+            }
         }
 
-        // should the tabletop check if the player died or should the arena? Then, GameOver.
+        StartNewTabletop();
 
-        Debug.Log("End battle between");
+        Debug.Log("start finished restore");
+    }
+
+    public void SaveSnapshot()
+    {
+        Snapshot = new BattleState();
+
+        foreach ( HexagonCell cell in _tabletop.Cells)
+        {
+            Snapshot.CellStates.Add(new HexagonCellState
+            {
+                Position = cell.CellValue,
+                CurrentMod = cell.EnvironmentMod,
+                LastMod = cell.LastMod
+            });
+        }
+
+        foreach ( TabletopBase piece in _pieces)
+        {
+            Snapshot.PieceStates.Add(new TabletopBaseState
+            {
+                PieceID = piece.gameObject.name,
+                CurrentCell = piece.CurrentCell.CellValue,
+                LastCell = piece.LastCell,
+                Dead = ! piece.gameObject.activeSelf
+            });
+        }
+
+        foreach (EnvironmentInteractive mod in _mods)
+        {
+            Snapshot.ModifierStates.Add(new ModifierState
+            {
+                ModID = mod.gameObject.name,
+                CurrentModified = mod.Modified,
+                LastModified = mod.LastModified
+            });
+        }
+    }
+
+    private void RestoreSnapshot( bool current )
+    {
+        if ( current )
+        {
+            Debug.Log("Setting reload as current values");
+            foreach (HexagonCellState cellState in Snapshot.CellStates)
+            {
+                HexagonCell cell = _tabletop.CellDict[cellState.Position];
+                cell.SetMod(cellState.CurrentMod);
+            }
+
+            foreach (TabletopBaseState pieceState in Snapshot.PieceStates)
+            {
+                foreach ( TabletopBase p in _pieces )
+                {
+                    if ( p.gameObject.name != pieceState.PieceID ) continue;
+
+                    if ( pieceState.Dead )
+                    {
+                        p.gameObject.SetActive(pieceState.Dead);
+                        continue;
+                    }
+
+                    p.SetCurrent( _tabletop.CellDict[pieceState.CurrentCell] );
+                }
+            }
+
+            foreach (ModifierState modState in Snapshot.ModifierStates)
+            {
+                foreach ( EnvironmentInteractive m in _mods )
+                {
+                    if ( m.gameObject.name != modState.ModID ) continue;
+
+                    m.SetModified(modState.CurrentModified);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Setting reload as last values");
+
+            foreach (HexagonCellState cellState in Snapshot.CellStates)
+            {
+                HexagonCell cell = _tabletop.CellDict[cellState.Position];
+                cell.SetMod(cellState.LastMod);
+            }
+
+            foreach (TabletopBaseState pieceState in Snapshot.PieceStates)
+            {
+                foreach ( TabletopBase p in _pieces )
+                {
+                    if ( p.gameObject.name != pieceState.PieceID ) continue;
+
+                    if ( pieceState.Dead )
+                    {
+                        p.gameObject.SetActive(pieceState.Dead);
+                        continue;
+                    }
+
+                    p.SetCurrent( _tabletop.CellDict[pieceState.LastCell] );
+                }
+            }
+
+            foreach (ModifierState modState in Snapshot.ModifierStates)
+            {
+                foreach ( EnvironmentInteractive m in _mods )
+                {
+                    if ( m.gameObject.name != modState.ModID ) continue;
+
+                    m.SetModified(modState.LastModified);
+                }
+            }
+        }
+
+        BattlePieces = new List<PieceInteractive>();
+
+        foreach ( string id in BattleIDs )
+        {
+            foreach (TabletopBase basePiece in _pieces)
+            {
+                if ( basePiece.gameObject.name == id )
+                {
+                    PieceInteractive piece = basePiece.Interactive as PieceInteractive;
+                    if ( piece != null )
+                        BattlePieces.Add( piece );
+
+                    break;
+                }
+            }
+        }
     }
 
     private void OnDisable()
     {
         if ( _playerInput == null || _enemies == null )
             return;
+
+        Debug.Log("Disabling controller");
 
         _playerInput.PlayerTurn -= ToggleRound;
         _enemies.EnemyTurn -= ToggleRound;

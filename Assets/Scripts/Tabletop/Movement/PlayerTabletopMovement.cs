@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerTabletopMovement : TabletopMovement
 {
     [SerializeField] private CellInfo _cellInformation;
+    [SerializeField] private Camera _cam;
     public LayerMask CellLayer => HexagonTabletop.CellLayer;
 
     private HexagonCell _hover;
@@ -19,6 +20,15 @@ public class PlayerTabletopMovement : TabletopMovement
     private HexagonCell _selectedCell;
 
     public bool InputEnabled { get; set; }
+
+    private void Awake()
+    {
+        if ( _cellInformation == null )
+            _cellInformation = FindFirstObjectByType<CellInfo>();
+
+        if ( _cam == null )
+            _cam = Camera.main;
+    }
 
     protected override void Start()
     {
@@ -40,7 +50,7 @@ public class PlayerTabletopMovement : TabletopMovement
     {
         if ( !InputEnabled || Moving ) return;
 
-        if ( InputManager.HoverCell(CellLayer, out HexagonCell newCell ))
+        if ( InputManager.HoverCell(_cam, CellLayer, out HexagonCell newCell ))
         {
             // ShowPath();
 
@@ -146,7 +156,9 @@ public class PlayerTabletopMovement : TabletopMovement
                 // here we have to wait until the interaction is done...
                 // yield return WaitUntil(() )
                 // break for now
-                DoneMoving();
+                PieceInteractive piece = next.Piece as PieceInteractive;
+
+                DoneMoving( piece != null );
                 yield break;
             }
 
@@ -177,11 +189,12 @@ public class PlayerTabletopMovement : TabletopMovement
         
         _hoveredCell = null;
     }
-    private void DoneMoving()
+    private void DoneMoving(bool isBattle = false)
     {
         Moving = false;
         _selectedCell = null;
         DoneHovering();
-        PlayerTurn?.Invoke();
+        if ( ! isBattle )
+            PlayerTurn?.Invoke();
     }
 }

@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
     // :p
-    public static DontDestroyOnLoad Instance { get; private set; }
-    void Awake()
+    public static HashSet<string> Instances { get; private set; }
+    private void Awake()
     {
-        if (Instance == null)
+        Instances ??= new();
+        
+        if ( ! Instances.Contains(gameObject.name) )
         {
-            Instance = this;
+            Instances.Add(gameObject.name);
             DontDestroyOnLoad(gameObject);
         }
         else

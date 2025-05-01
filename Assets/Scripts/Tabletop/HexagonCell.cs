@@ -12,9 +12,12 @@ public class HexagonCell : MonoBehaviour
 
     public Modifier Modifier =>  _temporaryMod ?? _environmentMod ?? _dynamicMod;
 
+    public Modifier EnvironmentMod => _environmentMod;
+
     private Modifier _dynamicMod;
     private Modifier _temporaryMod;
     private Modifier _environmentMod;
+    public Modifier LastMod { get; private set; }
 
 
     [SerializeField] private GameObject _Cosmetic;
@@ -91,6 +94,19 @@ public class HexagonCell : MonoBehaviour
     public void SetEnvironment()
     {
         _environmentMod = _temporaryMod;
+    }
+
+    public void SetMod( Modifier mod )
+    {
+        if ( mod != null )
+        {
+            Modify(mod);
+            SetEnvironment();
+        }
+    }
+    public void SetLast()
+    {
+        LastMod = _environmentMod != null ? _environmentMod.Clone() : null;
     }
 
     private void CosmeticModify()
@@ -247,20 +263,20 @@ public class HexagonCell : MonoBehaviour
         Piece?.Hover(_hovered);
     }
 
-    private int _pathStack = 0;
+    public int PathStack { get; private set; } = 0;
 
     /// <summary>
     /// Increases the path highlight stack count, but only visually changes when transitioning from 0 to 1.
     /// </summary>
     public void PathCell()
     {
-        if (_pathStack == 0)
+        if (PathStack == 0)
         {
-            if ( Piece == null )
-                CosmeticPathCell(true);
+            CosmeticPathCell(true);
         }
 
-        _pathStack++;
+        Debug.Log("envi path cell");
+        PathStack++;
     }
     
     private void CosmeticPathCell(bool upOrDown)
@@ -278,15 +294,17 @@ public class HexagonCell : MonoBehaviour
     /// </summary>
     public void StopPathCell()
     {
-        _pathStack--;
+        PathStack--;
 
-        if (_pathStack <= 0)
+        if (PathStack <= 0)
         {
-            // Debug.Log("Stop path count: " + _pathStack);
+            // Debug.Log("Stop path count: " + PathStack);
             CosmeticPathCell(false);
             
-            // _pathStack = 0;
+            // PathStack = 0;
         }
+        
+        Debug.Log("envi un path cell");
     }
 
     public void SelectCell()
@@ -298,7 +316,7 @@ public class HexagonCell : MonoBehaviour
         Piece?.SelectionError();
     }
 
-    public override string ToString() => $"Hex({CellValue.x}, {CellValue.y}), W({Weight}), P({Piece} is {Piece?.gameObject.name}), N({_pathStack})";
+    public override string ToString() => $"Hex({CellValue.x}, {CellValue.y}), W({Weight}), P({Piece} is {Piece?.gameObject.name}), N({PathStack})";
 
     public List<PieceInteractive> GetPieces(HashSet<HexagonCell> visited = null)
     {

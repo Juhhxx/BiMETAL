@@ -84,14 +84,18 @@ public class InputManager : MonoBehaviour
         return Input.GetAxis("Zoom");
     }
 
-    public static bool HoverCell(LayerMask cellLayer, out HexagonCell newCell)
+    public static bool HoverCell(Camera cam, LayerMask cellLayer, out HexagonCell newCell)
     {
         newCell = null;
-        if ( Paused ) return false;
-        
-        Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if ( Physics.Raycast(ray, out RaycastHit hit, cellLayer)
+        if ( Paused ) return false;
+
+        if ( cam == null )
+            return false;
+        
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, cellLayer)
             && hit.transform.parent.TryGetComponent(out newCell) )
                 return true;
         return false;

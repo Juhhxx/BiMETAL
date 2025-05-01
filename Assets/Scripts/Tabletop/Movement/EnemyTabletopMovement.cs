@@ -132,10 +132,8 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
             }
         }
 
-        Path.ObservePop();
-
         CurrentCell.WalkOn();
-        CurrentCell = next;
+        CurrentCell = Path.ObservePop();
         CurrentCell.WalkOn(Interactive);
         
         next = Path.Count > 0 ? Path.Peek() : null;

@@ -28,6 +28,8 @@ public abstract class ModifierInteractive : Interactive
         {
             ModPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
 
+            _modifier = _modifier.Clone();
+
             if ( ModPathfinder != null )
                 ModPathfinder.Path.CollectionChanged += DemonstratePath;
         }
@@ -73,7 +75,7 @@ public abstract class ModifierInteractive : Interactive
                 foreach (HexagonCell newItem in e.NewItems)
                 {
                     Debug.Log("Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
-                    yield return new WaitForSeconds(0.01f);
+                    yield return new WaitForSeconds(0.02f);
                     newItem.Modify(_modifier);
                 }
 

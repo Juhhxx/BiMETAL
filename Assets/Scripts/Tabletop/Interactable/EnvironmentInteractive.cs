@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnvironmentInteractive : ModifierInteractive
 {
+    public bool LastModified { get; protected set; } = false;
     protected override void Start()
     {
         base.Start();
@@ -20,6 +21,15 @@ public class EnvironmentInteractive : ModifierInteractive
             Debug.LogWarning(gameObject.name + " environment Interactive does not have modifier, aborting game object. ");
             Destroy(gameObject);
         }
+    }
+    public void SetModified(bool currMod)
+    {
+        Modified = currMod;
+    }
+
+    public void SetLast()
+    {
+        LastModified = Modified;
     }
 
     public override void Hover(bool onOrOff = true)

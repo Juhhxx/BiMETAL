@@ -13,5 +13,12 @@ public class Modifier : ScriptableObject
         Color = new Color(Random.value, Random.value, Random.value);
         Weight = Random.Range(1, 3);
     }
+
+    public Modifier Clone()
+    {
+        Modifier clone = Instantiate(this);
+        clone.hideFlags = HideFlags.HideAndDontSave;
+        return clone;
+    }
     public override string ToString() => $"C({Color}),, W({Weight})";
 }

@@ -35,25 +35,32 @@ public class AStarPathfinder : Pathfinder
 
             if (current == objective)
             {
-                Path.ObservePush(objective);
+                Path.Push(objective);
                 HexagonCell currentCell = _data[objective].Connection.Cell;
                 int weight = 0;
                 while (currentCell != start)
                 {
                     weight += currentCell.Weight;
                     if (totalWeight == -1 || weight <= totalWeight)
+                    {
                         Path.ObservePush(currentCell);
 
-                    if (_includeNonAvoidance && currentCell.IsNonAvoidable())
-                    {
-                        if ( currentCell.Piece is EnvironmentInteractive envi )
+                        if (_includeNonAvoidance && currentCell.IsNonAvoidable())
                         {
-                            ModPath = envi.ModPathfinder;
-                            Debug.Log("envi: " + envi.ModPathfinder.Done);
-                            yield return new WaitUntil(() => envi.ModPathfinder.Done);
+                            if ( currentCell.Piece is EnvironmentInteractive envi )
+                            {
+                                ModPath = envi.ModPathfinder;
+                                Debug.Log("envi: " + envi.ModPathfinder.Done);
+                                yield return new WaitUntil(() => envi.ModPathfinder.Done && envi.ModPathfinder.Path.Count > 0);
+                            }
+                            
+                            Debug.Log("Stopped at envi: " + currentCell.Piece.Name);
+                            Done = true;
+                            yield break;
                         }
-                        
-                        Debug.Log("Stopped at envi: " + currentCell.Piece.Name);
+                    }
+                    else
+                    {
                         Done = true;
                         yield break;
                     }

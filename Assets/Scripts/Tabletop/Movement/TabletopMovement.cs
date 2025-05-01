@@ -45,7 +45,8 @@ public abstract class TabletopMovement : TabletopBase
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
-                    yield return new WaitForSeconds(0.05f);
+                    yield return new WaitForSeconds(0.02f);
+
                     newItem.PathCell();
 
                     // if (newItem.IsNonAvoidable())
@@ -57,10 +58,9 @@ public abstract class TabletopMovement : TabletopBase
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
-                    yield return new WaitForSeconds(0.02f);
+                    yield return new WaitForSeconds(0.01f);
 
-                    if ( oldItem.Piece == null || oldItem.Piece == Interactive )
-                        oldItem.StopPathCell();
+                    oldItem.StopPathCell();
 
                     // if (oldItem.IsNonAvoidable())
                     ModifierInteractive mod = oldItem.Piece as ModifierInteractive;
