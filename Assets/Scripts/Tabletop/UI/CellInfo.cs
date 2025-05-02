@@ -30,7 +30,7 @@ public class CellInfo : MonoBehaviour
         if ( cell.Modifier != null )
             _cellType.text = cell.Modifier.name + " Modified " + _cellType.text;
 
-        _cellWeight.text = "Movement Cost: " + cell.Weight + "  path stack: " + cell.PathStack;
+        _cellWeight.text = "Movement Cost: " + cell.Weight;
 
         if ( cell.Piece != null )
         {

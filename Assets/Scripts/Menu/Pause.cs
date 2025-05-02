@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : Menu
 {
@@ -15,7 +16,7 @@ public class Pause : Menu
     /// </summary>
     private void LateUpdate()
     {
-        if ( InputManager.Pause() )
+        if (  SceneManager.GetActiveScene().name != _mainMenu && InputManager.Pause() )
         {
             if ( _pause.activeSelf )
                 Continue();
@@ -35,6 +36,7 @@ public class Pause : Menu
     {
         // preform save actions
 
+        Continue();
         SceneLoader.Load(_mainMenu);
     }
 
