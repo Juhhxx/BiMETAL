@@ -4901,7 +4901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 0}
-  <LastCell>k__BackingField: {fileID: 0}
+  <LastCell>k__BackingField: {x: 0, y: 0}
   <Interactive>k__BackingField: {fileID: 0}
   <Points>k__BackingField: 7
   _hopAnimation: {fileID: 0}
@@ -7076,22 +7076,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2232653698925093498, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3206558173843169156, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}

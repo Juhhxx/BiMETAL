@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Color: 0
-    - _ColorRes: 32
+    - _ColorRes: 8
     - _ColorResolution: 8
     - _DitherScale: 1
     - _DitherSpread: 0.05

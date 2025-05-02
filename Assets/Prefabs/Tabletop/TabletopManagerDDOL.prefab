@@ -1404,8 +1404,7 @@ MonoBehaviour:
   _baseHealth: 6
   _healthParent: {fileID: 3558267007964318588}
   _roundText: {fileID: 8464809893749129349}
-  BattlePieces: []
-  BattleModifier: {fileID: 0}
+  _canvas: {fileID: 5347431683976754710}
   <Snapshot>k__BackingField:
     CellStates: []
     PieceStates: []
