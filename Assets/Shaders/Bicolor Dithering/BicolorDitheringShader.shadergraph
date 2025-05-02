@@ -1124,6 +1124,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "Luminance",
     "m_FunctionSource": "",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "luminance = 0.299*color.r + 0.587 * color.g + 0.114 * color.b;"
 }
 
@@ -1221,6 +1222,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.ColorRGBAMaterialSlot",
+    "m_ObjectId": "7d2600510ec043d183196c5467a6b08c",
+    "m_Id": 2,
+    "m_DisplayName": "Output",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Output",
+    "m_StageCapability": 2,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.Rendering.Universal.UniversalSampleBufferNode",
     "m_ObjectId": "7da4d52e23cc4c3aa32dda150d6d0ac0",
     "m_Group": {
@@ -1242,7 +1268,7 @@
             "m_Id": "d89cd427c5d645aeaa90cf5e6677632f"
         },
         {
-            "m_Id": "f46c32051e094971a4dce8bb0fd4560a"
+            "m_Id": "7d2600510ec043d183196c5467a6b08c"
         }
     ],
     "synonyms": [
@@ -2096,31 +2122,6 @@
     },
     "isMainColor": false,
     "m_ColorMode": 0
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.ColorRGBAMaterialSlot",
-    "m_ObjectId": "f46c32051e094971a4dce8bb0fd4560a",
-    "m_Id": 2,
-    "m_DisplayName": "Output",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Output",
-    "m_StageCapability": 2,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 1.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 1.0
-    },
-    "m_Labels": []
 }
 
 {

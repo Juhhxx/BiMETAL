@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BicolorDitheringShader
-  m_Shader: {fileID: -6465566751694194690, guid: 4e8db5ff40480e242b9e6cdf4bdd0943, type: 3}
+  m_Name: AfonsoDither
+  m_Shader: {fileID: -6465566751694194690, guid: 1866a5c106cee6a40910871f3ecc18c7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -37,10 +37,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DitherScale: 1
-    - _StepThreshold: -0.1
-    m_Colors:
-    - _ColorA: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
-    - _ColorB: {r: 0.754717, g: 0.754717, b: 0.754717, a: 0}
+    - _ColorRes: 16
+    - _DitherSpread: 0.1
+    m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
