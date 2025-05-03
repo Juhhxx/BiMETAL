@@ -268,6 +268,10 @@ PrefabInstance:
       propertyPath: _charContoller
       value: 
       objectReference: {fileID: 3723913798522190170}
+    - target: {fileID: 6918506460863023697, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d7f64d2b5ea9f2b4bbd725521e33c54b, type: 2}
     - target: {fileID: 7057562776479609054, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_Layer
       value: 7
