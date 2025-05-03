@@ -66,6 +66,6 @@ Material:
     - _BackColor: {r: 0.06581525, g: 0.8207547, b: 0.20644124, a: 0}
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 1, g: 0, b: 0, a: 0}
-    - _Scroll_Speed: {r: 0, g: 0.1, b: 0, a: 0}
+    - _Scroll_Speed: {r: 0.3, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
