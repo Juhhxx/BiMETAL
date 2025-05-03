@@ -5,8 +5,9 @@ namespace AI.FSMs.UnityIntegration
 {
     public class StateMachineRunner : MonoBehaviour
     {
-        [Expandable][SerializeField] private StateMachineCreator _stateMachineModel;
-        private StateMachineCreator _stateMachine;
+        private bool InPlaymode => Application.isPlaying;
+        [HideIf("InPlaymode")][Expandable][SerializeField] private StateMachineCreator _stateMachineModel;
+        [ShowIf("InPlaymode")][Expandable][SerializeField] private StateMachineCreator _stateMachine;
         public StateMachineCreator StateMachine => _stateMachine;
 
         private void Start()

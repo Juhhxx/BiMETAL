@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using AI.FSMs.BaseFiles;
-using NaughtyAttributes;
 
 namespace AI.FSMs.UnityIntegration
 {
