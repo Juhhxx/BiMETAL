@@ -7078,6 +7078,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3206558173843169156, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: _enemies
       value: 
@@ -7097,8 +7113,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9093498262548406665, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4532058928143477982}
   m_SourcePrefab: {fileID: 100100000, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+--- !u!1 &4532058928143477981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9093498262548406665, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+  m_PrefabInstance: {fileID: 4532058928143477980}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4532058928143477982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4532058928143477981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5361a8906540a439bb50bf5037c864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInput: {fileID: 0}
 --- !u!1001 &6224384360201806407
 PrefabInstance:
   m_ObjectHideFlags: 0

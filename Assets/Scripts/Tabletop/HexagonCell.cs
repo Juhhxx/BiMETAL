@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class HexagonCell : MonoBehaviour
 {
+    [SerializeField] private Material _defaultMaterial;
+    [SerializeField] private Color _defaultColor;
+    [SerializeField] private GameObject _hoverObject;
+
     public Vector2 CellValue { get; private set; }
     private HexagonTabletop _tabletop;
 
@@ -111,7 +115,23 @@ public class HexagonCell : MonoBehaviour
 
     private void CosmeticModify()
     {
-        _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier? Modifier.Color : Color.white;
+        if ( Modifier != null )
+        {
+            if ( Modifier.Material != null )
+            {
+                _Cosmetic.GetComponentInChildren<Renderer>().material = Modifier.Material;
+            }
+            else
+            {
+                _Cosmetic.GetComponentInChildren<Renderer>().material = _defaultMaterial;
+                _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier.Color;
+            }
+        }
+        else
+        {
+            _Cosmetic.GetComponentInChildren<Renderer>().material = _defaultMaterial;
+            _Cosmetic.GetComponentInChildren<Renderer>().material.color = _defaultColor;
+        }
     }
 
 
@@ -254,9 +274,9 @@ public class HexagonCell : MonoBehaviour
         // Debug.Log("Hovering cell: " + this);
 
         if (_hovered)
-            _Cosmetic.transform.Translate(Vector3.down * 0.2f);
+            _hoverObject.SetActive(false);
         else if (!_hovered)
-            _Cosmetic.transform.Translate(Vector3.up * 0.2f);
+            _hoverObject.SetActive(true);
 
         _hovered = onOrOff;
 

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public abstract class TabletopMovement : TabletopBase
 {
-    [field: SerializeField] public int Points { get; protected set; } = 7;
+    [field: SerializeField] public int Points { get; set; } = 7;
+    
     [SerializeField] private Animation _hopAnimation;
 
     protected Pathfinder _pathfinder;

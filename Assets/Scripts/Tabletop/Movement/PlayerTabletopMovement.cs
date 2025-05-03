@@ -17,6 +17,8 @@ public class PlayerTabletopMovement : TabletopMovement
                 _cellInformation.Hover(_hover);
         }
     }
+    public HexagonCell Hovered => _hover;
+    
     private HexagonCell _selectedCell;
 
     public bool InputEnabled { get; set; }
