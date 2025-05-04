@@ -695,8 +695,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSpeed: 5
-  _maxAngularSpeed: 120
-  _targetAcceptenceRadius: 2.5
+  _maxChaseSpeed: 10
+  _maxAngularSpeed: 200
+  _targetAcceptanceRadius: 2
 --- !u!114 &5192395469993165608
 MonoBehaviour:
   m_ObjectHideFlags: 0

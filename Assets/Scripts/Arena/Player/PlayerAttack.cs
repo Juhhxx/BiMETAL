@@ -28,6 +28,7 @@ public class PlayerAttack : MonoBehaviour
     private float   _comboTimer;
     private bool    _isOnAir;
     private bool    _isDashing;
+    private Vector3 _corretcetPosition;
     
     [Space(10)]
     [Header("Attack Events")]
@@ -161,14 +162,17 @@ public class PlayerAttack : MonoBehaviour
     }
     private void CheckOnAir()
     {
-        Debug.DrawLine(transform.position, transform.position + (-transform.up * _onAirDistance), Color.blue);;
+        _corretcetPosition = transform.position;
+        _corretcetPosition.y -= 1.0f;
+
+        Debug.DrawLine(_corretcetPosition, _corretcetPosition + (-transform.up * _onAirDistance), Color.blue);;
 
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, -transform.up, out hit, _onAirDistance))
+        if (Physics.Raycast(_corretcetPosition, -transform.up, out hit, _onAirDistance))
         {
             _isOnAir = hit.collider.gameObject.layer == _groundLayer;
-            Debug.DrawLine(transform.position, hit.point, Color.red);
+            Debug.DrawLine(_corretcetPosition, hit.point, Color.red);
         }
         else
         {

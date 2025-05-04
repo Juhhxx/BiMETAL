@@ -31,8 +31,8 @@ Transform:
   m_Children:
   - {fileID: 7706071021815875130}
   - {fileID: 8991321782515694117}
-  - {fileID: 1682024628156428593}
   - {fileID: 5074521046197230546}
+  - {fileID: 1682024628156428593}
   - {fileID: 5778436622233481629}
   m_Father: {fileID: 5519380129300275168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,7 +117,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663275058524172134}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -254,7 +254,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
+  far clip plane: 80
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -492,7 +492,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2732867341441990927}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -700,7 +700,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3853424260708638827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -995,10 +995,10 @@ MonoBehaviour:
   _cameraRig: {fileID: 8748006915563494341}
   _movementType: 1
   _maxForwardSpeed: 10
-  _maxStrafeSpeed: 5
-  _maxBackwardSpeed: 3.5
+  _maxStrafeSpeed: 8
+  _maxBackwardSpeed: 5
   _rotationSpeed: 20
-  _jumpSpeed: 20
+  _jumpSpeed: 15
   _gravity: 50
   _maxFallSpeed: 100
   _dashSpeed: 20
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   _lockCamera: 0
   _lockTime: 2
   _maxComboTime: 0.5
-  _onAirDistance: 3
+  _onAirDistance: 1.3
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
