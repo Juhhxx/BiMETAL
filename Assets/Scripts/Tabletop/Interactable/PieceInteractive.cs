@@ -18,8 +18,6 @@ public class PieceInteractive : ModifierInteractive
     {
         base.Start();
 
-        _controller = FindFirstObjectByType<TabletopController>();
-
         if ( _base == null )
             Debug.Log("Base is null on init");
 
@@ -42,6 +40,11 @@ public class PieceInteractive : ModifierInteractive
                 Debug.Log("Init Movement in piece " + gameObject.name);
             }
         }
+
+        _rigidBody.constraints =
+            RigidbodyConstraints.FreezeRotation |
+            RigidbodyConstraints.FreezePositionX |
+            RigidbodyConstraints.FreezePositionZ;
     }
 
     public override void Hover(bool onOrOff = true)
@@ -78,6 +81,7 @@ public class PieceInteractive : ModifierInteractive
             if ( piece.IsEnemy && piece.HasModifier )
                 piece.ModPathfinder.Stop();
 
+        _controller = FindFirstObjectByType<TabletopController>();
         _controller.StartBattle(Cell, pieces);
     }
 
@@ -166,7 +170,9 @@ public class PieceInteractive : ModifierInteractive
         Color original = _renderer.material.color;
         Color noColor = new Color(1f, 1f, 1f, 0f);
 
-        for (int i = 0; i < 4f; i++)
+        yield return new WaitUntil( () => ! SceneLoader.IsLoading );
+
+        for (int i = 0; i < 6f; i++)
         {
             _renderer.material.color = noColor;
             yield return new WaitForSeconds( 0.1f );
@@ -177,13 +183,14 @@ public class PieceInteractive : ModifierInteractive
 
     private IEnumerator DieRoutine(Vector2 awayPos)
     {
+        yield return new WaitUntil( () => ! SceneLoader.IsLoading );
+
+        _rigidBody.constraints = RigidbodyConstraints.None;
 
         Vector3 forceDirection = new Vector3(awayPos.x, -1f, awayPos.y).normalized;
-        _rigidBody.AddForce(forceDirection * 10f, ForceMode.Impulse);
+        _rigidBody.AddForce(forceDirection * 9f, ForceMode.Impulse);
 
         yield return StartCoroutine(HurtRoutine());
-
-        yield return new WaitUntil(() => _rigidBody.linearVelocity.magnitude < 0.5f);
 
         gameObject.SetActive(false);
     }

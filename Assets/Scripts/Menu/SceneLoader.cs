@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,8 +16,19 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private float minLoadTime = 1;
     [SerializeField] private Slider _loadSlider;
 
-    public static void Load(string scene)
+    public static bool IsLoading { get; private set; } = false;
+
+    public static RestoreFlag CurrentRestoreFlag { get; private set; }
+
+    public static void Load(string scene, RestoreFlag restoreFlag = null )
     {
+        if (IsLoading) return;
+        IsLoading = true;
+
+        CurrentRestoreFlag = restoreFlag;
+        if ( CurrentRestoreFlag != null )
+            restoreFlag.IsRestored = false;
+
         SceneToLoad = scene;
         SceneManager.LoadSceneAsync(_loadScene, LoadSceneMode.Additive);
     }
@@ -26,6 +38,7 @@ public class SceneLoader : MonoBehaviour
     /// </summary>
     private IEnumerator Start()
     {
+        InputManager.Paused = true;
         // test SceneToLoad ??= "LoadScene";
 
         // wait prePostWaitTime before trying to load
@@ -39,6 +52,7 @@ public class SceneLoader : MonoBehaviour
             Scene scene = SceneManager.GetSceneAt(i);
             if (scene.name != _loadScene)
             {
+                Debug.Log("unloading async: " + scene.name);
                 op = SceneManager.UnloadSceneAsync(scene.name);
                 yield return new WaitWhile(() => !op.isDone);
             }
@@ -50,29 +64,54 @@ public class SceneLoader : MonoBehaviour
         op = SceneManager.LoadSceneAsync(SceneToLoad, LoadSceneMode.Additive);
         op.allowSceneActivation = false;
 
-
         float progress;
 
         // progress visualization
+        Debug.Log("one ");
         while ( !op.isDone )
         {
             // this line remaps 0-0.9 (AsyncOperation.progress returns a value in this range) into a value between 0-1
             progress = Mathf.InverseLerp(0, 0.9f, op.progress);
-            _loadSlider.value = Mathf.Lerp(_loadSlider.minValue, _loadSlider.maxValue, progress);
-
-            if(progress >= 1)
+            _loadSlider.value = Mathf.Lerp(_loadSlider.minValue, _loadSlider.maxValue * 0.8f, progress);
+            
+            if( progress >= 1)
                 op.allowSceneActivation = true;
+            
             yield return null;
         }
 
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(_loadScene));
+
+        Debug.Log("two ");
+        if ( CurrentRestoreFlag != null )
+            yield return new WaitUntil( () => CurrentRestoreFlag.IsRestored );
+
         // give it a min loading time, as loading immediately apparently gives a "pop" effect
         float leftTime = minLoadTime - (Time.time - startTime);
-        leftTime = Mathf.Max(0,leftTime);
-        yield return new WaitForSeconds(leftTime);
+        leftTime = Mathf.Max(0, leftTime);
+
+        float timer = 0;
+
+        while (timer < leftTime)
+        {
+            timer += Time.deltaTime;
+            float finalProgress = Mathf.Clamp01(timer / leftTime);
+            _loadSlider.value = Mathf.Lerp(_loadSlider.maxValue * 0.8f, _loadSlider.maxValue, finalProgress);
+            Debug.Log("timer? " + timer);
+            yield return null;
+        }
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneToLoad));
 
         //unload loading scene
         // onFinishLoad.Invoke();
         yield return new WaitForSeconds(prePostWaitTime);
+        
+        
         SceneManager.UnloadSceneAsync(_loadScene);
+
+        IsLoading = false;
+        CurrentRestoreFlag = null;
+        InputManager.Paused = false;
     }
 }

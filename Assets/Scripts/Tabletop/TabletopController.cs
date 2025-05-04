@@ -20,8 +20,10 @@ public class TabletopController : MonoBehaviour
 
     private string _currentTabletop;
 
-    private TabletopBase[] _pieces;
-    private EnvironmentInteractive[] _mods;
+    [SerializeField] private TabletopBase[] _pieces;
+    [SerializeField] private EnvironmentInteractive[] _mods;
+
+    private RestoreFlag _restoreFlag;
 
     private void Enable()
     {
@@ -29,9 +31,9 @@ public class TabletopController : MonoBehaviour
 
         _canvas.SetActive(true);
 
-        _playerInput = FindFirstObjectByType<PlayerTabletopMovement>();
-        _enemies = FindFirstObjectByType<EnemyComposite>();
-        _tabletop = FindFirstObjectByType<HexagonTabletop>();
+        _playerInput = FindFirstObjectByType<PlayerTabletopMovement>(FindObjectsInactive.Include);
+        _enemies = FindFirstObjectByType<EnemyComposite>(FindObjectsInactive.Include);
+        _tabletop = FindFirstObjectByType<HexagonTabletop>(FindObjectsInactive.Include);
 
         if (_playerInput == null || _enemies == null || _tabletop == null)
         {
@@ -44,6 +46,7 @@ public class TabletopController : MonoBehaviour
             .ToList();
         bases.Add(_playerInput);
         _pieces = bases.ToArray();
+
 
         _mods = FindObjectsByType<EnvironmentInteractive>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
@@ -59,9 +62,13 @@ public class TabletopController : MonoBehaviour
 
     private void Start()
     {
+        if (this == null) return;
+
         Enable();
 
-        _currentTabletop = SceneManager.GetActiveScene().name;
+        _currentTabletop = SceneLoader.SceneToLoad;
+
+        Debug.Log("tabletop to load is: " + _currentTabletop);
 
         _health = _baseHealth;
         _round = 0;
@@ -144,18 +151,23 @@ public class TabletopController : MonoBehaviour
 
     public void EndBattle(bool playerWon)
     {
-        SceneLoader.Load(_currentTabletop);
+        Debug.Log("Calling end battle. ");
 
-        StartCoroutine( RestoreAfterSceneLoad(playerWon) );
+        _restoreFlag = new RestoreFlag();
+        SceneLoader.Load(_currentTabletop, _restoreFlag);
+
+        StartCoroutine( RestoreAfterSceneLoad( playerWon ) );
     }
 
     private IEnumerator RestoreAfterSceneLoad(bool won)
     {
-        yield return new WaitUntil(() => SceneManager.GetActiveScene().name == _currentTabletop);
+        yield return new WaitUntil(() => SceneManager.GetSceneByName(_currentTabletop).isLoaded);
 
         Enable();
 
         yield return new WaitUntil( () => enabled );
+
+        yield return new WaitUntil( () => _tabletop.Done );
 
         Debug.Log("started restore");
 
@@ -186,6 +198,8 @@ public class TabletopController : MonoBehaviour
         StartNewTabletop();
 
         Debug.Log("start finished restore");
+
+        _restoreFlag.IsRestored = true;
     }
 
     public void SaveSnapshot()
@@ -201,6 +215,8 @@ public class TabletopController : MonoBehaviour
                 LastMod = cell.LastMod
             });
         }
+
+        Debug.Log("pieces null?" + _pieces);
 
         foreach ( TabletopBase piece in _pieces)
         {
@@ -243,7 +259,7 @@ public class TabletopController : MonoBehaviour
 
                     if ( pieceState.Dead )
                     {
-                        p.gameObject.SetActive(pieceState.Dead);
+                        p.gameObject.SetActive(false);
                         continue;
                     }
 
@@ -279,7 +295,7 @@ public class TabletopController : MonoBehaviour
 
                     if ( pieceState.Dead )
                     {
-                        p.gameObject.SetActive(pieceState.Dead);
+                        p.gameObject.SetActive(false);
                         continue;
                     }
 
