@@ -43,6 +43,8 @@ public class Tabletop_camera : MonoBehaviour
     private float _zoomVelocity;
     private void HandleZoom()
     {
+        if ( _cam == null ) return;
+        
         float change = InputManager.CamZoom() * _zoomSpeed;
         _targetZoom = Mathf.Clamp(_targetZoom - change, _minZoom, _maxZoom);
 

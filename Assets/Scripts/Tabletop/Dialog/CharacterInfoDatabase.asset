@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d963c68dc954a7a4fb9fca4ccd78fd2e, type: 3}
+  m_Name: CharacterInfoDatabase
+  m_EditorClassIdentifier: 
+  characterList:
+  - _characterID: 0
+    _audioClip: {fileID: 0}
+    _characterName: ???
+    _characterPicture: {fileID: 0}
+  - _characterID: 1
+    _audioClip: {fileID: 0}
+    _characterName: Gousse
+    _characterPicture: {fileID: 0}
+  - _characterID: 2
+    _audioClip: {fileID: 0}
+    _characterName: Automaton
+    _characterPicture: {fileID: 0}
+  - _characterID: 3
+    _audioClip: {fileID: 0}
+    _characterName: Nerdbert
+    _characterPicture: {fileID: 0}
+  - _characterID: 4
+    _audioClip: {fileID: 0}
+    _characterName: Grunt
+    _characterPicture: {fileID: 0}
+  - _characterID: 5
+    _audioClip: {fileID: 0}
+    _characterName: Bomber
+    _characterPicture: {fileID: 0}
+  - _characterID: 6
+    _audioClip: {fileID: 0}
+    _characterName: Sniper
+    _characterPicture: {fileID: 0}
+  - _characterID: 7
+    _audioClip: {fileID: 0}
+    _characterName: Elite
+    _characterPicture: {fileID: 0}

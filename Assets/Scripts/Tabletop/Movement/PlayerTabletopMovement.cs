@@ -21,7 +21,7 @@ public class PlayerTabletopMovement : TabletopMovement
     
     private HexagonCell _selectedCell;
 
-    public bool InputEnabled { get; set; }
+    public bool InputEnabled { get; set; } = true;
 
     private void Awake()
     {
@@ -78,6 +78,7 @@ public class PlayerTabletopMovement : TabletopMovement
             
             _hoveredCell.HoverCell();
             _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
+            Debug.Log("Find path. " + Points);
         }
         else if (_hoveredCell != null)
         {

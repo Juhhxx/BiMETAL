@@ -1,19 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CharacterInteractive : Interactive
+public class CharacterSpeech : MonoBehaviour
 {
-    [SerializeField] private string _levelSceneName;
-    [SerializeField] private GameObject _confirmScreen;
-    [SerializeField] private Button _confirmButton;
-    [SerializeField] private Button _notConfirmButton;
     [SerializeField] private List<DialogQueue> _dialogList;
     private Queue<Queue<(CharacterID, Queue<string>)>> _dialogQueues;
     private SpeechControl _speechControl;
     private bool _stop = false;
-
+    
     private void Awake()
     {
         _speechControl = FindFirstObjectByType<SpeechControl>();
@@ -40,8 +34,8 @@ public class CharacterInteractive : Interactive
             _dialogQueues.Enqueue(innerQueue);
         }
     }
-    
-    public override void Interact(Interactive other = null)
+
+    public void StartSpeech()
     {
         // Debug.Log("talking");
         if (_stop) return;
@@ -54,42 +48,7 @@ public class CharacterInteractive : Interactive
             _dialogQueues.Dequeue();
             _dialogQueues.Enqueue(updatedQueue);
         }
-
-        StartCoroutine(WaitForSpeech());
     }
-
-    public override void Select()
-    {
-        base.Select();
-    }
-
-    public IEnumerator WaitForSpeech()
-    {
-        yield return new WaitUntil( () => _speechControl.ShowingSpeech() );
-        yield return new WaitWhile( () => _speechControl.ShowingSpeech() );
-
-        Debug.Log("Showing confirmation menu. ");
-
-        _confirmScreen.SetActive( true );
-
-        _confirmButton.onClick.AddListener(StartLevel);
-        _notConfirmButton.onClick.AddListener(Continue);
-    }
-
-    public void StartLevel()
-    {
-        SceneLoader.Load(_levelSceneName);
-        Continue();
-    }
-
-    public void Continue()
-    {
-        _confirmButton.onClick.RemoveListener(StartLevel);
-        _notConfirmButton.onClick.RemoveListener(Continue);
-
-        _confirmScreen.SetActive( false );
-    }
-
     public void NextSpeech()
     {
         if (_dialogQueues.Count > 1)
