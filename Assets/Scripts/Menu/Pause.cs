@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,7 +37,16 @@ public class Pause : Menu
     {
         // preform save actions
 
+        StartCoroutine(QuitRoutine());
+    }
+
+    private IEnumerator QuitRoutine()
+    {
         Continue();
+
+        yield return new WaitUntil( () => ! _pause.activeSelf && ! _settings.GetActive() );
+
+        Debug.Log("loading main");
         SceneLoader.Load(_mainMenu);
     }
 
@@ -45,10 +55,13 @@ public class Pause : Menu
     /// </summary>
     public override void Continue()
     {
-        _settings.TurnOffSettings();
-        _pause.SetActive(false);
         Time.timeScale = 1f;
         InputManager.Paused = false;
+
+        _settings.TurnOffSettings();
+        _pause.SetActive(false);
+
+        // Debug.Log("unloading");
     }
 
     /// <summary>
@@ -69,6 +82,7 @@ public class Pause : Menu
 
     public void OnDestroy()
     {
+        Debug.Log("Destroying pause");
         Continue();        
     }
 }
