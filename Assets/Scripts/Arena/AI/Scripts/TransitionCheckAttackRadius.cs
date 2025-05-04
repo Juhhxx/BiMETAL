@@ -14,7 +14,7 @@ public class TransitionCheckAttackRadius : TransitionAbstract
 
     protected override void Action()
     {
-        Debug.Log($"Transition Passed");
+        Debug.Log($"Transition Attack Radius");
     }
     protected override bool Condition()
     {

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad3658913798e804d8fef6141f7dae50, type: 3}
-  m_Name: StateMachineGrunt
+  m_Name: GruntStateMachine
   m_EditorClassIdentifier: 
   StateTransitions:
   - State: {fileID: 11400000, guid: ca5eacbd498fce44589ec4b6f3789c2e, type: 2}

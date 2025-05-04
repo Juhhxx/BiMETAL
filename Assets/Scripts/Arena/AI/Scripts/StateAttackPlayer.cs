@@ -6,20 +6,25 @@ using UnityEngine;
 public class StateAttackPlayer : StateAbstract
 {
     private GameObject  gameObject;
+    private Transform   transform;
 
     [SerializeField] private float _attackTimer;
-    private float _timer = 0;
+
+    private float       _timer = 0;
     private EnemyAttack _enemyAttack;
+    private Transform   _target;
     
 
     protected override void EntryAction()
     {
-        Debug.Log("Entering Empty");
+        Debug.Log("Entering State Attack");
     }
 
     protected override void StateAction()
     {
-        Debug.Log("State Empty");
+        Debug.Log("State Attack");
+
+        transform.LookAt(_target);
 
         if (_timer < _attackTimer)
         {
@@ -34,12 +39,14 @@ public class StateAttackPlayer : StateAbstract
 
     protected override void ExitAction()
     {
-        Debug.Log("Exit Empty");
+        Debug.Log("Exit State Attack");
     }
     public override void InstantiateState()
     {
         gameObject = base.objectReference;
+        transform = gameObject.transform;
         _enemyAttack = gameObject.GetComponent<EnemyAttack>();
+        _target = FindAnyObjectByType<PlayerMovement>().transform;
 
         base.state = new State(base.Name, EntryAction, StateAction, ExitAction);
     }
