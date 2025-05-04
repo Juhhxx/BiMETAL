@@ -9,6 +9,7 @@ public class Character : ScriptableObject
     public float    HP;
     public float    BaseAttack;
     public float    SpecialAttack;
+    public Faction  Faction;
 
     public Character InstantiateCharacter()
     {

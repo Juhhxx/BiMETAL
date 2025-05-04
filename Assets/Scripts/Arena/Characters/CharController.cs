@@ -14,8 +14,6 @@ public class CharController : MonoBehaviour
     private void Awake()
     {
         _character = _characterBase.InstantiateCharacter();
-        
-        OnDamageTaken ??= new UnityEvent();
     }
     private void Update()
     {
@@ -27,6 +25,8 @@ public class CharController : MonoBehaviour
 
     public void GiveDamage(CharController c, float amount)
     {
+        if (c.Character.Faction == _character.Faction) return;
+         
         c.TakeDamage(amount);
         Debug.LogWarning($"{_character.Name} gave {amount} damage.");
     }
