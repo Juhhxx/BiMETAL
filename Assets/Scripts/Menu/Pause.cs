@@ -28,6 +28,7 @@ public class Pause : Menu
                 InputManager.Paused = true;
             }
         }
+        Debug.Log("time scale?" + Time.timeScale);
     }
 
     /// <summary>

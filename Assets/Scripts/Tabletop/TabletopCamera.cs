@@ -44,7 +44,7 @@ public class Tabletop_camera : MonoBehaviour
     private void HandleZoom()
     {
         if ( _cam == null ) return;
-        
+
         float change = InputManager.CamZoom() * _zoomSpeed;
         _targetZoom = Mathf.Clamp(_targetZoom - change, _minZoom, _maxZoom);
 
@@ -52,7 +52,7 @@ public class Tabletop_camera : MonoBehaviour
         _cam.orthographicSize = _currentZoom;
 
         // Probably temporary
-        _cam.nearClipPlane = Mathf.Min(-50f, -_currentZoom);
+        // _cam.nearClipPlane = Mathf.Min(50f, _currentZoom);
     }
 
     private float _pitch;

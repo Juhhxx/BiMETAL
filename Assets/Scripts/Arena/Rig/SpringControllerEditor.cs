@@ -1,6 +1,7 @@
-using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
 [CustomEditor(typeof(RigController))]
 public class SpringControllerEditor : Editor
 {
@@ -17,3 +18,4 @@ public class SpringControllerEditor : Editor
             controller.ApplySpringSettings();
     }
 }
+#endif
