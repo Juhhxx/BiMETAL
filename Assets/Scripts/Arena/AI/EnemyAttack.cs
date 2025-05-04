@@ -20,27 +20,19 @@ public class EnemyAttack : MonoBehaviour
 
     private void Start()
     {
-        _character      = GetComponent<CharController>();
+        _character = GetComponent<CharController>();
     }
     private void OnEnable()
     {
-        _attackCollider.OnCollisionEnter        += DoAttack;
+        _attackCollider.OnCollisionEnter += DoAttack;
     }
     private void OnDisable()
     {
-        _attackCollider.OnCollisionEnter        -= DoAttack;
+        _attackCollider.OnCollisionEnter -= DoAttack;
     }
-    private void Update()
+    public void Attack()
     {
-        Attack();
-    }
-
-    private void Attack()
-    {
-        if (Input.GetButtonDown("Attack"))
-        {
-            OnSlash?.Invoke();
-        }
+        OnSlash?.Invoke();
     }
     private void DoAttack(object sender, OnCollisionEventArgs e)
     {

@@ -21,4 +21,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: da68cd42d61ea6a4da643b7106e3e8ec, type: 2}
   - State: {fileID: 11400000, guid: 975a7c146999d0c4482f61e645bc3442, type: 2}
     Transitions:
+    - {fileID: 11400000, guid: 409048aa5d445b14a879019366813e83, type: 2}
     - {fileID: 11400000, guid: 2160810942a06834c85876f102b138d7, type: 2}
+  - State: {fileID: 11400000, guid: 0acba0d9116f9494080a349da64be951, type: 2}
+    Transitions:
+    - {fileID: 11400000, guid: adc25f5ac4c35d14297f5a826ac14dee, type: 2}

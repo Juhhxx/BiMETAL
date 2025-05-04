@@ -1770,8 +1770,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Grunt
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3595321060026885226, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
