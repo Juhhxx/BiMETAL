@@ -1,7 +1,6 @@
 using AI.FSMs.UnityIntegration;
 using AI.FSMs.BaseFiles;
 using UnityEngine;
-using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "StateFollowPlayer", menuName = "State Machines/StateFollowPlayer")]
 public class StateFollowPlayer : StateAbstract

@@ -16,3 +16,4 @@ MonoBehaviour:
   HP: 200
   BaseAttack: 10
   SpecialAttack: 25
+  Faction: 1

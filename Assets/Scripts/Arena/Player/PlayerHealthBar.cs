@@ -18,7 +18,7 @@ public class PlayerHealthBar : MonoBehaviour
     {
         _character = _playerCharacter.Character;
 
-        _tmp.text = _character.Name;
+        _tmp.text = $"HP : {_character.HP} / {_character.HP}";
         _fullHP = _character.HP;
     }
 
@@ -37,16 +37,16 @@ public class PlayerHealthBar : MonoBehaviour
     }
     private IEnumerator ChangeScale(float currentHP, float hp)
     {
-        float newScale = currentHP;
+        float newHP = currentHP;
         float i = 0;
 
-        while (newScale != hp)
+        while (newHP != hp)
         {
-            newScale = Mathf.Lerp(currentHP,hp,i);
+            newHP = Mathf.Lerp(currentHP,hp,i);
 
-            // Debug.Log($"COLOR {newColor} = {color} ? {newColor == color}");
+            _hpBar.fillAmount = newHP;
 
-            _hpBar.fillAmount = newScale;
+            _tmp.text = $"HP : {newHP * _fullHP:f0} / {_fullHP}";
 
             i += _updateSpeed * Time.deltaTime;
 
