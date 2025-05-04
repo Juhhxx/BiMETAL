@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -104,5 +105,10 @@ public class InputManager : MonoBehaviour
     public static bool Pause()
     {
         return Input.GetKeyDown(KeyCode.Escape);
+    }
+
+    public static bool Skip()
+    {
+        return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(1);
     }
 }

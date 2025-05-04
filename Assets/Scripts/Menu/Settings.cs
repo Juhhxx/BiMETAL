@@ -52,6 +52,11 @@ public class Settings : MonoBehaviour
             _settingsObject.SetActive(false);
     }
 
+    public bool GetActive()
+    {
+        return _settingsObject.activeSelf;
+    }
+
     public void ChangeBrightness(float value)
     {
         if ( _postExposure == null ) return;

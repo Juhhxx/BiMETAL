@@ -53,6 +53,8 @@ public class TabletopController : MonoBehaviour
         Debug.Log("started");
 
         _playerInput.InputEnabled = true;
+
+        enabled = true;
     }
 
     private void Start()
@@ -151,8 +153,9 @@ public class TabletopController : MonoBehaviour
     {
         yield return new WaitUntil(() => SceneManager.GetActiveScene().name == _currentTabletop);
 
-        enabled = true;
         Enable();
+
+        yield return new WaitUntil( () => enabled );
 
         Debug.Log("started restore");
 

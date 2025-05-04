@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5245409150805631178, guid: b9283eab281b51b429e7fafe76fd96b9, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431119801044835460, guid: b9283eab281b51b429e7fafe76fd96b9, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -60,6 +68,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 866203306923010595}
   m_SourcePrefab: {fileID: 100100000, guid: b9283eab281b51b429e7fafe76fd96b9, type: 3}
+--- !u!20 &958456323337106531 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5245409150805631178, guid: b9283eab281b51b429e7fafe76fd96b9, type: 3}
+  m_PrefabInstance: {fileID: 5009816045169824937}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6572514512257219774 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2211322419234646039, guid: b9283eab281b51b429e7fafe76fd96b9, type: 3}
@@ -77,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c6d540411c32c4eb6980fe62b5efb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cam: {fileID: 0}
+  _cam: {fileID: 958456323337106531}
   _rotSpeed: 5
   _zoomSpeed: 0.3
   _movSpeed: 1

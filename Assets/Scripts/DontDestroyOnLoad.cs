@@ -11,6 +11,7 @@ public class DontDestroyOnLoad : MonoBehaviour
         
         if ( ! Instances.Contains(gameObject.name) )
         {
+            Debug.Log("Adding new DDOL: " + gameObject.name);
             Instances.Add(gameObject.name);
             DontDestroyOnLoad(gameObject);
         }
