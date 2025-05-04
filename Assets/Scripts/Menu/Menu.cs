@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Menu : MonoBehaviour
+public class Menu : MonoBehaviour
 {
     protected Settings _settings;
     [SerializeField] private Canvas canvas;
@@ -61,6 +61,6 @@ public abstract class Menu : MonoBehaviour
         _settings.TurnOnSettings();
     }
 
-    public abstract void Continue();
-    public abstract void Quit();
+    public virtual void Continue() {}
+    public virtual void Quit() {}
 }
