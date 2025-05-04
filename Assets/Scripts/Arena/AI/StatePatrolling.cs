@@ -80,10 +80,10 @@ public class StatePatrolling : StateAbstract
             if (i == 0) newWP = transform.position;
             else
             {
-                newWP = _waypoints[i - 1];
-
                 do
                 {
+                    newWP = _waypoints[i - 1];
+                    
                     Vector2 rotation    = Random.insideUnitCircle;
                     Vector3 direction   = new Vector3(rotation.x, 0f, rotation.y);
 
