@@ -19,6 +19,7 @@ public class Character : ScriptableObject
         newC.HP             = HP;
         newC.BaseAttack     = BaseAttack;
         newC.SpecialAttack  = SpecialAttack;
+        newC.Faction        = Faction;
 
         return newC;
     }    

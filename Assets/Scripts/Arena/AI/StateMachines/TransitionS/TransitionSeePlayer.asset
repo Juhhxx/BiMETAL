@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: SeePlayer
   ToState: {fileID: 11400000, guid: 975a7c146999d0c4482f61e645bc3442, type: 2}
   _visionRange: 10
-  _fov: 90
+  _fov: 120
   _sensingRange: 3

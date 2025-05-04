@@ -15,3 +15,5 @@ MonoBehaviour:
   Name: Dummy
   HP: 100
   BaseAttack: 1
+  SpecialAttack: 0
+  Faction: 1
