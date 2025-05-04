@@ -147,7 +147,6 @@ public class PlayerAttack : MonoBehaviour
             float distance = Vector3.Distance(selfCorrected,otherCorrected);
 
             finalDamage = Mathf.Floor((-(distance * distance) * 5f) + 100);
-            Debug.LogWarning($"finalDamage : {finalDamage}");
         }
         else if (_isDashing)
         {
