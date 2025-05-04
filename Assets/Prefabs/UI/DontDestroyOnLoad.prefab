@@ -122,7 +122,7 @@ Canvas:
   m_GameObject: {fileID: 1810618869404855674}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -731,6 +731,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3775871522533681914}
+    - target: {fileID: 376588315235787606, guid: 3da9fe2c6b2375045b08b2d68359a509, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1322418661968965474, guid: 3da9fe2c6b2375045b08b2d68359a509, type: 3}
       propertyPath: m_Name
       value: Back
@@ -1007,6 +1011,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4415202098921662013, guid: b2a76782d59cc884f81289d7312aa786, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 6217684178875286623}
     - target: {fileID: 6306006006394352766, guid: b2a76782d59cc884f81289d7312aa786, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1248,6 +1256,10 @@ PrefabInstance:
     - target: {fileID: 5623163491908586201, guid: be52a9fa5a640644ca842563b922b562, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682021184639784246, guid: be52a9fa5a640644ca842563b922b562, type: 3}
+      propertyPath: m_Value
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 6771694540567723233, guid: be52a9fa5a640644ca842563b922b562, type: 3}
       propertyPath: m_fontAsset
@@ -1500,6 +1512,10 @@ PrefabInstance:
     - target: {fileID: 5623163491908586201, guid: be52a9fa5a640644ca842563b922b562, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6682021184639784246, guid: be52a9fa5a640644ca842563b922b562, type: 3}
+      propertyPath: m_Value
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 6771694540567723233, guid: be52a9fa5a640644ca842563b922b562, type: 3}
       propertyPath: m_fontAsset
