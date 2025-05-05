@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2049179682570185024}
   - component: {fileID: 5146437196665709907}
   - component: {fileID: 1999601699352541239}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Attack Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4327718641467943333}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 8420448622433640751}
   - component: {fileID: 1098950906787897270}
   - component: {fileID: 6327805944197332726}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 4235123021852491343}
   - component: {fileID: 204736086678458743}
   - component: {fileID: 6633335872303460572}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 4537380634941821314}
   - component: {fileID: 6536355325314258319}
   - component: {fileID: 8470437897781143761}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4529682681034395616}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 4812729436413281340}
   - component: {fileID: 8169570062200612896}
   - component: {fileID: 5192395469993165608}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Enemy Grunt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,7 +572,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.6
   m_Speed: 3.5
-  m_Acceleration: 3
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
   _maxSpeed: 5
   _maxChaseSpeed: 8
   _maxAngularSpeed: 200
-  _targetAcceptanceRadius: 3
+  _targetAcceptanceRadius: 2
 --- !u!114 &8169570062200612896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,6 +714,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5710165930209828291}
     m_Modifications:
+    - target: {fileID: 964239656356898356, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3053413875573560630, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -754,9 +758,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7057562776479609054, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675192198850106960, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8986869756253990803, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_Name
       value: Health Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986869756253990803, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020466960572123340, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132281943234136926, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

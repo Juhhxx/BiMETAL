@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: CheckIfOutside
   ToState: {fileID: 11400000, guid: 975a7c146999d0c4482f61e645bc3442, type: 2}
-  _radius: 2.5
+  _radius: 2
   _checkIfInside: 0
