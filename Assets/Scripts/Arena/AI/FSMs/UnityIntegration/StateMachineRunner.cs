@@ -24,5 +24,9 @@ namespace AI.FSMs.UnityIntegration
         {
             _stateMachine.Run();
         }
+        public void Reset()
+        {
+            _stateMachine.ResetStateMachine();
+        }
     }
 }

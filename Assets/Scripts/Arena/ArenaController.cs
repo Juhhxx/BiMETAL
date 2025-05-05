@@ -64,4 +64,5 @@ public class ArenaController : MonoBehaviour
                 _tabletopController.EndBattle(true);
         }
     }
+    public void WinBattle() => _tabletopController.EndBattle(true);
 }
