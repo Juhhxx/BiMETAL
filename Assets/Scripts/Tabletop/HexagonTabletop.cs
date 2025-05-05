@@ -4,11 +4,11 @@ using UnityEngine;
 public class HexagonTabletop : MonoBehaviour
 {
     public Dictionary<Vector2, HexagonCell> CellDict { get; private set; }
-    public HexagonCell[] Cells { get; private set; }
+    [field:SerializeField] public List<HexagonCell> Cells { get; set; }
     [SerializeField] private LayerMask _cells;
     public static LayerMask CellLayer;
 
-    public Grid Grid { get; private set; }
+    [field:SerializeField] public Grid Grid { get; private set; }
 
     public bool Done { get; private set; } = false;
 
@@ -17,29 +17,22 @@ public class HexagonTabletop : MonoBehaviour
         CellLayer = _cells;
 
         CellDict = new Dictionary<Vector2, HexagonCell>();
-        Grid = GetComponent<Grid>();
 
-        CreateCells();
+        if ( Grid == null )
+            Grid = GetComponent<Grid>();
+
+        foreach ( HexagonCell cell in Cells )
+            CellDict[cell.CellValue] = cell;
     }
 
     private void Start()
     {
+        Debug.Log("Initializing Cells Neighbors. ");
+
         foreach (HexagonCell cell in Cells)
             cell.SetNeighbors();
-    }
-
-    public void CreateCells()
-    {
-        Cells = GetComponentsInChildren<HexagonCell>();
-
-        // Debug.Log("Found " + cells.Length + " cells.");
-
-        foreach (HexagonCell cell in Cells)
-            CellDict[cell.InitializeCell(this)] = cell;
 
         Done = true;
-
-        // Debug.Log("Initialized " + Cells.Count + " cells.");
     }
 
     public void ResetPaths()

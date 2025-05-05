@@ -7,8 +7,8 @@ public class HexagonCell : MonoBehaviour
     [SerializeField] private Color _defaultColor;
     [SerializeField] private GameObject _hoverObject;
 
-    public Vector2 CellValue { get; private set; }
-    private HexagonTabletop _tabletop;
+    [field:SerializeField] public Vector2 CellValue { get; private set; }
+    [SerializeField] private HexagonTabletop _tabletop;
 
     // Any enemy can pass through here, but will take down the piece
     public Interactive Piece { get; private set; }
@@ -29,6 +29,14 @@ public class HexagonCell : MonoBehaviour
     [field:SerializeField] public HexagonCell[] Neighbors { get; private set; }
 
     public bool Walkable() => Piece == null && ( Modifier ? ! Modifier.NonWalkable : true );
+
+    private void Start()
+    {
+        if (_Cosmetic == null)
+            _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
+
+        CosmeticModify();
+    }
 
     public bool IsNonAvoidable()
     {
@@ -138,7 +146,6 @@ public class HexagonCell : MonoBehaviour
     public Vector2 InitializeCell(HexagonTabletop tabletop)
     {
         _tabletop = tabletop;
-
         // Pos = _q * new Vector2(Sqrt3, 0) + _r * new Vector2(Sqrt3 / 2, 1.5f);
         // We can just get the grid position, better in floats for hexagons in specific
 
@@ -146,12 +153,6 @@ public class HexagonCell : MonoBehaviour
             Round(transform.localPosition.x, 2),
             Round(transform.localPosition.y, 2)
         );
-
-        if (_Cosmetic == null)
-            _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
-
-
-        CosmeticModify();
 
         return CellValue;
     }
@@ -199,9 +200,13 @@ public class HexagonCell : MonoBehaviour
         Neighbors = new HexagonCell[6];
         Collider[] colliders = Physics.OverlapSphere(transform.position, _tabletop.Grid.cellSize.x * 0.75f);
 
+        Debug.Log("find neighbor, tabletop null? " + _tabletop);
+
         foreach (Collider col in colliders)
         {
-            if (!col.transform.parent.TryGetComponent(out HexagonCell neighbor) || neighbor == this)
+            Debug.Log("neighbor");
+            Transform parent = col.transform.parent;
+            if (parent == null || ! parent.TryGetComponent(out HexagonCell neighbor) || neighbor == this)
                 continue;
 
             Vector2 delta = neighbor.CellValue - CellValue;
