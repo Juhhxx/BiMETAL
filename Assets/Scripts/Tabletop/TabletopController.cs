@@ -68,6 +68,9 @@ public class TabletopController : MonoBehaviour
 
         _currentTabletop = SceneLoader.SceneToLoad;
 
+        if ( _currentTabletop == null || _currentTabletop == "" )
+            _currentTabletop = SceneManager.GetActiveScene().name;
+
         Debug.Log("tabletop to load is: " + _currentTabletop);
 
         _health = _baseHealth;
@@ -117,7 +120,13 @@ public class TabletopController : MonoBehaviour
         _playerRound = ! _playerRound;
     }
 
-    public List<PieceInteractive> BattlePieces { get; private set; }
+    private List<PieceInteractive> _battlePieces;
+    public List<PieceInteractive> BattlePieces {
+        get {
+            Debug.Log("Battle pieces num: " + _battlePieces.Count);
+            return _battlePieces;
+        }
+        }
     public List<string> BattleIDs { get; private set; }
     public HexagonCell BattleCell { get; private set; }
 
@@ -130,7 +139,7 @@ public class TabletopController : MonoBehaviour
 
     public void StartBattle(HexagonCell cell, List<PieceInteractive> pieces)
     {
-        BattlePieces = pieces;
+        _battlePieces = pieces;
         BattleIDs = new();
 
         foreach ( PieceInteractive piece in BattlePieces)
@@ -314,7 +323,7 @@ public class TabletopController : MonoBehaviour
             }
         }
 
-        BattlePieces = new List<PieceInteractive>();
+        _battlePieces = new List<PieceInteractive>();
 
         foreach ( string id in BattleIDs )
         {
@@ -324,7 +333,7 @@ public class TabletopController : MonoBehaviour
                 {
                     PieceInteractive piece = basePiece.Interactive as PieceInteractive;
                     if ( piece != null )
-                        BattlePieces.Add( piece );
+                        _battlePieces.Add( piece );
 
                     break;
                 }

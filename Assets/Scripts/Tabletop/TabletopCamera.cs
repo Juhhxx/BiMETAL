@@ -52,7 +52,7 @@ public class Tabletop_camera : MonoBehaviour
         _cam.orthographicSize = _currentZoom;
 
         // Probably temporary
-        _cam.nearClipPlane = Mathf.Min(50f, _currentZoom);
+        // _cam.nearClipPlane = Mathf.Min(50f, _currentZoom);
     }
 
     private float _pitch;
