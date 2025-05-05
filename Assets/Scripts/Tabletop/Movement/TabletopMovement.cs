@@ -33,7 +33,7 @@ public abstract class TabletopMovement : TabletopBase
 
         _queue.Enqueue(cor);
 
-        if (_queue.Count <= 1)
+        if (_queue.Count <= 1 && gameObject.activeInHierarchy)
             StartCoroutine(cor);
     }
 
