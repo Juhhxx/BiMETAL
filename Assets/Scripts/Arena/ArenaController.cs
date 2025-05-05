@@ -14,7 +14,7 @@ public class ArenaController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("ARENA CONTROLLER ACTIVE");
+        Debug.Log("ARENA CONTROLLER ACTIVE - DESTROYED");
         _tabletopController = FindAnyObjectByType<TabletopController>();
         _enemiesList = new List<GameObject>();
 
