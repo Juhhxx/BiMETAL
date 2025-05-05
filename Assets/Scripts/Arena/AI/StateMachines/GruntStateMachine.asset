@@ -15,7 +15,7 @@ MonoBehaviour:
   StateTransitions:
   - State: {fileID: 11400000, guid: ca5eacbd498fce44589ec4b6f3789c2e, type: 2}
     Transitions:
-    - {fileID: 11400000, guid: de432c57f4d77ca4b86c6a1802be9129, type: 2}
+    - {fileID: 11400000, guid: b3a3801f72e62f246afc92146b081820, type: 2}
   - State: {fileID: 11400000, guid: d0d2a33bf95fc5c458ee67e929ccaee0, type: 2}
     Transitions:
     - {fileID: 11400000, guid: da68cd42d61ea6a4da643b7106e3e8ec, type: 2}
@@ -26,3 +26,5 @@ MonoBehaviour:
   - State: {fileID: 11400000, guid: 0acba0d9116f9494080a349da64be951, type: 2}
     Transitions:
     - {fileID: 11400000, guid: adc25f5ac4c35d14297f5a826ac14dee, type: 2}
+  RegisteredComponents: []
+  RegisteredObjects: []

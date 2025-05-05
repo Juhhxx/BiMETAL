@@ -12,6 +12,7 @@ public class StatePatrolling : StateAbstract
 
     [SerializeField] private float _numberOfWaypoints;
     [SerializeField] private float _maximumDistance;
+    [SerializeField] private LayerMask _layersToRaycast;
 
     private EnemyMovement   _movement;
     private Vector3         _target;
@@ -80,19 +81,21 @@ public class StatePatrolling : StateAbstract
             if (i == 0) newWP = transform.position;
             else
             {
+                Vector2 rotation;
+                Vector3 direction;
                 do
                 {
                     newWP = _waypoints[i - 1];
                     
-                    Vector2 rotation    = Random.insideUnitCircle;
-                    Vector3 direction   = new Vector3(rotation.x, 0f, rotation.y);
+                    rotation    = Random.insideUnitCircle;
+                    direction   = new Vector3(rotation.x, 0f, rotation.y);
 
-                    newWP += direction.normalized * _maximumDistance;
+                    newWP += direction * _maximumDistance;
 
-                    Debug.Log($"New point Raycast Test: {Physics.Raycast(_waypoints[i - 1], newWP - _waypoints[i - 1])}");
+                    Debug.Log($"New point Raycast Test: {Physics.Raycast(_waypoints[i - 1], direction, _maximumDistance, _layersToRaycast)}");
                     Debug.Log($"New point NavMesh Test: {NavMesh.SamplePosition(newWP, out hit, 1.1f, 1)}");
                 }
-                while (Physics.Raycast(_waypoints[i - 1], newWP - _waypoints[i - 1]) || 
+                while (Physics.Raycast(_waypoints[i - 1], direction, _maximumDistance, _layersToRaycast) || 
                       !NavMesh.SamplePosition(newWP, out hit, 1.1f, 1));
 
             }

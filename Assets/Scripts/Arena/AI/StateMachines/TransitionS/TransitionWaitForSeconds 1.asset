@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 917bb3d491c5bca44a768fa36d4e396e, type: 3}
-  m_Name: StatePatrolling
+  m_Script: {fileID: 11500000, guid: 02cdcd129103c9b4ab0413f80430e7bd, type: 3}
+  m_Name: TransitionWaitForSeconds 1
   m_EditorClassIdentifier: 
-  Name: Patrolling
-  _numberOfWaypoints: 10
-  _maximumDistance: 10
-  _layersToRaycast:
-    serializedVersion: 2
-    m_Bits: 16908923
+  Name: WaitFor0.5Seconds
+  ToState: {fileID: 11400000, guid: d0d2a33bf95fc5c458ee67e929ccaee0, type: 2}
+  _seconds: 0.5
