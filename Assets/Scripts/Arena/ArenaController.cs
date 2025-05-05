@@ -56,6 +56,8 @@ public class ArenaController : MonoBehaviour
 
             CharController ctrl = newEnemy.GetComponent<CharController>();
             ctrl.OnDeath.AddListener(() => CheckEndBattle(true));
+
+            Debug.Log($"ENEMY SPAWNED AT {pos}");
         }
         _enemiesKilled = 0;
     }

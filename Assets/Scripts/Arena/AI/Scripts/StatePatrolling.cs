@@ -64,7 +64,7 @@ public class StatePatrolling : StateAbstract
         if (_increase) _currentWaypoint += 1;
         else           _currentWaypoint -= 1;
 
-        if (_currentWaypoint == 9) _increase = false;
+        if (_currentWaypoint == _numberOfWaypoints - 1) _increase = false;
         if (_currentWaypoint == 0) _increase = true;
 
         _target = _waypoints[_currentWaypoint];
@@ -89,9 +89,11 @@ public class StatePatrolling : StateAbstract
                     
                     rotation    = Random.insideUnitCircle;
                     direction   = new Vector3(rotation.x, 0f, rotation.y);
+                    direction   = direction.normalized;
 
                     newWP += direction * _maximumDistance;
 
+                    Debug.Log($"Testing Point at {newWP}");
                     Debug.Log($"New point Raycast Test: {Physics.Raycast(_waypoints[i - 1], direction, _maximumDistance, _layersToRaycast)}");
                     Debug.Log($"New point NavMesh Test: {NavMesh.SamplePosition(newWP, out hit, 1.1f, 1)}");
                 }
