@@ -68,8 +68,6 @@ public class PlayerMovement : MonoBehaviour
         _motion         = Vector3.zero;
         _jump           = false;
         _dash           = false;
-
-        HideCursor();
     }
     private void Update()
     {
@@ -219,9 +217,5 @@ public class PlayerMovement : MonoBehaviour
         _dash = false;
         _controller.excludeLayers = 0;
         OnPlayerDashEnd?.Invoke();
-    }
-    private void HideCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
     }
 }

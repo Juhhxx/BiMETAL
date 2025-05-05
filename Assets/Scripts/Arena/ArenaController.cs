@@ -24,7 +24,19 @@ public class ArenaController : MonoBehaviour
 
         SpawnEnemies();
     }
+    private void Update()
+    {
+        UpdateLockState();
+    }
 
+    // Update Lock State
+    private void UpdateLockState()
+    {
+        if (InputManager.Paused) Cursor.lockState = CursorLockMode.None;
+        else                     Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    // Enemy Spawning
     private void SpawnEnemies()
     {
         // Change to a foreach, enemie piece data should store the respective game object for instantiation
@@ -60,6 +72,8 @@ public class ArenaController : MonoBehaviour
 
         return point;
     }
+
+    // Check Battle Status
     public void CheckEndBattle(bool checkPlayerWin)
     {
         if (!checkPlayerWin)
