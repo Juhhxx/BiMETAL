@@ -10,7 +10,7 @@ public class ArenaController : MonoBehaviour
     private TabletopController _tabletopController;
     private int _numberOfEnemies;
     private int _enemiesKilled;
-    private IList<GameObject> _enemiesList;
+    [SerializeField] private IList<GameObject> _enemiesList;
 
     private void Start()
     {
