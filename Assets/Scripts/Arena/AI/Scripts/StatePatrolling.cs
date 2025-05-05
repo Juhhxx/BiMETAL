@@ -43,7 +43,7 @@ public class StatePatrolling : StateAbstract
     {
         gameObject  = base.objectReference;
         transform   = gameObject.transform;
-        _movement   = gameObject.GetComponent<EnemyMovement>();
+        _movement   = GetComponent<EnemyMovement>(gameObject);
         _waypoints  = new List<Vector3>();
 
         base.state = new State(base.Name, EntryAction, StateAction, ExitAction);

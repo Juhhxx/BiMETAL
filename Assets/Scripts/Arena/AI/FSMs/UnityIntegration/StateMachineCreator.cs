@@ -17,6 +17,7 @@ namespace AI.FSMs.UnityIntegration
         private GameObject _objectReference;
         // Reference to the Initial State of the State Machine.
         private StateAbstract _initialState;
+        
         // List of references to State Transitions.
         [Tooltip("List with all the States, and respective Transitions, for the State Machine.\nTip : The 1st State on the list will be the initial State.")]
         public List<StateTransition> StateTransitions;
@@ -31,6 +32,7 @@ namespace AI.FSMs.UnityIntegration
             {
                 // Debug.Log($"Initializing State {st.State.name} {st.State.State == null}");
                 st.State.SetObjectReference(_objectReference);
+                st.State.SetParent(this);
                 st.State.InstantiateState();
                 // Debug.Log($"Initialized State {st.State.name} {st.State.State == null}");
             }
@@ -40,6 +42,7 @@ namespace AI.FSMs.UnityIntegration
                 foreach (TransitionAbstract t in st.Transitions)
                 {
                     t.SetObjectReference(_objectReference);
+                    t.SetParent(this);
                     if (t.Transition == null) t.InstantiateTransition();
                     st.State.AddTransitions(t);
                 }
@@ -146,6 +149,34 @@ namespace AI.FSMs.UnityIntegration
             }
 
             return newSM;
+        }
+
+        // New Implementations
+
+        private Dictionary<string,Component> _components = new Dictionary<string, Component>();
+
+        public T GetComponent<T>(GameObject gameObject) where T : Component
+        {
+            T component = gameObject.GetComponent<T>();
+
+            string key = component.ToString();
+
+            if (!_components.ContainsKey(key)) _components.Add(key, component);
+
+            return _components[key] as T;
+        }
+
+        private Dictionary<string,GameObject> _objects = new Dictionary<string, GameObject>();
+
+        public GameObject FindObjectByType<T>() where T : Component
+        {
+            GameObject obj = FindAnyObjectByType<T>().gameObject;
+
+            string key = obj.name + "_" + obj.GetHashCode();
+
+            if (!_objects.ContainsKey(key)) _objects.Add(key, obj);
+
+            return _objects[key];
         }
     }
 }

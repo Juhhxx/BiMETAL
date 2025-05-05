@@ -45,8 +45,8 @@ public class StateAttackPlayer : StateAbstract
     {
         gameObject = base.objectReference;
         transform = gameObject.transform;
-        _enemyAttack = gameObject.GetComponent<EnemyAttack>();
-        _target = FindAnyObjectByType<PlayerMovement>().transform;
+        _enemyAttack = GetComponent<EnemyAttack>(gameObject);
+        _target = FindObjectByType<PlayerMovement>().transform;
 
         base.state = new State(base.Name, EntryAction, StateAction, ExitAction);
     }

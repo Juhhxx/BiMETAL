@@ -25,7 +25,7 @@ public class TransitionCheckAttackRadius : TransitionAbstract
     {
         gameObject = base.objectReference;
         transform = gameObject.transform;
-        _target = FindAnyObjectByType<PlayerMovement>().transform;
+        _target = FindObjectByType<PlayerMovement>().transform;
 
         base.transition = new Transition(base.Name, Condition, base.ToState.State, Action);
     }

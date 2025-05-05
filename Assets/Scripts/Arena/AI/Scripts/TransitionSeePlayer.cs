@@ -29,7 +29,7 @@ public class TransitionSeePlayer : TransitionAbstract
     {
         gameObject = base.objectReference;
         transform = gameObject.transform;
-        _target = FindAnyObjectByType<PlayerMovement>().gameObject;
+        _target = FindObjectByType<PlayerMovement>().gameObject;
 
         base.transition = new Transition(base.Name, Condition, base.ToState.State, Action);
     }

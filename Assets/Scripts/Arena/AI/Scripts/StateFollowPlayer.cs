@@ -29,8 +29,8 @@ public class StateFollowPlayer : StateAbstract
     public override void InstantiateState()
     {
         gameObject = base.objectReference;
-        _movement = gameObject.GetComponent<EnemyMovement>();
-        _target = FindAnyObjectByType<PlayerMovement>().transform;
+        _movement = GetComponent<EnemyMovement>(gameObject);
+        _target = FindObjectByType<PlayerMovement>().transform;
 
         base.state = new State(base.Name, EntryAction, StateAction, ExitAction);
     }

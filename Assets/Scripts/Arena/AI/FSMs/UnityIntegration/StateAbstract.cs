@@ -50,6 +50,21 @@ namespace AI.FSMs.UnityIntegration
         /// </summary>
         /// <returns>Copy of the State.</returns>
         public StateAbstract CreateState() => Instantiate(this);
+
+        // New implementations
+        private StateMachineCreator _stateMachineParent;
+        public void SetParent(StateMachineCreator st)
+        {
+            if (_stateMachineParent == null) _stateMachineParent = st;
+        }
+        protected T GetComponent<T>(GameObject gameObject) where T : Component
+        {
+            return _stateMachineParent.GetComponent<T>(gameObject);
+        }
+        public GameObject FindObjectByType<T>() where T : Component
+        {
+            return _stateMachineParent.FindObjectByType<T>();
+        }
     }
 }
  
