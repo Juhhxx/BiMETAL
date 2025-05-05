@@ -14,6 +14,8 @@ public class TabletopController : MonoBehaviour
     [SerializeField] private Transform _healthParent;
     [SerializeField] private TMP_Text _roundText;
     [SerializeField] private GameObject _canvas;
+
+    public string BATTLEARENA = "BattleArena";
     private int _round;
     private int _health;
     private bool _playerRound;
@@ -151,7 +153,7 @@ public class TabletopController : MonoBehaviour
 
         SaveSnapshot();
 
-        SceneLoader.Load("BattleArena");
+        SceneLoader.Load(BATTLEARENA);
 
         Debug.Log("Setting? Player cells: "+ _playerInput.CurrentCell + " l: " + _playerInput.LastCell);
 

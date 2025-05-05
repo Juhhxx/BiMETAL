@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class ArenaController : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class ArenaController : MonoBehaviour
             pos.y = 1.0f;
 
             GameObject newEnemy = Instantiate(_gruntPrefab, pos, Quaternion.identity);
+            if ( _tabletopController != null )
+            {
+                SceneManager.MoveGameObjectToScene(newEnemy,
+                    SceneManager.GetSceneByName(_tabletopController.BATTLEARENA));
+            }
 
             _enemiesList.Add(newEnemy);
 
