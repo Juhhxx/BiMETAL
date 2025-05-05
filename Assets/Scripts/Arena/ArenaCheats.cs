@@ -13,7 +13,11 @@ public class ArenaCheats : MonoBehaviour
     private void Start()
     {
         _arenaController = FindAnyObjectByType<ArenaController>();
-        _enemies = FindObjectsByType<EnemyMovement>(0).Cast<GameObject>().ToList();
+        _enemies = new List<GameObject>();
+        
+        EnemyMovement[] array = FindObjectsByType<EnemyMovement>(0);
+        foreach (EnemyMovement e in array) _enemies.Add(e.gameObject);
+
         _currentScene = SceneManager.GetActiveScene().name;
     }
     private void Update()
