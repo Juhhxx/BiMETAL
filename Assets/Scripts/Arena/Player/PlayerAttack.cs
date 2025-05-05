@@ -70,7 +70,7 @@ public class PlayerAttack : MonoBehaviour
     {
         string attackName = "None";
 
-        if (Input.GetButtonDown("Attack"))
+        if (InputManager.Attack())
         {
             if (_isOnAir)
             {
@@ -121,7 +121,7 @@ public class PlayerAttack : MonoBehaviour
     private void DoAttack(object sender, OnCollisionEventArgs e)
     {
         Collider self = e.self;
-        Collider other = e.other;
+        Collider other = e.other; 
         CharController otherChar = other.gameObject.GetComponent<CharController>();
 
         if (otherChar != null)
