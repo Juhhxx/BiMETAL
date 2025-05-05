@@ -31,6 +31,7 @@ public class TabletopController : MonoBehaviour
     {
         Debug.Log("starting");
 
+        if ( _canvas != null )
         _canvas.SetActive(true);
 
         _playerInput = FindFirstObjectByType<PlayerTabletopMovement>(FindObjectsInactive.Include);

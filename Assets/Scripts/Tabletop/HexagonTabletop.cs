@@ -29,8 +29,8 @@ public class HexagonTabletop : MonoBehaviour
     {
         Debug.Log("Initializing Cells Neighbors. ");
 
-        foreach (HexagonCell cell in Cells)
-            cell.SetNeighbors();
+        /*foreach (HexagonCell cell in Cells)
+            cell.SetNeighbors();*/
 
         Done = true;
     }

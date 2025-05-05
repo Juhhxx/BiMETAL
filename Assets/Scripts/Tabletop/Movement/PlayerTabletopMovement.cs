@@ -78,7 +78,7 @@ public class PlayerTabletopMovement : TabletopMovement
             
             _hoveredCell.HoverCell();
             _pathfinder.FindPath(CurrentCell, _hoveredCell, Points);
-            Debug.Log("Find path. " + Points);
+            // Debug.Log("Find path. " + Points);
         }
         else if (_hoveredCell != null)
         {

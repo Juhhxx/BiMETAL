@@ -23,6 +23,11 @@ public class AssignTabletopEditor : Editor
             {
                 cell.InitializeCell(tabletop);
                 tabletop.Cells.Add(cell);
+            }
+
+            foreach (HexagonCell cell in cells)
+            {
+                cell.SetNeighbors();
                 EditorUtility.SetDirty(cell);
             }
 

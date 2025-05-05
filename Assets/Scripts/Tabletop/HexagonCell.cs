@@ -204,7 +204,7 @@ public class HexagonCell : MonoBehaviour
 
         foreach (Collider col in colliders)
         {
-            Debug.Log("neighbor");
+            // Debug.Log("neighbor");
             Transform parent = col.transform.parent;
             if (parent == null || ! parent.TryGetComponent(out HexagonCell neighbor) || neighbor == this)
                 continue;
