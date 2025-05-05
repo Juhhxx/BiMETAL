@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 using AI.FSMs.BaseFiles;
-
 namespace AI.FSMs.UnityIntegration
 {
     /// <summary>
@@ -155,12 +155,16 @@ namespace AI.FSMs.UnityIntegration
 
         private Dictionary<string,Component> _components = new Dictionary<string, Component>();
 
+        [ReadOnly] public List<string> RegisteredComponents = new List<string>();
+        [ReadOnly] public List<string> RegisteredObjects = new List<string>();
+
         public T GetComponent<T>(GameObject gameObject) where T : Component
         {
             T component = gameObject.GetComponent<T>();
 
             string key = component.ToString();
 
+            if (!_components.ContainsKey(key)) RegisteredComponents.Add(key);
             if (!_components.ContainsKey(key)) _components.Add(key, component);
 
             return _components[key] as T;
@@ -172,8 +176,9 @@ namespace AI.FSMs.UnityIntegration
         {
             GameObject obj = FindAnyObjectByType<T>().gameObject;
 
-            string key = obj.name + "_" + obj.GetHashCode();
+            string key = obj.name + "[" + obj.GetHashCode() + "]";
 
+            if (!_objects.ContainsKey(key)) RegisteredObjects.Add(key);
             if (!_objects.ContainsKey(key)) _objects.Add(key, obj);
 
             return _objects[key];
