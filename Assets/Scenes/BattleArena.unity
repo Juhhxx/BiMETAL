@@ -1270,7 +1270,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaulfEnemyNumber: 3
-  _gruntPrefab: {fileID: 896216821799497898, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
+  _gruntPrefab: {fileID: 8296531496966734037, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
+  _enemiesList: []
 --- !u!4 &1107366093
 Transform:
   m_ObjectHideFlags: 0
