@@ -194,6 +194,12 @@ public class TabletopController : MonoBehaviour
             {
                 piece.Hurt();
             }
+
+            if ( _health <= 0 )
+            {
+                SceneLoader.Load("Overworld");
+                Destroy(gameObject);
+            }
         }
         else
         {
