@@ -24,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Debug.Log("DESTROYED ENEMY");
+        Debug.Log($"DESTROYED ENEMY, Enemy Life = {_character.Character.HP}");
     }
     private void OnEnable()
     {
