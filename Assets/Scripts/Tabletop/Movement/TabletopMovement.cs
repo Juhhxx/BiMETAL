@@ -24,6 +24,7 @@ public abstract class TabletopMovement : TabletopBase
 
     protected virtual void DemonstratePath(object sender, NotifyCollectionChangedEventArgs e)
     {
+        if ( this == null ) return;
         // Debug.Log("count: " + _pathfinder.Path.Count + "      points: " + Points);
         // count viewing, ideally point accumulation would be handled by the pathfinder itself, but it is shown here
         // if ( _pathfinder.Path.Count > Points ) return;

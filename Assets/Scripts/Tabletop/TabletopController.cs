@@ -123,7 +123,7 @@ public class TabletopController : MonoBehaviour
     private List<PieceInteractive> _battlePieces;
     public List<PieceInteractive> BattlePieces {
         get {
-            Debug.Log("Battle pieces num: " + _battlePieces.Count);
+            Debug.Log("DESTROYED? Battle pieces num: " + _battlePieces.Count);
             return _battlePieces;
         }
         }

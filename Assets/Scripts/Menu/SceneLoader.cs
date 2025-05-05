@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +21,7 @@ public class SceneLoader : MonoBehaviour
 
     public static void Load(string scene, RestoreFlag restoreFlag = null )
     {
+        Debug.Log("DESTROYED: Loading new");
         if (IsLoading) return;
         IsLoading = true;
 
@@ -75,12 +75,14 @@ public class SceneLoader : MonoBehaviour
             _loadSlider.value = Mathf.Lerp(_loadSlider.minValue, _loadSlider.maxValue * 0.8f, progress);
             
             if( progress >= 1)
+            {
+                Debug.Log("progress activated");
                 op.allowSceneActivation = true;
-            
+            }
             yield return null;
         }
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(_loadScene));
+        // SceneManager.SetActiveScene(SceneManager.GetSceneByName(_loadScene));
 
         Debug.Log("two ");
         if ( CurrentRestoreFlag != null )
@@ -101,13 +103,13 @@ public class SceneLoader : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneToLoad));
+        // SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneToLoad));
 
         //unload loading scene
         // onFinishLoad.Invoke();
         yield return new WaitForSeconds(prePostWaitTime);
         
-        
+        // why does unload scene async's async object not correctly return completed when using it in a yield return or loop?
         SceneManager.UnloadSceneAsync(_loadScene);
 
         IsLoading = false;
