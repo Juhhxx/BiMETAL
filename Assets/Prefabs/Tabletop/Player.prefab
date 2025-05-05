@@ -48,11 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 0}
-  <LastCell>k__BackingField: {fileID: 0}
+  <LastCell>k__BackingField: {x: 0, y: 0}
   <Interactive>k__BackingField: {fileID: 2495697816207425113}
   <Points>k__BackingField: 4
   _hopAnimation: {fileID: 2288109693588652710}
   _cellInformation: {fileID: 0}
+  _cam: {fileID: 0}
 --- !u!114 &2495697816207425113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 90
   m_CollisionDetection: 0
 --- !u!1 &8873497549458897916
 GameObject:

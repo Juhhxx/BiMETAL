@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &43057259085783709
+--- !u!1 &1185181439235434886
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,77 +8,134 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5807718964491243264}
-  - component: {fileID: 8696197932562567021}
-  - component: {fileID: 1023831215645743453}
-  - component: {fileID: 7530215450708501282}
+  - component: {fileID: 2558903729220416853}
+  - component: {fileID: 6236667789034640513}
+  - component: {fileID: 2906004345308924812}
+  - component: {fileID: 1373704673170459680}
   m_Layer: 0
-  m_Name: GruntMeleeEnemy
+  m_Name: Gousse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5807718964491243264
+--- !u!4 &2558903729220416853
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43057259085783709}
+  m_GameObject: {fileID: 1185181439235434886}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 1.51, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.02, y: 0.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2676068386301491656}
+  - {fileID: 57724277964169305}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8696197932562567021
+--- !u!114 &6236667789034640513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43057259085783709}
+  m_GameObject: {fileID: 1185181439235434886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e63f505dd1796c445b3359bfb446093b, type: 3}
+  m_Script: {fileID: 11500000, guid: 46e95cae500e37545b0dddf0cb3c7f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _base: {fileID: 2906004345308924812}
+  <Name>k__BackingField: Gousse
+  _levelSceneName: Level1
+  _confirmScreen: {fileID: 0}
+  _confirmButton: {fileID: 0}
+  _notConfirmButton: {fileID: 0}
+  _dialogList:
+  - characterDialogs:
+    - characterID: 0
+      dialogLines:
+      - Oh wow! This looks sooo weird!
+      - "I hope it\u2019s not a bomb! I had all my baby teeth smacked out last tim\u2013\r\n*ELECTRIC
+        NOISES*\r"
+      - "I hope it\u2019s not a bomb! I had all my baby teeth smacked out last tim\u2013\r\n*ELECTRIC
+        NOISES*\r"
+      - "I KNEW IT WAS A BOMB, TAKE COVERR!!!\r"
+    - characterID: 2
+      dialogLines:
+      - THE KINGDOM HATH BEEN SURPRISED!
+      - THY KING MIGHT NOT BUT BE REINSTATED!!
+      - "(To self) The king is dead. I was reformed\u2026"
+      - Beray yourself, thou sly creature!
+    - characterID: 1
+      dialogLines:
+      - "Dumb-aah undercover toaster\u2026  Lock in Gousse! It\u2019s just like the
+        others."
+      - "Just make it ramble about 2097\u2019s Kanye West's 105th big medication
+        pause and make a run for it."
+      - "You know, I was thinking that people should separate music from the arti-\r"
+    - characterID: 0
+      dialogLines:
+      - '*LOUD ALARM* *HEAVY STEPS*'
+    - characterID: 0
+      dialogLines:
+      - '*LOUD ALARM* *HEAVY STEPS*'
+    - characterID: 1
+      dialogLines:
+      - "FUCK! THEY\u2019RE HERE!"
+      - "I think I preferred if it was actually a bomb back there\u2026"
+    - characterID: 2
+      dialogLines:
+      - ARE THOU WITH THE KING??
+    - characterID: 1
+      dialogLines:
+      - "ARE YOU STUPID??\r"
+      - "wait, of course it is\u2026\n\r\rOOOOooooH my King\u2019s Shini-,no, not
+        shining. Gentle! Nope. "
+    - characterID: 0
+      dialogLines:
+      - "MAKE CODES AND FACES VISIBLE!\nDO NOT RESIST OR I\u2019LL HAVE TO USE VIOLENCE!\r\r"
+    - characterID: 1
+      dialogLines:
+      - "I\u2019M X34-54-13!!\nPUT ME DOWN, YOU WEST DICKRIDER!"
+    - characterID: 2
+      dialogLines:
+      - 'WEST?
+
+        DICKRIDER???
+
+        AN ENEMY SUCCUBUS!'
+      - FOR THE KING!!!
+    - characterID: 1
+      dialogLines:
+      - FOR THE KING!!!
+    - characterID: 2
+      dialogLines:
+      - PERISH YOU TRAITOROUS WESTERNERS!
+--- !u!114 &2906004345308924812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185181439235434886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12594931aa132894baa1e8b9e8c0307f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentCell>k__BackingField: {fileID: 0}
   <LastCell>k__BackingField: {x: 0, y: 0}
-  <Interactive>k__BackingField: {fileID: 1023831215645743453}
-  <Points>k__BackingField: 3
-  _hopAnimation: {fileID: 1740922154331630829}
-  last: {fileID: 0}
---- !u!114 &1023831215645743453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43057259085783709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3268f3e23c4d92543be6444c87e496f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _base: {fileID: 8696197932562567021}
-  <Name>k__BackingField: Grunt Enemy
-  _modifier: {fileID: 0}
-  _modRangeType: 0
-  _reach: 4
-  _renderer: {fileID: 3252926609709871761}
-  _rigidBody: {fileID: 7530215450708501282}
---- !u!54 &7530215450708501282
+  <Interactive>k__BackingField: {fileID: 6236667789034640513}
+--- !u!54 &1373704673170459680
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43057259085783709}
+  m_GameObject: {fileID: 1185181439235434886}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -99,7 +156,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 0
---- !u!1 &3666478158223137072
+--- !u!1 &3989908061442904178
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,11 +164,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2676068386301491656}
-  - component: {fileID: 7343131162816579767}
-  - component: {fileID: 3252926609709871761}
-  - component: {fileID: 7617441731099567700}
-  - component: {fileID: 1740922154331630829}
+  - component: {fileID: 57724277964169305}
+  - component: {fileID: 390080097695273239}
+  - component: {fileID: 5848407533380366206}
+  - component: {fileID: 1388978107166757996}
+  - component: {fileID: 3094098211655047889}
   m_Layer: 0
   m_Name: Cosmetic
   m_TagString: Untagged
@@ -119,36 +176,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2676068386301491656
+--- !u!4 &57724277964169305
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3666478158223137072}
+  m_GameObject: {fileID: 3989908061442904178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5807718964491243264}
+  m_Father: {fileID: 2558903729220416853}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7343131162816579767
+--- !u!33 &390080097695273239
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3666478158223137072}
+  m_GameObject: {fileID: 3989908061442904178}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3252926609709871761
+--- !u!23 &5848407533380366206
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3666478158223137072}
+  m_GameObject: {fileID: 3989908061442904178}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -165,7 +222,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bb7df08e032a9904b9e20f48761916be, type: 2}
+  - {fileID: 2100000, guid: 331fcaef560596741ac0171761ae7d27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -187,13 +244,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7617441731099567700
+--- !u!65 &1388978107166757996
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3666478158223137072}
+  m_GameObject: {fileID: 3989908061442904178}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -208,13 +265,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!111 &1740922154331630829
+--- !u!111 &3094098211655047889
 Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3666478158223137072}
+  m_GameObject: {fileID: 3989908061442904178}
   m_Enabled: 1
   serializedVersion: 4
   m_Animation: {fileID: 7400000, guid: 0337f375072fd4147bbd7eff2fcab546, type: 2}

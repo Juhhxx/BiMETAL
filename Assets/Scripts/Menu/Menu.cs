@@ -30,6 +30,7 @@ public class Menu : MonoBehaviour
         {
             canvas.renderMode = RenderMode.ScreenSpaceCamera;
             canvas.worldCamera = ActiveUICam.ActiveUICamera;
+            canvas.planeDistance = 1f;
         }
         else
         {

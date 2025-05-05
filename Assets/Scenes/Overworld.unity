@@ -15165,154 +15165,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2727851463618834284, guid: 70161868165544642b7370e092a8e6c3, type: 3}
   m_PrefabInstance: {fileID: 2127614996}
   m_PrefabAsset: {fileID: 0}
---- !u!33 &738781319780745583
-MeshFilter:
+--- !u!1001 &963441222700895443
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3798539789704917165}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2536193794699316071
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3798539789704917165}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 331fcaef560596741ac0171761ae7d27, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!4 &2863423791027257086
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3798539789704917165}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5797670072747728910}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &3087037773460645787
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7395375264740088504}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!1 &3798539789704917165
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2863423791027257086}
-  - component: {fileID: 738781319780745583}
-  - component: {fileID: 2536193794699316071}
-  - component: {fileID: 9091008474017179705}
-  - component: {fileID: 5788004535574022647}
-  m_Layer: 0
-  m_Name: Cosmetic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!111 &5788004535574022647
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3798539789704917165}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 0337f375072fd4147bbd7eff2fcab546, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 0337f375072fd4147bbd7eff2fcab546, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
---- !u!4 &5797670072747728910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7395375264740088504}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2863423791027257086}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1185181439235434886, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_Name
+      value: Gousse
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558903729220416853, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906004345308924812, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: <CurrentCell>k__BackingField
+      value: 
+      objectReference: {fileID: 550443184}
+    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: _confirmButton
+      value: 
+      objectReference: {fileID: 1673508776}
+    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: _confirmScreen
+      value: 
+      objectReference: {fileID: 1673508774}
+    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
+      propertyPath: _notConfirmButton
+      value: 
+      objectReference: {fileID: 1673508775}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
 --- !u!1001 &6874480862408651935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15383,140 +15308,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 958456323337106531, guid: aea3f184563b4d34f828a039f69dc717, type: 3}
   m_PrefabInstance: {fileID: 6874480862408651935}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7395375264740088504
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5797670072747728910}
-  - component: {fileID: 7395375264740088506}
-  - component: {fileID: 7395375264740088505}
-  - component: {fileID: 3087037773460645787}
-  m_Layer: 0
-  m_Name: Gousse
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &7395375264740088505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7395375264740088504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12594931aa132894baa1e8b9e8c0307f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <CurrentCell>k__BackingField: {fileID: 550443184}
-  <LastCell>k__BackingField: {x: 0, y: 0}
-  <Interactive>k__BackingField: {fileID: 7395375264740088506}
---- !u!114 &7395375264740088506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7395375264740088504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e95cae500e37545b0dddf0cb3c7f7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _base: {fileID: 7395375264740088505}
-  <Name>k__BackingField: Gousse
-  _levelSceneName: Level1
-  _confirmScreen: {fileID: 1673508774}
-  _confirmButton: {fileID: 1673508776}
-  _notConfirmButton: {fileID: 1673508775}
-  _dialogList:
-  - characterDialogs:
-    - characterID: 0
-      dialogLines:
-      - Oh wow! This looks sooo weird!
-      - "I hope it\u2019s not a bomb! I had all my baby teeth smacked out last tim\u2013\r\n*ELECTRIC
-        NOISES*\r"
-      - "I hope it\u2019s not a bomb! I had all my baby teeth smacked out last tim\u2013\r\n*ELECTRIC
-        NOISES*\r"
-      - "I KNEW IT WAS A BOMB, TAKE COVERR!!!\r"
-    - characterID: 2
-      dialogLines:
-      - THE KINGDOM HATH BEEN SURPRISED!
-      - THY KING MIGHT NOT BUT BE REINSTATED!!
-      - "(To self) The king is dead. I was reformed\u2026"
-      - Beray yourself, thou sly creature!
-    - characterID: 1
-      dialogLines:
-      - "Dumb-aah undercover toaster\u2026  Lock in Gousse! It\u2019s just like the
-        others."
-      - "Just make it ramble about 2097\u2019s Kanye West's 105th big medication
-        pause and make a run for it."
-      - "You know, I was thinking that people should separate music from the arti-\r"
-    - characterID: 0
-      dialogLines:
-      - '*LOUD ALARM* *HEAVY STEPS*'
-    - characterID: 0
-      dialogLines:
-      - '*LOUD ALARM* *HEAVY STEPS*'
-    - characterID: 1
-      dialogLines:
-      - "FUCK! THEY\u2019RE HERE!"
-      - "I think I preferred if it was actually a bomb back there\u2026"
-    - characterID: 2
-      dialogLines:
-      - ARE THOU WITH THE KING??
-    - characterID: 1
-      dialogLines:
-      - "ARE YOU STUPID??\r"
-      - "wait, of course it is\u2026\n\r\rOOOOooooH my King\u2019s Shini-,no, not
-        shining. Gentle! Nope. "
-    - characterID: 0
-      dialogLines:
-      - "MAKE CODES AND FACES VISIBLE!\nDO NOT RESIST OR I\u2019LL HAVE TO USE VIOLENCE!\r\r"
-    - characterID: 1
-      dialogLines:
-      - "I\u2019M X34-54-13!!\nPUT ME DOWN, YOU WEST DICKRIDER!"
-    - characterID: 2
-      dialogLines:
-      - 'WEST?
-
-        DICKRIDER???
-
-        AN ENEMY SUCCUBUS!'
-      - FOR THE KING!!!
-    - characterID: 1
-      dialogLines:
-      - FOR THE KING!!!
-    - characterID: 2
-      dialogLines:
-      - PERISH YOU TRAITOROUS WESTERNERS!
---- !u!65 &9091008474017179705
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3798539789704917165}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -15526,5 +15317,5 @@ SceneRoots:
   - {fileID: 1891478361}
   - {fileID: 609998868}
   - {fileID: 91579047}
-  - {fileID: 5797670072747728910}
+  - {fileID: 963441222700895443}
   - {fileID: 674302901}
