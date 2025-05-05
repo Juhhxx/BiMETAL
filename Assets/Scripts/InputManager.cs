@@ -1,36 +1,41 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     public static float MouseSensitivity = 1f;
     public static bool Paused = false;
+
+    // to be used later for ui stacking
+    private static int _paused = 0;
     public static bool CamRotDown()
     {
+        if ( Paused ) return false;
         return Input.GetMouseButton(1);
     }
     public static Vector2 CamRot()
     {
+        if ( Paused ) return Vector2.zero;
         return Input.mousePositionDelta;
     }
     public static bool CamMovDown()
     {
+        if ( Paused ) return false;
         return Input.GetMouseButton(2);
     }
     public static Vector2 CamMov()
     {
+        if ( Paused ) return Vector2.zero;
         return Input.mousePositionDelta;
     }
     public static float CamZoom()
     {
+        if ( Paused ) return 0f;
         return Input.mouseScrollDelta.y;
     }
 
     public static bool Select()
     {
         if ( Paused ) return false;
-        
-        // Debug.Log("Pause off and select");
 
         return Input.GetMouseButtonDown(0);
     }
@@ -78,10 +83,14 @@ public class InputManager : MonoBehaviour
     }
     public static bool Camera()
     {
+        if ( Paused ) return false;
+
         return Input.GetButton("Camera");
     }
     public static float Zoom()
     {
+        if ( Paused ) return 0f;
+
         return Input.GetAxis("Zoom");
     }
 
@@ -104,11 +113,15 @@ public class InputManager : MonoBehaviour
 
     public static bool Pause()
     {
+        if ( Paused ) return false;
+
         return Input.GetKeyDown(KeyCode.Escape);
     }
 
     public static bool Skip()
     {
-        return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(1);
+        if ( Paused ) return false;
+
+        return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1);
     }
 }
