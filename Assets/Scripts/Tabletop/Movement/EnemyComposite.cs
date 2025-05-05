@@ -31,6 +31,8 @@ public class EnemyComposite : TabletopMovement
             yield break;
         }
 
+        _enemies = _enemies.Where(enemy => enemy.gameObject.activeSelf).ToList();
+
         List<EnemyTabletopMovement> leftEnemies = new(_enemies);
         List<EnemyTabletopMovement> currentEnemies;
         PieceInteractive playerPiece = null;

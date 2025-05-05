@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: orthographic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5245409150805631178, guid: b9283eab281b51b429e7fafe76fd96b9, type: 3}
+      propertyPath: far clip plane
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 5431119801044835460, guid: b9283eab281b51b429e7fafe76fd96b9, type: 3}
       propertyPath: orthographic
       value: 1

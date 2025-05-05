@@ -1,4 +1,5 @@
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
 
 public class AddMeshCollidersEditor : EditorWindow
@@ -64,3 +65,4 @@ public class AddMeshCollidersEditor : EditorWindow
         Debug.Log($"Added or modified {count} springs to '{root.name}' and its children.");
     }
 }
+#endif

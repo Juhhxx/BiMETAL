@@ -10,6 +10,8 @@ public class HexagonTabletop : MonoBehaviour
 
     public Grid Grid { get; private set; }
 
+    public bool Done { get; private set; } = false;
+
     private void Awake()
     {
         CellLayer = _cells;
@@ -34,6 +36,8 @@ public class HexagonTabletop : MonoBehaviour
 
         foreach (HexagonCell cell in Cells)
             CellDict[cell.InitializeCell(this)] = cell;
+
+        Done = true;
 
         // Debug.Log("Initialized " + Cells.Count + " cells.");
     }

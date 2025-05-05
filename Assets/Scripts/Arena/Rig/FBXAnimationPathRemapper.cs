@@ -1,7 +1,8 @@
-using UnityEditor;
 using UnityEngine;
 using System.IO;
 
+#if UNITY_EDITOR
+using UnityEditor;
 public class ExtractAndRemapAnimations : EditorWindow
 {
     [MenuItem("Tools/Extract + Remap Spring Animation Paths")]
@@ -78,3 +79,4 @@ public class ExtractAndRemapAnimations : EditorWindow
         Debug.Log($"Done! Extracted and remapped {remapCount} paths.");
     }
 }
+#endif

@@ -80,6 +80,10 @@ public abstract class TabletopMovement : TabletopBase
 
     protected virtual void OnDisable()
     {
+        if ( CurrentCell != null )
+            CurrentCell.WalkOn();
+        if ( Pathfinder != null )
+            Pathfinder.Stop();
         Debug.LogWarning("Disabled: " + gameObject.name + "'s " + this);
     }
     protected virtual void OnDestroy()
