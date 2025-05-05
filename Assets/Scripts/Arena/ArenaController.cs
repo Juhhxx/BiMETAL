@@ -17,7 +17,7 @@ public class ArenaController : MonoBehaviour
         _tabletopController = FindAnyObjectByType<TabletopController>();
         _enemiesList = new List<GameObject>();
 
-        if (_tabletopController != null) _numberOfEnemies = _tabletopController.BattlePieces.Count;
+        if (_tabletopController != null) _numberOfEnemies = _tabletopController.BattlePieces.Count - 1;
         else                             _numberOfEnemies = _defaulfEnemyNumber;
 
         SpawnEnemies();
