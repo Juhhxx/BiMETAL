@@ -16,6 +16,10 @@ public class ArenaCheats : MonoBehaviour
         _enemies = FindObjectsByType<EnemyMovement>(0).Cast<GameObject>().ToList();
         _currentScene = SceneManager.GetActiveScene().name;
     }
+    private void Update()
+    {
+        Cheats();
+    }
 
     private void Cheats()
     {
