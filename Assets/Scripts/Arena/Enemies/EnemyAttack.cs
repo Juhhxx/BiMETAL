@@ -22,6 +22,10 @@ public class EnemyAttack : MonoBehaviour
     {
         _character = GetComponent<CharController>();
     }
+    private void OnDestroy()
+    {
+        Debug.Log("DESTROYED ENEMY");
+    }
     private void OnEnable()
     {
         _attackCollider.OnCollisionEnter += DoAttack;
