@@ -87,6 +87,23 @@ public class TabletopController : MonoBehaviour
         StartNewTabletop();
     }
 
+    private IEnumerator CheckForGame()
+    {
+        Debug.Log("commence");
+        yield return null;
+
+        if (_health <= 0 || _pieces.Where( p => p != _playerInput ).All( p => p.Interactive is PieceInteractive { Dead: true }) )
+        {
+            Debug.Log("commence detected");
+            yield return new WaitForSeconds(5f);
+
+            SceneLoader.Load("Overworld");
+            Destroy(gameObject);
+        }
+
+        StartNewTabletop();
+    }
+
     private void StartNewTabletop()
     {
         _playerRound = true;
@@ -195,12 +212,6 @@ public class TabletopController : MonoBehaviour
             {
                 piece.Hurt();
             }
-
-            if ( _health <= 0 )
-            {
-                SceneLoader.Load("Overworld");
-                Destroy(gameObject);
-            }
         }
         else
         {
@@ -213,7 +224,7 @@ public class TabletopController : MonoBehaviour
             }
         }
 
-        StartNewTabletop();
+        StartCoroutine(CheckForGame());
 
         Debug.Log("start finished restore");
 

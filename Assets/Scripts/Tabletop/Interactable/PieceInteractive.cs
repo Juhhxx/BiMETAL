@@ -12,6 +12,8 @@ public class PieceInteractive : ModifierInteractive
     [SerializeField] private Renderer _renderer;
     [SerializeField] private Rigidbody _rigidBody;
 
+    public bool Dead { get; private set; } = false;
+
     // Add here other piece stats like if its player or the prefab it needs to load in battle or something
 
     protected override void Start()
@@ -154,6 +156,8 @@ public class PieceInteractive : ModifierInteractive
 
     public void Die(Vector2 awayPos)
     {
+        Dead = true;
+
         StartCoroutine( DieRoutine(awayPos) );
     }
 
@@ -193,5 +197,11 @@ public class PieceInteractive : ModifierInteractive
         yield return StartCoroutine(HurtRoutine());
 
         gameObject.SetActive(false);
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        Dead = true;
     }
 }

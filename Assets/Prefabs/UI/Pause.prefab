@@ -838,9 +838,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 5214340872219324765}
     m_Modifications:
     - target: {fileID: 376588315235787606, guid: 3da9fe2c6b2375045b08b2d68359a509, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 376588315235787606, guid: 3da9fe2c6b2375045b08b2d68359a509, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6771427468380099749}
+    - target: {fileID: 376588315235787606, guid: 3da9fe2c6b2375045b08b2d68359a509, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 376588315235787606, guid: 3da9fe2c6b2375045b08b2d68359a509, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1322418661968965474, guid: 3da9fe2c6b2375045b08b2d68359a509, type: 3}
       propertyPath: m_Name
       value: SaveAndQuit
