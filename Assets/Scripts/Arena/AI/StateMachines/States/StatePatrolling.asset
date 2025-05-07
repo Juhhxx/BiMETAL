@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StatePatrolling
   m_EditorClassIdentifier: 
   Name: Patrolling
-  _numberOfWaypoints: 10
-  _maximumDistance: 10
+  _numberOfWaypoints: 8
+  _maximumDistance: 8
   _layersToRaycast:
     serializedVersion: 2
     m_Bits: 16908923

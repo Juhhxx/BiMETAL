@@ -7,16 +7,11 @@ using UnityEngine.SceneManagement;
 public class ArenaCheats : MonoBehaviour
 {
     private ArenaController _arenaController;
-    private List<GameObject> _enemies;
     private string _currentScene;
 
     private void Start()
     {
         _arenaController = FindAnyObjectByType<ArenaController>();
-        _enemies = new List<GameObject>();
-        
-        EnemyMovement[] array = FindObjectsByType<EnemyMovement>(0);
-        foreach (EnemyMovement e in array) _enemies.Add(e.gameObject);
 
         _currentScene = SceneManager.GetActiveScene().name;
     }
@@ -38,7 +33,7 @@ public class ArenaCheats : MonoBehaviour
     private void ResetScene() => SceneManager.LoadScene(_currentScene);
     private void ResetEnemies()
     {
-        foreach (GameObject e in _enemies)
+        foreach (GameObject e in _arenaController.EnemiesList)
         {
             e.GetComponent<StateMachineRunner>().Reset();
         }

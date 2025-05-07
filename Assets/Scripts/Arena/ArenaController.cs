@@ -12,6 +12,7 @@ public class ArenaController : MonoBehaviour
     private int _numberOfEnemies;
     private int _enemiesKilled;
     [SerializeField] private List<GameObject> _enemiesList;
+    public IEnumerable<GameObject> EnemiesList => _enemiesList;
 
     private void Start()
     {
