@@ -1429,6 +1429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1107366093}
   - component: {fileID: 1107366092}
+  - component: {fileID: 1107366094}
   m_Layer: 0
   m_Name: Arena Controller
   m_TagString: Untagged
@@ -1449,8 +1450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaulfEnemyNumber: 3
+  _enemyPool: {fileID: 1107366094}
   _gruntPrefab: {fileID: 8296531496966734037, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
-  _enemiesList: []
 --- !u!4 &1107366093
 Transform:
   m_ObjectHideFlags: 0
@@ -1466,6 +1467,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1107366094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107366091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d4f3b7347b56345953c7b5626ef8d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultSpawnNumber: 5
+  _enemyPrefabs:
+  - {fileID: 8296531496966734037, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
+  Pools: []
+  _enemiesList: []
 --- !u!1 &1238305755
 GameObject:
   m_ObjectHideFlags: 0

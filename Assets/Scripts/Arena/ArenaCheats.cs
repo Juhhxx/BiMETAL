@@ -33,7 +33,7 @@ public class ArenaCheats : MonoBehaviour
     private void ResetScene() => SceneManager.LoadScene(_currentScene);
     private void ResetEnemies()
     {
-        foreach (GameObject e in _arenaController.EnemiesList)
+        foreach (GameObject e in _arenaController.EnemyPool.EnemiesList)
         {
             e.GetComponent<StateMachineRunner>().Reset();
         }

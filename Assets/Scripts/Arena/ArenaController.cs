@@ -3,22 +3,24 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(EnemyPool))]
 public class ArenaController : MonoBehaviour
 {
-    [SerializeField] private int _defaulfEnemyNumber;
+    [Header("Spawning Parameters")]
+    [Space(5f)]
+    [SerializeField] private int        _defaulfEnemyNumber;
+    [SerializeField] private EnemyPool  _enemyPool;
+    public EnemyPool EnemyPool => _enemyPool;
     [SerializeField] private GameObject _gruntPrefab;
 
     private TabletopController _tabletopController;
     private int _numberOfEnemies;
     private int _enemiesKilled;
-    [SerializeField] private List<GameObject> _enemiesList;
-    public IEnumerable<GameObject> EnemiesList => _enemiesList;
 
     private void Start()
     {
-        Debug.Log("ARENA CONTROLLER ACTIVE - DESTROYED");
+        Debug.Log("ARENA CONTROLLER ACTIVE");
         _tabletopController = FindAnyObjectByType<TabletopController>();
-        _enemiesList = new List<GameObject>();
 
         if (_tabletopController != null) _numberOfEnemies = _tabletopController.BattlePieces.Count - 1;
         else                             _numberOfEnemies = _defaulfEnemyNumber;
@@ -46,14 +48,12 @@ public class ArenaController : MonoBehaviour
             Vector3 pos = GetRandomLocation();
             pos.y = 1.0f;
 
-            GameObject newEnemy = Instantiate(_gruntPrefab, pos, Quaternion.identity);
+            GameObject newEnemy = _enemyPool.SpawnEnemy(_gruntPrefab, pos);
             if ( _tabletopController != null )
             {
                 SceneManager.MoveGameObjectToScene(newEnemy,
                     SceneManager.GetSceneByName(_tabletopController.BATTLEARENA));
             }
-
-            _enemiesList.Add(newEnemy);
 
             CharController ctrl = newEnemy.GetComponent<CharController>();
             ctrl.OnDeath.AddListener(() => CheckEndBattle(true));

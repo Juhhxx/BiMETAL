@@ -14,6 +14,7 @@ public class EnemyMovement : MonoBehaviour
     public float AcceptanceRadius => _targetAcceptanceRadius;
 
     private NavMeshAgent _agent;
+    private EnemyPool _enemyPool;
 
     private void UpdateStats()
     {
@@ -24,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
             _agent.stoppingDistance = _targetAcceptanceRadius;
         }
     }
+    public void SetPool(EnemyPool pool) => _enemyPool = pool;
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -41,4 +43,8 @@ public class EnemyMovement : MonoBehaviour
     }
     public void SetSpeed(float speed) => _agent.speed = speed;
     public void SetAcceptanceRadius(float radius) => _agent.stoppingDistance = radius;
+    public void DestroyEnemy()
+    {
+        _enemyPool.DespawnEnemy(gameObject);
+    }
 }
