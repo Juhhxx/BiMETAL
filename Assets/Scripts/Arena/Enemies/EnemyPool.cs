@@ -28,9 +28,11 @@ public class EnemyPool : MonoBehaviour
         public int PoolCurrentSize;
     }
 
-    private void Start()
+    private void Awake()
     {
         _enemyPools = new Dictionary<string, Stack<GameObject>>();
+        _enemiesList = new List<GameObject>();
+
         CreatePools();
     }
 
@@ -49,7 +51,7 @@ public class EnemyPool : MonoBehaviour
 
         _enemyPools[poolKey].Push(newObj);
         _enemiesList.Add(newObj);
-        mov.SetPool(this);
+        mov?.SetPool(this);
         newObj.SetActive(false);
 
         PoolDebugVisualizer pd = GetPoolDebuger(poolKey);
@@ -63,6 +65,8 @@ public class EnemyPool : MonoBehaviour
         foreach (GameObject e in _enemyPrefabs)
         {
             string key = e.name;
+
+            Debug.Log($"INITIALIZING POOL FOR {key}");
 
             if (!_enemyPools.ContainsKey(key))
             {

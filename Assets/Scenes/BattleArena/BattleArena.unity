@@ -1452,6 +1452,7 @@ MonoBehaviour:
   _defaulfEnemyNumber: 3
   _enemyPool: {fileID: 1107366094}
   _gruntPrefab: {fileID: 8296531496966734037, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
+  _dummyPrefab: {fileID: 896216821799497898, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
 --- !u!4 &1107366093
 Transform:
   m_ObjectHideFlags: 0
@@ -1461,7 +1462,7 @@ Transform:
   m_GameObject: {fileID: 1107366091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 77.9354, y: 67.29869, z: -44.2096}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1482,6 +1483,7 @@ MonoBehaviour:
   _defaultSpawnNumber: 5
   _enemyPrefabs:
   - {fileID: 8296531496966734037, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
+  - {fileID: 896216821799497898, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
   Pools: []
   _enemiesList: []
 --- !u!1 &1238305755

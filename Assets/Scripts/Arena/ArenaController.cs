@@ -12,6 +12,7 @@ public class ArenaController : MonoBehaviour
     [SerializeField] private EnemyPool  _enemyPool;
     public EnemyPool EnemyPool => _enemyPool;
     [SerializeField] private GameObject _gruntPrefab;
+    [SerializeField] private GameObject _dummyPrefab;
 
     private TabletopController _tabletopController;
     private int _numberOfEnemies;
@@ -43,12 +44,18 @@ public class ArenaController : MonoBehaviour
     private void SpawnEnemies()
     {
         // Change to a foreach, enemie piece data should store the respective game object for instantiation
-        for (int i = 0; i < _numberOfEnemies; i++)
+        for (int i = 0; i < _numberOfEnemies*2; i++)
         {
             Vector3 pos = GetRandomLocation();
             pos.y = 1.0f;
+            
+            GameObject newEnemy;
 
-            GameObject newEnemy = _enemyPool.SpawnEnemy(_gruntPrefab, pos);
+            if (i < _numberOfEnemies)
+                newEnemy = _enemyPool.SpawnEnemy(_gruntPrefab, pos);
+            else
+                newEnemy = _enemyPool.SpawnEnemy(_dummyPrefab, pos);
+
             if ( _tabletopController != null )
             {
                 SceneManager.MoveGameObjectToScene(newEnemy,
