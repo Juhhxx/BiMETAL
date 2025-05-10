@@ -21,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
     [Space(10)]
     [Header("Combo Parameters")]
     [Space(5)]
+    [SerializeField] [Range(0,1)] private float _backstabbingThreshold;
     [SerializeField] [Range(0,1)] private float _maxComboTime = 1.0f;
     [SerializeField] private float              _onAirDistance;
     [SerializeField] private LayerMask          _groundLayer;
@@ -29,6 +30,8 @@ public class PlayerAttack : MonoBehaviour
     private bool    _isOnAir;
     private bool    _isDashing;
     private Vector3 _corretcetPosition;
+    private string  _attackName;
+
     
     [Space(10)]
     [Header("Attack Events")]
@@ -41,11 +44,13 @@ public class PlayerAttack : MonoBehaviour
     // Game Object Components 
     private CameraControl   _cameraControl;
     private CharController  _character;
+    private SphereCollider  _collider;
 
     private void Start()
     {
         _cameraControl  = GetComponent<CameraControl>();
         _character      = GetComponent<CharController>();
+        _collider       = _jumpAttackCollider.gameObject.GetComponentInChildren<SphereCollider>();
         _comboTimer     = _maxComboTime;
     }
     private void OnEnable()
@@ -64,40 +69,41 @@ public class PlayerAttack : MonoBehaviour
     {
         Attack();
         CheckOnAir();
+        Debug.LogWarning(_isOnAir);
     }
 
     private void Attack()
     {
-        string attackName = "None";
+        _attackName = "None";
 
         if (InputManager.Attack())
         {
             if (_isOnAir)
             {
+                Debug.LogWarning("Jump Attack");
                 OnJumpSlashCombo?.Invoke();
-                attackName = "JumpCombo";
+                _attackName = "JumpCombo";
             }
             else if (_isDashing)
             {
                 OnDashSlashCombo?.Invoke();
-                attackName = "DashCombo";
+                _attackName = "DashCombo";
             }
             else if (_attackCounter == 0)
             {
                 _attackCounter++;
                 OnSlash?.Invoke();
-                attackName = "Slash1";
+                _attackName = "Slash1";
             }
             else if (_attackCounter >= 1 && _comboTimer > 0)
             {
                 _attackCounter++;
                 OnSlashCombo?.Invoke();
-                attackName = "Slash2";
-
-                ResetComboTimer();
+                _attackName = "Slash2";
             }
 
-            Debug.Log($"Combo Timer : {_comboTimer} Attack : {attackName}");
+            Debug.Log($"Combo Timer : {_comboTimer} Attack : {_attackName}");
+            Debug.LogWarning($"Attack Counter : {_attackCounter}");
         }
 
         CountComboTimer();
@@ -130,6 +136,7 @@ public class PlayerAttack : MonoBehaviour
             if (_lockCamera) _cameraControl.LockOnPoint(other.transform, _lockTime);
         }
 
+        if (_attackCounter == 2) ResetComboTimer();
         Debug.Log($"Collision detected with {e.other.gameObject.name} from {gameObject.name}");
     }
     private float CalculateAttackDamage(Collider self, Collider other)
@@ -146,7 +153,10 @@ public class PlayerAttack : MonoBehaviour
 
             float distance = Vector3.Distance(selfCorrected,otherCorrected);
 
-            finalDamage = Mathf.Floor((-(distance * distance) * 5f) + 100);
+            float maxDistance = _collider.radius * _collider.transform.localScale.x;
+
+            // finalDamage = Mathf.Floor((-(distance * distance) * 5f) + 100);
+            finalDamage = _character.Character.SpecialAttack * (distance/maxDistance);
         }
         else if (_isDashing)
         {
@@ -154,10 +164,27 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            finalDamage = _character.Character.BaseAttack ;
+            finalDamage = _character.Character.BaseAttack * (1 + (0.2f * (_attackCounter - 1))) + 
+            CalculateBackstabbingBonus(other.transform);
         }
+
         Debug.LogWarning($"finalDamage : {finalDamage}");
         return finalDamage;
+    }
+    private float CalculateBackstabbingBonus(Transform enemy)
+    {
+        Vector3 playerFwr   = transform.forward;
+        Vector3 enemyFwr    = enemy.forward;
+
+        float dot = Vector3.Dot(playerFwr, enemyFwr);
+
+        if (dot > _backstabbingThreshold)
+        {
+            Debug.LogWarning($"BACKSTAB BONUS x{dot}");
+            return _character.Character.BaseAttack * dot;
+        }
+        else
+            return 0.0f;
     }
     private void CheckOnAir()
     {

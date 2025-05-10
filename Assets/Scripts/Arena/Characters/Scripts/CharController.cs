@@ -32,6 +32,7 @@ public class CharController : MonoBehaviour
         _character.HP -= amount;
         OnDamageTaken?.Invoke();
         Debug.LogWarning($"{_character.Name} took {amount} damage.");
+        
         if (_character.HP <= 0)
         {
             Debug.Log($"CHARACTER {_character.Name} DESTROYED");

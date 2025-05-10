@@ -13,6 +13,7 @@ public class ArenaController : MonoBehaviour
     public EnemyPool EnemyPool => _enemyPool;
     [SerializeField] private GameObject _gruntPrefab;
     [SerializeField] private GameObject _dummyPrefab;
+    [SerializeField] private bool _doSpawn;
 
     private TabletopController _tabletopController;
     private int _numberOfEnemies;
@@ -26,7 +27,7 @@ public class ArenaController : MonoBehaviour
         if (_tabletopController != null) _numberOfEnemies = _tabletopController.BattlePieces.Count - 1;
         else                             _numberOfEnemies = _defaulfEnemyNumber;
 
-        SpawnEnemies();
+        if (_doSpawn) SpawnEnemies();
     }
     private void Update()
     {
