@@ -1712,6 +1712,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 126294245133297863, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
+      propertyPath: _dashCoolDownTimer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1944478686964130941, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
       propertyPath: m_Enabled
       value: 0

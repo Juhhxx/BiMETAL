@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using NaughtyAttributes;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [Space(5)]
     [SerializeField] private float _dashSpeed;
     [SerializeField] private float _dashTimer;
+    [SerializeField] private float _dashCoolDownTimer;
     [SerializeField] private LayerMask _ignoreWhenDashing;
     
     [Space(10)]
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     private bool                _jump;
     private bool                _dash;
     private float               _dashCountDown;
+    private float               _dashCoolDown;
+    private YieldInstruction    _wff;
     private bool                _doRotation = true;
     public bool                 DoRotation
     {
@@ -68,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         _motion         = Vector3.zero;
         _jump           = false;
         _dash           = false;
+        _wff            = new WaitForEndOfFrame();
     }
     private void Update()
     {
@@ -192,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void CheckForDash()
     {
-        if (InputManager.Dash())
+        if (_dashCoolDown <= 0 && InputManager.Dash())
         {
             _dash = true;
             OnPlayerDashStart?.Invoke();
@@ -217,5 +222,21 @@ public class PlayerMovement : MonoBehaviour
         _dash = false;
         _controller.excludeLayers = 0;
         OnPlayerDashEnd?.Invoke();
+        ResetDashCoolDown();
+        StartCoroutine(CountDashCoolDownTimer());
+    }
+    private IEnumerator CountDashCoolDownTimer()
+    {
+        while (_dashCoolDown > 0)
+        {
+            _dashCoolDown -= Time.deltaTime;
+            Debug.LogWarning(_dashCoolDown);
+
+            yield return _wff;
+        }
+    }
+    private void ResetDashCoolDown()
+    {
+        _dashCoolDown = _dashCoolDownTimer;
     }
 }
