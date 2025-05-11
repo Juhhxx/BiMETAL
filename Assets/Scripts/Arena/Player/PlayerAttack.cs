@@ -164,7 +164,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            finalDamage = _character.Character.BaseAttack * (1 + (0.2f * (_attackCounter - 1))) + 
+            finalDamage = _character.Character.BaseAttack * (1 + (0.25f * (_attackCounter - 1))) + 
             CalculateBackstabbingBonus(other.transform);
         }
 
@@ -173,15 +173,17 @@ public class PlayerAttack : MonoBehaviour
     }
     private float CalculateBackstabbingBonus(Transform enemy)
     {
-        Vector3 playerFwr   = transform.forward;
+        Vector3 playerFwr   = _attackCollider.transform.forward;
         Vector3 enemyFwr    = enemy.forward;
 
         float dot = Vector3.Dot(playerFwr, enemyFwr);
+        dot = Mathf.Round(dot);
 
+        Debug.LogWarning($"Confirming : {dot} > {_backstabbingThreshold} ? {dot > _backstabbingThreshold}");
         if (dot > _backstabbingThreshold)
         {
             Debug.LogWarning($"BACKSTAB BONUS x{dot}");
-            return _character.Character.BaseAttack * dot;
+            return Mathf.Round(_character.Character.BaseAttack/2) * dot;
         }
         else
             return 0.0f;
