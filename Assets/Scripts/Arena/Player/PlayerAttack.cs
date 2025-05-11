@@ -177,13 +177,13 @@ public class PlayerAttack : MonoBehaviour
         Vector3 enemyFwr    = enemy.forward;
 
         float dot = Vector3.Dot(playerFwr, enemyFwr);
-        dot = Mathf.Round(dot);
+        dot = Mathf.Round(dot*10)/10;
 
         Debug.LogWarning($"Confirming : {dot} > {_backstabbingThreshold} ? {dot > _backstabbingThreshold}");
         if (dot > _backstabbingThreshold)
         {
             Debug.LogWarning($"BACKSTAB BONUS x{dot}");
-            return Mathf.Round(_character.Character.BaseAttack/2) * dot;
+            return (_character.Character.BaseAttack/2) * dot;
         }
         else
             return 0.0f;
