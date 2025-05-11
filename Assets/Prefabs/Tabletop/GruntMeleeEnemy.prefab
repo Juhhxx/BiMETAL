@@ -70,6 +70,7 @@ MonoBehaviour:
   _modifier: {fileID: 0}
   _modRangeType: 0
   _reach: 4
+  <Character>k__BackingField: {fileID: 11400000, guid: 7280353d9ca82084e9421c97567f8a6e, type: 2}
   _renderer: {fileID: 3252926609709871761}
   _rigidBody: {fileID: 7530215450708501282}
 --- !u!54 &7530215450708501282

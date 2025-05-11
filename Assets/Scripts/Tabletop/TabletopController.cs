@@ -141,6 +141,8 @@ public class TabletopController : MonoBehaviour
     }
 
     private List<PieceInteractive> _battlePieces;
+
+    public List<Character> BattleCharacters { get; private set; }
     public List<PieceInteractive> BattlePieces {
         get {
             Debug.Log("DESTROYED? Battle pieces num: " + _battlePieces.Count);
@@ -161,9 +163,13 @@ public class TabletopController : MonoBehaviour
     {
         _battlePieces = pieces;
         BattleIDs = new();
+        BattleCharacters = new();
 
         foreach ( PieceInteractive piece in BattlePieces)
             BattleIDs.Add(piece.gameObject.name);
+        
+        foreach ( PieceInteractive piece in BattlePieces)
+            BattleCharacters.Add(piece.Character);
 
         BattleCell = cell;
 

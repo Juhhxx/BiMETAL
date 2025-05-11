@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3217727181888802494}
   - component: {fileID: 1247624870869089191}
   m_Layer: 0
-  m_Name: SniperRangedEnemy
+  m_Name: BomberRangedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,10 +66,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _base: {fileID: 6331121909045825388}
-  <Name>k__BackingField: Sniper Enemy
+  <Name>k__BackingField: Bomber Enemy
   _modifier: {fileID: 11400000, guid: 62cee6b0a78a81148854ace9c50143a3, type: 2}
-  _modRangeType: 4
-  _reach: 3
+  _modRangeType: 3
+  _reach: 2
+  <Character>k__BackingField: {fileID: 11400000, guid: c1c22c57298161e44acc79e8302709d3, type: 2}
   _renderer: {fileID: 8253570625138235836}
   _rigidBody: {fileID: 1247624870869089191}
 --- !u!54 &1247624870869089191
