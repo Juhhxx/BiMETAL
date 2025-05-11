@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PieceInteractive : ModifierInteractive
 {
+    [field:SerializeField] public Character Character { get; private set; }
     private TabletopController _controller;
     public bool IsEnemy { get; protected set; }
     // [SerializeField] protected PathfinderType _rangeType;
