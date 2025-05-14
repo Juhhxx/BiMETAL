@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class TabletopController : MonoBehaviour
 {
+    [SerializeField] private OverworldController _overworld;
+
     [SerializeField] private PlayerTabletopMovement _playerInput;
     [SerializeField] private EnemyComposite _enemies;
     [SerializeField] private HexagonTabletop _tabletop;
@@ -71,6 +73,8 @@ public class TabletopController : MonoBehaviour
 
         _currentTabletop = SceneLoader.SceneToLoad;
 
+        _overworld = FindFirstObjectByType<OverworldController>();
+
         if ( _currentTabletop == null || _currentTabletop == "" )
             _currentTabletop = SceneManager.GetActiveScene().name;
 
@@ -95,9 +99,16 @@ public class TabletopController : MonoBehaviour
         if (_health <= 0 || _pieces.Where( p => p != _playerInput ).All( p => p.Interactive is PieceInteractive { Dead: true }) )
         {
             Debug.Log("commence detected");
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
 
-            SceneLoader.Load("Overworld");
+            // need to add gameover screen here
+
+            if ( _overworld != null )
+                _overworld.EndBattle(_currentTabletop, _health > 0 );
+            else
+                SceneLoader.Load("Overworld");
+
+            // SceneLoader.Load("Overworld");
             Destroy(gameObject);
         }
 
