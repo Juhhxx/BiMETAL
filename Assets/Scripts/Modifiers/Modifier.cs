@@ -7,6 +7,7 @@ public class Modifier : ScriptableObject
     [field: SerializeField] public Material Material { get; private set; }
     [field: SerializeField] public int Weight { get; private set; }
     [field: SerializeField] public bool NonWalkable { get; private set; }
+    [field: SerializeField] public bool Unavailable { get; private set; }
     [field: SerializeField] public bool Dynamic { get; private set; }
 
     public void GenerateRandomValues()

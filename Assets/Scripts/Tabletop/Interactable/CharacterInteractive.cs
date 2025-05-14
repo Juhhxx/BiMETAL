@@ -5,17 +5,44 @@ using UnityEngine.UI;
 
 public class CharacterInteractive : Interactive
 {
+    private OverworldController _controller;
     [SerializeField] private string _levelSceneName;
+    public string LevelName => _levelSceneName;
     [SerializeField] private GameObject _confirmScreen;
     [SerializeField] private Button _confirmButton;
     [SerializeField] private Button _notConfirmButton;
     [SerializeField] private List<DialogQueue> _dialogList;
     private Queue<Queue<(CharacterID, Queue<string>)>> _dialogQueues;
     private SpeechControl _speechControl;
-    private bool _stop = false;
+    private bool _talking = false;
+
+    [field:SerializeField] public bool Completed { get; private set; } = false;
+
+    [SerializeField] private HexagonCell[] _unlockedRegionCells;
+
+
+    public void SetCurrent(bool cur, Modifier unavailable)
+    {
+        // Debug.Log("level starting as " + cur);
+        Completed = cur;
+        if ( Completed ) // awake region
+        {
+            Debug.Log("next level On");
+            foreach ( HexagonCell cell in _unlockedRegionCells )
+                cell.AwakeRegion();
+        }
+        else // turn off region
+        {
+            Debug.Log("next level Off");
+            foreach ( HexagonCell cell in _unlockedRegionCells )
+                cell.SleepRegion(unavailable);
+        }
+    }
+    
 
     private void Awake()
     {
+        _controller = FindFirstObjectByType<OverworldController>();
         _speechControl = FindFirstObjectByType<SpeechControl>();
 
         if (_speechControl == null)
@@ -44,7 +71,9 @@ public class CharacterInteractive : Interactive
     public override void Interact(Interactive other = null)
     {
         // Debug.Log("talking");
-        if (_stop) return;
+        if (_talking) return;
+
+        _talking = true;
         
         Queue<(CharacterID, Queue<string>)> updatedQueue =
             _speechControl.ShowDialogs(_dialogQueues.Peek());
@@ -56,6 +85,12 @@ public class CharacterInteractive : Interactive
         }
 
         StartCoroutine(WaitForSpeech());
+    }
+
+    private void Update()
+    {
+        if ( _talking && InputManager.Skip() )
+            _speechControl.EndDialog();
     }
 
     public override void Select()
@@ -70,6 +105,8 @@ public class CharacterInteractive : Interactive
 
         Debug.Log("Showing confirmation menu. ");
 
+        _talking = false;
+
         _confirmScreen.SetActive( true );
 
         _confirmButton.onClick.AddListener(StartLevel);
@@ -78,8 +115,8 @@ public class CharacterInteractive : Interactive
 
     public void StartLevel()
     {
-        SceneLoader.Load(_levelSceneName);
         Continue();
+        _controller.StartLevel(_levelSceneName);
     }
 
     public void Continue()
@@ -90,14 +127,32 @@ public class CharacterInteractive : Interactive
         _confirmScreen.SetActive( false );
     }
 
-    public void NextSpeech()
+    /*public void NextSpeech()
     {
         if (_dialogQueues.Count > 1)
             _dialogQueues.Dequeue();
+    }*/
+
+    public override void AwakeRegion()
+    {
+        gameObject.SetActive(true);
+
+        // give it a thump at awake, rigidbody should align it
+        transform.Translate(Vector3.up * 0.2f);
+
+        // Debug.Log("level? modifying dialog queue");
+
+        if (Completed)
+            while (_dialogQueues.Count > 1)
+                _dialogQueues.Dequeue();
+
+        base.AwakeRegion();
     }
 
-    public void StopSpeech()
+    public override void SleepRegion()
     {
-        _stop = true;
+        gameObject.SetActive(false);
+
+        base.SleepRegion();
     }
 }

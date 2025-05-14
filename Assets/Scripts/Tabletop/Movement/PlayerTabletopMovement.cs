@@ -56,7 +56,7 @@ public class PlayerTabletopMovement : TabletopMovement
         {
             // ShowPath();
 
-            if (_hoveredCell == newCell) return;
+            if (_hoveredCell == newCell || ( newCell?.Modifier?.Unavailable == true )) return;
 
             if (_hoveredCell != null)
             {
@@ -102,6 +102,7 @@ public class PlayerTabletopMovement : TabletopMovement
             // not whats happening anymore // Previously the points were counting with the first and last cell we find in the pathfinded stack, we should change it to not count the first cell, so we add one
             if ( _hoveredCell != CurrentCell )
             {
+                Debug.Log("level? Selecting: " + _hoveredCell);
                 _selectedCell = _hoveredCell;
                 StartCoroutine(Move());
             }

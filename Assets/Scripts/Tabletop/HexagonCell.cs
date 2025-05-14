@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class HexagonCell : MonoBehaviour
 {
+    [SerializeField] private Animator _animator;
+    
     [SerializeField] private Material _defaultMaterial;
     [SerializeField] private Color _defaultColor;
     [SerializeField] private GameObject _hoverObject;
@@ -20,11 +22,12 @@ public class HexagonCell : MonoBehaviour
 
     private Modifier _dynamicMod;
     private Modifier _temporaryMod;
-    private Modifier _environmentMod;
+    [SerializeField] private Modifier _environmentMod;
     public Modifier LastMod { get; private set; }
 
 
-    [SerializeField] private GameObject _Cosmetic;
+    [SerializeField] private GameObject _cosmetic;
+    [SerializeField] private Renderer _renderer;
 
     [field:SerializeField] public HexagonCell[] Neighbors { get; private set; }
 
@@ -32,8 +35,8 @@ public class HexagonCell : MonoBehaviour
 
     private void Start()
     {
-        if (_Cosmetic == null)
-            _Cosmetic = GetComponentInChildren<Renderer>().gameObject;
+        if (_renderer == null)
+            _renderer = _cosmetic.GetComponentInChildren<Renderer>();
 
         CosmeticModify();
     }
@@ -116,6 +119,7 @@ public class HexagonCell : MonoBehaviour
             SetEnvironment();
         }
     }
+
     public void SetLast()
     {
         LastMod = _environmentMod != null ? _environmentMod.Clone() : null;
@@ -127,18 +131,18 @@ public class HexagonCell : MonoBehaviour
         {
             if ( Modifier.Material != null )
             {
-                _Cosmetic.GetComponentInChildren<Renderer>().material = Modifier.Material;
+                _cosmetic.GetComponentInChildren<Renderer>().material = Modifier.Material;
             }
             else
             {
-                _Cosmetic.GetComponentInChildren<Renderer>().material = _defaultMaterial;
-                _Cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier.Color;
+                _cosmetic.GetComponentInChildren<Renderer>().material = _defaultMaterial;
+                _cosmetic.GetComponentInChildren<Renderer>().material.color = Modifier.Color;
             }
         }
         else
         {
-            _Cosmetic.GetComponentInChildren<Renderer>().material = _defaultMaterial;
-            _Cosmetic.GetComponentInChildren<Renderer>().material.color = _defaultColor;
+            _cosmetic.GetComponentInChildren<Renderer>().material = _defaultMaterial;
+            _cosmetic.GetComponentInChildren<Renderer>().material.color = _defaultColor;
         }
     }
 
@@ -306,12 +310,12 @@ public class HexagonCell : MonoBehaviour
     
     private void CosmeticPathCell(bool upOrDown)
     {
-        // Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
+        Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
         
         if ( upOrDown )
-            _Cosmetic.transform.Translate(Vector3.up * 0.1f);
+            _cosmetic.transform.Translate(Vector3.up * 0.1f);
         else
-            _Cosmetic.transform.Translate(Vector3.down * 0.1f);
+            _cosmetic.transform.Translate(Vector3.down * 0.1f);
     }
 
     /// <summary>
@@ -321,13 +325,16 @@ public class HexagonCell : MonoBehaviour
     {
         PathStack--;
 
-        if (PathStack <= 0)
+        if (PathStack == 0)
         {
             // Debug.Log("Stop path count: " + PathStack);
             CosmeticPathCell(false);
             
             // PathStack = 0;
         }
+
+        if ( Piece as CharacterInteractive != null  )
+            Debug.Log("piece is interactive envi un level");
         
         Debug.Log("envi un path cell");
     }
@@ -386,5 +393,32 @@ public class HexagonCell : MonoBehaviour
     {
         neighbor = GetNeighborInDirection(direction);
         return neighbor != null;
+    }
+
+    public void AwakeRegion()
+    {
+        if ( _environmentMod != null )
+        {
+            _environmentMod = null;
+            _temporaryMod = null;
+            CosmeticModify();
+        }
+
+        _animator.Play("AwakeRegion");
+
+        Debug.Log("level? Awakening region mod: " + Modifier);
+
+        if ( Piece != null )
+            Piece.AwakeRegion();
+    }
+
+    public void SleepRegion(Modifier unavailable)
+    {
+        SetMod(unavailable);
+
+        // _animator.Play("SleepRegion");
+
+        if ( Piece != null )
+            Piece.SleepRegion();
     }
 }

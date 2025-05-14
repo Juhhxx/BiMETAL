@@ -37,4 +37,8 @@ public abstract class Interactive : MonoBehaviour
     }
 
     public abstract void Interact(Interactive other = null);
+
+    public virtual void AwakeRegion() {}
+    
+    public virtual void SleepRegion() {}
 }
