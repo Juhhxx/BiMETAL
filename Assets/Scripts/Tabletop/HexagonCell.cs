@@ -404,12 +404,18 @@ public class HexagonCell : MonoBehaviour
             CosmeticModify();
         }
 
+        _animator.enabled = true;
         _animator.Play("AwakeRegion");
 
         Debug.Log("level? Awakening region mod: " + Modifier);
 
         if ( Piece != null )
             Piece.AwakeRegion();
+    }
+
+    public void DisableAnimator()
+    {
+        _animator.enabled = false;
     }
 
     public void SleepRegion(Modifier unavailable)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,14 +29,28 @@ public class CharacterInteractive : Interactive
         if ( Completed ) // awake region
         {
             Debug.Log("next level On");
-            foreach ( HexagonCell cell in _unlockedRegionCells )
-                cell.AwakeRegion();
+            StartCoroutine(AwakeCells());
         }
         else // turn off region
         {
             Debug.Log("next level Off");
             foreach ( HexagonCell cell in _unlockedRegionCells )
                 cell.SleepRegion(unavailable);
+        }
+    }
+
+    private IEnumerator AwakeCells()
+    {
+        YieldInstruction wfs = new WaitForSeconds(0.03f);
+
+        _unlockedRegionCells = _unlockedRegionCells
+            .OrderBy(t => t.GetDistance(Cell))
+            .ToArray();
+
+        foreach ( HexagonCell cell in _unlockedRegionCells )
+        {
+            cell.AwakeRegion();
+            yield return wfs;
         }
     }
     
@@ -138,7 +153,7 @@ public class CharacterInteractive : Interactive
         gameObject.SetActive(true);
 
         // give it a thump at awake, rigidbody should align it
-        transform.Translate(Vector3.up * 0.2f);
+        transform.Translate(Vector3.up * 0.5f);
 
         // Debug.Log("level? modifying dialog queue");
 
