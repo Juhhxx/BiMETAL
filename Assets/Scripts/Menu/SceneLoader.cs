@@ -38,7 +38,7 @@ public class SceneLoader : MonoBehaviour
     /// </summary>
     private IEnumerator Start()
     {
-        InputManager.Paused = true;
+        InputManager.PauseCount++;
         // test SceneToLoad ??= "LoadScene";
 
         // wait prePostWaitTime before trying to load
@@ -114,6 +114,6 @@ public class SceneLoader : MonoBehaviour
 
         IsLoading = false;
         CurrentRestoreFlag = null;
-        InputManager.Paused = false;
+        InputManager.PauseCount--;
     }
 }

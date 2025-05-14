@@ -25,7 +25,7 @@ public class Pause : Menu
             {
                 _pause.SetActive( true );
                 Time.timeScale = 0f;
-                InputManager.Paused = true;
+                // InputManager.Paused = true;
             }
         }
         // Debug.Log("time scale?" + Time.timeScale);
@@ -57,7 +57,7 @@ public class Pause : Menu
     public override void Continue()
     {
         Time.timeScale = 1f;
-        InputManager.Paused = false;
+        // InputManager.Paused = false;
 
         _settings.TurnOffSettings();
         _pause.SetActive(false);
