@@ -4,6 +4,7 @@ public class Menu : MonoBehaviour
 {
     protected Settings _settings;
     [SerializeField] private Canvas canvas;
+    [SerializeField] protected string _mainMenu;
 
     private void Awake()
     {
@@ -63,5 +64,12 @@ public class Menu : MonoBehaviour
     }
 
     public virtual void Continue() {}
-    public virtual void Quit() {}
+    public virtual void Quit()
+    {
+        Controller[] _controllerDDOLs = FindObjectsByType<Controller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach ( Controller ctrl in _controllerDDOLs )
+            Destroy(ctrl.gameObject);
+        
+        SceneLoader.Load(_mainMenu);
+    }
 }

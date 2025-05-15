@@ -69,7 +69,7 @@ MonoBehaviour:
   <Name>k__BackingField: Grunt Enemy
   _modifier: {fileID: 0}
   _modRangeType: 0
-  _reach: 4
+  <Reach>k__BackingField: 3
   <Character>k__BackingField: {fileID: 11400000, guid: 7280353d9ca82084e9421c97567f8a6e, type: 2}
   _renderer: {fileID: 3252926609709871761}
   _rigidBody: {fileID: 7530215450708501282}

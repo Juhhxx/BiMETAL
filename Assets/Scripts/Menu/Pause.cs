@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class Pause : Menu
 {
     [SerializeField] private GameObject _pause;
-    [SerializeField] private string _mainMenu;
 
     private void Start()
     {
@@ -48,6 +47,11 @@ public class Pause : Menu
         yield return new WaitUntil( () => ! _pause.activeSelf && ! _settings.GetActive() );
 
         Debug.Log("loading main");
+
+        Controller[] _controllerDDOLs = FindObjectsByType<Controller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach ( Controller ctrl in _controllerDDOLs )
+            Destroy(ctrl.gameObject);
+        
         SceneLoader.Load(_mainMenu);
     }
 

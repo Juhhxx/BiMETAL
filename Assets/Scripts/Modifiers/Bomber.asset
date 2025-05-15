@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 541c62c65376cd04290e385d133bce02, type: 3}
-  m_Name: Blue
+  m_Name: Bomber
   m_EditorClassIdentifier: 
-  <Color>k__BackingField: {r: 0, g: 0.04080534, b: 1, a: 1}
-  <Weight>k__BackingField: 1
-  <Dynamic>k__BackingField: 0
+  <Color>k__BackingField: {r: 1, g: 0.009424087, b: 0, a: 1}
+  <Weight>k__BackingField: 0
+  <Dynamic>k__BackingField: 1

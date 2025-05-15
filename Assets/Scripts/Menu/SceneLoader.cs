@@ -99,7 +99,7 @@ public class SceneLoader : MonoBehaviour
             timer += Time.deltaTime;
             float finalProgress = Mathf.Clamp01(timer / leftTime);
             _loadSlider.value = Mathf.Lerp(_loadSlider.maxValue * 0.8f, _loadSlider.maxValue, finalProgress);
-            Debug.Log("timer? " + timer);
+            // Debug.Log("timer? " + timer);
             yield return null;
         }
 
