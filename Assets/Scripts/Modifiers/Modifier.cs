@@ -10,12 +10,6 @@ public class Modifier : ScriptableObject
     [field: SerializeField] public bool Unavailable { get; private set; }
     [field: SerializeField] public bool Dynamic { get; private set; }
 
-    public void GenerateRandomValues()
-    {
-        Color = new Color(Random.value, Random.value, Random.value);
-        Weight = Random.Range(1, 3);
-    }
-
     public Modifier Clone()
     {
         Modifier clone = Instantiate(this);

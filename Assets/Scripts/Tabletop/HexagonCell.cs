@@ -20,8 +20,14 @@ public class HexagonCell : MonoBehaviour
 
     private Modifier GetTopTemporaryMod()
     {
+        _temporaryMod ??= new();
+        foreach ( Modifier mod in _temporaryMod )
+            if ( mod.NonWalkable )
+                return mod;
+        
         if ( _temporaryMod.Count > 0 )
             return _temporaryMod[^1];
+        
         return null;
     }
     
@@ -120,9 +126,9 @@ public class HexagonCell : MonoBehaviour
     }
     public void SetEnvironment(Modifier mod)
     {
-        if ( Modifier != null && Modifier.NonWalkable ) return;
+        if ( _environmentMod != null && _environmentMod.NonWalkable ) return;
 
-        Debug.Log("get mod? set envi: " + mod);
+        // Debug.Log("get mod? set envi: " + mod);
         if ( _temporaryMod.Contains(mod) )
             _environmentMod = mod;
     }
@@ -320,13 +326,13 @@ public class HexagonCell : MonoBehaviour
             CosmeticPathCell(true);
         }
 
-        Debug.Log("envi path cell");
+        // Debug.Log("envi path cell");
         PathStack++;
     }
     
     private void CosmeticPathCell(bool upOrDown)
     {
-        Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
+        // Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
         
         if ( upOrDown )
             _cosmetic.transform.Translate(Vector3.up * 0.1f);
@@ -348,11 +354,8 @@ public class HexagonCell : MonoBehaviour
             
             // PathStack = 0;
         }
-
-        if ( Piece as CharacterInteractive != null  )
-            Debug.Log("piece is interactive envi un level");
         
-        Debug.Log("envi un path cell");
+        // Debug.Log("envi un path cell");
     }
 
     public void SelectCell()
