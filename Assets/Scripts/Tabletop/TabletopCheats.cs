@@ -3,6 +3,14 @@ using UnityEngine;
 public class TabletopCheats : MonoBehaviour
 {
     [SerializeField] private PlayerTabletopMovement _playerInput;
+    [SerializeField] private TabletopController _controller;
+
+    private void Start()
+    {
+        if ( _controller == null )
+            _controller = FindFirstObjectByType<TabletopController>();
+    }
+
     private void Update()
     {
         if ( Input.GetKey(KeyCode.Z) && Input.GetKeyDown(KeyCode.G) && _playerInput.Hovered != null )
@@ -44,6 +52,7 @@ public class TabletopCheats : MonoBehaviour
 
             if ( piece != null && _playerInput.Hovered.Piece != _playerInput.Interactive )
                 piece.Die( _playerInput.CurrentCell.CellValue );
+            _controller.CheckGame();
         }
     }
 }
