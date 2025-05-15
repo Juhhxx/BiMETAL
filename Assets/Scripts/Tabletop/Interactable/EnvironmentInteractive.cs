@@ -62,7 +62,7 @@ public class EnvironmentInteractive : ModifierInteractive
         // we just clear the current path to save the current cells settings and move on
 
         foreach ( HexagonCell cell in ModPathfinder.Path)
-            cell.SetEnvironment();
+            cell.SetEnvironment(Modifier);
        ModPathfinder.Path.Clear();
     }
 

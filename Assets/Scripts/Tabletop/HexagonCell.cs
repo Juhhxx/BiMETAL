@@ -16,12 +16,19 @@ public class HexagonCell : MonoBehaviour
     public Interactive Piece { get; private set; }
 
 
-    public Modifier Modifier =>  _temporaryMod ?? _environmentMod ?? _dynamicMod;
+    public Modifier Modifier => GetTopTemporaryMod() != null ? GetTopTemporaryMod() : (_environmentMod != null ? _environmentMod : _dynamicMod);
 
+    private Modifier GetTopTemporaryMod()
+    {
+        if ( _temporaryMod.Count > 0 )
+            return _temporaryMod[^1];
+        return null;
+    }
+    
     public Modifier EnvironmentMod => _environmentMod;
 
     private Modifier _dynamicMod;
-    private Modifier _temporaryMod;
+    [field:SerializeField] private List<Modifier> _temporaryMod = new();
     [SerializeField] private Modifier _environmentMod;
     public Modifier LastMod { get; private set; }
 
@@ -90,7 +97,7 @@ public class HexagonCell : MonoBehaviour
     {
         // Debug.Log("Hex: " + this + "     Modifying to: " + mod + " from: " + Modifier);
 
-        if ( Modifier != null && Modifier.NonWalkable && Modifier != mod ) return false;
+        // if ( Modifier != null && Modifier.NonWalkable && Modifier != mod ) return false;
 
         /*if ( mod.Dynamic && Modifier != null && Modifier != mod )
             return false;*/
@@ -100,15 +107,24 @@ public class HexagonCell : MonoBehaviour
         if (mod.Dynamic)
             _dynamicMod = ( _dynamicMod == mod ) ? null : mod;
         else // Envionrment mod still needs to be able to get it to null despite the games visual behavior because of pathing visuals ( EnvironmentModifier )
-            _temporaryMod = ( _temporaryMod == mod ) ? _environmentMod : mod;
+        {
+            if ( _temporaryMod.Contains(mod) )
+                _temporaryMod.Remove(mod);
+            else
+                _temporaryMod.Add(mod);
+        }
 
         CosmeticModify();
 
         return true;
     }
-    public void SetEnvironment()
+    public void SetEnvironment(Modifier mod)
     {
-        _environmentMod = _temporaryMod;
+        if ( Modifier != null && Modifier.NonWalkable ) return;
+
+        Debug.Log("get mod? set envi: " + mod);
+        if ( _temporaryMod.Contains(mod) )
+            _environmentMod = mod;
     }
 
     public void SetMod( Modifier mod )
@@ -116,13 +132,13 @@ public class HexagonCell : MonoBehaviour
         if ( mod != null )
         {
             Modify(mod);
-            SetEnvironment();
+            SetEnvironment(mod);
         }
     }
 
     public void SetLast()
     {
-        LastMod = _environmentMod != null ? _environmentMod.Clone() : null;
+        LastMod = _environmentMod;
     }
 
     private void CosmeticModify()
