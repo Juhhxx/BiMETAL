@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class OverworldController : MonoBehaviour
+public class OverworldController : Controller
 {
     [SerializeField] private PlayerTabletopMovement _player;
     [SerializeField] private HexagonTabletop _tabletop;

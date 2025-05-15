@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TabletopController : MonoBehaviour
+public class TabletopController : Controller
 {
     [SerializeField] private OverworldController _overworld;
 
@@ -16,6 +16,7 @@ public class TabletopController : MonoBehaviour
     [SerializeField] private Transform _healthParent;
     [SerializeField] private TMP_Text _roundText;
     [SerializeField] private GameObject _canvas;
+    [SerializeField] private GameObject _gameOver;
 
     public string BATTLEARENA = "BattleArena";
     private int _round;
@@ -71,12 +72,17 @@ public class TabletopController : MonoBehaviour
 
         Enable();
 
+        _gameOver.SetActive(false);
+
         _currentTabletop = SceneLoader.SceneToLoad;
 
         _overworld = FindFirstObjectByType<OverworldController>();
 
         if ( _currentTabletop == null || _currentTabletop == "" )
+        {
             _currentTabletop = SceneManager.GetActiveScene().name;
+            Debug.Log("detected editor time tabletop load, new name: " + _currentTabletop);
+        }
 
         Debug.Log("tabletop to load is: " + _currentTabletop);
 
@@ -91,6 +97,11 @@ public class TabletopController : MonoBehaviour
         StartNewTabletop();
     }
 
+    public void CheckGame()
+    {
+        StartCoroutine(CheckForGame());
+    }
+
     private IEnumerator CheckForGame()
     {
         Debug.Log("commence");
@@ -103,16 +114,27 @@ public class TabletopController : MonoBehaviour
 
             // need to add gameover screen here
 
-            if ( _overworld != null )
-                _overworld.EndBattle(_currentTabletop, _health > 0 );
-            else
-                SceneLoader.Load("Overworld");
-
-            // SceneLoader.Load("Overworld");
-            Destroy(gameObject);
+            _gameOver.SetActive(true);
         }
 
         StartNewTabletop();
+    }
+
+    public void Retry()
+    {
+        SceneLoader.Load(_currentTabletop);
+        Destroy(gameObject);
+    }
+
+    public void OverWorld()
+    {
+        if ( _overworld != null )
+            _overworld.EndBattle(_currentTabletop, _health > 0 );
+        else
+            SceneLoader.Load("Overworld");
+
+        // SceneLoader.Load("Overworld");
+        Destroy(gameObject);
     }
 
     private void StartNewTabletop()
