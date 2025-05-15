@@ -99,7 +99,7 @@ public class PieceInteractive : ModifierInteractive
         if ( ! HasModifier ) return;
 
         ModPathfinder.Stop();
-        ModPathfinder.FindPath(Cell, null, _reach);
+        ModPathfinder.FindPath(Cell, null, Reach);
     }
 
     public void Stop()

@@ -27,8 +27,7 @@ public abstract class ModifierInteractive : Interactive
     [ShowIf(nameof(HasModifier))]
     [SerializeField] protected PathfinderType _modRangeType;
 
-    [ShowIf(nameof(HasModifier))]
-    [SerializeField] protected int _reach;
+    [field:SerializeField] public int Reach { get; protected set; }
 
 
     public Pathfinder ModPathfinder { get; protected set; }
@@ -85,7 +84,7 @@ public abstract class ModifierInteractive : Interactive
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
-                    Debug.Log("Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
+                    // Debug.Log("Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
                     yield return new WaitForSeconds(0.02f);
                     newItem.Modify(Modifier);
                 }
@@ -93,7 +92,7 @@ public abstract class ModifierInteractive : Interactive
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
-                    Debug.Log("Un-Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
+                    // Debug.Log("Un-Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
                     yield return new WaitForSeconds(0.01f);
                     oldItem.Modify(Modifier);
                 }
