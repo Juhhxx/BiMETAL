@@ -6135,6 +6135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1891478360}
+  _mainMenu: 
 --- !u!114 &1891478358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7578,6 +7579,10 @@ PrefabInstance:
       propertyPath: _notConfirmButton
       value: 
       objectReference: {fileID: 1673508775}
+    - target: {fileID: 6999185454378232374, guid: a0ebec10e23fc1c40a9abca125e94ca5, type: 3}
+      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[0].characterID
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
