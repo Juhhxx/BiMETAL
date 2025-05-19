@@ -30,8 +30,8 @@ public class EnemyPool : MonoBehaviour
 
     private void Awake()
     {
-        _enemyPools = new Dictionary<string, Stack<GameObject>>();
-        _enemiesList = new List<GameObject>();
+        _enemyPools     = new Dictionary<string, Stack<GameObject>>();
+        _enemiesList    = new List<GameObject>();
 
         CreatePools();
     }

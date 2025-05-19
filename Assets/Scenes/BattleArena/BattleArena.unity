@@ -1449,8 +1449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225f2fef09c8128468098c16bd389ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaulfEnemyNumber: 3
   _enemyPool: {fileID: 1107366094}
+  _defaulfEnemyNumber: 3
   _gruntPrefab: {fileID: 8296531496966734037, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
   _dummyPrefab: {fileID: 896216821799497898, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
   _doSpawn: 0

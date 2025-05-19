@@ -10,16 +10,18 @@ public class Character : ScriptableObject
     public float    BaseAttack;
     public float    SpecialAttack;
     public Faction  Faction;
+    public GameObject CharacterPrefab;
 
     public Character InstantiateCharacter()
     {
         Character newC = CreateInstance<Character>();
 
-        newC.Name           = Name;
-        newC.HP             = HP;
-        newC.BaseAttack     = BaseAttack;
-        newC.SpecialAttack  = SpecialAttack;
-        newC.Faction        = Faction;
+        newC.Name               = Name;
+        newC.HP                 = HP;
+        newC.BaseAttack         = BaseAttack;
+        newC.SpecialAttack      = SpecialAttack;
+        newC.Faction            = Faction;
+        newC.CharacterPrefab    = CharacterPrefab;
 
         return newC;
     }    

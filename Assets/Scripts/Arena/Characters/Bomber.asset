@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba86f21e6b563a40846a54a9865f990, type: 3}
   m_Name: Bomber
   m_EditorClassIdentifier: 
-  Name: 
-  HP: 0
+  Name: Bomber
+  HP: 200
   BaseAttack: 0
-  SpecialAttack: 0
+  SpecialAttack: 100
   Faction: 1
+  CharacterPrefab: {fileID: 0}

@@ -8,9 +8,13 @@ public class ArenaController : MonoBehaviour
 {
     [Header("Spawning Parameters")]
     [Space(5f)]
-    [SerializeField] private int        _defaulfEnemyNumber;
     [SerializeField] private EnemyPool  _enemyPool;
     public EnemyPool EnemyPool => _enemyPool;
+
+    [Space(10f)]
+    [Header("Testing Parameters")]
+    [Space(5f)]
+    [SerializeField] private int        _defaulfEnemyNumber;
     [SerializeField] private GameObject _gruntPrefab;
     [SerializeField] private GameObject _dummyPrefab;
     [SerializeField] private bool _doSpawn;
@@ -44,30 +48,47 @@ public class ArenaController : MonoBehaviour
     // Enemy Spawning
     private void SpawnEnemies()
     {
-        // Change to a foreach, enemie piece data should store the respective game object for instantiation
-        for (int i = 0; i < _numberOfEnemies*2; i++)
+        if (_tabletopController == null)
         {
-            Vector3 pos = GetRandomLocation();
-            pos.y = 1.0f;
-            
-            GameObject newEnemy;
-
-            if (i < _numberOfEnemies)
-                newEnemy = _enemyPool.SpawnEnemy(_gruntPrefab, pos);
-            else
-                newEnemy = _enemyPool.SpawnEnemy(_dummyPrefab, pos);
-
-            if ( _tabletopController != null )
+            for (int i = 0; i < _numberOfEnemies * 2; i++)
             {
-                SceneManager.MoveGameObjectToScene(newEnemy,
-                    SceneManager.GetSceneByName(_tabletopController.BATTLEARENA));
+                Vector3 pos = GetRandomLocation();
+                pos.y = 1.0f;
+
+                GameObject newEnemy;
+
+                if (i < _numberOfEnemies)
+                    newEnemy = _enemyPool.SpawnEnemy(_gruntPrefab, pos);
+                else
+                    newEnemy = _enemyPool.SpawnEnemy(_dummyPrefab, pos);
+
+                CharController ctrl = newEnemy.GetComponent<CharController>();
+                ctrl.OnDeath.AddListener(() => CheckEndBattle(true));
+
+                Debug.Log($"ENEMY SPAWNED AT {pos}");
             }
-
-            CharController ctrl = newEnemy.GetComponent<CharController>();
-            ctrl.OnDeath.AddListener(() => CheckEndBattle(true));
-
-            Debug.Log($"ENEMY SPAWNED AT {pos}");
         }
+        else
+        {
+            foreach (Character c in _tabletopController.BattleCharacters)
+            {
+                Vector3 pos = GetRandomLocation();
+                pos.y = 1.0f;
+
+                GameObject prefab = c.CharacterPrefab;
+
+                GameObject newEnemy = _enemyPool.SpawnEnemy(prefab, pos);
+
+                SceneManager.MoveGameObjectToScene(newEnemy,
+                SceneManager.GetSceneByName(_tabletopController.BATTLEARENA));
+
+                CharController ctrl = newEnemy.GetComponent<CharController>();
+                ctrl.OnDeath.AddListener(() => CheckEndBattle(true));
+
+                Debug.Log($"ENEMY SPAWNED AT {pos}");
+            }
+        }
+
         _enemiesKilled = 0;
     }
     private Vector3 GetRandomLocation()

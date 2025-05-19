@@ -15,5 +15,6 @@ MonoBehaviour:
   Name: Dummy
   HP: 100
   BaseAttack: 1
-  SpecialAttack: 0
+  SpecialAttack: 1
   Faction: 1
+  CharacterPrefab: {fileID: 896216821799497898, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
