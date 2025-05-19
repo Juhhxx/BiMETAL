@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 541c62c65376cd04290e385d133bce02, type: 3}
-  m_Name: Bomber
+  m_Script: {fileID: 11500000, guid: 6258416c49bd9c64cbd34d1a941b0058, type: 3}
+  m_Name: ModifierLava
   m_EditorClassIdentifier: 
-  <Color>k__BackingField: {r: 1, g: 0.009424087, b: 0, a: 1}
-  <Weight>k__BackingField: 0
-  <Dynamic>k__BackingField: 1

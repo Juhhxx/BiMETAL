@@ -31,6 +31,11 @@ public class ArenaController : MonoBehaviour
         if (_tabletopController != null) _numberOfEnemies = _tabletopController.BattlePieces.Count - 1;
         else                             _numberOfEnemies = _defaulfEnemyNumber;
 
+        if (_tabletopController != null)
+        {
+            _tabletopController.BattleCell.Modifier?.ArenaModifier?.ActivateModifier();
+        }
+
         if (_doSpawn) SpawnEnemies();
     }
     private void Update()

@@ -18,3 +18,4 @@ MonoBehaviour:
   <NonWalkable>k__BackingField: 1
   <Unavailable>k__BackingField: 0
   <Dynamic>k__BackingField: 0
+  <ArenaModifier>k__BackingField: {fileID: 11400000, guid: 6a669d45daaaf82449555e5a0bf4aef4, type: 2}
