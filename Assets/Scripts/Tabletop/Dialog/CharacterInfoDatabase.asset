@@ -23,25 +23,29 @@ MonoBehaviour:
     _characterPicture: {fileID: 0}
   - _characterID: 2
     _audioClip: {fileID: 0}
-    _characterName: Automaton
+    _characterName: Gousse's Mom
     _characterPicture: {fileID: 0}
   - _characterID: 3
     _audioClip: {fileID: 0}
-    _characterName: Nerdbert
+    _characterName: Automaton
     _characterPicture: {fileID: 0}
   - _characterID: 4
     _audioClip: {fileID: 0}
-    _characterName: Grunt
+    _characterName: Nerdbert
     _characterPicture: {fileID: 0}
   - _characterID: 5
     _audioClip: {fileID: 0}
-    _characterName: Bomber
+    _characterName: Grunt
     _characterPicture: {fileID: 0}
   - _characterID: 6
     _audioClip: {fileID: 0}
-    _characterName: Sniper
+    _characterName: Bomber
     _characterPicture: {fileID: 0}
   - _characterID: 7
+    _audioClip: {fileID: 0}
+    _characterName: Sniper
+    _characterPicture: {fileID: 0}
+  - _characterID: 8
     _audioClip: {fileID: 0}
     _characterName: Elite
     _characterPicture: {fileID: 0}

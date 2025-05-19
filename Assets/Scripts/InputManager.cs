@@ -3,10 +3,11 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public static float MouseSensitivity = 1f;
-    public static bool Paused = false;
+    public static bool Paused => PauseCount != 0 || NarrativePaused;
+    public static bool NarrativePaused = false;
 
     // to be used later for ui stacking
-    private static int _paused = 0;
+    public static int PauseCount = 0;
     public static bool CamRotDown()
     {
         if ( Paused ) return false;
@@ -113,15 +114,26 @@ public class InputManager : MonoBehaviour
 
     public static bool Pause()
     {
-        if ( Paused ) return false;
+        // if ( Paused ) return false;
 
         return Input.GetKeyDown(KeyCode.Escape);
     }
 
+    public static bool Next()
+    {
+        if ( PauseCount != 0 ) return false;
+
+        return Input.GetKeyDown(KeyCode.Space)
+        || Input.GetKeyDown(KeyCode.F)
+        || Input.GetMouseButtonDown(0)
+        || Input.GetMouseButtonDown(1);
+    }
+
     public static bool Skip()
     {
-        if ( Paused ) return false;
+        if ( PauseCount != 0 ) return false;
 
-        return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1);
+        return Input.GetKey(KeyCode.LeftControl)
+            || Input.GetKey(KeyCode.Tab);
     }
 }

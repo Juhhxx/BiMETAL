@@ -69,7 +69,7 @@ MonoBehaviour:
   <Name>k__BackingField: Bomber Enemy
   _modifier: {fileID: 11400000, guid: 62cee6b0a78a81148854ace9c50143a3, type: 2}
   _modRangeType: 3
-  _reach: 2
+  <Reach>k__BackingField: 2
   <Character>k__BackingField: {fileID: 11400000, guid: c1c22c57298161e44acc79e8302709d3, type: 2}
   _renderer: {fileID: 8253570625138235836}
   _rigidBody: {fileID: 1247624870869089191}

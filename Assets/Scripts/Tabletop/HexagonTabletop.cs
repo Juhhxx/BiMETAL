@@ -37,6 +37,7 @@ public class HexagonTabletop : MonoBehaviour
 
     public void ResetPaths()
     {
+        Debug.Log("level? Reset cells");
         foreach (HexagonCell cell in Cells)
        {
             while ( cell.PathStack != 0 )

@@ -5,6 +5,7 @@ public enum CharacterID
 {
     Unknown,
     Gousse,
+    Mom,
     Automaton,
     Nerdbert,
     Grunt,

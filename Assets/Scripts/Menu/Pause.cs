@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class Pause : Menu
 {
     [SerializeField] private GameObject _pause;
-    [SerializeField] private string _mainMenu;
 
     private void Start()
     {
@@ -25,7 +24,7 @@ public class Pause : Menu
             {
                 _pause.SetActive( true );
                 Time.timeScale = 0f;
-                InputManager.Paused = true;
+                // InputManager.Paused = true;
             }
         }
         // Debug.Log("time scale?" + Time.timeScale);
@@ -48,6 +47,11 @@ public class Pause : Menu
         yield return new WaitUntil( () => ! _pause.activeSelf && ! _settings.GetActive() );
 
         Debug.Log("loading main");
+
+        Controller[] _controllerDDOLs = FindObjectsByType<Controller>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach ( Controller ctrl in _controllerDDOLs )
+            Destroy(ctrl.gameObject);
+        
         SceneLoader.Load(_mainMenu);
     }
 
@@ -57,7 +61,7 @@ public class Pause : Menu
     public override void Continue()
     {
         Time.timeScale = 1f;
-        InputManager.Paused = false;
+        // InputManager.Paused = false;
 
         _settings.TurnOffSettings();
         _pause.SetActive(false);

@@ -121,7 +121,7 @@ MonoBehaviour:
   <Name>k__BackingField: Lava Modifier
   _modifier: {fileID: 11400000, guid: 6d46cb661823c8b409076088ed554b99, type: 2}
   _modRangeType: 1
-  _reach: 2
+  <Reach>k__BackingField: 2
 --- !u!54 &8811055000448337837
 Rigidbody:
   m_ObjectHideFlags: 0

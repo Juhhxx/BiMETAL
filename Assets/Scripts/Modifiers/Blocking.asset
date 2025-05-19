@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Blocking
   m_EditorClassIdentifier: 
   <Color>k__BackingField: {r: 0.3962264, g: 0.20538013, b: 0.08410467, a: 1}
-  <Weight>k__BackingField: 0
+  <Material>k__BackingField: {fileID: 0}
+  <Weight>k__BackingField: 2
   <NonWalkable>k__BackingField: 1
+  <Unavailable>k__BackingField: 0
   <Dynamic>k__BackingField: 0

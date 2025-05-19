@@ -121,7 +121,7 @@ MonoBehaviour:
   <Name>k__BackingField: Lighting Modifier
   _modifier: {fileID: 11400000, guid: a2e814ade9121944c9ff2adf1a210b2d, type: 2}
   _modRangeType: 1
-  _reach: 2
+  <Reach>k__BackingField: 2
 --- !u!54 &8811055000448337837
 Rigidbody:
   m_ObjectHideFlags: 0

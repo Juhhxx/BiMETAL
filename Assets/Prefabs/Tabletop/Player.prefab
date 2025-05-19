@@ -70,7 +70,8 @@ MonoBehaviour:
   <Name>k__BackingField: Automaton
   _modifier: {fileID: 0}
   _modRangeType: 0
-  _reach: 0
+  <Reach>k__BackingField: 4
+  <Character>k__BackingField: {fileID: 0}
   _renderer: {fileID: 7827746536415936566}
   _rigidBody: {fileID: 7297164752010226890}
 --- !u!54 &7297164752010226890

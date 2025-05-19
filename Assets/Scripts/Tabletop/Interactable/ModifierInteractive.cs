@@ -7,15 +7,27 @@ using UnityEngine;
 public abstract class ModifierInteractive : Interactive
 {
     [SerializeField] protected Modifier _modifier;
-    public Modifier Modifier => _modifier;
-    public bool HasModifier => _modifier != null;
+    public Modifier Modifier
+    {
+        get
+        {
+            if (!_cloned && _modifier != null)
+            {
+                _modifier = _modifier.Clone();
+                _cloned = true;
+                Debug.Log("Get mod from " + gameObject.name + " mod: " + _modifier.name);
+            }
+            return _modifier;
+        }
+    }
+    private bool _cloned = false;
+    public bool HasModifier => Modifier != null;
     public bool Modified { get; protected set; } = false;
 
     [ShowIf(nameof(HasModifier))]
     [SerializeField] protected PathfinderType _modRangeType;
 
-    [ShowIf(nameof(HasModifier))]
-    [SerializeField] protected int _reach;
+    [field:SerializeField] public int Reach { get; protected set; }
 
 
     public Pathfinder ModPathfinder { get; protected set; }
@@ -27,8 +39,6 @@ public abstract class ModifierInteractive : Interactive
         if ( HasModifier )
         {
             ModPathfinder = PathfinderChooser.ChooseRange(this, _modRangeType);
-
-            _modifier = _modifier.Clone();
 
             if ( ModPathfinder != null )
                 ModPathfinder.Path.CollectionChanged += DemonstratePath;
@@ -74,17 +84,17 @@ public abstract class ModifierInteractive : Interactive
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
-                    Debug.Log("Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
+                    // Debug.Log("Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
                     yield return new WaitForSeconds(0.02f);
-                    newItem.Modify(_modifier);
+                    newItem.Modify(Modifier);
                 }
 
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
-                    Debug.Log("Un-Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
+                    // Debug.Log("Un-Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
                     yield return new WaitForSeconds(0.01f);
-                    oldItem.Modify(_modifier);
+                    oldItem.Modify(Modifier);
                 }
         }
 

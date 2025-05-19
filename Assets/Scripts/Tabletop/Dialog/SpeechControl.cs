@@ -30,11 +30,12 @@ public class SpeechControl : MonoBehaviour
     private WaitUntil _waitUntil;
     private WaitUntil _waitUntilOrDisplayed;
     private YieldInstruction _waitForEndOfFrame;
+    private Coroutine _phraseCoroutine;
     private Coroutine _typingCoroutine;
     private IEnumerator _dialogCoroutine;
     private bool _isTextFullyDisplayed = false;
 
-    public bool Paused { get; set;} = false;
+    public bool Paused => InputManager.PauseCount != 0;
     private WaitUntil _waitUntilNotPaused;
 
     /// <summary>
@@ -52,8 +53,8 @@ public class SpeechControl : MonoBehaviour
         _waitForTypingSpeed = new WaitForSeconds(_typingSpeed);
         _stringBuilder = new StringBuilder();
 
-        _waitUntil = new WaitUntil(() => InputManager.Skip() );
-        _waitUntilOrDisplayed = new WaitUntil(() => _isTextFullyDisplayed || InputManager.Skip() );
+        _waitUntil = new WaitUntil(() => InputManager.Next() );
+        _waitUntilOrDisplayed = new WaitUntil(() => _isTextFullyDisplayed || InputManager.Next() );
         _waitForEndOfFrame = new WaitForFixedUpdate();
         _waitUntilNotPaused = new WaitUntil(() => !Paused);
         
@@ -84,6 +85,8 @@ public class SpeechControl : MonoBehaviour
         _dialogCoroutine = ShowAllDialogs();
         StartCoroutine(_dialogCoroutine);
 
+        InputManager.NarrativePaused = true;
+
         if (_currentDialogs != newDialogQueue)
             return _currentDialogs;
         else
@@ -107,7 +110,8 @@ public class SpeechControl : MonoBehaviour
             // dont play if pause menu is on
             yield return _waitUntilNotPaused;
 
-            yield return StartCoroutine(BeginDialog(_currentDialogs.Peek()));
+            _phraseCoroutine = StartCoroutine(BeginDialog(_currentDialogs.Peek()));
+            yield return _phraseCoroutine;
 
             if (_currentDialogs.Count > 1)
             {
@@ -308,10 +312,29 @@ public class SpeechControl : MonoBehaviour
     /// End dialog disables all the necessary objects for the ui, and enables all the
     /// ones that it had to disables when showDialog was first called
     /// </summary>
-    private void EndDialog()
+    public void EndDialog()
     {
         _dialogUI.SetActive(false);
+        _currentDialogs = null;
 
-        _dialogCoroutine = null;
+        InputManager.NarrativePaused = false;
+
+        if ( _dialogCoroutine != null )
+        {
+            StopCoroutine(_dialogCoroutine);
+            _dialogCoroutine = null;
+        }
+
+        if ( _phraseCoroutine != null )
+        {
+            StopCoroutine(_phraseCoroutine);
+            _phraseCoroutine = null;
+        }
+
+        if ( _typingCoroutine != null )
+        {
+            StopCoroutine(_typingCoroutine);
+            _typingCoroutine = null;
+        }
     }
 }

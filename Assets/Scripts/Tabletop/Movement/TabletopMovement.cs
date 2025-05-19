@@ -85,7 +85,7 @@ public abstract class TabletopMovement : TabletopBase
             CurrentCell.WalkOn();
         if ( Pathfinder != null )
             Pathfinder.Stop();
-        Debug.LogWarning("Disabled: " + gameObject.name + "'s " + this);
+        // Debug.LogWarning("Disabled: " + gameObject.name + "'s " + this);
     }
     protected virtual void OnDestroy()
     {

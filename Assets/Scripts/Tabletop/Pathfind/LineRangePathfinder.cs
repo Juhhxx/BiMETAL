@@ -23,6 +23,8 @@ public class LineRangePathfinder : Pathfinder
         int dir = objective.GetDirectionToNeighbor(start);
         dir = HexagonCell.ReverseDirection(dir);
 
+        Path.ObservePush(objective);
+
         for ( int tryNum = 0; tryNum < totalWeight; tryNum++)
         {
 
