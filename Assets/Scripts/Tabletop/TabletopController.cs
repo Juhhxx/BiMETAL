@@ -230,6 +230,14 @@ public class TabletopController : Controller
         StartCoroutine( RestoreAfterSceneLoad( playerWon ) );
     }
 
+    /// <summary>
+    /// Restores data from the scriptable called Snapshot ( give snapshot save system values and then call this on enable )
+    /// Restore additional tabletop controller data only after running this
+    /// Keep in mind you need to wait for tabletop controller Start to end to run this, plus unity loading is async, use a Restire flag to wait until the correct scene is loaded and then use it to make the scene loader continue on saying "loading" to make teh save system wait until everything is finished, if you didnt get the last line, then welp
+    /// </summary>
+    /// <param name="won"> If it won a battle
+    /// ( determines if its supposed to roll back or not, for save system say true,
+    /// tabletop pieces will not be killed, since the variable is null on game load )</param>
     private IEnumerator RestoreAfterSceneLoad(bool won)
     {
         yield return new WaitUntil(() => SceneManager.GetSceneByName(_currentTabletop).isLoaded);
@@ -273,6 +281,11 @@ public class TabletopController : Controller
         _restoreFlag.IsRestored = true;
     }
 
+    /// <summary>
+    /// Here values are saved, to be used by the save system and persistence, the scriptable Snapshot
+    /// It's called every time a battle starts for now, should be called before save system saves data from the scriptable Snapshot as well
+    /// The save system should additionally save controller values like health and round number
+    /// </summary>
     public void SaveSnapshot()
     {
         Snapshot = new BattleState();

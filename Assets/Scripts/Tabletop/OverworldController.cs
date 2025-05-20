@@ -86,6 +86,15 @@ public class OverworldController : Controller
         StartCoroutine( RestoreAfterSceneLoad( playerWon ) );
     }
 
+    /// <summary>
+    /// Restores data from the scriptable called Snapshot ( give snapshot save system values and then call this on enable )
+    /// Restore additional overword controller data only after running this
+    /// Restore level only after restoring overworld if it exists (load overworld-> load overworld controller -> load tabletop -> load tabletop controller)
+    /// </summary>
+    /// <param name="won"> If it won a level
+    /// ( determines if its supposed to progress the narrative line, say false,
+    /// as it will keep the level or non existent level to be completed,
+    /// but restore previous progression from the scriptable </param>
     private IEnumerator RestoreAfterSceneLoad( bool won)
     {
         yield return new WaitUntil(() => SceneManager.GetSceneByName("Overworld").isLoaded);
@@ -122,13 +131,19 @@ public class OverworldController : Controller
 
         Debug.Log("setting level " + _levelName + " as " + won);
 
-        foreach ( CharacterInteractive level in _levels )
-        {
-            if ( level.LevelName == _levelName )
-                level.SetCurrent( won, _unavailableMod );
-        }
+        if ( _levelName != null && _levelName != "" )
+            foreach ( CharacterInteractive level in _levels )
+            {
+                if ( level.LevelName == _levelName )
+                    level.SetCurrent( won, _unavailableMod );
+            }
     }
 
+    /// <summary>
+    /// Here values are saved, to be used by the save system and persistence, the scriptable Snapshot
+    /// It's called every time we enter a level for now, should be called before save system saves data from the scriptable Snapshot as well
+    /// Shouldnt need to save any additional overworld controller
+    /// </summary>
     public void SaveSnapshot()
     {
         Snapshot = new OverworldState();
