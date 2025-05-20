@@ -17,6 +17,7 @@ public class TabletopController : Controller
     [SerializeField] private TMP_Text _roundText;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _gameOver;
+    [SerializeField] private GameObject _winOver;
 
     public string BATTLEARENA = "BattleArena";
     private int _round;
@@ -73,6 +74,7 @@ public class TabletopController : Controller
         Enable();
 
         _gameOver.SetActive(false);
+        _winOver.SetActive(false);
 
         _currentTabletop = SceneLoader.SceneToLoad;
 
@@ -107,14 +109,15 @@ public class TabletopController : Controller
         Debug.Log("commence");
         yield return null;
 
-        if (_health <= 0 || _pieces.Where( p => p != _playerInput ).All( p => p.Interactive is PieceInteractive { Dead: true }) )
+        if ( _health <= 0 )
         {
-            Debug.Log("commence detected");
             yield return new WaitForSeconds(3f);
-
-            // need to add gameover screen here
-
             _gameOver.SetActive(true);
+        }
+        else if ( _pieces.Where( p => p != _playerInput ).All( p => p.Interactive is PieceInteractive { Dead: true }) )
+        {
+            yield return new WaitForSeconds(3f);
+            _winOver.SetActive(true);
         }
 
         StartNewTabletop();

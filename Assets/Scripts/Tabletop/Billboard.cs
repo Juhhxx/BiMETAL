@@ -9,8 +9,6 @@ public class Billboard : MonoBehaviour
     private void Start()
     {
         _upDis = transform.position - _transformToFollow.position;
-        _upDis.x = 0;
-        _upDis.z = 0;
     }
 
     private void Update()
