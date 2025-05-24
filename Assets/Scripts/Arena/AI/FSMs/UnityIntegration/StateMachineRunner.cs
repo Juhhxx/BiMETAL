@@ -13,20 +13,20 @@ namespace AI.FSMs.UnityIntegration
         private void Start()
         {
             // Get copy of the State Machine.
-            _stateMachine = _stateMachineModel.CreateStateMachine();
+            _stateMachine = _stateMachineModel?.CreateStateMachine();
             
             // Set the Object Reference of the State Machine to this Game Object.
-            _stateMachine.SetObjectReference(gameObject);
+            _stateMachine?.SetObjectReference(gameObject);
             // Instantiate the State Machine.
-            _stateMachine.InstantiateStateMachine();
+            _stateMachine?.InstantiateStateMachine();
         }
         private void Update()
         {
-            _stateMachine.Run();
+            _stateMachine?.Run();
         }
         public void Reset()
         {
-            _stateMachine.ResetStateMachine();
+            _stateMachine?.ResetStateMachine();
         }
     }
 }

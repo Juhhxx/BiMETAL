@@ -17,4 +17,4 @@ MonoBehaviour:
   BaseAttack: 0
   SpecialAttack: 100
   Faction: 1
-  CharacterPrefab: {fileID: 0}
+  CharacterPrefab: {fileID: 440125959601628111, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}

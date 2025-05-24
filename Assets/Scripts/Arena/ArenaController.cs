@@ -77,6 +77,8 @@ public class ArenaController : MonoBehaviour
         {
             foreach (Character c in _tabletopController.BattleCharacters)
             {
+                if (c.Name == "Player") continue;
+                
                 Vector3 pos = GetRandomLocation();
                 pos.y = 1.0f;
 
