@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba86f21e6b563a40846a54a9865f990, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 80fb2dcf82c7a864dbdefdeb2573c43a, type: 3}
+  m_Name: StateFlee
   m_EditorClassIdentifier: 
-  Name: Player
-  HP: 500
-  BaseAttack: 20
-  SpecialAttack: 40
-  Faction: 0
-  CharacterPrefab: {fileID: 0}
+  Name: Flee

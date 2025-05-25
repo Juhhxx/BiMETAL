@@ -116,12 +116,12 @@ public class ArenaController : MonoBehaviour
     public void CheckEndBattle(bool checkPlayerWin)
     {
         if (!checkPlayerWin)
-            _tabletopController.EndBattle(false);
+            _tabletopController?.EndBattle(false);
         else
         {
             _enemiesKilled++;
             if (_enemiesKilled == _numberOfEnemies)
-                _tabletopController.EndBattle(true);
+                _tabletopController?.EndBattle(true);
         }
     }
     public void WinBattle() => _tabletopController.EndBattle(true);

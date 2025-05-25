@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba86f21e6b563a40846a54a9865f990, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 912f66144653e5f459c67ea016e2fef4, type: 3}
+  m_Name: StateAttackPlayerBomber
   m_EditorClassIdentifier: 
-  Name: Player
-  HP: 500
-  BaseAttack: 20
-  SpecialAttack: 40
-  Faction: 0
-  CharacterPrefab: {fileID: 0}
+  Name: AttackBomber
+  _attackTimer: 2

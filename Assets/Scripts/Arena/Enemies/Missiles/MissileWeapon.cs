@@ -6,28 +6,22 @@ public class MissileWeapon : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _target;
-    [SerializeField] private float _spawnRate;
     private MissilePool _pool;
-    private YieldInstruction _wfs;
+    private CharController _owner;
 
     private void Start()
     {
         _pool = GetComponent<MissilePool>();
-        _wfs = new WaitForSeconds(_spawnRate);
-
-        StartCoroutine(ShootMissiles());
+        _owner = GetComponentInParent<CharController>();
     }
-    private IEnumerator ShootMissiles()
+
+    public void Shoot()
     {
-        while (true)
-        {
-            MissileController ctrl = _pool.SpawnMissile(_spawnPoint.position,
-                                                    _spawnPoint.rotation)
-                                            .GetComponent<MissileController>();
+        MissileController ctrl = _pool.SpawnMissile(_spawnPoint.position,
+                                        _spawnPoint.rotation)
+                                        .GetComponent<MissileController>();
 
-            ctrl.SetTarget(_target);
-
-            yield return _wfs;
-        }
+        ctrl.SetTarget(_target);
+        ctrl.SetOwner(_owner);
     }
 }

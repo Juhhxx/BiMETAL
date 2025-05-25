@@ -25,11 +25,11 @@ public class EnemyAttack : MonoBehaviour
    
     private void OnEnable()
     {
-        _attackCollider.OnCollisionEnter += DoAttack;
+        if (_attackCollider != null) _attackCollider.OnCollisionEnter += DoAttack;
     }
     private void OnDisable()
     {
-        _attackCollider.OnCollisionEnter -= DoAttack;
+        if (_attackCollider != null) _attackCollider.OnCollisionEnter -= DoAttack;
     }
     public void Attack()
     {

@@ -12,6 +12,7 @@ public class MissileController : MonoBehaviour
     private Vector3 _destination;
 
     private MissilePool _pool;
+    private CharController _owner;
 
     private void Start()
     {
@@ -50,10 +51,19 @@ public class MissileController : MonoBehaviour
     public void SetTarget(Transform target) => _target = target;
     private void Explode(object sender, OnCollisionEventArgs e)
     {
-        Debug.Log($"Missile Detected Collision with {e.other.name}");
+        Collider other = e.other;
+        CharController otherChar = other.gameObject.GetComponent<CharController>();
+
+        if (otherChar != null)
+        {
+            _owner.GiveDamage(otherChar, _owner.Character.SpecialAttack);
+        }
+
+        Debug.Log($"Missile Detected Collision with {other.name}");
         Destroy();
     }
 
     public void SetPool(MissilePool pool) => _pool = pool;
+    public void SetOwner(CharController owner) => _owner = owner;
     public void Destroy() => _pool?.DespawnMissile(gameObject);
 }

@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba86f21e6b563a40846a54a9865f990, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 4ff486c56bb8c98479cbd554449a4f0e, type: 3}
+  m_Name: TransitionCheckAttackRadiusBomber
   m_EditorClassIdentifier: 
-  Name: Player
-  HP: 500
-  BaseAttack: 20
-  SpecialAttack: 40
-  Faction: 0
-  CharacterPrefab: {fileID: 0}
+  Name: CheckAttackRadiusBomber
+  ToState: {fileID: 11400000, guid: ee8742489a4939843afedafb4515f0c4, type: 2}
+  _radius: 20
+  _checkIfInside: 1
