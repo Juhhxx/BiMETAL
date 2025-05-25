@@ -2,7 +2,7 @@ using AI.FSMs.UnityIntegration;
 using AI.FSMs.BaseFiles;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StateFollowPlayer", menuName = "State Machines/StateFollowPlayer")]
+[CreateAssetMenu(fileName = "StateFollowPlayer", menuName = "State Machines/States/StateFollowPlayer")]
 public class StateFollowPlayer : StateAbstract
 {
     private GameObject      gameObject;

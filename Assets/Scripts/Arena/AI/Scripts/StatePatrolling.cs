@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "StatePatrolling", menuName = "State Machines/StatePatrolling")]
+[CreateAssetMenu(fileName = "StatePatrolling", menuName = "State Machines/States/StatePatrolling")]
 public class StatePatrolling : StateAbstract
 {
     private GameObject  gameObject;

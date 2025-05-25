@@ -3,7 +3,7 @@ using AI.FSMs.BaseFiles;
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(fileName = "TransitionSeePlayer", menuName = "State Machines/TransitionSeePlayer")]
+[CreateAssetMenu(fileName = "TransitionSeePlayer", menuName = "State Machines/Transitions/TransitionSeePlayer")]
 public class TransitionSeePlayer : TransitionAbstract
 {
     private GameObject  gameObject;

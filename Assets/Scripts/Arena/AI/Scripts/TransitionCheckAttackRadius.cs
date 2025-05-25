@@ -2,7 +2,7 @@ using AI.FSMs.UnityIntegration;
 using AI.FSMs.BaseFiles;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TransitionCheckAttackRadius", menuName = "State Machines/TransitionCheckAttackRadius")]
+[CreateAssetMenu(fileName = "TransitionCheckAttackRadius", menuName = "State Machines/Transitions/TransitionCheckAttackRadius")]
 public class TransitionCheckAttackRadius : TransitionAbstract
 {
     private GameObject  gameObject;

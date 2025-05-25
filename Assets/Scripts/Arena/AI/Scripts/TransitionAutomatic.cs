@@ -2,7 +2,7 @@ using AI.FSMs.UnityIntegration;
 using AI.FSMs.BaseFiles;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TransitionAutomatic", menuName = "State Machines/TransitionAutomatic")]
+[CreateAssetMenu(fileName = "TransitionAutomatic", menuName = "State Machines/Transitions/TransitionAutomatic")]
 public class TransitionAutomatic : TransitionAbstract
 {
     protected override void Action()

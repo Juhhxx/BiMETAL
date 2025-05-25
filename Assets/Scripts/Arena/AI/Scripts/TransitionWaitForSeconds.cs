@@ -2,7 +2,7 @@ using AI.FSMs.UnityIntegration;
 using AI.FSMs.BaseFiles;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TransitionWaitForSeconds", menuName = "State Machines/TransitionWaitForSeconds")]
+[CreateAssetMenu(fileName = "TransitionWaitForSeconds", menuName = "State Machines/Transitions/TransitionWaitForSeconds")]
 public class TransitionWaitForSeconds : TransitionAbstract
 {
     [SerializeField] private float _seconds;

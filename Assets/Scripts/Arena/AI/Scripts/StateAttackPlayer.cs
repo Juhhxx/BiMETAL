@@ -2,7 +2,7 @@ using AI.FSMs.UnityIntegration;
 using AI.FSMs.BaseFiles;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StateAttackPlayer", menuName = "State Machines/StateAttackPlayer")]
+[CreateAssetMenu(fileName = "StateAttackPlayer", menuName = "State Machines/States/StateAttackPlayer")]
 public class StateAttackPlayer : StateAbstract
 {
     private GameObject  gameObject;

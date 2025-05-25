@@ -2756,10 +2756,6 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 1492007170}
-    - target: {fileID: 861667625384994900, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
-      propertyPath: _spawnRate
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 959451680174772425, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.36

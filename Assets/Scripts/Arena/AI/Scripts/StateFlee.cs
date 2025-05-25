@@ -2,22 +2,23 @@ using AI.FSMs.UnityIntegration;
 using AI.FSMs.BaseFiles;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StateEmpty", menuName = "State Machines/States/StateEmpty")]
-public class StateEmpty : StateAbstract
+[CreateAssetMenu(fileName = "StateFlee", menuName = "State Machines/States/StateFlee")]
+public class StateFlee : StateAbstract
 {
+
     protected override void EntryAction()
     {
-        Debug.Log("Entering Empty");
+        Debug.Log("Entering Flee");
     }
 
     protected override void StateAction()
     {
-        Debug.Log("State Empty");
+        Debug.Log("State Flee");
     }
 
     protected override void ExitAction()
     {
-        Debug.Log("Exit Empty");
+        Debug.Log("Exit Flee");
     }
     public override void InstantiateState()
     {
