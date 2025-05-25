@@ -119,49 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &70241488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4838181850888138955, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
-  m_PrefabInstance: {fileID: 3495245991226135867}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &70241490 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2435093807298399038, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
-  m_PrefabInstance: {fileID: 3495245991226135867}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70241488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ffc5fd90c946c54b8088bd150fa0422, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!54 &70241494
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70241488}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!20 &286574638 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2354008547768096668, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
@@ -1759,6 +1716,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 86480739735210236, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 577886592151275310, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2837962599220010696, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2787,9 +2752,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Bomber
       objectReference: {fileID: 0}
-    - target: {fileID: 440125959601628111, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 861667625384994900, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 1492007170}
+    - target: {fileID: 861667625384994900, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
+      propertyPath: _spawnRate
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 959451680174772425, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2834,7 +2803,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 703649170214166310, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
 --- !u!1001 &3495245991226135867
 PrefabInstance:
@@ -2888,33 +2860,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Missile
       objectReference: {fileID: 0}
+    - target: {fileID: 2341265973925201895, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2441857436519233986, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
       propertyPath: _target
       value: 
       objectReference: {fileID: 1492007170}
-    - target: {fileID: 2441857436519233986, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
-      propertyPath: _linearVelocity
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2441857436519233986, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
-      propertyPath: _angularVelocity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2441857436519233986, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
-      propertyPath: _explosionCollider
-      value: 
-      objectReference: {fileID: 70241490}
-    - target: {fileID: 2441857436519233986, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
-      propertyPath: _targetAcceptanceRadius
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4838181850888138955, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 70241494}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

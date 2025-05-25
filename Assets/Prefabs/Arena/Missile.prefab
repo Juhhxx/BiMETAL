@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1181418586570735435}
   - component: {fileID: 2441857436519233986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,9 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed04cefcbea7f04ab86c8cae501d424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _explosionCollider: {fileID: 2435093807298399038}
   _target: {fileID: 0}
-  _linearVelocity: 5
+  _linearVelocity: 8
   _angularVelocity: 1
+  _targetAcceptanceRadius: 10
+  _velocity: 0
 --- !u!1 &3272921360882694424
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +63,7 @@ GameObject:
   - component: {fileID: 7722756950991333630}
   - component: {fileID: 6708616689424826967}
   - component: {fileID: 6753928549259052778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,9 +149,10 @@ GameObject:
   - component: {fileID: 9182113359281680802}
   - component: {fileID: 7925946905023893611}
   - component: {fileID: 7110228586096959916}
+  - component: {fileID: 709656091848657597}
   - component: {fileID: 2571849479338072684}
   - component: {fileID: 2435093807298399038}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,6 +227,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &709656091848657597
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4838181850888138955}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!135 &2571849479338072684
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -236,7 +267,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 448
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -265,7 +296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6054329511302457002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

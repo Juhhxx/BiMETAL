@@ -1,16 +1,17 @@
 using NaughtyAttributes;
 using UnityEngine;
 
-public class Missile : MonoBehaviour
+public class MissileController : MonoBehaviour
 {
     [SerializeField] private CollisionDetector _explosionCollider;
     [SerializeField] private Transform _target;
     [SerializeField] private float _linearVelocity;
     [SerializeField] private float _angularVelocity;
     [SerializeField] private float _targetAcceptanceRadius;
-
     [SerializeField][ReadOnly] private float _velocity;
     private Vector3 _destination;
+
+    private MissilePool _pool;
 
     private void Start()
     {
@@ -22,7 +23,7 @@ public class Missile : MonoBehaviour
     }
     private void Update()
     {
-        if (_target)
+        if (_target != null)
         {
             _destination = _target.position;
         }
@@ -46,8 +47,13 @@ public class Missile : MonoBehaviour
         transform.position += movement * Time.deltaTime;
     }
 
+    public void SetTarget(Transform target) => _target = target;
     private void Explode(object sender, OnCollisionEventArgs e)
     {
-        Destroy(gameObject);
+        Debug.Log($"Missile Detected Collision with {e.other.name}");
+        Destroy();
     }
+
+    public void SetPool(MissilePool pool) => _pool = pool;
+    public void Destroy() => _pool?.DespawnMissile(gameObject);
 }
