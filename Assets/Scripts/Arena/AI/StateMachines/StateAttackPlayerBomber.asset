@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StateAttackPlayerBomber
   m_EditorClassIdentifier: 
   Name: AttackBomber
-  _attackTimer: 2
+  _attackTimer: 2.5

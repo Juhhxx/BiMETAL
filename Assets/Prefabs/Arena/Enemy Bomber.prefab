@@ -190,9 +190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3950725a12407e4439fa56b9829a7516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 3.5
-  _maxChaseSpeed: 5
-  _maxAngularSpeed: 200
+  _maxSpeed: 5
+  _maxChaseSpeed: 8
+  _maxAngularSpeed: 250
   _targetAcceptanceRadius: 2
 --- !u!114 &4568815404797350364
 MonoBehaviour:
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad496f9f0acfd94aa2be936df7f0a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stateMachineModel: {fileID: 0}
+  _stateMachineModel: {fileID: 11400000, guid: 44a25fbf48bb79241940e241940b3913, type: 2}
   _stateMachine: {fileID: 0}
 --- !u!1 &2362250606423364379
 GameObject:

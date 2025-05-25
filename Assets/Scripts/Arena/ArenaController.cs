@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,9 @@ public class ArenaController : MonoBehaviour
     [SerializeField] private GameObject _gruntPrefab;
     [SerializeField] private GameObject _dummyPrefab;
     [SerializeField] private bool _doSpawn;
+    [SerializeField] private bool _simulateModifier;
+    public bool SimulateModifier => _simulateModifier;
+    [ShowIf("SimulateModifier")][SerializeField] private ArenaModifierAbstract _arenaModifier;
 
     private TabletopController _tabletopController;
     private int _numberOfEnemies;
@@ -33,14 +37,17 @@ public class ArenaController : MonoBehaviour
 
         if (_tabletopController != null)
         {
-            _tabletopController.BattleCell.Modifier?.ArenaModifier?.ActivateModifier();
+            _arenaModifier = _tabletopController.BattleCell.Modifier?.ArenaModifier;
+            _arenaModifier?.ActivateModifier();
         }
+        else if (_simulateModifier) _arenaModifier.ActivateModifier();
 
         if (_doSpawn) SpawnEnemies();
     }
     private void Update()
     {
         UpdateLockState();
+        _arenaModifier?.UpdateModifier();
     }
 
     // Update Lock State

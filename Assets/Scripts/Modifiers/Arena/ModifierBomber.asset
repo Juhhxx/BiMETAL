@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf34b9304ae98e47974154a7eae3e07, type: 3}
+  m_Name: ModifierBomber
+  m_EditorClassIdentifier: 
+  _missile: {fileID: 2341265973925201895, guid: cb393739c52916f40a1fe4390a8ab903, type: 3}
+  _character: {fileID: 1818262929226504128, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
+  _fireRate: 0.5

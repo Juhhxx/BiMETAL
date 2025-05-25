@@ -1458,6 +1458,8 @@ MonoBehaviour:
   _gruntPrefab: {fileID: 8296531496966734037, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
   _dummyPrefab: {fileID: 896216821799497898, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
   _doSpawn: 0
+  _simulateModifier: 1
+  _arenaModifier: {fileID: 11400000, guid: 47376694c2ea83c44824cd5cedc231f8, type: 2}
 --- !u!4 &1107366093
 Transform:
   m_ObjectHideFlags: 0
@@ -1488,7 +1490,7 @@ MonoBehaviour:
   _defaultSpawnNumber: 5
   _enemyPrefabs:
   - {fileID: 8296531496966734037, guid: bce5ca693b1de5543bebd30d091eb05a, type: 3}
-  - {fileID: 896216821799497898, guid: 6aa049083b70ecc4484cef7a6ed945b5, type: 3}
+  - {fileID: 440125959601628111, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
   Pools: []
   _enemiesList: []
 --- !u!1 &1238305755
@@ -1724,6 +1726,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2354008547768096668, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2354008547768096668, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539827014554561490, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2837962599220010696, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1777,6 +1791,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5744144030328647783, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561417244679053121, guid: 501c2a94cb1b38e40b13b72b7053885d, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -2752,6 +2770,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Bomber
       objectReference: {fileID: 0}
+    - target: {fileID: 440125959601628111, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 861667625384994900, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
       propertyPath: _target
       value: 
@@ -2795,26 +2817,6 @@ PrefabInstance:
     - target: {fileID: 959451680174772425, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678574178795480356, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
-      propertyPath: _maxSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678574178795480356, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
-      propertyPath: _maxChaseSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678574178795480356, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
-      propertyPath: _maxAngularSpeed
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 2572131018612366495, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
-      propertyPath: _stateMachineModel
-      value: 
-      objectReference: {fileID: 11400000, guid: 44a25fbf48bb79241940e241940b3913, type: 2}
-    - target: {fileID: 4568815404797350364, guid: 5b1a7858af0417d4988efb0506cff4d5, type: 3}
-      propertyPath: OnSlash.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

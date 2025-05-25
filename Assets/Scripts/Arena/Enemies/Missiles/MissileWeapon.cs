@@ -5,7 +5,7 @@ using UnityEngine;
 public class MissileWeapon : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private Transform _target;
+    private Transform _target;
     private MissilePool _pool;
     private CharController _owner;
 
@@ -13,6 +13,7 @@ public class MissileWeapon : MonoBehaviour
     {
         _pool = GetComponent<MissilePool>();
         _owner = GetComponentInParent<CharController>();
+        _target = FindAnyObjectByType<PlayerMovement>().transform;
     }
 
     public void Shoot()
