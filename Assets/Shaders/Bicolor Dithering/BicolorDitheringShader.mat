@@ -40,7 +40,7 @@ Material:
     - _DitherScale: 1
     - _StepThreshold: -0.1
     m_Colors:
-    - _ColorA: {r: 0.18039216, g: 0.18039216, b: 0.18039216, a: 1}
+    - _ColorA: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
     - _ColorB: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
