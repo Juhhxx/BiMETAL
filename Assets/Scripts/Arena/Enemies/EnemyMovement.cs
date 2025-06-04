@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     [OnValueChanged("UpdateStats")] [SerializeField] private float _maxChaseSpeed;
     [OnValueChanged("UpdateStats")] [SerializeField] private float _maxAngularSpeed;
     [OnValueChanged("UpdateStats")] [SerializeField] private float _targetAcceptanceRadius;
+    [SerializeField] private Animator _animator;
 
     public float MaxSpeed => _maxSpeed;
     public float MaxChaseSpeed => _maxChaseSpeed;
@@ -45,6 +46,12 @@ public class EnemyMovement : MonoBehaviour
     public void SetAcceptanceRadius(float radius) => _agent.stoppingDistance = radius;
     public void DestroyEnemy()
     {
+        _animator.SetTrigger("Death");
+    }
+
+    public void DespawnEnemy()
+    {
         _enemyPool.DespawnEnemy(gameObject);
     }
 }
+
