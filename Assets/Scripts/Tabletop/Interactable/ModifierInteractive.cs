@@ -85,7 +85,7 @@ public abstract class ModifierInteractive : Interactive
                 foreach (HexagonCell newItem in e.NewItems)
                 {
                     // Debug.Log("Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
-                    yield return new WaitForSeconds(0.02f);
+                    yield return new WaitForSeconds(0.01f);
                     newItem.Modify(Modifier);
                 }
 
@@ -93,7 +93,7 @@ public abstract class ModifierInteractive : Interactive
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
                     // Debug.Log("Un-Pathing Modifying cell and count is: " + ModPathfinder.Path.Count);
-                    yield return new WaitForSeconds(0.01f);
+                    yield return new WaitForSeconds(0.005f);
                     oldItem.Modify(Modifier);
                 }
         }

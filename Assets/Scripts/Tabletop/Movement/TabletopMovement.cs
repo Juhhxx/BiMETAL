@@ -47,7 +47,7 @@ public abstract class TabletopMovement : TabletopBase
             if (e.NewItems != null)
                 foreach (HexagonCell newItem in e.NewItems)
                 {
-                    yield return new WaitForSeconds(0.02f);
+                    yield return new WaitForSeconds(0.01f);
 
                     newItem.PathCell();
 
@@ -60,7 +60,7 @@ public abstract class TabletopMovement : TabletopBase
             if (e.OldItems != null)
                 foreach (HexagonCell oldItem in e.OldItems)
                 {
-                    yield return new WaitForSeconds(0.01f);
+                    yield return new WaitForSeconds(0.001f);
 
                     oldItem.StopPathCell();
 

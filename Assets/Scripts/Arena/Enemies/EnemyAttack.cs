@@ -1,5 +1,3 @@
-using System;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +7,7 @@ public class EnemyAttack : MonoBehaviour
     [Header("Attack Colliders Parameters")]
     [Space(5)]
     [SerializeField] private CollisionDetector  _attackCollider;
+    [SerializeField] private Animator  _animator;
 
     [Space(10)]
     [Header("Attack Events")]
@@ -39,6 +38,8 @@ public class EnemyAttack : MonoBehaviour
     {
         Collider other = e.other;
         CharController otherChar = other.gameObject.GetComponent<CharController>();
+
+        _animator.SetTrigger("Attack");
 
         if (otherChar != null)
         {
