@@ -1,4 +1,6 @@
-# Readme for Mermaid Representation of AI in GDD
+# Representation of AI in GDD
+
+## UML Diagram Grid Based Pathfinding
 
 ```mermaid
 classDiagram
