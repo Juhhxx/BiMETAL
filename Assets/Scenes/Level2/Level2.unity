@@ -445,6 +445,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3217727181888802494, guid: 48d4815d32a2eae43b1bc9cf1bc72385, type: 3}
+      propertyPath: _modifier
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3217727181888802494, guid: 48d4815d32a2eae43b1bc9cf1bc72385, type: 3}
+      propertyPath: <Reach>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3465584886289220771, guid: 48d4815d32a2eae43b1bc9cf1bc72385, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.21
@@ -8916,11 +8924,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d772688dd33343498e9e273bc9915e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2072162760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5685813150577230086, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-  m_PrefabInstance: {fileID: 4532058928143477980}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2074936606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9470,7 +9473,7 @@ PrefabInstance:
     - target: {fileID: 3206558173843169156, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: _gameOver
       value: 
-      objectReference: {fileID: 2072162760}
+      objectReference: {fileID: 0}
     - target: {fileID: 3206558173843169156, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: _tabletop
       value: 
