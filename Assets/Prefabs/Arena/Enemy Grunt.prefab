@@ -537,7 +537,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 46
   m_CollisionDetection: 0
 --- !u!136 &7573211639297537273
 CapsuleCollider:
@@ -665,7 +665,7 @@ MonoBehaviour:
   _maxChaseSpeed: 8
   _maxAngularSpeed: 200
   _targetAcceptanceRadius: 2
-  _animator: {fileID: 0}
+  _animator: {fileID: 9056549709343174211}
 --- !u!114 &8169570062200612896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,7 +691,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Attack1
+          m_StringArgument: Attack
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &5192395469993165608
@@ -940,7 +940,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 18.712643
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 68746486194155684, guid: 629a74146add012408954f7df1b31950, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -971,6 +972,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyMovement: {fileID: 4812729436413281340}
+--- !u!95 &9056549709343174211 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8770947280954351272, guid: 629a74146add012408954f7df1b31950, type: 3}
+  m_PrefabInstance: {fileID: 294979105456615659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4376037321730262797
 PrefabInstance:
   m_ObjectHideFlags: 0

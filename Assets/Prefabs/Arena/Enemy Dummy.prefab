@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4992433091963518647}
   - component: {fileID: 8720060471155029488}
   - component: {fileID: 3723913798522190170}
+  - component: {fileID: -3908772795139228853}
   m_Layer: 7
   m_Name: Enemy Dummy
   m_TagString: Untagged
@@ -215,6 +216,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &-3908772795139228853
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896216821799497898}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9d9782aa5ea5ae142a2a021f82c1819a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6673922477914149645
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +499,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SCRAP_Edited
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 68746486194155684, guid: 629a74146add012408954f7df1b31950, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

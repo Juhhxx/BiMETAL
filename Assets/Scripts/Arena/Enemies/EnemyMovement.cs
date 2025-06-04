@@ -44,6 +44,7 @@ public class EnemyMovement : MonoBehaviour
     }
     public void SetSpeed(float speed) => _agent.speed = speed;
     public void SetAcceptanceRadius(float radius) => _agent.stoppingDistance = radius;
+
     public void DestroyEnemy()
     {
         _animator.SetTrigger("Death");
@@ -51,6 +52,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void DespawnEnemy()
     {
+        Debug.Log("BUMDA SELVAGEM");
         _enemyPool.DespawnEnemy(gameObject);
     }
 }
