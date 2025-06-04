@@ -18,9 +18,9 @@ classDiagram
   class OpenStarPathfinder
 
   class CellData
-  class ObservableStack<T>
+  class ObservableStack
 
-  class Stack<T>
+  class Stack
 
   class HexagonCell
   class HexagonTabletop
@@ -29,7 +29,7 @@ classDiagram
 
   class Modifier
   
-  Stack<T> <|-- ObservableStack<T>
+  Stack <|-- ObservableStack
 
   Pathfinder <|-- AStarPathfinder
   Pathfinder <|-- BFSRangePathfinder
@@ -48,7 +48,7 @@ classDiagram
   PathfinderChooser ..> PathfinderType
 
   Pathfinder --> HexagonTabletop
-  Pathfinder --> ObservableStack<T>
+  Pathfinder --> ObservableStack
   Pathfinder --> MonoBehaviour
   Pathfinder o-- HexagonCell
   Pathfinder *-- CellData
