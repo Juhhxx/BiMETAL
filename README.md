@@ -1,4 +1,4 @@
-Readme for mermaid representation of AI in GDD
+# Readme for Mermaid Representation of AI in GDD
 
 ```mermaid
 classDiagram
@@ -18,7 +18,7 @@ classDiagram
   class OpenStarPathfinder
 
   class CellData
-  class ObservableStack
+  class ObservableStack<T>
 
   class Stack<T>
 
@@ -26,34 +26,45 @@ classDiagram
   class HexagonTabletop
   class TabletopBase
   class TabletopMovement
+
+  class Modifier
   
-  MonoBehaviour <|-- TabletopCamera
+  Stack<T> <|-- ObservableStack<T>
+
+  Pathfinder <|-- AStarPathfinder
+  Pathfinder <|-- BFSRangePathfinder
+  Pathfinder <|-- HexRangePathfinder
+  Pathfinder <|-- StarRangePathfinder
+  Pathfinder <|-- LineRangePathfinder
+  Pathfinder <|-- OpenStarPathfinder
+
+  MonoBehaviour <|-- HexagonCell
+  MonoBehaviour <|-- HexagonTabletop
+  MonoBehaviour <|-- TabletopBase
+  TabletopBase <|-- TabletopMovement
 
 
-  MonoBehaviour <|-- Structure~T~
-  MonoBehaviour <|-- TabletopCamera
-  MonoBehaviour <|-- Manager
-  MonoBehaviour <|-- AgentStatsController
-  MonoBehaviour <|-- Fire
-  MonoBehaviour <|-- StateMachineRunner
+  PathfinderChooser ..> Pathfinder
+  PathfinderChooser ..> PathfinderType
 
-  Manager <|-- RandomManager
-  Manager <|-- DRcHandle
-  Manager <|-- DRCrowdManager
-  Manager <|-- ExplosionManager
+  Pathfinder --> HexagonTabletop
+  Pathfinder --> ObservableStack<T>
+  Pathfinder --> MonoBehaviour
+  Pathfinder o-- HexagonCell
+  Pathfinder *-- CellData
+  Pathfinder --> Pathfinder
 
+  CellData --> CellData
+  CellData --> HexagonCell
 
+  HexagonCell --> HexagonTabletop
+  HexagonCell *-- Modifier
+  HexagonCell o-- HexagonCell
 
-  Structure~T~ --> RcVec3f
-  Structure~T~ --> ISeedRandom
-  Structure~T~ --> List~T~
+  HexagonTabletop o-- HexagonCell
 
-  Stage --|> Structure~Stage~
-  Stage --> DRcHandle
+  TabletopBase --> HexagonCell
 
-  GreenSpace --|> Structure~GreenSpace~
-  GreenSpace --> DRcHandle
-  
-  FoodArea --|> Structure~FoodArea~
-  FoodArea --> DRcHandle
+  TabletopMovement --> Pathfinder
+  TabletopMovement ..> HexagonCell
 ```
