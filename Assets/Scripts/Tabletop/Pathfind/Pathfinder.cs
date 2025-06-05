@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Incase I need to implement new pathfinding methods we make a an abstract pathfinder
+/// Abstract base class for all custom pathfinding algorithms on a hexagonal grid.
 /// </summary>
 public abstract class Pathfinder
 {
@@ -34,6 +34,10 @@ public abstract class Pathfinder
         OpenList = new SortedSet<CellData>();
         _closedList = new HashSet<HexagonCell>();
     }
+
+    /// <summary>
+    /// Starts the pathfinding coroutine and returns the current observable path stack.
+    /// </summary>
     public Stack<HexagonCell> FindPath(HexagonCell start, HexagonCell objective, int points)
     {
         ModPath = null;
@@ -45,8 +49,14 @@ public abstract class Pathfinder
         return Path;
     }
 
+    /// <summary>
+    /// Abstract coroutine that each concrete pathfinder implements.
+    /// </summary>
     protected abstract IEnumerator GetPath(HexagonCell objective, HexagonCell start, int points);
 
+    /// <summary>
+    /// Stops the current pathfinding coroutine and resets state.
+    /// </summary>
     public void Stop()
     {
         // Debug.Log("piece? stopping " + _owner + " path.");
@@ -65,6 +75,9 @@ public abstract class Pathfinder
         Done = true;
     }
 
+    /// <summary>
+    /// Reverses the order of the current path.
+    /// </summary>
     public void Reverse()
     {
         Path.Reverse();

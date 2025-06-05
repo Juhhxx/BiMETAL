@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// gets any cell you can walk to with total weight, accounting for avoidables and walkables, not counting start cell (objective)
+/// A breadth first pathfinder that finds all reachable hex cells from a starting position
+/// based on a total movement weight to highlight all reachable cells from a given reach.
 /// </summary>
 public class BFSRangePathfinder : Pathfinder
 {
@@ -14,12 +15,9 @@ public class BFSRangePathfinder : Pathfinder
     private HashSet<HexagonCell> _set;
 
     /// <summary>
-    /// objective is the current cell and start is the objective
+    /// Begins the weighted breadth first search from the objective cell, collecting all reachable neighbors
+    /// within the movement weight budget.
     /// </summary>
-    /// <param name="objective"></param>
-    /// <param name="start"></param>
-    /// <param name="totalWeight"></param>
-    /// <returns></returns>
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         Done = false;

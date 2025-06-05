@@ -1,12 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// A pathfinder that traces a straight line of hexagonal cells from the objective
+/// toward the start cell direction, up to reach.
+/// </summary>
 public class LineRangePathfinder : Pathfinder
 {
 
     public LineRangePathfinder(MonoBehaviour owner, bool nonAvoid) : base(owner, nonAvoid)
     { }
 
+    /// <summary>
+    /// Calculates a straight path from the objective cell, in the direction pointing toward the start cell,
+    /// and continues for a number of steps equal to totalWeight.
+    /// </summary>
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         if ( totalWeight < 1 ) yield break;

@@ -1,12 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Expands in all 6 hex grid directions from an origin cell into a star.
+/// </summary>
 public class StarRangePathfinder : Pathfinder
 {
 
     public StarRangePathfinder(MonoBehaviour owner, bool nonAvoid) : base(owner, nonAvoid)
     { }
 
+    /// <summary>
+    /// Generates line paths from the objective cell outward in all 6 hex directions.
+    /// </summary>
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         if ( totalWeight < 1 ) yield break;

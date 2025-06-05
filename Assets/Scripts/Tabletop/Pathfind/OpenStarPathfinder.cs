@@ -3,8 +3,8 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// Gets an AStars' open list as the path, non avoidance bool here counts for walkable objects as well
-/// A water like moment 
+/// A variant of A* pathfinding that floods outward from a start point,
+/// but returns all visited cells in order as the path.
 /// </summary>
 public class OpenStarPathfinder : Pathfinder
 {
@@ -12,6 +12,10 @@ public class OpenStarPathfinder : Pathfinder
     public OpenStarPathfinder(MonoBehaviour owner, bool nonAvoid) : base(owner, nonAvoid)
     { }
 
+    /// <summary>
+    /// Begins the open star pathfinding but spreads outward while avoiding movement directly
+    /// along the input direction, and stops when the objective cell is reached or the open list is done.
+    /// </summary>
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         // objective and start are switched

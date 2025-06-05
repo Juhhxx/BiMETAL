@@ -1,12 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// A custom Pathfinder implementation that expands a hexagonal range from a target cell.
+/// </summary>
 public class HexRangePathfinder : Pathfinder
 {
 
     public HexRangePathfinder(MonoBehaviour owner, bool nonAvoid) : base(owner, nonAvoid)
     { }
 
+    /// <summary>
+    /// Begins the hex-range expansion from the objective cell, in a circular pattern.
+    /// It grows in all six directions for a number of steps equal to totalWeight,
+    /// then adds adjacent cells to the endpoints for a natural shape.
+    /// </summary>
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         if ( totalWeight < 1 ) yield break;
@@ -62,6 +70,9 @@ public class HexRangePathfinder : Pathfinder
         Done = true;
     }
 
+    /// <summary>
+    /// Adds a straight line of cells in one direction to the closed list.
+    /// </summary>
     private void AddAdjacent(HexagonCell start, int dir, int totalWeight)
     {
         HexagonCell current = start;

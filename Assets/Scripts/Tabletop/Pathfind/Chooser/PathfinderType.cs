@@ -1,4 +1,3 @@
-using UnityEngine;
 
 /// <summary>
 /// This exists so we can choose in editor the path we want

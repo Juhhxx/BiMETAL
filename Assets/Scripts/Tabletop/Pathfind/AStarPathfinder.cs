@@ -2,12 +2,20 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// A* pathfinding algorithm on a hex grid.
+/// Calculates the shortest path between a start and an objective cell.
+/// </summary>
 public class AStarPathfinder : Pathfinder
 {
 
     public AStarPathfinder(MonoBehaviour owner, bool nonAvoid) : base(owner, nonAvoid)
     { }
 
+    /// <summary>
+    /// Begins the A* pathfinding search from the given start to the objective cell.
+    /// It can start a second pathfinder inside it if an environment modifier is encountered.
+    /// </summary>
     protected override IEnumerator GetPath(HexagonCell objective, HexagonCell start, int totalWeight = -1)
     {
         // objective and start are switched
