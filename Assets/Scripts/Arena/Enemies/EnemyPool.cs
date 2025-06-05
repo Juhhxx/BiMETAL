@@ -99,6 +99,8 @@ public class EnemyPool : MonoBehaviour
     }
     public void DespawnEnemy(GameObject enemy)
     {
+        Debug.Log("BUMDA SELVAGEM DISABLING: " + enemy.name);
+        
         enemy.SetActive(false);
         _enemyPools[enemy.name].Push(enemy);
 

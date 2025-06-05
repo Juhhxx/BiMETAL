@@ -22,6 +22,7 @@ namespace AI.FSMs.UnityIntegration
         }
         private void Update()
         {
+            Debug.Log("Running Runner. In: " + gameObject.name);
             _stateMachine?.Run();
         }
         public void Reset()

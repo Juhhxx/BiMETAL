@@ -53,6 +53,9 @@ public class EnemyMovement : MonoBehaviour
     public void DespawnEnemy()
     {
         Debug.Log("BUMDA SELVAGEM");
+        if (_enemyPool == null )
+            Debug.Log("BUMDA SELVAGEM POOL IS NULL");
+        
         _enemyPool.DespawnEnemy(gameObject);
     }
 }
