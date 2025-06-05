@@ -638,9 +638,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3950725a12407e4439fa56b9829a7516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 5
-  _maxChaseSpeed: 8
-  _maxAngularSpeed: 200
+  _maxSpeed: 3
+  _maxChaseSpeed: 7
+  _maxAngularSpeed: 300
   _targetAcceptanceRadius: 2
   _animator: {fileID: 9056549709343174211}
   _healthBar: {fileID: 266678363166573508}
@@ -695,6 +695,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4529682681034395616}
     m_Modifications:
+    - target: {fileID: 1954593612913072907, guid: 629a74146add012408954f7df1b31950, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2209084658203566420, guid: 629a74146add012408954f7df1b31950, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.28089753

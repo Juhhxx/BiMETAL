@@ -29,7 +29,6 @@ public class EnemyMovement : MonoBehaviour
     }
     public void SetPool(EnemyPool pool)
     {
-        Debug.Log("BUMDA SELVAGEM ENEMY POOL NULL: " + (pool == null));
         _enemyPool = pool;
     }
     private void Start()
@@ -40,6 +39,12 @@ public class EnemyMovement : MonoBehaviour
         _agent.angularSpeed     = _maxAngularSpeed;
         _agent.stoppingDistance = _targetAcceptanceRadius;
         _agent.updateRotation = true;
+    }
+
+    private void Update()
+    {
+        Debug.Log("BUMDA SELVAGEM VEL: " + Mathf.Abs(_agent.velocity.magnitude) + " TRUE: " + (Mathf.Abs(_agent.velocity.magnitude) > 0.001f));
+        _animator.SetFloat("Walking", Mathf.Abs(_agent.velocity.magnitude));
     }
 
     public void SetDestination(Vector3 target)
@@ -58,10 +63,6 @@ public class EnemyMovement : MonoBehaviour
 
     public void DespawnEnemy()
     {
-        Debug.Log("BUMDA SELVAGEM");
-        if (_enemyPool == null )
-            Debug.Log("BUMDA SELVAGEM POOL IS NULL");
-
         gameObject.SetActive(false);
         _enemyPool.DespawnEnemy(gameObject);
     }
