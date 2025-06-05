@@ -483,7 +483,6 @@ GameObject:
   - component: {fileID: 892780173000261607}
   - component: {fileID: 7573211639297537273}
   - component: {fileID: 1407844859420369121}
-  - component: {fileID: 8141026100002696317}
   - component: {fileID: 7654269700683515199}
   - component: {fileID: 4812729436413281340}
   - component: {fileID: 8169570062200612896}
@@ -584,28 +583,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!95 &8141026100002696317
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296531496966734037}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9d9782aa5ea5ae142a2a021f82c1819a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7654269700683515199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,6 +643,7 @@ MonoBehaviour:
   _maxAngularSpeed: 200
   _targetAcceptanceRadius: 2
   _animator: {fileID: 9056549709343174211}
+  _healthBar: {fileID: 266678363166573508}
 --- !u!114 &8169570062200612896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,10 +657,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackCollider: {fileID: 1999601699352541239}
+  _animator: {fileID: 9056549709343174211}
   OnSlash:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8141026100002696317}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
         m_Mode: 5

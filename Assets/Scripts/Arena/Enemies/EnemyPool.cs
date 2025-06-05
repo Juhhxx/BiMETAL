@@ -47,7 +47,9 @@ public class EnemyPool : MonoBehaviour
     private GameObject CreateObject(string poolKey, GameObject prefab)
     {
         GameObject newObj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-        EnemyMovement mov = newObj.GetComponent<EnemyMovement>();
+        EnemyMovement mov = newObj.GetComponentInChildren<EnemyMovement>();
+
+        Debug.Log("BUMDA SELVAGEM INSTANTIATED: " + newObj.name + " MOVEMENT IS NULL? " + (mov == null));
 
         _enemyPools[poolKey].Push(newObj);
         _enemiesList.Add(newObj);
@@ -99,8 +101,8 @@ public class EnemyPool : MonoBehaviour
     }
     public void DespawnEnemy(GameObject enemy)
     {
-        Debug.Log("BUMDA SELVAGEM DISABLING: " + enemy.name);
-        
+        Debug.Log("BUMDA SELVAGEM? DISABLING: " + enemy.name);
+
         enemy.SetActive(false);
         _enemyPools[enemy.name].Push(enemy);
 

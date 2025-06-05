@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     [OnValueChanged("UpdateStats")] [SerializeField] private float _maxAngularSpeed;
     [OnValueChanged("UpdateStats")] [SerializeField] private float _targetAcceptanceRadius;
     [SerializeField] private Animator _animator;
+    [SerializeField] private HeallthBar _healthBar;
 
     public float MaxSpeed => _maxSpeed;
     public float MaxChaseSpeed => _maxChaseSpeed;
@@ -26,7 +27,11 @@ public class EnemyMovement : MonoBehaviour
             _agent.stoppingDistance = _targetAcceptanceRadius;
         }
     }
-    public void SetPool(EnemyPool pool) => _enemyPool = pool;
+    public void SetPool(EnemyPool pool)
+    {
+        Debug.Log("BUMDA SELVAGEM ENEMY POOL NULL: " + (pool == null));
+        _enemyPool = pool;
+    }
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -48,6 +53,7 @@ public class EnemyMovement : MonoBehaviour
     public void DestroyEnemy()
     {
         _animator.SetTrigger("Death");
+        _agent.enabled = false;
     }
 
     public void DespawnEnemy()
@@ -55,7 +61,8 @@ public class EnemyMovement : MonoBehaviour
         Debug.Log("BUMDA SELVAGEM");
         if (_enemyPool == null )
             Debug.Log("BUMDA SELVAGEM POOL IS NULL");
-        
+
+        gameObject.SetActive(false);
         _enemyPool.DespawnEnemy(gameObject);
     }
 }

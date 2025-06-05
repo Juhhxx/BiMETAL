@@ -40,7 +40,7 @@ public class ArenaController : MonoBehaviour
             _arenaModifier = _tabletopController.BattleCell.Modifier?.ArenaModifier;
             _arenaModifier?.ActivateModifier();
         }
-        else if (_simulateModifier) _arenaModifier.ActivateModifier();
+        else if (_simulateModifier && _arenaModifier != null ) _arenaModifier.ActivateModifier();
 
         if (_doSpawn) SpawnEnemies();
     }

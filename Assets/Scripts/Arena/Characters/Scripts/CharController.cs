@@ -29,6 +29,9 @@ public class CharController : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
+        if ( !enabled )
+            return;
+        
         _character.HP -= amount;
         OnDamageTaken?.Invoke();
         Debug.LogWarning($"{_character.Name} took {amount} damage.");
@@ -36,6 +39,8 @@ public class CharController : MonoBehaviour
         if (_character.HP <= 0)
         {
             Debug.Log($"CHARACTER {_character.Name} DESTROYED");
+            _character.HP = 0;
+            enabled = false;
             OnDeath?.Invoke();
         }
     }
