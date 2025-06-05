@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manager for tabletop grid.
+/// </summary>
 public class HexagonTabletop : MonoBehaviour
 {
     public Dictionary<Vector2, HexagonCell> CellDict { get; private set; }
@@ -35,6 +38,9 @@ public class HexagonTabletop : MonoBehaviour
         Done = true;
     }
 
+    /// <summary>
+    /// Clears any active path indicators from all hex cells.
+    /// </summary>
     public void ResetPaths()
     {
         Debug.Log("level? Reset cells");
@@ -49,6 +55,4 @@ public class HexagonTabletop : MonoBehaviour
             }
        }
     }
-
-    public HexagonCell GetCell(Vector2 pos) => CellDict.TryGetValue(pos, out HexagonCell tile) ? tile : null;
 }

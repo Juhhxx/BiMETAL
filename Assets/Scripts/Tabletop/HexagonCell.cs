@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Represents a single hexagonal cell on the tabletop.
+/// </summary>
 public class HexagonCell : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
@@ -169,7 +172,9 @@ public class HexagonCell : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Initializes the cell's logical coordinate and assigns the tabletop reference.
+    /// </summary>
     public Vector2 InitializeCell(HexagonTabletop tabletop)
     {
         _tabletop = tabletop;
@@ -189,38 +194,6 @@ public class HexagonCell : MonoBehaviour
         float scale = Mathf.Pow(10, decimals);
         return Mathf.Round(value * scale) / scale;
     }
-
-    /* pointy example:
-    0 East (+q, 0)
-    1 Northeast (+q, -r)
-    2 Northwest (0, -r)
-    3 West (−q, 0)
-    4 Southwest (−q, +r)
-    5 Southeast (0, +r)
-    traditional flat:
-        new(+1, 0),
-        new(+1, -1),
-        new(0, -1),
-        new(-1, 0),
-        new(-1, +1),
-        new(0, +1)
-    traditional pointy:
-        new(0, +1),
-        new(+1, 0),
-        new(+1, -1),
-        new(0, -1),
-        new(-1, 0),
-        new(-1, +1)
-    
-    private static readonly Vector2Int[] Directions = new Vector2Int[]
-    {
-        new(+1, +1),
-        new(+1, 0),
-        new(+1, -1),
-        new(-1, -1),
-        new(-1, 0),
-        new(-1, +1)
-    };    */
 
     public void SetNeighbors()
     {
@@ -258,24 +231,13 @@ public class HexagonCell : MonoBehaviour
                 Neighbors[4] = neighbor;
             if ( delta.x < 0 && delta.y > 0 )
                 Neighbors[5] = neighbor;
-
-            /*for (int i = 0; i < 6; i++)
-                if (delta == Directions[i])
-                {
-                    // if ( Piece != null && Piece is PieceInteractive piece2 && ! piece2.IsEnemy )
-                    Debug.Log("new neighbor " + i + "  cel: " + neighbor + "    dir: " + Directions[i]);
-                    Neighbors[i] = neighbor;
-                    break;
-                }*/
         }
-
-        /*for ( int i = 0 ; i < 6 ; i++ )
-            Debug.Log("neighbor " + i + "  for dir: " + directions[i] + "  cel: " + Neighbors[i]);*/
     }
 
-
-    // Using Axial Distance we can determine the distance in the 3 hexagonal directions with only 2 of these directions.
-    // Its different than just using unity's transform.GetDistance because that gives the distance in a circle shape rather than the tabletop's desired hexagonal shape.     
+    /// <summary>
+    /// Using Axial Distance we can determine the distance in the 3 hexagonal directions with only 2 of these directions.
+    /// Its different than just using unity's transform.GetDistance because that gives the distance in a circle shape rather than the tabletop's desired hexagonal shape.     
+    /// </summary> 
     public float GetDistance(HexagonCell other)
     {
         // Getting vector to other from the current cell
