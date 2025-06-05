@@ -6,6 +6,7 @@ using NaughtyAttributes;
 public class CharController : MonoBehaviour
 {
     [SerializeField][Expandable] private Character _characterBase;
+    [SerializeField] private CollisionDetector _collisionDetector;
     private Character _character;
     public Character Character => _character;
 
@@ -22,7 +23,11 @@ public class CharController : MonoBehaviour
         if (c.Character.Faction != _character.Faction)
         {
             c.TakeDamage(amount);
-            Debug.LogWarning($"{_character.Name} gave {amount} damage.");
+
+            if (_collisionDetector != null )
+                _collisionDetector.gameObject.SetActive(false);
+            
+            Debug.LogWarning($"BUMDA Collision detected with {_character.Name} gave {amount} damage.");
         }
         else
             Debug.Log("No friendly fire!");

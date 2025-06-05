@@ -1560,7 +1560,7 @@ MonoBehaviour:
   _healthParent: {fileID: 3558267007964318588}
   _roundText: {fileID: 8464809893749129349}
   _canvas: {fileID: 5347431683976754710}
-  _gameOver: {fileID: 0}
+  _gameOver: {fileID: 5685813150577230086}
   _winOver: {fileID: 5951377712220902783}
   BATTLEARENA: BattleArena
   _pieces: []
@@ -1823,6 +1823,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7909dfeb720bb414c985c958c91db2a0, type: 3}
+--- !u!1 &5685813150577230086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4478927969126159817, guid: 7909dfeb720bb414c985c958c91db2a0, type: 3}
+  m_PrefabInstance: {fileID: 8124574741147489487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6873220399699280479 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3432547929397548688, guid: 7909dfeb720bb414c985c958c91db2a0, type: 3}

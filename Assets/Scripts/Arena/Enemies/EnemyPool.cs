@@ -87,8 +87,9 @@ public class EnemyPool : MonoBehaviour
         string key = type.name;
         GameObject spawn;
 
-        spawn = (_enemyPools[key].Count == 0)   ? CreateObject(key, type) 
-                                                : _enemyPools[key].Pop();
+        spawn = (_enemyPools[key].Count == 0 || !_enemyPools.ContainsKey(key)) ?
+            CreateObject(key, type) 
+            : _enemyPools[key].Pop();
 
         spawn.transform.position = position;
         spawn.SetActive(true);

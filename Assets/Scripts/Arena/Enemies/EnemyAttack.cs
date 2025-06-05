@@ -32,20 +32,18 @@ public class EnemyAttack : MonoBehaviour
     }
     public void Attack()
     {
+        _animator.SetTrigger("Attack");
         OnSlash?.Invoke();
+        // Debug.Log("BUMDA");
     }
     private void DoAttack(object sender, OnCollisionEventArgs e)
     {
         Collider other = e.other;
         CharController otherChar = other.gameObject.GetComponent<CharController>();
 
-        _animator.SetTrigger("Attack");
-
         if (otherChar != null)
         {
             _character.GiveDamage(otherChar, _character.Character.BaseAttack);
         }
-
-        Debug.Log($"Collision detected with {e.other.gameObject.name} from {gameObject.name}");
     }
 }

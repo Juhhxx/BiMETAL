@@ -136,10 +136,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5129559033163288600}
   _defaultMaterial: {fileID: 2100000, guid: d6ae4bc34d6423f4588d2762ed291ed7, type: 2}
-  _defaultColor: {r: 0.83624065, g: 0.83624065, b: 0.83624065, a: 1}
+  _defaultColor: {r: 0.31764707, g: 0.28235295, b: 0.2784314, a: 0.78431374}
   _hoverObject: {fileID: 7384486380376637000}
   <CellValue>k__BackingField: {x: 0, y: 0}
   _tabletop: {fileID: 0}
+  _temporaryMod: []
   _environmentMod: {fileID: 0}
   _cosmetic: {fileID: 1662123757950849830}
   _renderer: {fileID: 8708060204842422591}

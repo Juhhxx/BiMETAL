@@ -80,12 +80,6 @@ public class TabletopController : Controller
 
         _overworld = FindFirstObjectByType<OverworldController>();
 
-        if ( _currentTabletop == null || _currentTabletop == "" )
-        {
-            _currentTabletop = SceneManager.GetActiveScene().name;
-            Debug.Log("detected editor time tabletop load, new name: " + _currentTabletop);
-        }
-
         Debug.Log("tabletop to load is: " + _currentTabletop);
 
         _health = _baseHealth;
@@ -212,6 +206,12 @@ public class TabletopController : Controller
         Debug.Log("Starting battle");
 
         SaveSnapshot();
+
+        if ( _currentTabletop == null || _currentTabletop == "" )
+        {
+            _currentTabletop = SceneManager.GetActiveScene().name;
+            Debug.Log("detected editor time tabletop load, new name: " + _currentTabletop);
+        }
 
         SceneLoader.Load(BATTLEARENA);
 

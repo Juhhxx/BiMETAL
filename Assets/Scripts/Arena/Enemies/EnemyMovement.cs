@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("BUMDA SELVAGEM VEL: " + Mathf.Abs(_agent.velocity.magnitude/3) + " TRUE: " + (Mathf.Abs(_agent.velocity.magnitude) > 0.001f));
+        // Debug.Log("BUMDA SELVAGEM VEL: " + Mathf.Abs(_agent.velocity.magnitude/3) + " TRUE: " + (Mathf.Abs(_agent.velocity.magnitude) > 0.001f));
         _animator.SetBool("Walk", Mathf.Abs(_agent.velocity.magnitude) > 0.001f);
         _animator.SetFloat("Walking", Mathf.Max(1f, Mathf.Abs(_agent.velocity.magnitude)/3));
     }

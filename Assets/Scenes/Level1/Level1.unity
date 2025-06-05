@@ -10908,6 +10908,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3206558173843169156, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: _enemies
       value: 
@@ -10920,6 +10936,10 @@ PrefabInstance:
       propertyPath: _playerInput
       value: 
       objectReference: {fileID: 682221947}
+    - target: {fileID: 5951377712220902783, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7051809924894305525, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: _playerInput
       value: 

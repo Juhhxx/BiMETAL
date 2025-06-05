@@ -63,7 +63,7 @@ public class ArenaController : MonoBehaviour
 
             for (int i = 0; i < _numberOfEnemies * 2; i++)
             {
-                Vector3 pos = GetRandomLocation();
+                Vector3 pos = Vector3.zero;// GetRandomLocation();
                 pos.y = 1.0f;
 
                 GameObject newEnemy;
@@ -89,7 +89,7 @@ public class ArenaController : MonoBehaviour
                 
                 if ( c == null || c.Name == "Player") continue;
                 
-                Vector3 pos = GetRandomLocation();
+                Vector3 pos = Vector3.zero;
                 pos.y = 1.0f;
 
                 GameObject prefab = c.CharacterPrefab;
@@ -119,22 +119,34 @@ public class ArenaController : MonoBehaviour
         
         // Select a random point on it
         Vector3 point = Vector3.Lerp(navMeshData.vertices[navMeshData.indices[t]], navMeshData.vertices[navMeshData.indices[t+1]], Random.value);
-        Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[t+2]], Random.value);
+        point = Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[t+2]], Random.value);
+
+        if (NavMesh.SamplePosition(point, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
 
         return point;
     }
 
     // Check Battle Status
+    private bool _battleEnded = false;
     public void CheckEndBattle(bool checkPlayerWin)
     {
+        if (_battleEnded) return;
+
         if (!checkPlayerWin)
             _tabletopController?.EndBattle(false);
         else
         {
             _enemiesKilled++;
             if (_enemiesKilled == _numberOfEnemies)
+            {
+                _battleEnded = true;
                 _tabletopController?.EndBattle(true);
+            }
         }
     }
     public void WinBattle() => _tabletopController.EndBattle(true);
+    public void LoseBattle() => _tabletopController.EndBattle(false);
 }

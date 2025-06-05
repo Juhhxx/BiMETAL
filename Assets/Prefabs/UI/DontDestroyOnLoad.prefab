@@ -276,7 +276,7 @@ MonoBehaviour:
   _volumeText: {fileID: 157015790607386617}
   _maxSensitivity: 10
   _maxVolume: 3
-  _clampBrightness: 3
+  _clampBrightness: 2
   volume: {fileID: 2483880780827759865}
 --- !u!1 &2850893476459543501
 GameObject:
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0.5
   sharedProfile: {fileID: 11400000, guid: 5ffda648ec6163740a9c769dde78a9af, type: 2}
 --- !u!1 &3775871522533681914
 GameObject:

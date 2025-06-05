@@ -25,6 +25,7 @@ public class ArenaCheats : MonoBehaviour
         if (Input.GetKey(KeyCode.Z))
         {
             if (Input.GetKeyDown(KeyCode.W)) WinBattle();
+            if (Input.GetKeyDown(KeyCode.L)) _arenaController.LoseBattle();
             if (Input.GetKeyDown(KeyCode.R)) ResetScene();
             if (Input.GetKeyDown(KeyCode.E)) ResetEnemies();
         }
