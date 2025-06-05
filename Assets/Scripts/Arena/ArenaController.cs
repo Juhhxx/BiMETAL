@@ -32,9 +32,6 @@ public class ArenaController : MonoBehaviour
         Debug.Log("ARENA CONTROLLER ACTIVE");
         _tabletopController = FindAnyObjectByType<TabletopController>();
 
-        if (_tabletopController != null) _numberOfEnemies = _tabletopController.BattlePieces.Count - 1;
-        else                             _numberOfEnemies = _defaulfEnemyNumber;
-
         if (_tabletopController != null)
         {
             _arenaModifier = _tabletopController.BattleCell.Modifier?.ArenaModifier;
@@ -62,6 +59,8 @@ public class ArenaController : MonoBehaviour
     {
         if (_tabletopController == null)
         {
+            _numberOfEnemies = _defaulfEnemyNumber;
+
             for (int i = 0; i < _numberOfEnemies * 2; i++)
             {
                 Vector3 pos = GetRandomLocation();
@@ -82,9 +81,13 @@ public class ArenaController : MonoBehaviour
         }
         else
         {
+            _numberOfEnemies = 0;
+            
             foreach (Character c in _tabletopController.BattleCharacters)
             {
-                if (c.Name == "Player") continue;
+                Debug.Log("Trying to spawn battle char: " + c);
+                
+                if ( c == null || c.Name == "Player") continue;
                 
                 Vector3 pos = GetRandomLocation();
                 pos.y = 1.0f;
@@ -98,6 +101,8 @@ public class ArenaController : MonoBehaviour
 
                 CharController ctrl = newEnemy.GetComponent<CharController>();
                 ctrl.OnDeath.AddListener(() => CheckEndBattle(true));
+
+                _numberOfEnemies++;
 
                 Debug.Log($"ENEMY SPAWNED AT {pos}");
             }

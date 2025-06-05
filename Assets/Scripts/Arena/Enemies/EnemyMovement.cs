@@ -66,7 +66,8 @@ public class EnemyMovement : MonoBehaviour
     public void DespawnEnemy()
     {
         gameObject.SetActive(false);
-        _enemyPool.DespawnEnemy(gameObject);
+        if ( _enemyPool != null )
+            _enemyPool.DespawnEnemy(gameObject);
     }
 }
 

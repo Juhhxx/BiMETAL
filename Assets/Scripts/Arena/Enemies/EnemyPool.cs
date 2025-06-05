@@ -100,7 +100,9 @@ public class EnemyPool : MonoBehaviour
     public void DespawnEnemy(GameObject enemy)
     {
         enemy.SetActive(false);
-        _enemyPools[enemy.name].Push(enemy);
+
+        if ( _enemyPools.ContainsKey(enemy.name) )
+            _enemyPools[enemy.name].Push(enemy);
 
         GetPoolDebuger(enemy.name).PoolCurrentSize++;
     }

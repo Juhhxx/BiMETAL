@@ -16,7 +16,7 @@ public class PlayerHealthBar : MonoBehaviour
 
     private void Start()
     {
-        _character = _playerCharacter.Character;
+        _character = _playerCharacter?.Character;
 
         _tmp.text = $"HP : {_character.HP} / {_character.HP}";
         _fullHP = _character.HP;
