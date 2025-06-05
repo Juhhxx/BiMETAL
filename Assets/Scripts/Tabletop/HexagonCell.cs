@@ -8,6 +8,7 @@ public class HexagonCell : MonoBehaviour
     [SerializeField] private Material _defaultMaterial;
     [SerializeField] private Color _defaultColor;
     [SerializeField] private GameObject _hoverObject;
+    [SerializeField] private GameObject _pathObject;
 
     [field:SerializeField] public Vector2 CellValue { get; private set; }
     [SerializeField] private HexagonTabletop _tabletop;
@@ -335,9 +336,15 @@ public class HexagonCell : MonoBehaviour
         // Debug.Log("Cosmetic turning: " + upOrDown + " at cell: " + this + " with piece null? " + (Piece == null));
         
         if ( upOrDown )
+        {
+            _pathObject.SetActive(true);
             _cosmetic.transform.Translate(Vector3.up * 0.1f);
+        }
         else
+        {
+            _pathObject.SetActive(false);
             _cosmetic.transform.Translate(Vector3.down * 0.1f);
+        }
     }
 
     /// <summary>
