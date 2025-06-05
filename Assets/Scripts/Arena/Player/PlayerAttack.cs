@@ -69,7 +69,6 @@ public class PlayerAttack : MonoBehaviour
     {
         Attack();
         CheckOnAir();
-        Debug.LogWarning(_isOnAir);
     }
 
     private void Attack()
@@ -80,7 +79,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (_isOnAir)
             {
-                Debug.LogWarning("Jump Attack");
+                Debug.Log("Jump Attack");
                 OnJumpSlashCombo?.Invoke();
                 _attackName = "JumpCombo";
             }
@@ -168,7 +167,7 @@ public class PlayerAttack : MonoBehaviour
             CalculateBackstabbingBonus(other.transform);
         }
 
-        Debug.LogWarning($"finalDamage : {finalDamage}");
+        Debug.Log($"finalDamage : {finalDamage}");
         return finalDamage;
     }
     private float CalculateBackstabbingBonus(Transform enemy)
@@ -179,10 +178,10 @@ public class PlayerAttack : MonoBehaviour
         float dot = Vector3.Dot(playerFwr, enemyFwr);
         dot = Mathf.Round(dot*10)/10;
 
-        Debug.LogWarning($"Confirming : {dot} > {_backstabbingThreshold} ? {dot > _backstabbingThreshold}");
+        Debug.Log($"Confirming : {dot} > {_backstabbingThreshold} ? {dot > _backstabbingThreshold}");
         if (dot > _backstabbingThreshold)
         {
-            Debug.LogWarning($"BACKSTAB BONUS x{dot}");
+            Debug.Log($"BACKSTAB BONUS x{dot}");
             return (_character.Character.BaseAttack/2) * dot;
         }
         else
