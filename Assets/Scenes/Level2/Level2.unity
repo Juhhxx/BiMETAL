@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: faa658798eb78e94499b36bef66de877, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -9450,30 +9450,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032055101505686847, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3206558173843169156, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: _enemies
       value: 
       objectReference: {fileID: 1369393699}
-    - target: {fileID: 3206558173843169156, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: _gameOver
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3206558173843169156, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: _tabletop
       value: 
@@ -9482,17 +9462,21 @@ PrefabInstance:
       propertyPath: _playerInput
       value: 
       objectReference: {fileID: 682221947}
+    - target: {fileID: 6019722289205901623, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_text
+      value: The Stomach, Energy processing unit.
+      objectReference: {fileID: 0}
     - target: {fileID: 7051809924894305525, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: _playerInput
       value: 
       objectReference: {fileID: 682221947}
+    - target: {fileID: 7664589454508395418, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 9093498262548406665, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
       propertyPath: m_Name
       value: TabletopManagerDDOL
-      objectReference: {fileID: 0}
-    - target: {fileID: 9093498262548406665, guid: f0e53268f91a68d4a9b084f80f9e19bf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

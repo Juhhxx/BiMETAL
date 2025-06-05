@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private float prePostWaitTime = 0.5f;
     [SerializeField] private float minLoadTime = 1;
     [SerializeField] private Slider _loadSlider;
+    [SerializeField] private TMP_Text _sceneName;
 
     public static bool IsLoading { get; private set; } = false;
 
@@ -38,6 +40,7 @@ public class SceneLoader : MonoBehaviour
     /// </summary>
     private IEnumerator Start()
     {
+        _sceneName.text = "Loading " + SceneToLoad + "...";
         InputManager.PauseCount++;
         // test SceneToLoad ??= "LoadScene";
 
@@ -115,5 +118,6 @@ public class SceneLoader : MonoBehaviour
         IsLoading = false;
         CurrentRestoreFlag = null;
         InputManager.PauseCount--;
+        _sceneName.text = "";
     }
 }
