@@ -451,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3217727181888802494, guid: 48d4815d32a2eae43b1bc9cf1bc72385, type: 3}
       propertyPath: <Reach>k__BackingField
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3465584886289220771, guid: 48d4815d32a2eae43b1bc9cf1bc72385, type: 3}
       propertyPath: m_LocalPosition.x
