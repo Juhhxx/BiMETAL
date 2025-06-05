@@ -18,6 +18,7 @@ public class ArenaController : MonoBehaviour
     [SerializeField] private int        _defaulfEnemyNumber;
     [SerializeField] private GameObject _gruntPrefab;
     [SerializeField] private GameObject _dummyPrefab;
+    [SerializeField] private Transform[] _spawnLocations;
     [SerializeField] private bool _doSpawn;
     [SerializeField] private bool _simulateModifier;
     public bool SimulateModifier => _simulateModifier;
@@ -63,7 +64,7 @@ public class ArenaController : MonoBehaviour
 
             for (int i = 0; i < _numberOfEnemies * 2; i++)
             {
-                Vector3 pos = Vector3.zero;// GetRandomLocation();
+                Vector3 pos = GetRandomLocation();
                 pos.y = 1.0f;
 
                 GameObject newEnemy;
@@ -89,7 +90,7 @@ public class ArenaController : MonoBehaviour
                 
                 if ( c == null || c.Name == "Player") continue;
                 
-                Vector3 pos = Vector3.zero;
+                Vector3 pos = GetRandomLocation();
                 pos.y = 1.0f;
 
                 GameObject prefab = c.CharacterPrefab;
@@ -112,21 +113,15 @@ public class ArenaController : MonoBehaviour
     }
     private Vector3 GetRandomLocation()
     {
-        NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
+        int index = Random.Range(0, _spawnLocations.Length / 3);
 
-        // Pick the first indice of a random triangle in the nav mesh
-        int t = Random.Range(0, navMeshData.indices.Length-3);
-        
-        // Select a random point on it
-        Vector3 point = Vector3.Lerp(navMeshData.vertices[navMeshData.indices[t]], navMeshData.vertices[navMeshData.indices[t+1]], Random.value);
-        point = Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[t+2]], Random.value);
-
-        if (NavMesh.SamplePosition(point, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(_spawnLocations[index].position, out NavMeshHit hit, 10f, NavMesh.AllAreas))
         {
             return hit.position;
         }
 
-        return point;
+        Debug.LogWarning("Failed to sample from NavMesh position.");
+        return _spawnLocations[index].position;
     }
 
     // Check Battle Status

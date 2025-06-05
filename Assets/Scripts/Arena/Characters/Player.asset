@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   Name: Player
-  HP: 500
+  HP: 100
   BaseAttack: 20
   SpecialAttack: 40
   Faction: 0
