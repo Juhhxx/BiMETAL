@@ -1,4 +1,6 @@
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -6,6 +8,7 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] private MeshFilter _meshFilter;
     [SerializeField] private Transform _floor;
     [SerializeField] private PerlinGenerator[] _perlingGenerator;
+    [SerializeField] private NavMeshSurface _navmesh;
 
     [SerializeField, Range(0f, 1f)] private float _outsideFalloffStart;
     [SerializeField, Range(0f, 1f)] private float _outsideFalloffEnd;
@@ -21,6 +24,9 @@ public class TerrainGenerator : MonoBehaviour
 
     private void Start()
     {
+        if ( _navmesh == null )
+            return;
+        
         _meshDivider.Generate();
         Vector3[] verts = _meshFilter.mesh.vertices;
         Vector3[] norms = _meshFilter.mesh.normals;
