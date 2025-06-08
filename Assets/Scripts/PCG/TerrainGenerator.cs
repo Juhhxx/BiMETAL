@@ -39,7 +39,8 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         verts = GenerateBorderFalloff(verts, norms);
-        _meshFilter.mesh.vertices = GenerateBorderFalloff(verts, norms);
+        verts = GenerateBorderFalloff(verts, norms);
+        _meshFilter.mesh.vertices = GenerateNavFalloff(verts, norms);
     }
 
     private Vector3[] GenerateBorderFalloff(Vector3[] vertices, Vector3[] normals)
@@ -107,15 +108,38 @@ public class TerrainGenerator : MonoBehaviour
 
     private Vector3[] GenerateNavFalloff(Vector3[] vertices, Vector3[] normals)
     {
+        float s = float.NegativeInfinity;
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            if ( normals[i].z < 0.99f ) continue;
+            float distance = new Vector2(vertices[i].x, vertices[i].z).magnitude;
+
+            if (distance > s)
+               s = distance;
+        }
+
+        float min = s * _insideFalloffStart;
+        float max = s * _insideFalloffEnd;
+        
         // create an array of nav mesh points (based on _insideFalloffStart)
-        // for each vertice iterate to see which navmesh border points are close enough
+        // for each vertices iterate to see which nav mesh border points are close enough
         // use euclidean distance to apply all their height corrections
 
         for (int i = 0; i < vertices.Length; i++)
         {
             if ( normals[i].y < 0.99f ) continue;
 
-            Vector3 v = vertices[i];
+            Vector3 worldPos = _floor.TransformPoint(vertices[i]);
+            worldPos.y = _navmesh.navMeshData.position.y;
+
+            if (NavMesh.SamplePosition(worldPos, out NavMeshHit hit, 100f, NavMesh.AllAreas))
+            {
+                worldPos.y = hit.position.y;
+                float distance = Vector3.Distance(worldPos, hit.position);
+
+                float t = Mathf.InverseLerp(min, max, distance); // 0 inside,1 outside
+                vertices[i].y *= 1f - Mathf.SmoothStep(1f, 0f, t);
+            }
         }
 
         return vertices;
