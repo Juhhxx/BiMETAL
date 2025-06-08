@@ -8,6 +8,7 @@ public class MeshDivider : MonoBehaviour
 
     private List<Vector3> _vertices;
     private List<Vector3> _normals;
+    private List<Vector2> _uvs;
 
     private Dictionary<uint,int> _newVectices;
 
@@ -26,6 +27,7 @@ public class MeshDivider : MonoBehaviour
 
         _vertices = new List<Vector3>(mesh.vertices);
         _normals = new List<Vector3>(mesh.normals);
+        _uvs = new List<Vector2>(mesh.uv);
         int[] triangles = mesh.triangles;
         
         for (int i = 0; i < triangles.Length; i += 3)
@@ -56,13 +58,16 @@ public class MeshDivider : MonoBehaviour
         mesh.vertices = _vertices.ToArray();
         mesh.normals = _normals.ToArray();
         mesh.triangles = newTriangles.ToArray();
+        mesh.uv = _uvs.ToArray();
 
         _vertices.Clear();
         _normals.Clear();
         _newVectices.Clear();
+        _uvs.Clear();
 
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
+        mesh.RecalculateUVDistributionMetrics();
         _meshFilter.mesh = mesh;
     }
 
@@ -99,6 +104,7 @@ public class MeshDivider : MonoBehaviour
 
         // calculate new vertex
         _vertices.Add((_vertices[i1] + _vertices[i2]) * 0.5f); // vertice is a Vector3, calculate midpoint position
+        _uvs.Add((_uvs[i1] + _uvs[i2]) * 0.5f);
         _normals.Add((_normals[i1] + _normals[i2]).normalized);
 
         return newIndex;
