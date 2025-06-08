@@ -25,6 +25,10 @@ public class HeallthBar : MonoBehaviour
     private void Update()
     {
         // UpdateBar();
+
+        if ( Camera.main != null )
+            _lookTarget = Camera.main.transform;
+        
         transform.LookAt(_lookTarget);
     }
     public void UpdateBar()

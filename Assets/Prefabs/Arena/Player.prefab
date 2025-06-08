@@ -824,7 +824,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 20
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -842,6 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterBase: {fileID: 11400000, guid: fd0009cf9c52583438da5fb2f09c34e8, type: 2}
+  _collisionDetector: {fileID: 0}
   OnDamageTaken:
     m_PersistentCalls:
       m_Calls:
