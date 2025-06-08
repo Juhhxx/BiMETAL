@@ -118,8 +118,11 @@ public class TerrainGenerator : MonoBehaviour
                s = distance;
         }
 
-        float min = s * _insideFalloffStart;
-        float max = s * _insideFalloffEnd;
+        Vector3 worldScale = _floor.lossyScale;
+        float scale = Mathf.Max(worldScale.x, worldScale.y, worldScale.z);
+
+        float min = s * scale * _insideFalloffStart;
+        float max = s * scale * _insideFalloffEnd;
         
         // create an array of nav mesh points (based on _insideFalloffStart)
         // for each vertices iterate to see which nav mesh border points are close enough
@@ -138,6 +141,7 @@ public class TerrainGenerator : MonoBehaviour
                 float distance = Vector3.Distance(worldPos, hit.position);
 
                 float t = Mathf.InverseLerp(min, max, distance); // 0 inside,1 outside
+                Debug.Log("init corrected pos: " + worldPos + " hit pos: " + hit.position + " distance: " + distance + " t(minmax): " + t + " i/x: " + min + " " + max + " result: " + (1f - Mathf.SmoothStep(1f, 0f, t)) );
                 vertices[i].y *= 1f - Mathf.SmoothStep(1f, 0f, t);
             }
         }

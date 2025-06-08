@@ -3710,11 +3710,11 @@ PrefabInstance:
       objectReference: {fileID: 1707989625}
     - target: {fileID: 2885360379003026621, guid: 2672784ba24a01c45be205efc1cca3fb, type: 3}
       propertyPath: _insideFalloffEnd
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2885360379003026621, guid: 2672784ba24a01c45be205efc1cca3fb, type: 3}
       propertyPath: _insideFalloffStart
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4449022369926920700, guid: 2672784ba24a01c45be205efc1cca3fb, type: 3}
       propertyPath: m_IsActive
