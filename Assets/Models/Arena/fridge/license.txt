@@ -1,0 +1,11 @@
+Model Information:
+* title:	FRIDGE
+* source:	https://sketchfab.com/3d-models/fridge-26216fb1c1f24c77a3685af9f31aa5fe
+* author:	cristian borra (https://sketchfab.com/cris97)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "FRIDGE" (https://sketchfab.com/3d-models/fridge-26216fb1c1f24c77a3685af9f31aa5fe) by cristian borra (https://sketchfab.com/cris97) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

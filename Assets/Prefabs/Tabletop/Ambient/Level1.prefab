@@ -702,7 +702,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015415094010883438}
-  m_Mesh: {fileID: 6099800089077584851, guid: 03c587eb9e7814e42a89384117b2853b, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 2cf1b88266d203b4e8fa9bf2ffd26fe7, type: 2}
 --- !u!23 &9152945658615692757
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -769,7 +769,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 6099800089077584851, guid: 03c587eb9e7814e42a89384117b2853b, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 2cf1b88266d203b4e8fa9bf2ffd26fe7, type: 2}
 --- !u!1 &2794020886807768561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,6 +1196,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8140024839730285006}
+  - component: {fileID: 1365539619806598436}
+  - component: {fileID: 2885360379003026621}
   m_Layer: 0
   m_Name: Level1
   m_TagString: Untagged
@@ -1223,6 +1225,62 @@ Transform:
   - {fileID: 753867114219443131}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1365539619806598436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5926845388319522639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88732ee3e431de4f808490e15e1c092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meshFilter: {fileID: 2211051811207050382}
+  _numSubdivisions: 6
+--- !u!114 &2885360379003026621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5926845388319522639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b5d711c5422eb4d854b02dafedf209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meshDivider: {fileID: 1365539619806598436}
+  _meshFilter: {fileID: 2211051811207050382}
+  _floor: {fileID: 6354507237746522328}
+  _perlingGenerator:
+  - <Active>k__BackingField: 1
+    _tileSize: 48
+    _heightFactor: 0
+    _maxHeight: 0.1
+  - <Active>k__BackingField: 1
+    _tileSize: 2
+    _heightFactor: 0
+    _maxHeight: 1
+  - <Active>k__BackingField: 1
+    _tileSize: 4
+    _heightFactor: 0
+    _maxHeight: 1.7
+  - <Active>k__BackingField: 1
+    _tileSize: 8
+    _heightFactor: 0
+    _maxHeight: 1.8
+  - <Active>k__BackingField: 1
+    _tileSize: 16
+    _heightFactor: 0
+    _maxHeight: 1.1
+  _navmesh: {fileID: 0}
+  _outsideFalloffStart: 0.65
+  _outsideFalloffEnd: 0.95
+  _outsideEuclideanAxial: 0.55
+  _insideFalloffStart: 0
+  _insideFalloffEnd: 0
 --- !u!1 &5928262395278309820
 GameObject:
   m_ObjectHideFlags: 0

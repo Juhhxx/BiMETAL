@@ -311,7 +311,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7108994232989602158}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1013,6 +1013,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4654147287169703007, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f44175e4a5de7e44b987ed0412f85bf, type: 2}
+    - target: {fileID: 4654147287169703007, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9161195565784790982, guid: 4f44175e4a5de7e44b987ed0412f85bf, type: 2}
+    - target: {fileID: 4654147287169703007, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282978375649319559, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ef9a56aa9cb82040aedfbf18a219091, type: 2}
+    - target: {fileID: 5654230506679040056, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3dded4de6fb5db84bad4457688c392b2, type: 2}
     - target: {fileID: 7057562776479609054, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -1029,6 +1049,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 9002469555908275678, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -9161195565784790982, guid: 4f44175e4a5de7e44b987ed0412f85bf, type: 2}
     - target: {fileID: 9020466960572123340, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_Layer
       value: 7

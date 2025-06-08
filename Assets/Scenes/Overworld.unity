@@ -561,7 +561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &265263317
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4437,7 +4437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -145, y: -43}
   m_SizeDelta: {x: 1460, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1163151953
@@ -4462,8 +4462,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f44175e4a5de7e44b987ed0412f85bf, type: 2}
+  m_sharedMaterial: {fileID: -9161195565784790982, guid: 4f44175e4a5de7e44b987ed0412f85bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4677,7 +4677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1259772392
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6926,15 +6926,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.10423374, a: 0.9490196}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: c108b251a56faf34f9fa016b27beabde, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7318,10 +7318,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1673508775}
     - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _unlockedRegionCells.Array.size
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
       propertyPath: '_unlockedRegionCells.Array.data[0]'
       value: 
       objectReference: {fileID: 190445077}
@@ -7397,120 +7393,6 @@ PrefabInstance:
       propertyPath: '_unlockedRegionCells.Array.data[18]'
       value: 
       objectReference: {fileID: 1008615697}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[1].characterID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[4].characterID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[5].characterID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[6].characterID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[7].characterID
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[8].characterID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[9].characterID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[10].characterID
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[11].characterID
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[4].dialogLines.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[5].dialogLines.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[6].dialogLines.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[7].dialogLines.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[9].dialogLines.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: _dialogList.Array.data[0].characterDialogs.Array.data[10].dialogLines.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[4].dialogLines.Array.data[0]'
-      value: "FUCK! THEY\u2019RE HERE!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[4].dialogLines.Array.data[1]'
-      value: "I think I preferred if it was actually a bomb back there\u2026"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[5].dialogLines.Array.data[0]'
-      value: ARE THOU WITH THE KING??
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[6].dialogLines.Array.data[0]'
-      value: "ARE YOU STUPID??\r"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[6].dialogLines.Array.data[1]'
-      value: "wait, of course it is\u2026\n\r\rOOOOooooH my King\u2019s Shini-,no,
-        not shining. Gentle! Nope. "
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[7].dialogLines.Array.data[0]'
-      value: "MAKE CODES AND FACES VISIBLE!\nDO NOT RESIST OR I\u2019LL HAVE TO USE
-        VIOLENCE!\r\r"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[8].dialogLines.Array.data[0]'
-      value: "I\u2019M X34-54-13!!\nPUT ME DOWN, YOU WEST DICKRIDER!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[9].dialogLines.Array.data[0]'
-      value: 'WEST?
-
-        DICKRIDER???
-
-        AN ENEMY SUCCUBUS!'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[9].dialogLines.Array.data[1]'
-      value: FOR THE KING!!!
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[10].dialogLines.Array.data[0]'
-      value: FOR THE KING!!!
-      objectReference: {fileID: 0}
-    - target: {fileID: 6236667789034640513, guid: 24c28de5e73d28a4e936f7d66b541b21, type: 3}
-      propertyPath: '_dialogList.Array.data[0].characterDialogs.Array.data[11].dialogLines.Array.data[0]'
-      value: PERISH YOU TRAITOROUS WESTERNERS!
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

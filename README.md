@@ -70,3 +70,25 @@ classDiagram
   TabletopMovement --> Pathfinder
   TabletopMovement ..> HexagonCell
 ```
+
+## UML Diagram Terrain Generation
+
+```mermaid
+classDiagram
+  class MonoBehaviour
+
+  class Generator
+  <<abstract>> Generator
+
+  class TerrainGenerator
+  class PerlinGenerator
+  class MeshDivider
+  
+  MonoBehaviour <|-- Generator
+  MonoBehaviour <|-- TerrainGenerator
+  MonoBehaviour <|-- MeshDivider
+  Generator <|-- PerlinGenerator
+
+  TerrainGenerator ..> MeshDivider
+  TerrainGenerator *-- PerlinGenerator
+```
