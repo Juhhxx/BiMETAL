@@ -2,14 +2,9 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class PerlinGenerator
+public class PerlinGenerator : Generator
 {
-    [field:SerializeField] public bool Active { get; private set; } = true;
-    [SerializeField] private float _tileSize = 1f;
-    [SerializeField] private HeightFactor _heightFactor;
-    [SerializeField] private float _maxHeight = 1f;
-
-    public Vector3[] Generate(Vector3[] vertices, Vector3[] normals, Vector2 offset)
+    public override Vector3[] Generate(Vector3[] vertices, Vector3[] normals, Vector2 offset)
     {
         // map 2D perlin noise to 3D
         for (int i = 0; i < vertices.Length; i++)
@@ -63,11 +58,5 @@ public class PerlinGenerator
         }
 
         return vertices;
-    }
-
-    private enum HeightFactor
-    {
-        Scale,
-        Normalize
     }
 }

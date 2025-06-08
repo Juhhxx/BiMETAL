@@ -265,15 +265,19 @@ MonoBehaviour:
   - <Active>k__BackingField: 1
     _tileSize: 4
     _heightFactor: 0
-    _maxHeight: 2
+    _maxHeight: 1.7
   - <Active>k__BackingField: 1
     _tileSize: 8
     _heightFactor: 0
-    _maxHeight: 2
+    _maxHeight: 1.8
   - <Active>k__BackingField: 1
     _tileSize: 16
     _heightFactor: 0
     _maxHeight: 1.1
+  _outsideFalloffStart: 0.9
+  _outsideFalloffEnd: 0.95
+  _insideFalloffStart: 0
+  _insideFalloffEnd: 0
 --- !u!1 &774027864
 GameObject:
   m_ObjectHideFlags: 0
