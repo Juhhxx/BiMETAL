@@ -154,11 +154,10 @@ public class TerrainGenerator : MonoBehaviour
                 float t = Mathf.InverseLerp(min, max, distance); // 0 inside,1 outside
 
                 float baseHeight = vertices[i].y - _baseHeight;
-                vertices[i].y *= 1f - Mathf.SmoothStep(1f, 0f, t);
+                vertices[i].y = _baseHeight  + baseHeight * (1f - Mathf.SmoothStep(1f, 0f, t) );
                 Debug.Log("corrected pos: " + vertices[i].y  + " initial height: " + (baseHeight + _baseHeight) + " mesh base height: " + _baseHeight + " vertex base height: " + baseHeight + " t(minmax): " + t + " i/x: " + min + " " + max + " result: " + (1f - Mathf.SmoothStep(1f, 0f, t)) );
             }
         }
-
         return vertices;
     }
 }
