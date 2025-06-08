@@ -16,6 +16,8 @@ public class TerrainGenerator : MonoBehaviour
 
     [SerializeField, Range(0f, 1f)] private float _insideFalloffStart;
     [SerializeField, Range(0f, 1f)] private float _insideFalloffEnd;
+
+    private float _baseHeight;
     private void Awake()
     {
         if ( _meshDivider == null )
@@ -31,6 +33,15 @@ public class TerrainGenerator : MonoBehaviour
         Vector3[] verts = _meshFilter.mesh.vertices;
         Vector3[] norms = _meshFilter.mesh.normals;
         Vector2 offset = new Vector2 ( _floor.localScale.x, _floor.localScale.z);
+
+        _baseHeight = float.NegativeInfinity;
+        for (int i = 0; i < verts.Length; i++)
+        {
+            if ( norms[i].z < 0.99f ) continue;
+               
+            if ( verts[i].y > _baseHeight )
+               _baseHeight = verts[i].y;
+        }
 
         foreach (PerlinGenerator perlin in _perlingGenerator)
         {
@@ -135,14 +146,16 @@ public class TerrainGenerator : MonoBehaviour
             Vector3 worldPos = _floor.TransformPoint(vertices[i]);
             worldPos.y = _navmesh.navMeshData.position.y;
 
-            if (NavMesh.SamplePosition(worldPos, out NavMeshHit hit, 100f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(worldPos, out NavMeshHit hit, float.MaxValue, NavMesh.AllAreas))
             {
                 worldPos.y = hit.position.y;
                 float distance = Vector3.Distance(worldPos, hit.position);
 
                 float t = Mathf.InverseLerp(min, max, distance); // 0 inside,1 outside
-                Debug.Log("init corrected pos: " + worldPos + " hit pos: " + hit.position + " distance: " + distance + " t(minmax): " + t + " i/x: " + min + " " + max + " result: " + (1f - Mathf.SmoothStep(1f, 0f, t)) );
+
+                float baseHeight = vertices[i].y - _baseHeight;
                 vertices[i].y *= 1f - Mathf.SmoothStep(1f, 0f, t);
+                Debug.Log("corrected pos: " + vertices[i].y  + " initial height: " + (baseHeight + _baseHeight) + " mesh base height: " + _baseHeight + " vertex base height: " + baseHeight + " t(minmax): " + t + " i/x: " + min + " " + max + " result: " + (1f - Mathf.SmoothStep(1f, 0f, t)) );
             }
         }
 
