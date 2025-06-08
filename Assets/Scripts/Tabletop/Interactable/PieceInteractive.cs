@@ -172,16 +172,15 @@ public class PieceInteractive : ModifierInteractive
         if (_renderer == null)
             _renderer = GetComponentInChildren<Renderer>();
 
-        Color original = _renderer.material.color;
         Color noColor = new Color(1f, 1f, 1f, 0f);
 
         yield return new WaitUntil( () => ! SceneLoader.IsLoading );
 
         for (int i = 0; i < 6f; i++)
         {
-            _renderer.material.color = noColor;
+            _renderer.enabled = false;
             yield return new WaitForSeconds( 0.1f );
-            _renderer.material.color = original;
+            _renderer.enabled = true;
             yield return new WaitForSeconds( 0.1f );
         }
     }

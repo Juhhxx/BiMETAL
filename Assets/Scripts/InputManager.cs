@@ -103,8 +103,16 @@ public class InputManager : MonoBehaviour
 
         if ( cam == null )
             return false;
+
+        Vector3 mousePos = Input.mousePosition;
+
+        if (float.IsNaN(mousePos.x) || float.IsNaN(mousePos.y) ||
+            float.IsInfinity(mousePos.x) || float.IsInfinity(mousePos.y))
+        {
+            return false;
+        }
         
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, cellLayer)
             && hit.transform.parent.TryGetComponent(out newCell) )
