@@ -274,8 +274,9 @@ MonoBehaviour:
     _tileSize: 16
     _heightFactor: 0
     _maxHeight: 1.1
-  _outsideFalloffStart: 0.9
+  _outsideFalloffStart: 0.65
   _outsideFalloffEnd: 0.95
+  _outsideEuclideanAxial: 0.55
   _insideFalloffStart: 0
   _insideFalloffEnd: 0
 --- !u!1 &774027864
