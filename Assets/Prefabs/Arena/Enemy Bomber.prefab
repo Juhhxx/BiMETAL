@@ -1304,6 +1304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ed8c8f1b9017e479b30729137181f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  cooldownTime: 5
 --- !u!1001 &7508242486461673464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1317,16 +1319,28 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3053413875573560630, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5136082
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053413875573560630, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5136082
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053413875573560630, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5136082
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053413875573560630, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3053413875573560630, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1.166
       objectReference: {fileID: 0}
     - target: {fileID: 3053413875573560630, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.000024318
       objectReference: {fileID: 0}
     - target: {fileID: 3053413875573560630, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1356,6 +1370,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4654147287169703007, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f44175e4a5de7e44b987ed0412f85bf, type: 2}
+    - target: {fileID: 4654147287169703007, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -9161195565784790982, guid: 4f44175e4a5de7e44b987ed0412f85bf, type: 2}
+    - target: {fileID: 4654147287169703007, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282978375649319559, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ef9a56aa9cb82040aedfbf18a219091, type: 2}
+    - target: {fileID: 5654230506679040056, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3dded4de6fb5db84bad4457688c392b2, type: 2}
     - target: {fileID: 7057562776479609054, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -1363,6 +1397,10 @@ PrefabInstance:
     - target: {fileID: 8675192198850106960, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8872153674210584489, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8986869756253990803, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_Name
@@ -1372,6 +1410,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 9002469555908275678, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -9161195565784790982, guid: 4f44175e4a5de7e44b987ed0412f85bf, type: 2}
     - target: {fileID: 9020466960572123340, guid: 80e3fc1eeed484240b40480fc5a576f3, type: 3}
       propertyPath: m_Layer
       value: 7
