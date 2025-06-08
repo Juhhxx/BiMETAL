@@ -1,0 +1,11 @@
+Model Information:
+* title:	Mojave Motel Sign
+* source:	https://sketchfab.com/3d-models/mojave-motel-sign-c64f69ab7a6e4674826de6600f1a61d6
+* author:	aocrisan (https://sketchfab.com/aocrisan)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Mojave Motel Sign" (https://sketchfab.com/3d-models/mojave-motel-sign-c64f69ab7a6e4674826de6600f1a61d6) by aocrisan (https://sketchfab.com/aocrisan) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
