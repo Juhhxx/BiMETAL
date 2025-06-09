@@ -80,8 +80,10 @@ public class PlayerMovement : MonoBehaviour
         CheckForJump();
         CheckForDash();
 
-        _anim.SetBool("IsGrounded",_controller.isGrounded);        
-        _anim.SetBool("IsDashing",_dash);        
+        _anim.SetBool("IsGrounded",_controller.isGrounded);
+        _anim.SetBool("IsDashing",_dash);
+        _anim.SetBool("IsRunning", Mathf.Abs(_velocityHor.magnitude) > 0.001f);
+        _anim.SetFloat("Running", Mathf.Max(1f, Mathf.Abs(_velocityHor.magnitude)/3));
     }
     private void FixedUpdate()
     {
