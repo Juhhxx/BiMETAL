@@ -92,3 +92,61 @@ classDiagram
   TerrainGenerator ..> MeshDivider
   TerrainGenerator *-- PerlinGenerator
 ```
+
+## UML Diagram State Machines
+
+#### UML Diagram
+
+```mermaid
+classDiagram
+  class MonoBehaviour
+  class ScriptableObject
+
+  class AgentStatsController
+  class StateMachineRunner
+  class StateMachine
+  class StateAbstract
+  class TransitionAbstract
+  <<abstract>> TransitionAbstract
+  class StateTransition
+  <<struct>> StateTransition
+  class Transition
+
+  MonoBehaviour <|-- StateMachineRunner
+
+  class State
+  class Transition
+  class StateMachine
+  class StateAbstract
+  <<abstract>> StateAbstract
+  class TransitionAbstract
+  <<abstract>> TransitionAbstract
+  class StateTransition
+  <<struct>> StateTransition
+  class StateMachineCreator
+  class StateMachineRunner
+
+  State o-- Transition
+
+  Transition --> State
+
+  StateMachine --> State
+
+  StateAbstract --|> ScriptableObject
+  StateAbstract --> State
+  StateAbstract --> GameObject
+
+  TransitionAbstract --|> ScriptableObject
+  TransitionAbstract --> Transition
+  TransitionAbstract --> StateAbstract
+  TransitionAbstract --> GameObject
+
+  StateMachineCreator --|> ScriptableObject
+  StateMachineCreator --> StateMachine
+  StateMachineCreator o-- StateTransition
+  StateMachineCreator --> GameObject
+
+  StateTransition --> StateAbstract
+  StateTransition o-- TransitionAbstract
+
+```
