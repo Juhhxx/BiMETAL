@@ -55,10 +55,10 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
+  m_MotionVectors: 2
+  m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 5066367390285261548}
   <Name>k__BackingField: Lighting Modifier
-  _modifier: {fileID: 11400000, guid: a2e814ade9121944c9ff2adf1a210b2d, type: 2}
+  _modifier: {fileID: 0}
   _modRangeType: 1
   <Reach>k__BackingField: 2
 --- !u!54 &8811055000448337837
