@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _controller     = GetComponent<CharacterController>();
-        _anim           = GetComponent<Animator>();
+        _anim           = GetComponentInChildren<Animator>();
         _velocityHor    = Vector3.zero;
         _velocityVer    = Vector3.zero;
         _motion         = Vector3.zero;
