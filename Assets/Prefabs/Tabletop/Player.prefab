@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3896253204001494220}
   - component: {fileID: 2862885766103028605}
+  - component: {fileID: 1465270042056146242}
   m_Layer: 0
   m_Name: Cosmetic
   m_TagString: Untagged
@@ -50,6 +51,23 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &1465270042056146242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2460315500215435209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200e7ab4864d6354899179888f45896a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepClips:
+  - {fileID: 8300000, guid: b89ed086533a78f49ae03eb9d5c98cdc, type: 3}
+  - {fileID: 8300000, guid: 6cdf568b16f1bb94baae8f84a53d1818, type: 3}
+  - {fileID: 8300000, guid: 6f8075de3c607604d9dabc79ce5b86fe, type: 3}
+  footstepVolume: 0.3
 --- !u!1 &2968512410510201321
 GameObject:
   m_ObjectHideFlags: 0

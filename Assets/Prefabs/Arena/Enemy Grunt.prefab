@@ -978,9 +978,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepClips:
-  - {fileID: 8300000, guid: aa43f27df106e0e4591625e48436f6ca, type: 3}
-  - {fileID: 8300000, guid: 052173d5a45086d4e98aa35a3f5a1077, type: 3}
-  - {fileID: 8300000, guid: ecb1e878193291341868e6906e07f095, type: 3}
+  - {fileID: 8300000, guid: 338cc6ff1bff3134aa7c7c5eed0ee5b1, type: 3}
+  - {fileID: 8300000, guid: 40eda38594e4d65488aaa5d7dcb565ea, type: 3}
+  - {fileID: 8300000, guid: 5885ad36b680609419b61b94b8b7fe95, type: 3}
   footstepVolume: 0.025
 --- !u!114 &6668047908894892541
 MonoBehaviour:
@@ -1009,10 +1009,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackClips:
-  - {fileID: 8300000, guid: 7ee63381a30c81d4d9edb745f36d9976, type: 3}
-  - {fileID: 8300000, guid: 1e509f2309677724786e2ffb90d83615, type: 3}
-  - {fileID: 8300000, guid: 362b5b4e97e491846b737f5a77142700, type: 3}
-  attackVolume: 0.3
+  - {fileID: 8300000, guid: 3d38cf9c35f582b449ea6fe589afb14e, type: 3}
+  - {fileID: 8300000, guid: 49cf130ac6819cb44a14318ffc8a7444, type: 3}
+  - {fileID: 8300000, guid: 4fb291d4917beb74e9572840ec2892b4, type: 3}
+  attackVolume: 0.19
 --- !u!95 &9056549709343174211 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8770947280954351272, guid: 629a74146add012408954f7df1b31950, type: 3}
