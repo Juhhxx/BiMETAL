@@ -6,6 +6,10 @@ public class PlayerTabletopMovement : TabletopMovement
 {
     [SerializeField] private CellInfo _cellInformation;
     [SerializeField] private Camera _cam;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _hoverSound;
+    [SerializeField] private AudioClip _selectSound;
+    
     public LayerMask CellLayer => HexagonTabletop.CellLayer;
 
     private HexagonCell _hover;
@@ -13,6 +17,7 @@ public class PlayerTabletopMovement : TabletopMovement
         get => _hover;
         set {
             _hover = value;
+            _audioSource.PlayOneShot(_hoverSound);
             if ( _cellInformation != null )
                 _cellInformation.Hover(_hover);
         }
@@ -104,6 +109,7 @@ public class PlayerTabletopMovement : TabletopMovement
             {
                 Debug.Log("level? Selecting: " + _hoveredCell);
                 _selectedCell = _hoveredCell;
+                _audioSource.PlayOneShot(_selectSound);
                 StartCoroutine(Move());
             }
             else
