@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 4812729436413281340}
   - component: {fileID: 8169570062200612896}
   - component: {fileID: 5192395469993165608}
+  - component: {fileID: 5955633015979824621}
   m_Layer: 7
   m_Name: Enemy Grunt
   m_TagString: Untagged
@@ -612,6 +613,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5955633015979824621}
+        m_TargetAssemblyTypeName: PlayAudioArray, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeath:
     m_PersistentCalls:
       m_Calls:
@@ -688,6 +701,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachineModel: {fileID: 11400000, guid: f0feb454d2f8811429d4e2c42f009c92, type: 2}
   _stateMachine: {fileID: 0}
+--- !u!114 &5955633015979824621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296531496966734037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e3abbaceeb58646bb9b54bd74c9eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: b31c3db09c88c864da54be38ad8b2f17, type: 3}
+  - {fileID: 8300000, guid: 0dd36a897a4fbcf4aa3517bf09f989d2, type: 3}
+  audioVolume: 0.15
 --- !u!1001 &294979105456615659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1029,7 +1058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathClips:
-  - {fileID: 8300000, guid: 4658acb231e05534ab41ac9eeae7603a, type: 3}
+  - {fileID: 8300000, guid: 2a324fe06b018084da476b07e2510098, type: 3}
   deathAudioVolume: 0.3
 --- !u!95 &9056549709343174211 stripped
 Animator:

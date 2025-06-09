@@ -60,6 +60,7 @@ public class EnemyMovement : MonoBehaviour
     public void DestroyEnemy()
     {
         _animator.SetTrigger("Death");
+        _animator.SetLayerWeight(0, 0f);
         _agent.enabled = false;
     }
 
