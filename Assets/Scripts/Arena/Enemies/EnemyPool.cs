@@ -105,6 +105,7 @@ public class EnemyPool : MonoBehaviour
         if ( _enemyPools.ContainsKey(enemy.name) )
             _enemyPools[enemy.name].Push(enemy);
 
-        GetPoolDebuger(enemy.name).PoolCurrentSize++;
+        if ( enemy != null )
+            GetPoolDebuger(enemy.name).PoolCurrentSize++;
     }
 }
