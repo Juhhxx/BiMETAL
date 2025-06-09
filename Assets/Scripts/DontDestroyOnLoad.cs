@@ -30,4 +30,10 @@ public class DontDestroyOnLoad : MonoBehaviour
             InstancesGO.Remove(gameObject);
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        Instances.Clear();
+        InstancesGO.Clear();
+    }
 }

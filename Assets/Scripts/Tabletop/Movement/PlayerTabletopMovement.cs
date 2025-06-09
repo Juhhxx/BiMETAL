@@ -201,4 +201,10 @@ public class PlayerTabletopMovement : TabletopMovement
         if ( ! isBattle )
             PlayerTurn?.Invoke();
     }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _pathfinder.Path.CollectionChanged -= DemonstratePath;
+    }
 }

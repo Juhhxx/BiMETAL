@@ -90,8 +90,6 @@ public abstract class TabletopMovement : TabletopBase
     protected virtual void OnDestroy()
     {
         Moving = false;
-        if (_pathfinder != null)
-            _pathfinder.Path.CollectionChanged -= DemonstratePath;
     }
 
     protected IEnumerator Step(HexagonCell current, HexagonCell next)

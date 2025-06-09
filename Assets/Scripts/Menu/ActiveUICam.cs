@@ -15,4 +15,16 @@ public class ActiveUICam : MonoBehaviour
         if (ActiveUICamera == GetComponent<Camera>())
             ActiveUICamera = null;
     }
+
+    private void OnDestroy()
+    {
+        if ( ActiveUICamera != null )
+            ActiveUICamera = null;
+    }
+
+    private void OnApplicationQuit()
+    {
+        if ( ActiveUICamera != null )
+            ActiveUICamera = null;
+    }
 }

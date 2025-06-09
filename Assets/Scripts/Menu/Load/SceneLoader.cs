@@ -61,6 +61,9 @@ public class SceneLoader : MonoBehaviour
             }
         }
 
+        yield return Resources.UnloadUnusedAssets();
+        System.GC.Collect();
+
         //  start counting load time
         float startTime = Time.time;
         // start loading target scene without enabling it

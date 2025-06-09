@@ -158,4 +158,12 @@ public class EnvironmentInteractive : ModifierInteractive
     {
         return ModPathfinder.Path.Count;
     }
+
+    private void OnDestroy()
+    {
+        if ( ModPathfinder != null )
+        {
+            ModPathfinder.Path.CollectionChanged -= DemonstratePath;
+        }
+    }
 }

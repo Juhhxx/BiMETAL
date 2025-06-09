@@ -169,4 +169,11 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
         _pathfinder.Stop();
         _queue.Clear();
     }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _movementPathfinder.Path.CollectionChanged -= DemonstratePath;
+        _rangePathfinder.Path.CollectionChanged -= DemonstratePath;
+    }
 }

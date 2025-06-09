@@ -144,4 +144,18 @@ public class InputManager : MonoBehaviour
         return Input.GetKey(KeyCode.LeftControl)
             || Input.GetKey(KeyCode.Tab);
     }
+
+    private void OnDestroy()
+    {
+        MouseSensitivity = 1f;
+        NarrativePaused = false;
+        PauseCount = 0;
+    }
+
+    private void OnApplicationQuit()
+    {
+        MouseSensitivity = 1f;
+        NarrativePaused = false;
+        PauseCount = 0;
+    }
 }
