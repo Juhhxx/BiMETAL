@@ -7,7 +7,15 @@ public class InputManager : MonoBehaviour
     public static bool NarrativePaused = false;
 
     // to be used later for ui stacking
-    public static int PauseCount = 0;
+    public static int _pauseCount = 0;
+    public static int PauseCount
+    {
+        get { return _pauseCount; }
+        set {
+            Debug.Log("BUMDA PAUSE COUNT CHANGED TO: " + value);
+            _pauseCount = value;
+        }
+    }
     public static bool CamRotDown()
     {
         if ( Paused ) return false;
@@ -143,13 +151,6 @@ public class InputManager : MonoBehaviour
 
         return Input.GetKey(KeyCode.LeftControl)
             || Input.GetKey(KeyCode.Tab);
-    }
-
-    private void OnDestroy()
-    {
-        MouseSensitivity = 1f;
-        NarrativePaused = false;
-        PauseCount = 0;
     }
 
     private void OnApplicationQuit()
