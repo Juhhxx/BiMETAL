@@ -714,8 +714,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: b31c3db09c88c864da54be38ad8b2f17, type: 3}
-  - {fileID: 8300000, guid: 0dd36a897a4fbcf4aa3517bf09f989d2, type: 3}
+  - {fileID: 8300000, guid: eca9781352d2b734da0ad42b5c678a1e, type: 3}
+  - {fileID: 8300000, guid: a68e9fa4c8f16314d98409749b28c6a3, type: 3}
   audioVolume: 0.15
 --- !u!1001 &294979105456615659
 PrefabInstance:
@@ -1013,7 +1013,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 338cc6ff1bff3134aa7c7c5eed0ee5b1, type: 3}
   - {fileID: 8300000, guid: 40eda38594e4d65488aaa5d7dcb565ea, type: 3}
   - {fileID: 8300000, guid: 5885ad36b680609419b61b94b8b7fe95, type: 3}
-  footstepVolume: 0.025
+  footstepVolume: 0.15
 --- !u!114 &6668047908894892541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,7 +1059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathClips:
   - {fileID: 8300000, guid: 2a324fe06b018084da476b07e2510098, type: 3}
-  deathAudioVolume: 0.3
+  deathAudioVolume: 0.4
 --- !u!95 &9056549709343174211 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8770947280954351272, guid: 629a74146add012408954f7df1b31950, type: 3}

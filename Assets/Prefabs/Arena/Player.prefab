@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 126294245133297863}
   - component: {fileID: 6210919743787579017}
   - component: {fileID: 2652798685861718164}
+  - component: {fileID: 8605631638702425374}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -884,6 +885,18 @@ MonoBehaviour:
           m_StringArgument: Attack1
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8605631638702425374}
+        m_TargetAssemblyTypeName: PlayAttack, Assembly-CSharp
+        m_MethodName: PlayAttackSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSlashCombo:
     m_PersistentCalls:
       m_Calls:
@@ -897,6 +910,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Attack2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8605631638702425374}
+        m_TargetAssemblyTypeName: PlayAttack, Assembly-CSharp
+        m_MethodName: PlayAttackSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   OnDashSlashCombo:
@@ -929,6 +954,23 @@ MonoBehaviour:
           m_StringArgument: JumpAttack
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8605631638702425374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5744144030328647783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0b28eb431a23a4eb933a5dd2afddaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackClips:
+  - {fileID: 8300000, guid: e6097c9833e2fdc4a8ab007e20796c5f, type: 3}
+  - {fileID: 8300000, guid: a2a073c7c9629134a9e1f44a0ae1ea5b, type: 3}
+  - {fileID: 8300000, guid: 1179ffabbe90332408a39f0bf344b463, type: 3}
+  attackVolume: 0.2
 --- !u!1 &8748006915563494341
 GameObject:
   m_ObjectHideFlags: 0
