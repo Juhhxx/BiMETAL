@@ -102,17 +102,8 @@ classDiagram
   class MonoBehaviour
   class ScriptableObject
 
-  class AgentStatsController
-  class StateMachineRunner
-  class StateMachine
-  class StateAbstract
-  class TransitionAbstract
-  <<abstract>> TransitionAbstract
-  class StateTransition
-  <<struct>> StateTransition
-  class Transition
-
   MonoBehaviour <|-- StateMachineRunner
+  StateMachineRunner --> StateMachineCreator
 
   class State
   class Transition
@@ -134,17 +125,14 @@ classDiagram
 
   StateAbstract --|> ScriptableObject
   StateAbstract --> State
-  StateAbstract --> GameObject
 
   TransitionAbstract --|> ScriptableObject
   TransitionAbstract --> Transition
   TransitionAbstract --> StateAbstract
-  TransitionAbstract --> GameObject
 
   StateMachineCreator --|> ScriptableObject
   StateMachineCreator --> StateMachine
   StateMachineCreator o-- StateTransition
-  StateMachineCreator --> GameObject
 
   StateTransition --> StateAbstract
   StateTransition o-- TransitionAbstract
