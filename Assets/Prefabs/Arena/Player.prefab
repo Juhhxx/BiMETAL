@@ -1822,7 +1822,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3c70f554c8b3afd4a898b93cdaf4f97b, type: 3}
   - {fileID: 8300000, guid: 25259b4ddeb8d544d97e78e4ddbe7a1b, type: 3}
   - {fileID: 8300000, guid: 497ddd61fe2dd594aae70fdd85358820, type: 3}
-  footstepVolume: 0.3
+  footstepVolume: 0.1
 --- !u!4 &5549457693084582392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1278974960048889058, guid: 02be481a3225de14287206bb02f7f441, type: 3}

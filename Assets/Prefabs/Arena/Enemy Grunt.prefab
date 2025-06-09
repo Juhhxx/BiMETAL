@@ -1013,7 +1013,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 338cc6ff1bff3134aa7c7c5eed0ee5b1, type: 3}
   - {fileID: 8300000, guid: 40eda38594e4d65488aaa5d7dcb565ea, type: 3}
   - {fileID: 8300000, guid: 5885ad36b680609419b61b94b8b7fe95, type: 3}
-  footstepVolume: 0.15
+  footstepVolume: 0.1
 --- !u!114 &6668047908894892541
 MonoBehaviour:
   m_ObjectHideFlags: 0
