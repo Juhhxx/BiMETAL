@@ -300,12 +300,12 @@ public class HexagonCell : MonoBehaviour
         if ( upOrDown )
         {
             _pathObject.SetActive(true);
-            _cosmetic.transform.Translate(Vector3.up * 0.1f);
+            _cosmetic.transform.Translate(Vector3.up * 0.03f);
         }
         else
         {
             _pathObject.SetActive(false);
-            _cosmetic.transform.Translate(Vector3.down * 0.1f);
+            _cosmetic.transform.Translate(Vector3.down * 0.03f);
         }
     }
 

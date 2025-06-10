@@ -17,9 +17,9 @@ public abstract class TabletopMovement : TabletopBase
 
     public bool Moving { get; protected set; }
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
     }
 
     protected virtual void DemonstratePath(object sender, NotifyCollectionChangedEventArgs e)

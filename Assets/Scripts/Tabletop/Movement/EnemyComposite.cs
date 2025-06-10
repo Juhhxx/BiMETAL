@@ -8,7 +8,7 @@ public class EnemyComposite : TabletopMovement
 {
     protected PlayerTabletopMovement _player;
     protected List<EnemyTabletopMovement> _enemies;
-    protected override void Start()
+    protected override void Awake()
     {
         _player = FindFirstObjectByType<PlayerTabletopMovement>();
         _enemies = FindObjectsByType<EnemyTabletopMovement>(

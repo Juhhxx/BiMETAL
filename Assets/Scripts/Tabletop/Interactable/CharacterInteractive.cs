@@ -53,7 +53,7 @@ public class CharacterInteractive : Interactive
             yield return wfs;
         }
     }
-    
+
 
     private void Awake()
     {
@@ -155,7 +155,7 @@ public class CharacterInteractive : Interactive
         // give it a thump at awake, rigidbody should align it
         transform.Translate(Vector3.up * 0.5f);
 
-        // Debug.Log("level? modifying dialog queue");
+        Debug.Log("level? modifying dialog queue");
 
         if (Completed)
             while (_dialogQueues.Count > 1)

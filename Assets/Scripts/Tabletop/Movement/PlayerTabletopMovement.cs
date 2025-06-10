@@ -28,18 +28,16 @@ public class PlayerTabletopMovement : TabletopMovement
 
     public bool InputEnabled { get; set; } = true;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if ( _cellInformation == null )
+        base.Awake();
+
+        if (_cellInformation == null)
             _cellInformation = FindFirstObjectByType<CellInfo>();
 
         if ( _cam == null )
             _cam = Camera.main;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
+        
         _pathfinder = new AStarPathfinder(this, false);
         _pathfinder.Path.CollectionChanged += DemonstratePath;
 

@@ -11,9 +11,9 @@ public class EnemyTabletopMovement : TabletopMovement, IComparable<EnemyTabletop
     protected Pathfinder _rangePathfinder;
     protected Pathfinder _movementPathfinder;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         _movementPathfinder = new AStarPathfinder(this, true);
         _rangePathfinder = new BFSRangePathfinder(this, true);

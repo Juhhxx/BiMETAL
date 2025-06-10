@@ -6,7 +6,7 @@ public class TabletopBase : MonoBehaviour
     [field: SerializeField] public Vector2 LastCell { get; protected set; }
     [field: SerializeField] public Interactive Interactive { get; protected set; }
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         if (CurrentCell == null)
             CurrentCell = FindFirstObjectByType<HexagonCell>();
