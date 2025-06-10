@@ -2166,6 +2166,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightingModifier
       objectReference: {fileID: 0}
+    - target: {fileID: 9048628747846103286, guid: 5e3c1320693d1fc4ab31281b8cbb9d2c, type: 3}
+      propertyPath: _modifier
+      value: 
+      objectReference: {fileID: 11400000, guid: a2e814ade9121944c9ff2adf1a210b2d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

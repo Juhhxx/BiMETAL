@@ -161,9 +161,10 @@ public class EnvironmentInteractive : ModifierInteractive
 
     private void OnDestroy()
     {
-        if ( ModPathfinder != null )
+        if (ModPathfinder != null)
         {
             ModPathfinder.Path.CollectionChanged -= DemonstratePath;
         }
+        Debug.Log("Destroying envi inter name:" + gameObject.name);
     }
 }
